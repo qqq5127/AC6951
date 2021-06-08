@@ -80,7 +80,7 @@ void ci_data_rx_handler(u8 type)
 
     __this->rx_type = type;
     if (type == CI_UART && __this->udev) {
-        __this->data_length += __this->udev->read(&__this->pRxBuffer[__this->data_length], (UART_RX_SIZE - __this->data_length), 0);//ä¸²å£è¯»å–bufå‰©ä½™ç©ºé—´çš„é•¿åº¦ï¼Œå®é™…é•¿åº¦æ¯”bufé•¿ï¼Œå¯¼è‡´è¶Šç•Œæ”¹å†™é—®é¢˜
+        __this->data_length += __this->udev->read(&__this->pRxBuffer[__this->data_length], (UART_RX_SIZE - __this->data_length), 0);//´®¿Ú¶ÁÈ¡bufÊ£Óà¿Õ¼äµÄ³¤¶È£¬Êµ¼Ê³¤¶È±Èbuf³¤£¬µ¼ÖÂÔ½½ç¸ÄĞ´ÎÊÌâ
     }
 
     /* log_info("Rx : %d", __this->data_length); */
@@ -315,7 +315,7 @@ const ci_transport_t *ci_transport_uart_instance(void)
 #endif
 
 #ifdef  CONFIG_AC608N
-//è¯¥å‡½æ•°åœ¨è“ç‰™åº“å®ç°ï¼Œ608æ²¡æœ‰è“ç‰™åº“ï¼Œåœ¨æ­¤é‡å®šä¹‰
+//¸Ãº¯ÊıÔÚÀ¶ÑÀ¿âÊµÏÖ£¬608Ã»ÓĞÀ¶ÑÀ¿â£¬ÔÚ´ËÖØ¶¨Òå
 u16 crc_get_16bit(const void *src, u32 len)
 {
     /* log_info(__func__); */

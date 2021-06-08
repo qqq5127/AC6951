@@ -110,7 +110,7 @@ static void audio_stream_iis_data_clear(struct audio_stream_entry *entry)
 {
 #if (IIS_RESAMPLE_USE_BUF_SIZE)
     if (iis_output_hdl->hw_src) {
-        // å¼€å…³ä¸€æ¬¡srcï¼Œé¿å…srcä¸­æ®‹ç•™æ•°æ®
+        // ¿ª¹ØÒ»´Îsrc£¬±ÜÃâsrcÖÐ²ÐÁôÊý¾Ý
         audio_stream_iis_src_close();
         iis_output_hdl->out_sample_rate = TCFG_IIS_OUTPUT_SR;
         iis_output_hdl->resample_dir = 0;

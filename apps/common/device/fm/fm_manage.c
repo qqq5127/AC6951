@@ -160,7 +160,7 @@ void fm_manage_check_online(void)
 {
     /* printf("fm check online dev \n"); */
     /* printf("addr %x %x\n", fm_dev_begin, fm_dev_end); */
-    ////å…ˆæ‰¾å¤–æŒ‚fm
+    ////ÏÈÕÒÍâ¹Òfm
     list_for_each_fm(t_fm_hdl) {
         /* printf("find %x %x %s\n", t_fm_hdl, t_fm_hdl->read_id((void *)fm_dev_info), t_fm_hdl->logo); */
         if (t_fm_hdl->read_id((void *)fm_dev_info) &&
@@ -221,10 +221,10 @@ int fm_manage_start()
         printf("fm_manage could not find dev\n");
         return -1;
     }
-    if (memcmp(fm_dev_info->logo, "fm_inside", strlen(fm_dev_info->logo))) {//ä¸å¼€å¯å†…éƒ¨æ”¶éŸ³å¼€å¯linein
+    if (memcmp(fm_dev_info->logo, "fm_inside", strlen(fm_dev_info->logo))) {//²»¿ªÆôÄÚ²¿ÊÕÒô¿ªÆôlinein
 #if (TCFG_FM_INPUT_WAY != LINEIN_INPUT_WAY_ADC)
         if (!app_audio_get_volume(APP_AUDIO_STATE_MUSIC)) {
-            audio_linein_mute(1);    //æ¨¡æ‹Ÿè¾“å‡ºæ—¶å€™ï¼Œdacä¸º0ä¹Ÿæœ‰æ•°æ®
+            audio_linein_mute(1);    //Ä£ÄâÊä³öÊ±ºò£¬dacÎª0Ò²ÓĞÊı¾İ
         }
 #endif
 #if (TCFG_FM_INPUT_WAY == LINEIN_INPUT_WAY_ADC)
@@ -242,13 +242,13 @@ int fm_manage_start()
 #if (TCFG_FM_INPUT_WAY != LINEIN_INPUT_WAY_ADC)
         if (app_audio_get_volume(APP_AUDIO_STATE_MUSIC)) {
             audio_linein_mute(0);
-            app_audio_set_volume(APP_AUDIO_STATE_MUSIC, app_audio_get_volume(APP_AUDIO_STATE_MUSIC), 1);//é˜²æ­¢æ— æ³•è°ƒæ•´
+            app_audio_set_volume(APP_AUDIO_STATE_MUSIC, app_audio_get_volume(APP_AUDIO_STATE_MUSIC), 1);//·ÀÖ¹ÎŞ·¨µ÷Õû
         }
-        //æ¨¡æ‹Ÿè¾“å‡ºæ—¶å€™ï¼Œdacä¸º0ä¹Ÿæœ‰æ•°æ®
+        //Ä£ÄâÊä³öÊ±ºò£¬dacÎª0Ò²ÓĞÊı¾İ
 #endif
 
     } else {
-        fm_dec_open(0xff, 37500);//æ‰“å¼€å†…ç½®æ”¶éŸ³è§£ç é€šé“
+        fm_dec_open(0xff, 37500);//´ò¿ªÄÚÖÃÊÕÒô½âÂëÍ¨µÀ
     }
     return 0;
 }
@@ -285,7 +285,7 @@ void fm_manage_close(void)
         fm_hdl = NULL;
     }
 
-    if (t_fm_hdl && memcmp(t_fm_hdl->logo, "fm_inside", strlen(t_fm_hdl->logo))) { //ä¸ä½¿ç”¨å†…éƒ¨æ”¶éŸ³å¼€å¯linein
+    if (t_fm_hdl && memcmp(t_fm_hdl->logo, "fm_inside", strlen(t_fm_hdl->logo))) { //²»Ê¹ÓÃÄÚ²¿ÊÕÒô¿ªÆôlinein
 #if (TCFG_FM_INPUT_WAY == LINEIN_INPUT_WAY_ADC)
         linein_dec_close();
 #else

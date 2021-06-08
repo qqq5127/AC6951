@@ -75,32 +75,32 @@ const struct __effect_mode_attr echo_tool_attr[EFFECT_ECHO_MODE_MAX] = {
     {
         .num = ARRAY_SIZE(echo_cmd_cfg),
         .cmd_tab = (u16 *)echo_cmd_cfg,
-        .name = "çº¯å›å£°",
+        .name = "´¿»ØÉù",
     },
     [EFFECT_ECHO_MODE_BOY_TO_GIRL] =
     {
         .num = ARRAY_SIZE(boy_to_girl_cmd_cfg),
         .cmd_tab = (u16 *)boy_to_girl_cmd_cfg,
-        .name = "ç”·å£°å˜å¥³å£°",
+        .name = "ÄĞÉù±äÅ®Éù",
     },
     [EFFECT_ECHO_MODE_GIRL_TO_BOY] =
     {
         .num = ARRAY_SIZE(girl_to_boy_cmd_cfg),
         .cmd_tab = (u16 *)girl_to_boy_cmd_cfg,
-        .name = "å¥³å£°å˜ç”·å£°",
+        .name = "Å®Éù±äÄĞÉù",
 
     },
     [EFFECT_ECHO_MODE_KIDS] =
     {
         .num = ARRAY_SIZE(kids_cmd_cfg),
         .cmd_tab = (u16 *)kids_cmd_cfg,
-        .name = "å¨ƒå¨ƒéŸ³",
+        .name = "ÍŞÍŞÒô",
     },
     [EFFECT_ECHO_MODE_MAGIC] =
     {
         .num = ARRAY_SIZE(magic_cmd_cfg),
         .cmd_tab = (u16 *)magic_cmd_cfg,
-        .name = "é­”éŸ³",
+        .name = "Ä§Òô",
     },
 };
 

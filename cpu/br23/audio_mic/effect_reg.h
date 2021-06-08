@@ -23,10 +23,10 @@ struct __mic_effect_parm {
 };
 
 struct __effect_dodge_parm {
-    u32 dodge_in_thread;//è§¦å‘é—ªé¿çš„èƒ½é‡é˜ˆå€¼
-    u32 dodge_in_time_ms;//èƒ½é‡å€¼æŒç»­å¤§äºdodge_in_thread å°±è§¦å‘é—ªé¿
-    u32 dodge_out_thread;//é€€å‡ºé—ªé¿çš„èƒ½é‡é˜ˆå€¼
-    u32 dodge_out_time_ms;//èƒ½é‡å€¼æŒç»­å°äºdodge_out_thread å°±é€€å‡ºé—ªé¿
+    u32 dodge_in_thread;//´¥·¢ÉÁ±ÜµÄÄÜÁ¿ãĞÖµ
+    u32 dodge_in_time_ms;//ÄÜÁ¿Öµ³ÖĞø´óÓÚdodge_in_thread ¾Í´¥·¢ÉÁ±Ü
+    u32 dodge_out_thread;//ÍË³öÉÁ±ÜµÄÄÜÁ¿ãĞÖµ
+    u32 dodge_out_time_ms;//ÄÜÁ¿Öµ³ÖĞøĞ¡ÓÚdodge_out_thread ¾ÍÍË³öÉÁ±Ü
 };
 
 // #define MIC_EFFECT_SAMPLERATE			(16000L)

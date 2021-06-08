@@ -3,13 +3,13 @@
 #include "asm/gpio.h"
 
 /**
- * æ³¨æ„ï¼šJL_WAKEUP åŒºåˆ«äºPMUç®¡ç†çš„å”¤é†’ã€‚å¯ç†è§£ä¸ºä¸€ä¸ªç‹¬ç«‹çš„æ¨¡å—ä½¿ç”¨ã€‚ä½†åœ¨ä½åŠŸè€—çš„æƒ…å†µä¸‹ï¼Œä¸­æ–­æ— æ•ˆã€‚
+ * ×¢Òâ£ºJL_WAKEUP Çø±ğÓÚPMU¹ÜÀíµÄ»½ĞÑ¡£¿ÉÀí½âÎªÒ»¸ö¶ÀÁ¢µÄÄ£¿éÊ¹ÓÃ¡£µ«ÔÚµÍ¹¦ºÄµÄÇé¿öÏÂ£¬ÖĞ¶ÏÎŞĞ§¡£
  */
 
 static void (*port_wkup_irq_cbfun)(void) = NULL;
 static u32 user_port = -1;;
 /**
- * @brief å¼•è„šä¸­æ–­å‡½æ•°
+ * @brief Òı½ÅÖĞ¶Ïº¯Êı
  */
 ___interrupt
 void port_wkup_irq_fun(void)
@@ -22,10 +22,10 @@ void port_wkup_irq_fun(void)
     }
 }
 /**
- * @brief å¼•è„šä¸­æ–­åˆå§‹åŒ–
- * @param port ä»»æ„å¼•è„šçš„å¼•è„šå·ï¼šIO_PORTA_00......
- * @param trigger_edge è§¦å‘è¾¹æ²¿ã€‚ 0ï¼šä¸Šå‡æ²¿è§¦å‘ã€‚ 1ï¼›ä¸‹é™æ²¿è§¦å‘
- * @param cbfun ç›¸åº”çš„ä¸­æ–­å›è°ƒå‡½æ•°
+ * @brief Òı½ÅÖĞ¶Ï³õÊ¼»¯
+ * @param port ÈÎÒâÒı½ÅµÄÒı½ÅºÅ£ºIO_PORTA_00......
+ * @param trigger_edge ´¥·¢±ßÑØ¡£ 0£ºÉÏÉıÑØ´¥·¢¡£ 1£»ÏÂ½µÑØ´¥·¢
+ * @param cbfun ÏàÓ¦µÄÖĞ¶Ï»Øµ÷º¯Êı
  */
 void port_wkup_interrupt_init(u32 port, u8 trigger_edge, void (*cbfun)(void))
 {
@@ -45,16 +45,16 @@ void port_wkup_interrupt_init(u32 port, u8 trigger_edge, void (*cbfun)(void))
     if (cbfun) {
         port_wkup_irq_cbfun = cbfun;
     }
-    request_irq(IRQ_PORT_IDX, 3, port_wkup_irq_fun, 0); //æ³¨å†Œä¸­æ–­å‡½æ•°
-    JL_IOMAP->CON2 &= ~(0b111111 << 0);                 //ä½¿ç”¨inputchannel 0
+    request_irq(IRQ_PORT_IDX, 3, port_wkup_irq_fun, 0); //×¢²áÖĞ¶Ïº¯Êı
+    JL_IOMAP->CON2 &= ~(0b111111 << 0);                 //Ê¹ÓÃinputchannel 0
     JL_IOMAP->CON2 |= (port << 0);
-    JL_WAKEUP->CON2 |= BIT(0);                          //æ¸…ä¸€æ¬¡pnd
-    JL_WAKEUP->CON0 |= BIT(0);                          //å¼•è„šä¸­æ–­ä½¿èƒ½
+    JL_WAKEUP->CON2 |= BIT(0);                          //ÇåÒ»´Îpnd
+    JL_WAKEUP->CON0 |= BIT(0);                          //Òı½ÅÖĞ¶ÏÊ¹ÄÜ
 }
 
 /**
- * @brief å…³æ‰è¯¥å¼•è„šçš„ä¸­æ–­åŠŸèƒ½
- * @param port å¼•è„šå·ï¼šIO_PORTA_00......
+ * @brief ¹Øµô¸ÃÒı½ÅµÄÖĞ¶Ï¹¦ÄÜ
+ * @param port Òı½ÅºÅ£ºIO_PORTA_00......
  */
 void port_wkup_interrupt_close(u32 port)
 {
@@ -68,7 +68,7 @@ void port_wkup_interrupt_close(u32 port)
 }
 
 /*********************************************************************************************************
- * ******************************           ä½¿ç”¨ä¸¾ä¾‹å¦‚ä¸‹           ***************************************
+ * ******************************           Ê¹ÓÃ¾ÙÀıÈçÏÂ           ***************************************
  * ******************************************************************************************************/
 void port_irq_cbfun(void)
 {
@@ -76,8 +76,8 @@ void port_irq_cbfun(void)
 }
 void my_port_wkup_test()
 {
-    port_wkup_interrupt_init(IO_PORTA_03, 0, port_irq_cbfun);//ä¸Šå‡æ²¿è§¦å‘
-    /* port_wkup_interrupt_init(IO_PORT_DP, 1, port_irq_cbfun);//ä¸‹é™æ²¿è§¦å‘ */
+    port_wkup_interrupt_init(IO_PORTA_03, 0, port_irq_cbfun);//ÉÏÉıÑØ´¥·¢
+    /* port_wkup_interrupt_init(IO_PORT_DP, 1, port_irq_cbfun);//ÏÂ½µÑØ´¥·¢ */
     while (1);
 }
 

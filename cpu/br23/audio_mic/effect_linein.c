@@ -19,8 +19,8 @@ struct __effect_linein {
     struct __stream_entry 		*stream;
 };
 
-//adcå‡ºæ•°é¡ºåº lineinL lineinR  mic
-//micé€šè·¯æ•°æ®æºæ˜¯å•å£°é“ï¼Œç”¨reverbä¼šå˜åŒå£°é“ï¼Œç”¨echoå£°é“æ•°ä¸å˜
+//adc³öÊıË³Ğò lineinL lineinR  mic
+//micÍ¨Â·Êı¾İÔ´ÊÇµ¥ÉùµÀ£¬ÓÃreverb»á±äË«ÉùµÀ£¬ÓÃechoÉùµÀÊı²»±ä
 int effect_linein_mix_callback(void *priv, struct audio_data_frame *in)
 {
     struct __effect_linein *linein = (struct __effect_linein *)priv;
@@ -36,17 +36,17 @@ int effect_linein_mix_callback(void *priv, struct audio_data_frame *in)
         int points = len >> 1;
         if (in->channel == 2) {
             for (i = 0; i < points; i++) {
-                data[i] = data_sat_s16(data[i] + linein->adc_buf[i]);//å£°é“æ•°ä¸€è‡´æ—¶ï¼ŒlineinLRä¸è¿‡äº†reverbåæ··å“é€šè·¯æ•°æ®ç‚¹æ•°ä¸€è‡´
+                data[i] = data_sat_s16(data[i] + linein->adc_buf[i]);//ÉùµÀÊıÒ»ÖÂÊ±£¬lineinLRÓë¹ıÁËreverbºó»ìÏìÍ¨Â·Êı¾İµãÊıÒ»ÖÂ
             }
         } else {
-            //æ··å“é€šè·¯æ˜¯å•å£°é“æ—¶ï¼ŒlineinLRå£°é“ç‚¹æ•°æ˜¯micé€šè·¯æ•°æ®çš„ä¸¤å€
+            //»ìÏìÍ¨Â·ÊÇµ¥ÉùµÀÊ±£¬lineinLRÉùµÀµãÊıÊÇmicÍ¨Â·Êı¾İµÄÁ½±¶
             s16 *tmp = linein->adc_buf;
             for (i = 0, j = 0; i < points * 2; i += 2, j++) {
-                tmp[j] = data_sat_s16(tmp[i] + tmp[i + 1]); //å°†linein LRåˆæˆ å•å£°é“
+                tmp[j] = data_sat_s16(tmp[i] + tmp[i + 1]); //½«linein LRºÏ³É µ¥ÉùµÀ
             }
 
             for (i = 0; i < points; i++) {
-                data[i] = data_sat_s16(data[i] + linein->adc_buf[i]);//å°†åˆæˆå•å£°é“åçš„lineinæ•°æ®ï¼Œå åŠ åˆ°æ··å“é€šè·¯
+                data[i] = data_sat_s16(data[i] + linein->adc_buf[i]);//½«ºÏ³Éµ¥ÉùµÀºóµÄlineinÊı¾İ£¬µş¼Óµ½»ìÏìÍ¨Â·
             }
         }
     }

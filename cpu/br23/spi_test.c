@@ -6,18 +6,18 @@
 #if 0
 /*
     [[[ README ]]]
-    1. 本spi测试demo提供了spi.c的API使用例程，测试方式为两个spi的环回测试。
-    spi1设置为主机模式，spi2设置为从机模式，spi1发送数据到spi2，然后接收spi2
-    原样返回的数据，然后比较发送出去的数据与接收的数据是否一致，一致则说明
-    验证通过。
-    2. 本demo涉及BYTE收发测试及DMA收发测试，通过宏SPI_TEST_MODE选择。另外
-    demo还涉及到spi中断中调用可用于中断的spi API的使用。
-    3. spi.c的API不包含CS引脚，CS由API以外控制。
-    4. 请在board_xxx.c中定义配置结构体，例如用到spi1，需要定义spi1_p_data，
-    否则编译出错。
-    5. spi的DMA地址需要4字节对齐。
-    6. 虽然spi.c的API带有spi0，但在有挂spi flash的芯片上使用可能会出问题，
-    避免使用spi0。
+    1. ��spi����demo�ṩ��spi.c��APIʹ�����̣����Է�ʽΪ����spi�Ļ��ز��ԡ�
+    spi1����Ϊ����ģʽ��spi2����Ϊ�ӻ�ģʽ��spi1�������ݵ�spi2��Ȼ�����spi2
+    ԭ�����ص����ݣ�Ȼ��ȽϷ��ͳ�ȥ����������յ������Ƿ�һ�£�һ����˵��
+    ��֤ͨ����
+    2. ��demo�漰BYTE�շ����Լ�DMA�շ����ԣ�ͨ����SPI_TEST_MODEѡ������
+    demo���漰��spi�ж��е��ÿ������жϵ�spi API��ʹ�á�
+    3. spi.c��API������CS���ţ�CS��API������ơ�
+    4. ����board_xxx.c�ж������ýṹ�壬�����õ�spi1����Ҫ����spi1_p_data��
+    ������������
+    5. spi��DMA��ַ��Ҫ4�ֽڶ��롣
+    6. ��Ȼspi.c��API����spi0�������й�spi flash��оƬ��ʹ�ÿ��ܻ�����⣬
+    ����ʹ��spi0��
 
 */
 
@@ -51,7 +51,7 @@ static spi_dev spi2_hdl = 2;
 
 #define SPI_TEST_BYTE_MODE      0x01
 #define SPI_TEST_DMA_MODE       0x02
-//测试模式选择
+//����ģʽѡ��
 #define SPI_TEST_MODE           SPI_TEST_BYTE_MODE
 
 static void my_put_u8hex(u8 b)
@@ -72,7 +72,7 @@ static void my_put_u8hex(u8 b)
     putchar(' ');
 }
 
-//中断函数，需以下特殊声明
+//�жϺ�������������������
 __attribute__((interrupt("")))
 static void spi2_isr()
 {
@@ -102,7 +102,7 @@ static void spi2_isr()
     }
 }
 
-#if 1  //仅用于spi demo，正式工程请放到board_xxx.c文件中
+#if 1  //������spi demo����ʽ������ŵ�board_xxx.c�ļ���
 /* const struct spi_platform_data spi0_p_data = { */
 /* .port = 'A', */
 /* .mode = SPI_MODE_BIDIR_1BIT, */
@@ -134,7 +134,7 @@ void spi_test_main()
     spi_open(spi1_hdl);
     spi_open(spi2_hdl);
     spi_set_ie(spi2_hdl, 1);
-    //配置中断优先级，中断函数
+    //�����ж����ȼ����жϺ���
     request_irq(IRQ_SPI2_IDX, 3, spi2_isr, 0);
 
     SPI1_CS_OUT();

@@ -9,9 +9,9 @@
 #define plcnt_ctm_debug(fmt, ...)
 #endif
 
-u8 g_touch_len;        //è§¦æ‘¸æŒ‰é”®æ•°
-u8  bCapState;          //ç”µå®¹å……æ”¾ç”µçŠ¶æ€
-u8  bCap_ch = 0;          //è§¦æ‘¸é€šé“
+u8 g_touch_len;        //´¥Ãş°´¼üÊı
+u8  bCapState;          //µçÈİ³ä·Åµç×´Ì¬
+u8  bCap_ch = 0;          //´¥ÃşÍ¨µÀ
 u16 Touchkey_value_new = 0;
 u16 Touchkey_value_old = 0;
 sCTM_KEY_VAR ctm_key_value;
@@ -50,13 +50,13 @@ static void set_port_die(u8 chan)
 
 static void set_port_in(u8 chan)
 {
-    gpio_direction_input(plcnt_channel2port(chan)); //è¾“å…¥
+    gpio_direction_input(plcnt_channel2port(chan)); //ÊäÈë
 }
 
 static void set_touch_io(u8 chan)
 {
     INPUT_CHANNLE2_SRC_SEL(plcnt_channel2port(chan));
-    set_port_in(chan);  //è®¾ç½®ä¸ºè¾“å…¥
+    set_port_in(chan);  //ÉèÖÃÎªÊäÈë
 }
 
 
@@ -71,7 +71,7 @@ static void ctm_irq(u16 ctm_res, u8 ch)
     s16 temp_s16_0, temp_s16_1;
     s32 temp_s32_0;
 //..............................................................................................
-//å–è®¡æ•°å€¼/é€šé“åˆ¤æ–­
+//È¡¼ÆÊıÖµ/Í¨µÀÅĞ¶Ï
 //..............................................................................................
 
 
@@ -84,7 +84,7 @@ static void ctm_irq(u16 ctm_res, u8 ch)
     }
 
 //..............................................................................................
-//å½“å‰è®¡æ•°å€¼å»æŠ–åŠ¨æ»¤æ³¢å™¨
+//µ±Ç°¼ÆÊıÖµÈ¥¶¶¶¯ÂË²¨Æ÷
 //..............................................................................................
     temp_u16_0 = ctm_key_var->touch_cnt_buf[ch];
     temp_u16_1 = temp_u16_0;
@@ -96,11 +96,11 @@ static void ctm_irq(u16 ctm_res, u8 ch)
 
 
 //..............................................................................................
-//å„é€šé“æŒ‰é”®é‡Šæ”¾è®¡æ•°å€¼æ»¤æ³¢å™¨
+//¸÷Í¨µÀ°´¼üÊÍ·Å¼ÆÊıÖµÂË²¨Æ÷
 //..............................................................................................
     temp_s32_0 = ctm_key_var->touch_release_buf[ch];
-    temp_u16_1 = temp_s32_0 >> ctm_key_var->FLT1CFG0;	//è·å¾—æ»¤æ³¢å™¨ä¹‹åçš„æŒ‰é”®é‡Šæ”¾å€¼
-    temp_s16_0 = temp_u16_0 - temp_u16_1;	//è·å¾—å’Œæœ¬æ¬¡æ£€æµ‹å€¼çš„å·®å€¼ï¼ŒæŒ‰ä¸‹æŒ‰é”®ä¸ºè´Ÿå€¼ï¼Œé‡Šæ”¾æŒ‰é”®ä¸ºæ­£å€¼
+    temp_u16_1 = temp_s32_0 >> ctm_key_var->FLT1CFG0;	//»ñµÃÂË²¨Æ÷Ö®ºóµÄ°´¼üÊÍ·ÅÖµ
+    temp_s16_0 = temp_u16_0 - temp_u16_1;	//»ñµÃºÍ±¾´Î¼ì²âÖµµÄ²îÖµ£¬°´ÏÂ°´¼üÎª¸ºÖµ£¬ÊÍ·Å°´¼üÎªÕıÖµ
     temp_s16_1 = temp_s16_0;
 
 //	if(ch == 1)
@@ -108,20 +108,20 @@ static void ctm_irq(u16 ctm_res, u8 ch)
 //		printf("ch%d: %d  %d", (short)ch, temp_u16_0, temp_s16_1);
 //	}
 
-    if (ctm_key_var->touch_key_state & BIT(ch)) {	//å¦‚æœæœ¬é€šé“æŒ‰é”®ç›®å‰æ˜¯å¤„äºé‡Šæ”¾çŠ¶æ€
-        if (temp_s16_1 >= 0) {	//å½“å‰è®¡æ•°å€¼å¤§äºä½é€šå€¼ï¼Œæ”¾å¤§åå‚ä¸è¿ç®—
+    if (ctm_key_var->touch_key_state & BIT(ch)) {	//Èç¹û±¾Í¨µÀ°´¼üÄ¿Ç°ÊÇ´¦ÓÚÊÍ·Å×´Ì¬
+        if (temp_s16_1 >= 0) {	//µ±Ç°¼ÆÊıÖµ´óÓÚµÍÍ¨Öµ£¬·Å´óºó²ÎÓëÔËËã
             if (temp_s16_1 < (ctm_key_var->FLT1CFG2 >> 3)) {
-                temp_s16_1 <<= 3;	//æ”¾å¤§åå‚ä¸è¿ç®—
+                temp_s16_1 <<= 3;	//·Å´óºó²ÎÓëÔËËã
             } else {
-                temp_s16_1 = ctm_key_var->FLT1CFG2;	//é¥±å’Œï¼Œé˜²æ­¢æŸäº›è¾ƒå¤§çš„æ­£åå·®å¯¼è‡´é”™åˆ¤
+                temp_s16_1 = ctm_key_var->FLT1CFG2;	//±¥ºÍ£¬·ÀÖ¹Ä³Ğ©½Ï´óµÄÕıÆ«²îµ¼ÖÂ´íÅĞ
             }
-        } else if (temp_s16_1 >= ctm_key_var->FLT1CFG1) {	//å½“å‰è®¡æ•°å€¼å°äºä½é€šå€¼ä¸å¤šï¼Œæ­£å¸¸å‚ä¸è¿ç®—
-        } else {			//å½“å‰è®¡æ•°å€¼å°äºä½é€šå€¼å¾ˆå¤šï¼Œç¼©å°åå‚ä¸è¿ç®— (æœ‰ç¬¦å·æ•°å³ç§»è‡ªåŠ¨æ‰©å±•ç¬¦å·ä½???)
+        } else if (temp_s16_1 >= ctm_key_var->FLT1CFG1) {	//µ±Ç°¼ÆÊıÖµĞ¡ÓÚµÍÍ¨Öµ²»¶à£¬Õı³£²ÎÓëÔËËã
+        } else {			//µ±Ç°¼ÆÊıÖµĞ¡ÓÚµÍÍ¨ÖµºÜ¶à£¬ËõĞ¡ºó²ÎÓëÔËËã (ÓĞ·ûºÅÊıÓÒÒÆ×Ô¶¯À©Õ¹·ûºÅÎ»???)
             temp_s16_1 >>= 3;
         }
-    } else {		//å¦‚æœæœ¬é€šé“æŒ‰é”®ç›®å‰æ˜¯å¤„äºæŒ‰ä¸‹çŠ¶æ€, ç¼“æ…¢é™ä½é‡Šæ”¾è®¡æ•°å€¼
+    } else {		//Èç¹û±¾Í¨µÀ°´¼üÄ¿Ç°ÊÇ´¦ÓÚ°´ÏÂ×´Ì¬, »ºÂı½µµÍÊÍ·Å¼ÆÊıÖµ
         if (temp_s16_1 <= ctm_key_var->RELEASECFG1) {
-            temp_s16_1 >>= 3;		//ç¼©å°åå‚ä¸è¿ç®—
+            temp_s16_1 >>= 3;		//ËõĞ¡ºó²ÎÓëÔËËã
         } else {
             temp_s16_1 = 0;
         }
@@ -131,11 +131,11 @@ static void ctm_irq(u16 ctm_res, u8 ch)
     ctm_key_var->touch_release_buf[ch] = temp_s32_0;
 
 //..............................................................................................
-//æŒ‰é”®æŒ‰ä¸‹ä¸é‡Šæ”¾æ£€æµ‹
+//°´¼ü°´ÏÂÓëÊÍ·Å¼ì²â
 //..............................................................................................
-    if (temp_s16_0 <= ctm_key_var->PRESSCFG) {			//æŒ‰é”®æŒ‰ä¸‹
+    if (temp_s16_0 <= ctm_key_var->PRESSCFG) {			//°´¼ü°´ÏÂ
         ctm_key_var->touch_key_state &= ~BIT(ch);
-    } else if (temp_s16_0 >= ctm_key_var->RELEASECFG0) {	//æŒ‰é”®é‡Šæ”¾
+    } else if (temp_s16_0 >= ctm_key_var->RELEASECFG0) {	//°´¼üÊÍ·Å
         ctm_key_var->touch_key_state |= BIT(ch);
     }
 }
@@ -152,7 +152,7 @@ static void scan_capkey(void *priv)
 
     if (bCapState == 0) {
         bCapState = 1;
-        Touchkey_value_new = JL_PCNT->VAL;   ///è·å–è®¡æ•°å€¼
+        Touchkey_value_new = JL_PCNT->VAL;   ///»ñÈ¡¼ÆÊıÖµ
 
         set_port_out_H(bCap_ch);//set output H
         ///////***wait IO steady for pulse counter
@@ -163,8 +163,8 @@ static void scan_capkey(void *priv)
 
         Touchkey_value_delta = Touchkey_value_new - Touchkey_value_old;
         //plcnt_ctm_debug("old: %x   new: %x", Touchkey_value_old, Touchkey_value_new);
-        Touchkey_value_old = Touchkey_value_new;	///è®°å½•æ—§å€¼
-        temp = 6800L - Touchkey_value_delta * user_data->change_gain;    ///1å˜åŒ–å¢å¤§å€æ•°
+        Touchkey_value_old = Touchkey_value_new;	///¼ÇÂ¼¾ÉÖµ
+        temp = 6800L - Touchkey_value_delta * user_data->change_gain;    ///1±ä»¯Ôö´ó±¶Êı
 
         /* if(bCap_ch == 0){ */
         /* plcnt_ctm_debug("value: %x\n", Touchkey_value_delta); */
@@ -176,12 +176,12 @@ static void scan_capkey(void *priv)
         /* plcnt_ctm_debug("temp: %d\n", Touchkey_value_delta); */
         /* } */
 
-        /*è°ƒç”¨æ»¤æ³¢ç®—æ³•*/
+        /*µ÷ÓÃÂË²¨Ëã·¨*/
         ctm_irq(temp, bCap_ch);
 
-        /*æ¸…é™¤å‰ä¸€ä¸ªé€šé“çŠ¶æ€ï¼Œé”å®šPLL CNT*/
-        //set_port_out(bCap_ch); //è®¾ä¸ºè¾“å‡º
-        /*åˆ‡æ¢é€šé“ï¼Œå¼€å§‹å……ç”µï¼ŒPLL CNT è¾“å…¥Mux åˆ‡æ¢*/
+        /*Çå³ıÇ°Ò»¸öÍ¨µÀ×´Ì¬£¬Ëø¶¨PLL CNT*/
+        //set_port_out(bCap_ch); //ÉèÎªÊä³ö
+        /*ÇĞ»»Í¨µÀ£¬¿ªÊ¼³äµç£¬PLL CNT ÊäÈëMux ÇĞ»»*/
         bCap_ch++;
         bCap_ch %= g_touch_len;
         //bCap_ch = (bCap_ch >= g_touch_len) ? 0 : bCap_ch;
@@ -194,7 +194,7 @@ static void scan_capkey(void *priv)
 
     } else {
         bCapState = 0;
-        set_touch_io(bCap_ch); //è®¾ä¸ºè¾“å…¥å¼€å§‹è®¡æ•°
+        set_touch_io(bCap_ch); //ÉèÎªÊäÈë¿ªÊ¼¼ÆÊı
     }
 }
 
@@ -232,13 +232,13 @@ int plcnt_init(void *_data)
 
     memset((u8 *)&ctm_key_value, 0x0, sizeof(sCTM_KEY_VAR));
 
-    /*è§¦æ‘¸æŒ‰é”®å‚æ•°é…ç½®*/
+    /*´¥Ãş°´¼ü²ÎÊıÅäÖÃ*/
     ctm_key_value.FLT0CFG = 0;
     ctm_key_value.FLT1CFG0 = 7;
     ctm_key_value.FLT1CFG1 = -80;
     ctm_key_value.FLT1CFG2 = (-(-10)) << 7; //1280
 
-    ///è°ƒèŠ‚çµæ•åº¦çš„ä¸»è¦å‚æ•°
+    ///µ÷½ÚÁéÃô¶ÈµÄÖ÷Òª²ÎÊı
     /* ctm_key_value.PRESSCFG = -10; */
     /* ctm_key_value.RELEASECFG0 = -50; */
     /* ctm_key_value.RELEASECFG1 = -80;//-81; */
@@ -249,12 +249,12 @@ int plcnt_init(void *_data)
 
     memset((u8 *) & (ctm_key_value.touch_init_cnt[0]), 0x10, TOUCH_KEY_CH_MAX);
 
-    ctm_key_value.touch_key_state = 0xffff; //<æŒ‰é”®é»˜è®¤é‡Šæ”¾
+    ctm_key_value.touch_key_state = 0xffff; //<°´¼üÄ¬ÈÏÊÍ·Å
 
-    //åˆå§‹åŒ–è®¡æ•°å™¨é…ç½®:
+    //³õÊ¼»¯¼ÆÊıÆ÷ÅäÖÃ:
     PLCNT_CLOCK_SEL(user_data->clock);
 
-    JL_PCNT->CON |= BIT(1);	//ä½¿èƒ½è®¡æ•°å™¨
+    JL_PCNT->CON |= BIT(1);	//Ê¹ÄÜ¼ÆÊıÆ÷
 
     if (user_data->num > TOUCH_KEY_CH_MAX) {
         printf("plcnt_ctm key num config err!!!");
@@ -262,11 +262,11 @@ int plcnt_init(void *_data)
     }
 
     g_touch_len = user_data->num;
-    Touchkey_value_old = JL_PCNT->VAL;   ///è·å–è®¡æ•°å€¼
+    Touchkey_value_old = JL_PCNT->VAL;   ///»ñÈ¡¼ÆÊıÖµ
 
     set_port_out_H(bCap_ch);
 
-#if 1       //å¦‚æœå¤–éƒ¨æœ‰ä¸‹æ‹‰ç”µé˜»ï¼Œå¯ä¸æ˜¯ç”¨èŠ¯ç‰‡å†…éƒ¨ä¸‹æ‹‰
+#if 1       //Èç¹ûÍâ²¿ÓĞÏÂÀ­µç×è£¬¿É²»ÊÇÓÃĞ¾Æ¬ÄÚ²¿ÏÂÀ­
     for (u8 i = 0; i < g_touch_len; i++) {
         set_port_pd(i);
         set_port_die(i);

@@ -6,11 +6,11 @@
 #include "update.h"
 
 /*
-    [[  æ³¨æ„!!!  ]]
-    * é€‚ç”¨äºŽå¸¦cfg_doneçš„ç¡¬ä»¶IICï¼Œå¦ä¸€ç§ç¡¬ä»¶IICå¦ä½œè¯´æ˜Ž
-    * ç¡¬ä»¶IICçš„START / ACK(NACK)å¿…é¡»åœ¨å‘é€æˆ–æŽ¥æ”¶å­—èŠ‚cfg_doneå‰è®¾ç½®ï¼Œä¸”ä¸èƒ½
-      æŽ¥cfg_doneå•ç‹¬å‘é€ï¼›è€ŒSTOPåˆ™åº”åœ¨å‘é€æˆ–æŽ¥æ”¶å­—èŠ‚cfg_doneåŽè®¾ç½®ï¼Œå¿…é¡»æŽ¥
-      cfg_doneå•ç‹¬å‘é€
+    [[  ×¢Òâ!!!  ]]
+    * ÊÊÓÃÓÚ´øcfg_doneµÄÓ²¼þIIC£¬ÁíÒ»ÖÖÓ²¼þIICÁí×÷ËµÃ÷
+    * Ó²¼þIICµÄSTART / ACK(NACK)±ØÐëÔÚ·¢ËÍ»ò½ÓÊÕ×Ö½Úcfg_doneÇ°ÉèÖÃ£¬ÇÒ²»ÄÜ
+      ½Ócfg_doneµ¥¶À·¢ËÍ£»¶øSTOPÔòÓ¦ÔÚ·¢ËÍ»ò½ÓÊÕ×Ö½Úcfg_doneºóÉèÖÃ£¬±ØÐë½Ó
+      cfg_doneµ¥¶À·¢ËÍ
 */
 struct iic_iomapping {
     u8 scl;

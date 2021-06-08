@@ -9,8 +9,8 @@
 #define LATCHED_MODE			LATCHED_1S	//interrupt latched mode
 #define INTERRUPT_THRESHOLD 	15			//interrupt threshold 0~31 ,(threshold*125)mg
 #define INTERRUPT_DURATION      5   		//interrupt duration 0~7 ,(50~700)ms 0:50ms 1:100ms 2:150ms 3:200ms 4:250ms 5:375ms 6:500ms 7:700ms
-#define TAP_SAMPLE_LEVEL		1			//é‡‡æ ·æ¬¡æ•° = 25-TAP_SAMPLE_LEVEL*5
-#define TAP_FILTER				30			//å™ªå£°å¤§å°ï¼Œå¤§äºTAP_FILTERè®¤ä¸ºæ˜¯å™ªå£°
+#define TAP_SAMPLE_LEVEL		1			//²ÉÑù´ÎÊı = 25-TAP_SAMPLE_LEVEL*5
+#define TAP_FILTER				30			//ÔëÉù´óĞ¡£¬´óÓÚTAP_FILTERÈÏÎªÊÇÔëÉù
 
 #define I2C_ADDR_DA230_W 				0x4e
 #define I2C_ADDR_DA230_R 				0x4f

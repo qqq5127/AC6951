@@ -1,6 +1,6 @@
 
-# -- 参数配置说明: 根据不同的应用方案(APP_CASE)进行配置
-# -- 模块是否使能以及模块内部与memory pool相关的配置
+# -- ��������˵��: ���ݲ�ͬ��Ӧ�÷���(APP_CASE)��������
+# -- ģ���Ƿ�ʹ���Լ�ģ���ڲ���memory pool��ص�����
 
 
 export FLASH_256K?= n
@@ -111,14 +111,14 @@ endif #ifeq ($(CONFIG_ANS_V2),y)
 #-------------------- Config item format vm ---------------------#
 #================================================================#
 ifneq ($(CPU),br22)
-#除br22以外, br18, br26, br23其他cpu配置项格式统一使用vm的格式
+#��br22����, br18, br26, br23����cpu�������ʽͳһʹ��vm�ĸ�ʽ
 CC_DEFINE += \
 -DCONFIG_ITEM_FORMAT_VM
 
 endif #ifneq ($(CPU),br22)
 
 ifeq ($(CPU),br22)
-#br22用旧的EQ工具
+#br22�þɵ�EQ����
 CC_DEFINE += \
 -DCONFIG_EQ_COEFF_TOOL_DESIGN
 

@@ -19,10 +19,10 @@ void linein_sample_close(void *hdl);
 void *fm_sample_open(u8 source, u16 sample_rate);
 void fm_sample_close(void *hdl, u8 source);
 
-////>>>>>>>>>>>>>>record_player apiå½•éŸ³æ¥å£<<<<<<<<<<<<<<<<<<<<<///
+////>>>>>>>>>>>>>>record_player apiÂ¼Òô½Ó¿Ú<<<<<<<<<<<<<<<<<<<<<///
 void recorder_encode_stop(void);
 u32 recorder_get_encoding_time();
-///æ£€æŸ¥å½•éŸ³æ˜¯å¦æ­£åœ¨è¿›è¡Œ
+///¼ì²éÂ¼ÒôÊÇ·ñÕıÔÚ½øĞĞ
 int recorder_is_encoding(void);
 void recorder_device_offline_check(char *logo);
 

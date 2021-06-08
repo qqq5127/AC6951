@@ -7,9 +7,9 @@
 #include "system/includes.h"
 #include "media/audio_decoder.h"
 
-// pcè§£ç é‡æ–°å¼€å§‹
+// pc½âÂëÖØĞÂ¿ªÊ¼
 int uac_dec_restart(int magic);
-// æ¨é€pcè§£ç é‡æ–°å¼€å§‹å‘½ä»¤
+// ÍÆËÍpc½âÂëÖØĞÂ¿ªÊ¼ÃüÁî
 int uac_dec_push_restart(void);
 
 #endif /* TCFG_APP_PC_EN */

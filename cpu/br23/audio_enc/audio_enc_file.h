@@ -6,7 +6,7 @@
 #include "dev_manager.h"
 
 
-// å†™pcmæ•°æ®
+// Ğ´pcmÊı¾İ
 int pcm2file_enc_write_pcm(void *priv, s16 *data, int len);
 void *pcm2file_enc_open(struct audio_fmt *pfmt, char *logo, char *folder, char *filename);
 void pcm2file_enc_write_file_set_limit(void *hdl, u32 cut_size, u32 limit_size);

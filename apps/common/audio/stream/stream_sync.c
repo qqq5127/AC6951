@@ -62,7 +62,7 @@ static int stream_sync_data_handler(struct audio_stream_entry *entry,
     if (in->data_len) {
         out->no_subsequent = 1;
     }
-    //è¾“å‡ºå‰©ä½™æ•°æ®
+    //Êä³öÊ£ÓàÊı¾İ
     if (stream->out_buf && (stream->out_points < stream->out_total)) {
         struct audio_data_frame frame;
         memset(&frame, 0, sizeof(frame));
@@ -85,7 +85,7 @@ static int stream_sync_data_handler(struct audio_stream_entry *entry,
             break;
 #endif
         }
-        //æœªè¾“å‡ºå®Œé€€å‡º
+        //Î´Êä³öÍêÍË³ö
         if (stream->out_points < stream->out_total) {
             return 0;
         }

@@ -5,12 +5,12 @@
 
 #if(TCFG_FM_EMITTER_INSIDE_ENABLE == ENABLE)
 
-#define FM_EMITTER_INSIDE_USE_STEREO		0	// 1:fm 发射使用立体声  0:非立体声
+#define FM_EMITTER_INSIDE_USE_STEREO		0	// 1:fm ����ʹ��������  0:��������
 
 
 //*****************************************************************
-//695 1:pb11 超强驱动天线  0:pb10 普通天线
-//696 1:pb3 超强驱动天线   0:pb1 普通天线,使用pb1需要需要改变唤醒IO
+//695 1:pb11 ��ǿ��������  0:pb10 ��ͨ����
+//696 1:pb3 ��ǿ��������   0:pb1 ��ͨ����,ʹ��pb1��Ҫ��Ҫ�ı份��IO
 //*****************************************************************
 #define FM_EMITTER_INSIDE_USE_CH    		1
 
@@ -28,7 +28,7 @@ static void fm_emitter_inside_init(u16 fre)
 #if FM_EMITTER_INSIDE_USE_CH
     fm_emitter_set_ch(1);
     fm_emitter_init();
-    fm_emitter_set_power(3);//功率等级0~3，最高发射功率为3级，在初始化之后设置,只用于强驱
+    fm_emitter_set_power(3);//���ʵȼ�0~3����߷��书��Ϊ3�����ڳ�ʼ��֮������,ֻ����ǿ��
 #else
     fm_emitter_init();
 #endif
@@ -57,10 +57,10 @@ static void fm_emitter_inside_set_fre(u16 fre)
 }
 
 //**************************************************
-//功率调节只适用于超强驱动,使用普通IO发射不调用这个函数
-//等级0-3,3为最高输出功率，默认使用等级3最高功率
-//功率设置放在初始化之后
-//该功率调节为全频点功率调节，所以参数 fre 无效，填0即可
+//���ʵ���ֻ�����ڳ�ǿ����,ʹ����ͨIO���䲻�����������
+//�ȼ�0-3,3Ϊ���������ʣ�Ĭ��ʹ�õȼ�3��߹���
+//�������÷��ڳ�ʼ��֮��
+//�ù��ʵ���ΪȫƵ�㹦�ʵ��ڣ����Բ��� fre ��Ч����0����
 //**************************************************
 static void fm_emitter_inside_set_power(u8 level, u16 fre)
 {

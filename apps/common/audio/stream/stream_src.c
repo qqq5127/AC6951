@@ -75,7 +75,7 @@ static int stream_src_data_handler(struct audio_stream_entry *entry,
     if (in->data_len) {
         out->no_subsequent = 1;
     }
-    //è¾“å‡ºå‰©ä½™æ•°æ®
+    //Êä³öÊ£ÓàÊı¾İ
     if (stream->out_buf && (stream->out_points < stream->out_total)) {
         struct audio_data_frame frame;
         memset(&frame, 0, sizeof(frame));
@@ -89,7 +89,7 @@ static int stream_src_data_handler(struct audio_stream_entry *entry,
             audio_stream_run(entry, &frame);
             break;
         }
-        //æœªè¾“å‡ºå®Œé€€å‡º
+        //Î´Êä³öÍêÍË³ö
         if (stream->out_points < stream->out_total) {
             return 0;
         }
@@ -97,7 +97,7 @@ static int stream_src_data_handler(struct audio_stream_entry *entry,
         //printf("=========\n");
     }
 
-    //åŒæ­¥æ£€æŸ¥
+    //Í¬²½¼ì²é
     stream_src_check(stream, in->sample_rate, in->channel);
 
     int len = 0;

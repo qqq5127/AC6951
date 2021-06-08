@@ -16,11 +16,11 @@
 #include "application/audio_vbass.h"
 
 
-#define FILE_DEC_REPEAT_EN			0 // æ— ç¼å¾ªç¯æ’­æ”¾
+#define FILE_DEC_REPEAT_EN			0 // ÎŞ·ìÑ­»·²¥·Å
 
-#define FILE_DEC_AB_REPEAT_EN		1 // ABç‚¹å¤è¯»
+#define FILE_DEC_AB_REPEAT_EN		1 // ABµã¸´¶Á
 
-#define FILE_DEC_DEST_PLAY			0 // æŒ‡å®šæ—¶é—´æ’­æ”¾
+#define FILE_DEC_DEST_PLAY			0 // Ö¸¶¨Ê±¼ä²¥·Å
 
 enum {
     FILE_DEC_STREAM_CLOSE = 0,
@@ -28,52 +28,52 @@ enum {
 };
 
 struct file_dec_hdl {
-    struct audio_stream *stream;	// éŸ³é¢‘æµ
-    struct file_decoder file_dec;	// fileè§£ç å¥æŸ„
-    struct audio_res_wait wait;		// èµ„æºç­‰å¾…å¥æŸ„
-    struct audio_mixer_ch mix_ch;	// å åŠ å¥æŸ„
-    struct audio_eq_drc *eq_drc;//eq drcå¥æŸ„
-    struct audio_dec_breakpoint *dec_bp; // æ–­ç‚¹
-    s_pitchspeed_hdl *p_pitchspeed_hdl; // å˜é€Ÿå˜è°ƒå¥æŸ„
+    struct audio_stream *stream;	// ÒôÆµÁ÷
+    struct file_decoder file_dec;	// file½âÂë¾ä±ú
+    struct audio_res_wait wait;		// ×ÊÔ´µÈ´ı¾ä±ú
+    struct audio_mixer_ch mix_ch;	// µş¼Ó¾ä±ú
+    struct audio_eq_drc *eq_drc;//eq drc¾ä±ú
+    struct audio_dec_breakpoint *dec_bp; // ¶Ïµã
+    s_pitchspeed_hdl *p_pitchspeed_hdl; // ±äËÙ±äµ÷¾ä±ú
 #if TCFG_EQ_DIVIDE_ENABLE
-    struct audio_eq_drc *eq_drc_rl_rr;//eq drcå¥æŸ„
-    struct audio_vocal_tract vocal_tract;//å£°é“åˆå¹¶ç›®æ ‡å¥æŸ„
-    struct audio_vocal_tract_ch synthesis_ch_fl_fr;//å£°é“åˆå¹¶å¥æŸ„
-    struct audio_vocal_tract_ch synthesis_ch_rl_rr;//å£°é“åˆå¹¶å¥æŸ„
-    struct channel_switch *ch_switch;//å£°é“å˜æ¢
+    struct audio_eq_drc *eq_drc_rl_rr;//eq drc¾ä±ú
+    struct audio_vocal_tract vocal_tract;//ÉùµÀºÏ²¢Ä¿±ê¾ä±ú
+    struct audio_vocal_tract_ch synthesis_ch_fl_fr;//ÉùµÀºÏ²¢¾ä±ú
+    struct audio_vocal_tract_ch synthesis_ch_rl_rr;//ÉùµÀºÏ²¢¾ä±ú
+    struct channel_switch *ch_switch;//ÉùµÀ±ä»»
 #endif
-    surround_hdl *surround;         //ç¯ç»•éŸ³æ•ˆå¥æŸ„
-    vbass_hdl *vbass;               //è™šæ‹Ÿä½éŸ³å¥æŸ„
+    surround_hdl *surround;         //»·ÈÆÒôĞ§¾ä±ú
+    vbass_hdl *vbass;               //ĞéÄâµÍÒô¾ä±ú
 
-    u32 id;					// å”¯ä¸€æ ‡è¯†ç¬¦ï¼Œéšæœºå€¼
-    void *file;				// æ–‡ä»¶å¥æŸ„
-    u32 pick_flag : 1;		// æŒ‘å‡ºæ•°æ®å¸§å‘é€ï¼ˆå¦‚MP3ç­‰)ã€‚ä¸æ˜¯è¾“å‡ºpcmï¼Œåçº§ä¸èƒ½æ¥ä»»ä½•éŸ³æ•ˆå¤„ç†ç­‰
-    u32 pcm_enc_flag : 1;	// pcmå‹ç¼©æˆæ•°æ®å¸§å‘é€ï¼ˆå¦‚WAVç­‰ï¼‰
-    u32 read_err : 2;		// è¯»æ•°å‡ºé”™ 0:no errï¼Œ 1:fat err,  2:disk err
-    u32 ab_repeat_status : 3;	// ABå¤è¯»çŠ¶æ€
+    u32 id;					// Î¨Ò»±êÊ¶·û£¬Ëæ»úÖµ
+    void *file;				// ÎÄ¼ş¾ä±ú
+    u32 pick_flag : 1;		// Ìô³öÊı¾İÖ¡·¢ËÍ£¨ÈçMP3µÈ)¡£²»ÊÇÊä³öpcm£¬ºó¼¶²»ÄÜ½ÓÈÎºÎÒôĞ§´¦ÀíµÈ
+    u32 pcm_enc_flag : 1;	// pcmÑ¹Ëõ³ÉÊı¾İÖ¡·¢ËÍ£¨ÈçWAVµÈ£©
+    u32 read_err : 2;		// ¶ÁÊı³ö´í 0:no err£¬ 1:fat err,  2:disk err
+    u32 ab_repeat_status : 3;	// AB¸´¶Á×´Ì¬
 
 #if TCFG_DEC_DECRYPT_ENABLE
-    CIPHER mply_cipher;		// è§£å¯†æ’­æ”¾
+    CIPHER mply_cipher;		// ½âÃÜ²¥·Å
 #endif
 #if TCFG_DEC_ID3_V1_ENABLE
-    MP3_ID3_OBJ *p_mp3_id3_v1;	// id3_v1ä¿¡æ¯
+    MP3_ID3_OBJ *p_mp3_id3_v1;	// id3_v1ĞÅÏ¢
 #endif
 #if TCFG_DEC_ID3_V2_ENABLE
-    MP3_ID3_OBJ *p_mp3_id3_v2;	// id3_v2ä¿¡æ¯
+    MP3_ID3_OBJ *p_mp3_id3_v2;	// id3_v2ĞÅÏ¢
 #endif
 
 #if FILE_DEC_REPEAT_EN
-    u8 repeat_num;			// æ— ç¼å¾ªç¯æ¬¡æ•°
-    struct fixphase_repair_obj repair_buf;	// æ— ç¼å¾ªç¯å¥æŸ„
+    u8 repeat_num;			// ÎŞ·ìÑ­»·´ÎÊı
+    struct fixphase_repair_obj repair_buf;	// ÎŞ·ìÑ­»·¾ä±ú
 #endif
 
-    struct audio_dec_breakpoint *bp;	// æ–­ç‚¹ä¿¡æ¯
+    struct audio_dec_breakpoint *bp;	// ¶ÏµãĞÅÏ¢
 
-    void *evt_priv;			// äº‹ä»¶å›è°ƒç§æœ‰å‚æ•°
-    void (*evt_cb)(void *, int argc, int *argv);	// äº‹ä»¶å›è°ƒå¥æŸ„
+    void *evt_priv;			// ÊÂ¼ş»Øµ÷Ë½ÓĞ²ÎÊı
+    void (*evt_cb)(void *, int argc, int *argv);	// ÊÂ¼ş»Øµ÷¾ä±ú
 
-    void (*stream_handler)(void *priv, int event, struct file_dec_hdl *);	// æ•°æ®æµè®¾ç½®å›è°ƒ
-    void *stream_priv;						// æ•°æ®æµè®¾ç½®å›è°ƒç§æœ‰å¥æŸ„
+    void (*stream_handler)(void *priv, int event, struct file_dec_hdl *);	// Êı¾İÁ÷ÉèÖÃ»Øµ÷
+    void *stream_priv;						// Êı¾İÁ÷ÉèÖÃ»Øµ÷Ë½ÓĞ¾ä±ú
 
 };
 
@@ -92,26 +92,26 @@ struct file_decoder *file_dec_get_file_decoder_hdl(void);
 #define file_dec_get_cur_time()			file_decoder_get_cur_time(file_dec_get_file_decoder_hdl())
 #define file_dec_get_decoder_type()		file_decoder_get_decoder_type(file_dec_get_file_decoder_hdl())
 
-// åˆ›å»ºä¸€ä¸ªæ–‡ä»¶è§£ç 
+// ´´½¨Ò»¸öÎÄ¼ş½âÂë
 int file_dec_create(void *priv, void (*handler)(void *, int argc, int *argv));
-// æ‰“å¼€æ–‡ä»¶è§£ç 
+// ´ò¿ªÎÄ¼ş½âÂë
 int file_dec_open(void *file, struct audio_dec_breakpoint *bp);
-// å…³é—­æ–‡ä»¶è§£ç 
+// ¹Ø±ÕÎÄ¼ş½âÂë
 void file_dec_close();
 
-// æ–‡ä»¶è§£ç é‡æ–°å¼€å§‹
+// ÎÄ¼ş½âÂëÖØĞÂ¿ªÊ¼
 int file_dec_restart(int id);
-// æ¨é€æ–‡ä»¶è§£ç é‡æ–°å¼€å§‹å‘½ä»¤
+// ÍÆËÍÎÄ¼ş½âÂëÖØĞÂ¿ªÊ¼ÃüÁî
 int file_dec_push_restart(void);
-// è·å–file_decçŠ¶æ€
+// »ñÈ¡file_dec×´Ì¬
 int file_dec_get_status(void);
 
-// è®¾ç½®è§£ç æ•°æ®æµè®¾ç½®å›è°ƒæ¥å£
+// ÉèÖÃ½âÂëÊı¾İÁ÷ÉèÖÃ»Øµ÷½Ó¿Ú
 void file_dec_set_stream_set_hdl(struct file_dec_hdl *dec,
                                  void (*stream_handler)(void *priv, int event, struct file_dec_hdl *),
                                  void *stream_priv);
 
-// è·å–æ–‡ä»¶è§£ç hdl
+// »ñÈ¡ÎÄ¼ş½âÂëhdl
 void *get_file_dec_hdl();
 
 #if (FILE_DEC_AB_REPEAT_EN)

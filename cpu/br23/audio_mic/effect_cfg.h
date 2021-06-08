@@ -63,39 +63,39 @@ typedef struct {
 }  EFFECTS_MIC_GAIN_PARM;
 
 typedef struct PITCH_PARM_SET2 {
-    u32 effect_v;//å˜å£°æ¨¡å¼ï¼šå˜è°ƒ/å˜å£°0/å˜å£°1/å˜å£°2/æœºå™¨éŸ³
-    u32 pitch;		//å˜éŸ³æ—¶ pitch å¯¹é¥®shiftv, effectv å¡« EFFECT_VOICECHANGE_KIN0
-    u32 formant_shift;//å˜éŸ³å¯¹åº”formant
+    u32 effect_v;//±äÉùÄ£Ê½£º±äµ÷/±äÉù0/±äÉù1/±äÉù2/»úÆ÷Òô
+    u32 pitch;		//±äÒôÊ± pitch ¶ÔÒûshiftv, effectv Ìî EFFECT_VOICECHANGE_KIN0
+    u32 formant_shift;//±äÒô¶ÔÓ¦formant
 } PITCH_PARM_SET2;
 
 
 typedef struct NOISE_PARM {
     int attacktime;// 0 - 15000ms
     int releasetime;//  0 - 300ms
-    int threadhold;//    -92 - 0 db   ï¼ˆä¼ ä¸‹æ—¶è½¬åŒ–ä¸ºmdb,(thr * 1000)ï¼‰
-    int gain;//   0 - 1               (ä¼ ä¸‹æ¥æ—¶æ‰©å¤§30bitï¼Œ(int)(gain * ï¼ˆ1 <<30ï¼‰))
+    int threadhold;//    -92 - 0 db   £¨´«ÏÂÊ±×ª»¯Îªmdb,(thr * 1000)£©
+    int gain;//   0 - 1               (´«ÏÂÀ´Ê±À©´ó30bit£¬(int)(gain * £¨1 <<30£©))
 } NOISE_PARM_SET;
 
 
-// é«˜éŸ³:
+// ¸ßÒô:
 typedef struct HIGH_SOUND {
-    int cutoff_frequency;//:æˆªæ­¢é¢‘ç‡:  1800
-    int highest_gain;//æœ€é«˜å¢ç›Šï¼š0
-    int lowest_gain;// æœ€ä½å¢ç›Šï¼š-12000
+    int cutoff_frequency;//:½ØÖ¹ÆµÂÊ:  1800
+    int highest_gain;//×î¸ßÔöÒæ£º0
+    int lowest_gain;// ×îµÍÔöÒæ£º-12000
 } HIGH_SOUND_PARM_SET;
 
-// ä½éŸ³ï¼š
+// µÍÒô£º
 typedef struct LOW_SOUND {
-    int cutoff_frequency;//æˆªæ­¢é¢‘ç‡ï¼š600
-    int highest_gain;//æœ€é«˜å¢ç›Šï¼š0
-    int lowest_gain;//æœ€ä½å¢ç›Š:  -12000
+    int cutoff_frequency;//½ØÖ¹ÆµÂÊ£º600
+    int highest_gain;//×î¸ßÔöÒæ£º0
+    int lowest_gain;//×îµÍÔöÒæ:  -12000
 } LOW_SOUND_PARM_SET;
 
-// å–Šéº¦æ»¤æ³¢å™¨:
+// º°ÂóÂË²¨Æ÷:
 typedef struct SHOUT_WHEAT {
-    int center_frequency;//ä¸­å¿ƒé¢‘ç‡: 800
-    int bandwidth;//å¸¦å®½:   4000
-    int occupy;//å æ¯”:   100%
+    int center_frequency;//ÖĞĞÄÆµÂÊ: 800
+    int bandwidth;//´ø¿í:   4000
+    int occupy;//Õ¼±È:   100%
 } SHOUT_WHEAT_PARM_SET;
 
 
@@ -187,10 +187,10 @@ typedef enum {
     EFFECTS_TYPE_MODE_TAB,
 } EFFECTS_TYPE;
 
-// 0x09 æŸ¥è¯¢æ˜¯å¦æœ‰å¯†ç 
-// 0x0A å¯†ç æ˜¯å¦æ­£ç¡®
-// 0x0B æŸ¥è¯¢æ–‡ä»¶å¤§å°
-// 0x0C è¯»å–æ–‡ä»¶å†…å®¹
+// 0x09 ²éÑ¯ÊÇ·ñÓĞÃÜÂë
+// 0x0A ÃÜÂëÊÇ·ñÕıÈ·
+// 0x0B ²éÑ¯ÎÄ¼ş´óĞ¡
+// 0x0C ¶ÁÈ¡ÎÄ¼şÄÚÈİ
 
 /*effects online cmd*/
 typedef enum {
@@ -201,29 +201,29 @@ typedef enum {
     EFFECTS_ONLINE_CMD_VERIFY_PASSWORD = 0xA,
     EFFECTS_ONLINE_CMD_FILE_SIZE = 0xB,
     EFFECTS_ONLINE_CMD_FILE = 0xC,
-    EFFECTS_EQ_ONLINE_CMD_GET_SECTION_NUM = 0xD,//å·¥å…·æŸ¥è¯¢ å°æœºéœ€è¦çš„eqæ®µæ•°
-    EFFECTS_EQ_ONLINE_CMD_CHANGE_MODE = 0xE,//åˆ‡æ¢å˜å£°æ¨¡å¼
+    EFFECTS_EQ_ONLINE_CMD_GET_SECTION_NUM = 0xD,//¹¤¾ß²éÑ¯ Ğ¡»úĞèÒªµÄeq¶ÎÊı
+    EFFECTS_EQ_ONLINE_CMD_CHANGE_MODE = 0xE,//ÇĞ»»±äÉùÄ£Ê½
 
-    EFFECTS_ONLINE_CMD_MODE_COUNT = 0x100,//æ¨¡å¼ä¸ªæ•°
-    EFFECTS_ONLINE_CMD_MODE_NAME = 0x101,//æ¨¡å¼çš„åå­—
-    EFFECTS_ONLINE_CMD_MODE_GROUP_COUNT = 0x102,//æ¨¡å¼ä¸‹ç»„çš„ä¸ªæ•°,4ä¸ªå­—èŠ‚
-    EFFECTS_ONLINE_CMD_MODE_GROUP_RANGE = 0x103,//æ¨¡å¼ä¸‹ç»„çš„idå†…å®¹
-    EFFECTS_ONLINE_CMD_EQ_GROUP_COUNT = 0x104,//eqç»„çš„idä¸ªæ•°
-    EFFECTS_ONLINE_CMD_EQ_GROUP_RANGE = 0x105,//eqç»„çš„idå†…å®¹
-    EFFECTS_ONLINE_CMD_MODE_SEQ_NUMBER = 0x106,//modeçš„ç¼–å·
+    EFFECTS_ONLINE_CMD_MODE_COUNT = 0x100,//Ä£Ê½¸öÊı
+    EFFECTS_ONLINE_CMD_MODE_NAME = 0x101,//Ä£Ê½µÄÃû×Ö
+    EFFECTS_ONLINE_CMD_MODE_GROUP_COUNT = 0x102,//Ä£Ê½ÏÂ×éµÄ¸öÊı,4¸ö×Ö½Ú
+    EFFECTS_ONLINE_CMD_MODE_GROUP_RANGE = 0x103,//Ä£Ê½ÏÂ×éµÄidÄÚÈİ
+    EFFECTS_ONLINE_CMD_EQ_GROUP_COUNT = 0x104,//eq×éµÄid¸öÊı
+    EFFECTS_ONLINE_CMD_EQ_GROUP_RANGE = 0x105,//eq×éµÄidÄÚÈİ
+    EFFECTS_ONLINE_CMD_MODE_SEQ_NUMBER = 0x106,//modeµÄ±àºÅ
 
     EFFECTS_CMD_REVERB = 0x1001,
-    EFFECTS_CMD_PITCH1 = 0x1002, //æ— ç”¨
+    EFFECTS_CMD_PITCH1 = 0x1002, //ÎŞÓÃ
     EFFECTS_CMD_PITCH2 = 0x1003,
     EFFECTS_CMD_ECHO  = 0x1004,
     EFFECTS_CMD_NOISE = 0x1005,
-    //é«˜éŸ³ã€ä½éŸ³ã€å–Šéº¦
+    //¸ßÒô¡¢µÍÒô¡¢º°Âó
     EFFECTS_CMD_HIGH_SOUND = 0x1006,
     EFFECTS_CMD_LOW_SOUND = 0x1007,
     EFFECTS_CMD_SHOUT_WHEAT = 0x1008,
-    //æ··å“eq
+    //»ìÏìeq
     EFFECTS_EQ_ONLINE_CMD_PARAMETER_SEG = 0x1009,
-    EFFECTS_EQ_ONLINE_CMD_PARAMETER_TOTAL_GAIN = 0x100A,//æ— ç”¨
+    EFFECTS_EQ_ONLINE_CMD_PARAMETER_TOTAL_GAIN = 0x100A,//ÎŞÓÃ
     EFFECTS_CMD_MIC_ANALOG_GAIN = 0x100B,
     //add xx
 

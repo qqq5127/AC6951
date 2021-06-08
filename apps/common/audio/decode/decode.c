@@ -20,7 +20,7 @@ extern u32 audio_output_channel_num(void);
 //////////////////////////////////////////////////////////////////////////////
 struct audio_dec_app_audio_state_hdl {
     struct audio_mixer 			*p_mixer;
-    u32 dec_mix : 1;	// 1:å åŠ æ¨¡å¼
+    u32 dec_mix : 1;	// 1:µş¼ÓÄ£Ê½
     u32 flag;
 };
 
@@ -47,10 +47,10 @@ static struct audio_stream_entry *audio_dec_app_entries[2] = {NULL};
 //////////////////////////////////////////////////////////////////////////////
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è§£ç åˆ›å»ºå‚æ•°åˆå§‹åŒ–
-   @param    *dec: è§£ç å¥æŸ„
-   @return   0-æ­£å¸¸
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+/**@brief    ½âÂë´´½¨²ÎÊı³õÊ¼»¯
+   @param    *dec: ½âÂë¾ä±ú
+   @return   0-Õı³£
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int audio_dec_app_create_param_init(struct audio_dec_app_hdl *dec)
@@ -83,10 +83,10 @@ int audio_dec_app_create_param_init(struct audio_dec_app_hdl *dec)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç åˆ›å»ºå‚æ•°åˆå§‹åŒ–
-   @param    *file_dec: æ–‡ä»¶è§£ç å¥æŸ„
-   @return   0-æ­£å¸¸
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+/**@brief    ÎÄ¼ş½âÂë´´½¨²ÎÊı³õÊ¼»¯
+   @param    *file_dec: ÎÄ¼ş½âÂë¾ä±ú
+   @return   0-Õı³£
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int audio_dec_file_app_create_param_init(struct audio_dec_file_app_hdl *file_dec)
@@ -96,10 +96,10 @@ int audio_dec_file_app_create_param_init(struct audio_dec_file_app_hdl *file_dec
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è§£ç è¾“å‡ºçŠ¶æ€è®¾ç½®
-   @param    *dec: è§£ç å¥æŸ„
-   @param    flag: è§£ç æ ‡ç­¾
-   @return   0-æ­£å¸¸
+/**@brief    ½âÂëÊä³ö×´Ì¬ÉèÖÃ
+   @param    *dec: ½âÂë¾ä±ú
+   @param    flag: ½âÂë±êÇ©
+   @return   0-Õı³£
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -128,9 +128,9 @@ int audio_dec_app_audio_state_switch(struct audio_dec_app_hdl *dec, u32 flag)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è§£ç è¾“å‡ºçŠ¶æ€é€€å‡º
-   @param    *p_aud_state: è¾“å‡ºçŠ¶æ€
-   @return   0-æ­£å¸¸
+/**@brief    ½âÂëÊä³ö×´Ì¬ÍË³ö
+   @param    *p_aud_state: Êä³ö×´Ì¬
+   @return   0-Õı³£
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -154,10 +154,10 @@ int audio_dec_app_audio_state_exit(struct audio_dec_app_audio_state_hdl *p_aud_s
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç åˆå§‹åŒ–å®Œæˆ
-   @param    *file_dec: æ–‡ä»¶è§£ç å¥æŸ„
-   @return   0-æ­£å¸¸
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+/**@brief    ÎÄ¼ş½âÂë³õÊ¼»¯Íê³É
+   @param    *file_dec: ÎÄ¼ş½âÂë¾ä±ú
+   @return   0-Õı³£
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int audio_dec_file_app_init_ok(struct audio_dec_file_app_hdl *file_dec)
@@ -167,10 +167,10 @@ int audio_dec_file_app_init_ok(struct audio_dec_file_app_hdl *file_dec)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç ç»“æŸ
-   @param    *file_dec: æ–‡ä»¶è§£ç å¥æŸ„
-   @return   0-æ­£å¸¸
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+/**@brief    ÎÄ¼ş½âÂë½áÊø
+   @param    *file_dec: ÎÄ¼ş½âÂë¾ä±ú
+   @return   0-Õı³£
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int audio_dec_file_app_play_end(struct audio_dec_file_app_hdl *file_dec)
@@ -185,10 +185,10 @@ int audio_dec_file_app_play_end(struct audio_dec_file_app_hdl *file_dec)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ­£å¼¦æ³¢è§£ç åˆå§‹åŒ–å®Œæˆ
-   @param    *sine_dec: æ­£å¼¦æ³¢è§£ç å¥æŸ„
-   @return   0-æ­£å¸¸
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+/**@brief    ÕıÏÒ²¨½âÂë³õÊ¼»¯Íê³É
+   @param    *sine_dec: ÕıÏÒ²¨½âÂë¾ä±ú
+   @return   0-Õı³£
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int audio_dec_sine_app_init_ok(struct audio_dec_sine_app_hdl *sine_dec)
@@ -197,10 +197,10 @@ int audio_dec_sine_app_init_ok(struct audio_dec_sine_app_hdl *sine_dec)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    æ­£å¼¦æ³¢è§£ç ç»“æŸ
-   @param    *sine_dec: æ­£å¼¦æ³¢è§£ç å¥æŸ„
-   @return   0-æ­£å¸¸
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+/**@brief    ÕıÏÒ²¨½âÂë½áÊø
+   @param    *sine_dec: ÕıÏÒ²¨½âÂë¾ä±ú
+   @return   0-Õı³£
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int audio_dec_sine_app_play_end(struct audio_dec_sine_app_hdl *sine_dec)

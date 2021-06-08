@@ -34,13 +34,13 @@
 //
 
 struct localtws_dec_hdl {
-    struct audio_stream *stream;	// éŸ³é¢‘æµ
-    struct localtws_decoder local_dec;	// localè§£ç å¥æŸ„
-    struct audio_res_wait wait;		// èµ„æºç­‰å¾…å¥æŸ„
-    struct audio_eq_drc *eq_drc;    //eq drcå¥æŸ„ï¼Œmusic eqæ‰“å¼€æ—¶ï¼Œtwsè½¬å‘ésbcæ•°æ®ï¼Œæ‰åšeq
-    struct audio_mixer_ch mix_ch;	// å åŠ å¥æŸ„
-    u32 id;					// å”¯ä¸€æ ‡è¯†ç¬¦ï¼Œéšæœºå€¼
-    u32 media_value;		// localtwsåª’ä½“ä¿¡æ¯
+    struct audio_stream *stream;	// ÒôÆµÁ÷
+    struct localtws_decoder local_dec;	// local½âÂë¾ä±ú
+    struct audio_res_wait wait;		// ×ÊÔ´µÈ´ı¾ä±ú
+    struct audio_eq_drc *eq_drc;    //eq drc¾ä±ú£¬music eq´ò¿ªÊ±£¬tws×ª·¢·ÇsbcÊı¾İ£¬²Å×öeq
+    struct audio_mixer_ch mix_ch;	// µş¼Ó¾ä±ú
+    u32 id;					// Î¨Ò»±êÊ¶·û£¬Ëæ»úÖµ
+    u32 media_value;		// localtwsÃ½ÌåĞÅÏ¢
     struct audio_wireless_sync *sync;
 };
 static struct localtws_dec_hdl *localtws_dec = NULL;
@@ -84,8 +84,8 @@ const struct local_dec_type local_dec_clk_tb[] = {
 
 /*----------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç æ—¶é’Ÿæ·»åŠ 
-   @param    type: è§£ç ç±»å‹
+/**@brief    localtws½âÂëÊ±ÖÓÌí¼Ó
+   @param    type: ½âÂëÀàĞÍ
    @return
    @note
 */
@@ -103,8 +103,8 @@ static void local_dec_clock_add(u32 type)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç æ—¶é’Ÿç§»é™¤
-   @param    type: è§£ç ç±»å‹
+/**@brief    localtws½âÂëÊ±ÖÓÒÆ³ı
+   @param    type: ½âÂëÀàĞÍ
    @return
    @note
 */
@@ -122,10 +122,10 @@ static void local_dec_clock_remove(u32 type)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsæ¿€æ´»å‰çº§è§£ç /ç¼–ç 
+/**@brief    localtws¼¤»îÇ°¼¶½âÂë/±àÂë
    @param
    @return
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 #if 0
@@ -139,10 +139,10 @@ void localtws_decoder_resume_pre(void)
 #endif
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç è¾“å‡ºé‡å¯
-   @param    ms: é‡å¯é™éŸ³æ—¶é•¿
+/**@brief    localtws½âÂëÊä³öÖØÆô
+   @param    ms: ÖØÆô¾²ÒôÊ±³¤
    @return
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 void localtws_decoder_output_reset(u32 ms)
@@ -151,7 +151,7 @@ void localtws_decoder_output_reset(u32 ms)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç æ¿€æ´»
+/**@brief    localtws½âÂë¼¤»î
    @param
    @return
    @note
@@ -165,10 +165,10 @@ void localtws_dec_resume(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwså·²ç»æ‰“å¼€
+/**@brief    localtwsÒÑ¾­´ò¿ª
    @param
-   @return   true: æ‰“å¼€
-   @return   false: æ²¡æœ‰æ‰“å¼€
+   @return   true: ´ò¿ª
+   @return   false: Ã»ÓĞ´ò¿ª
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -181,17 +181,17 @@ u8 localtws_dec_is_open(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsæŠ›å¼ƒæ•°æ®
+/**@brief    localtwsÅ×ÆúÊı¾İ
    @param
-   @return   true: æŠ›å¼ƒæ•°æ®
-   @return   false: ä¸æŠ›å¼ƒ
+   @return   true: Å×ÆúÊı¾İ
+   @return   false: ²»Å×Æú
    @note
 */
 /*----------------------------------------------------------------------------*/
 int localtws_media_dat_abandon(void)
 {
     if ((localtws_dec) && (localtws_dec->local_dec.status) && (localtws_dec->local_dec.tmp_pause)) {
-        // ä»æœºï¼Œæš‚åœï¼ŒæŠ›å¼ƒä¸­é—´æ•°æ®åŒ…
+        // ´Ó»ú£¬ÔİÍ££¬Å×ÆúÖĞ¼äÊı¾İ°ü
         return true;
     }
     return false;
@@ -199,7 +199,7 @@ int localtws_media_dat_abandon(void)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç é‡Šæ”¾
+/**@brief    localtws½âÂëÊÍ·Å
    @param
    @return
    @note
@@ -219,10 +219,10 @@ static void localtws_dec_release()
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç äº‹ä»¶å›è°ƒ
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @param    argc: å‚æ•°ä¸ªæ•°
-   @param    *argv: å‚æ•°
+/**@brief    localtws½âÂëÊÂ¼ş»Øµ÷
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @param    argc: ²ÎÊı¸öÊı
+   @param    *argv: ²ÎÊı
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -238,8 +238,8 @@ static void localtws_dec_event_handler(struct audio_decoder *decoder, int argc, 
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç æ•°æ®æµæ¿€æ´»
-   @param    *p: ç§æœ‰å¥æŸ„
+/**@brief    localtws½âÂëÊı¾İÁ÷¼¤»î
+   @param    *p: Ë½ÓĞ¾ä±ú
    @return
    @note
 */
@@ -251,9 +251,9 @@ static void localtws_dec_out_stream_resume(void *p)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç å¼€å§‹
+/**@brief    localtws½âÂë¿ªÊ¼
    @param
-   @return   0ï¼šæˆåŠŸ
+   @return   0£º³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -275,7 +275,7 @@ static int localtws_dec_start()
     LOCALTWS_LOG("localtws_dec_start: in, type:0x%x \n", dec->local_dec.dec_type);
     LOCALTWS_LOG("sr:%d, ch:%d, outch:%d \n", dec->local_dec.sample_rate, dec->local_dec.ch_num, dec->local_dec.output_ch_num);
 
-    // æ‰“å¼€fileè§£ç å™¨
+    // ´ò¿ªfile½âÂëÆ÷
     err = localtws_decoder_open(&dec->local_dec, &LOCALTWS_TASK);
     if (err) {
         goto __err1;
@@ -285,10 +285,10 @@ static int localtws_dec_start()
 
     audio_mode_main_dec_open(AUDIO_MODE_MAIN_STATE_DEC_LOCALTWS);
 
-    // è®¾ç½®å åŠ åŠŸèƒ½
-    audio_mixer_ch_open_head(&dec->mix_ch, &mixer); // æŒ‚è½½åˆ°mixeræœ€å‰é¢
+    // ÉèÖÃµş¼Ó¹¦ÄÜ
+    audio_mixer_ch_open_head(&dec->mix_ch, &mixer); // ¹ÒÔØµ½mixer×îÇ°Ãæ
     audio_mixer_ch_set_src(&dec->mix_ch, 1, 0);
-    audio_mixer_ch_set_no_wait(&dec->mix_ch, 1, 10); // è¶…æ—¶è‡ªåŠ¨ä¸¢æ•°
+    audio_mixer_ch_set_no_wait(&dec->mix_ch, 1, 10); // ³¬Ê±×Ô¶¯¶ªÊı
     audio_mixer_ch_sample_sync_enable(&dec->mix_ch, 1);
     audio_mixer_ch_set_sample_rate(&dec->mix_ch, dec->local_dec.sample_rate);
 
@@ -299,7 +299,7 @@ static int localtws_dec_start()
         dec->eq_drc = file_eq_drc_open(dec->local_dec.sample_rate, dec->local_dec.output_ch_num);
     }
 
-    // æ•°æ®æµä¸²è”
+    // Êı¾İÁ÷´®Áª
     struct audio_stream_entry *entries[8] = {NULL};
     u8 entry_cnt = 0;
     entries[entry_cnt++] = &dec->local_dec.decoder.entry;
@@ -380,11 +380,11 @@ static void localtws_dec_res_put(struct localtws_dec_hdl *dec)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç èµ„æºç­‰å¾…
-   @param    *wait: å¥æŸ„
-   @param    event: äº‹ä»¶
-   @return   0ï¼šæˆåŠŸ
-   @note     ç”¨äºå¤šè§£ç æ‰“æ–­å¤„ç†
+/**@brief    localtws½âÂë×ÊÔ´µÈ´ı
+   @param    *wait: ¾ä±ú
+   @param    event: ÊÂ¼ş
+   @return   0£º³É¹¦
+   @note     ÓÃÓÚ¶à½âÂë´ò¶Ï´¦Àí
 */
 /*----------------------------------------------------------------------------*/
 static int localtws_dec_wait_res_handler(struct audio_res_wait *wait, int event)
@@ -417,7 +417,7 @@ static int localtws_dec_wait_res_handler(struct audio_res_wait *wait, int event)
             dec->local_dec.tmp_pause = 1;
             err = audio_decoder_pause(&dec->local_dec.decoder);
             os_time_dly(2);
-            // å…ˆæš‚åœå†æ¸…æ•°æ®ï¼Œé¿å…æ¸…äº†æ•°æ®ådecè¿˜åœ¨output
+            // ÏÈÔİÍ£ÔÙÇåÊı¾İ£¬±ÜÃâÇåÁËÊı¾İºódec»¹ÔÚoutput
             tws_api_local_media_trans_clear();
             localtws_drop_frame_start();
             /* audio_mixer_ch_close(&dec->mix_ch); */
@@ -440,7 +440,7 @@ static int localtws_dec_wait_res_handler(struct audio_res_wait *wait, int event)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€localtwsè§£ç 
+/**@brief    ´ò¿ªlocaltws½âÂë
    @param    :
    @return
    @note
@@ -504,9 +504,9 @@ int localtws_dec_open(u32 value)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­localtwsè§£ç 
-   @param    drop_frame_start: æ˜¯å¦ä¸­æ­¢ä¼ è¾“
-   @return   0ï¼šæˆåŠŸ
+/**@brief    ¹Ø±Õlocaltws½âÂë
+   @param    drop_frame_start: ÊÇ·ñÖĞÖ¹´«Êä
+   @return   0£º³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -520,7 +520,7 @@ int localtws_dec_close(u8 drop_frame_start)
     }
 
     if (drop_frame_start) {
-        g_localtws.drop_frame_start = 1;	// å…³é—­è¿‡ç¨‹ä¸­å¯èƒ½åˆšå¥½ä¼šæœ‰æ•°æ®è¿‡æ¥
+        g_localtws.drop_frame_start = 1;	// ¹Ø±Õ¹ı³ÌÖĞ¿ÉÄÜ¸ÕºÃ»áÓĞÊı¾İ¹ıÀ´
     }
 
     if (localtws_dec->local_dec.status) {
@@ -562,7 +562,7 @@ int localtws_dec_close(u8 drop_frame_start)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsæš‚åœ
+/**@brief    localtwsÔİÍ£
    @param    :
    @return
    @note
@@ -578,10 +578,10 @@ void localtws_dec_pause(void)
     g_localtws.tws_send_pause = 2;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwså·²ç»å¼€å§‹è§£ç 
+/**@brief    localtwsÒÑ¾­¿ªÊ¼½âÂë
    @param
-   @return   true: å·²ç»å¼€å§‹è§£ç 
-   @return   false: æ²¡æœ‰å¼€å§‹è§£ç 
+   @return   true: ÒÑ¾­¿ªÊ¼½âÂë
+   @return   false: Ã»ÓĞ¿ªÊ¼½âÂë
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -598,7 +598,7 @@ int localtws_dec_out_is_start(void)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    localtwsè§£ç idleåˆ¤æ–­
+/**@brief    localtws½âÂëidleÅĞ¶Ï
    @param
    @return   1: idle
    @return   0: busy

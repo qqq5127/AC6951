@@ -8,30 +8,30 @@
 #include "media/audio_decoder.h"
 #include "mic_effect.h"
 
-// fmæ•°æ®å¡«å……
+// fmÊı¾İÌî³ä
 void fm_sample_output_handler(s16 *data, int len);
-// fmè§£ç é‡Šæ”¾
+// fm½âÂëÊÍ·Å
 void fm_dec_relaese();
 
-// fmè§£ç å¼€å§‹
+// fm½âÂë¿ªÊ¼
 int fm_dec_start();
-// æ‰“å¼€fmè§£ç 
+// ´ò¿ªfm½âÂë
 int fm_dec_open(u8 source, u32 sample_rate);
-// å…³é—­fmè§£ç 
+// ¹Ø±Õfm½âÂë
 void fm_dec_close(void);
-// fmè§£ç é‡æ–°å¼€å§‹
+// fm½âÂëÖØĞÂ¿ªÊ¼
 int fm_dec_restart(int magic);
-// æ¨é€fmè§£ç é‡æ–°å¼€å§‹å‘½ä»¤
+// ÍÆËÍfm½âÂëÖØĞÂ¿ªÊ¼ÃüÁî
 int fm_dec_push_restart(void);
-// æš‚åœ/å¯åŠ¨ fmè§£ç mix chè¾“å‡º
+// ÔİÍ£/Æô¶¯ fm½âÂëmix chÊä³ö
 void fm_dec_pause_out(u8 pause);
 
 /***********************inein pcm enc******************************/
-// fmå½•éŸ³åœæ­¢
+// fmÂ¼ÒôÍ£Ö¹
 void fm_pcm_enc_stop(void);
-// fmå½•éŸ³å¼€å§‹
+// fmÂ¼Òô¿ªÊ¼
 int fm_pcm_enc_start(void);
-// æ£€æµ‹fmæ˜¯å¦åœ¨å½•éŸ³
+// ¼ì²âfmÊÇ·ñÔÚÂ¼Òô
 bool fm_pcm_enc_check();
 
 #endif

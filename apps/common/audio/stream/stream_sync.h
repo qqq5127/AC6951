@@ -8,21 +8,21 @@ struct stream_sync_info {
     u16 i_sr;
     u16 o_sr;
     u8	ch_num;
-    int begin_per;		// èµ·å§‹ç™¾åˆ†æ¯”
-    int top_per;		// æœ€å¤§ç™¾åˆ†æ¯”
-    int bottom_per;		// æœ€å°ç™¾åˆ†æ¯”
-    u8 inc_step;		// æ¯æ¬¡è°ƒæ•´å¢åŠ æ­¥ä¼
-    u8 dec_step;		// æ¯æ¬¡è°ƒæ•´å‡å°‘æ­¥ä¼
-    u8 max_step;		// æœ€å¤§è°ƒæ•´æ­¥ä¼
-    void *priv;			// get_total,get_sizeç§æœ‰å¥æŸ„
-    int (*get_total)(void *priv);	// è·å–bufæ€»é•¿
-    int (*get_size)(void *priv);	// è·å–bufæ•°æ®é•¿åº¦
+    int begin_per;		// ÆğÊ¼°Ù·Ö±È
+    int top_per;		// ×î´ó°Ù·Ö±È
+    int bottom_per;		// ×îĞ¡°Ù·Ö±È
+    u8 inc_step;		// Ã¿´Îµ÷ÕûÔö¼Ó²½·¥
+    u8 dec_step;		// Ã¿´Îµ÷Õû¼õÉÙ²½·¥
+    u8 max_step;		// ×î´óµ÷Õû²½·¥
+    void *priv;			// get_total,get_sizeË½ÓĞ¾ä±ú
+    int (*get_total)(void *priv);	// »ñÈ¡buf×Ü³¤
+    int (*get_size)(void *priv);	// »ñÈ¡bufÊı¾İ³¤¶È
 };
 
 struct __stream_sync_cb {
-    void *priv;			// get_total,get_sizeç§æœ‰å¥æŸ„
-    int (*get_total)(void *priv);	// è·å–bufæ€»é•¿
-    int (*get_size)(void *priv);	// è·å–bufæ•°æ®é•¿åº¦
+    void *priv;			// get_total,get_sizeË½ÓĞ¾ä±ú
+    int (*get_total)(void *priv);	// »ñÈ¡buf×Ü³¤
+    int (*get_size)(void *priv);	// »ñÈ¡bufÊı¾İ³¤¶È
 };
 
 

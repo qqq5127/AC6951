@@ -11,7 +11,7 @@
 
 #define MCPWM_CLK   clk_get("mcpwm")
 
-/*mcpwmÁ°¨‰ª∂ÂºïËÑöÔºå‰∏ä‰∏ã‰∏∫‰∏ÄÂØπÔºö---CH0---     ---CH1---    ---CH2---    ---CH3---    ---CH4---    ---CH5--- */
+/*mcpwm”≤º˛“˝Ω≈£¨…œœ¬Œ™“ª∂‘£∫---CH0---     ---CH1---    ---CH2---    ---CH3---    ---CH4---    ---CH5--- */
 static u8 pwm_hw_h_pin[6] = {IO_PORTA_00, IO_PORTB_00, IO_PORTB_04, IO_PORTB_09, IO_PORTA_09, IO_PORTC_04};
 static u8 pwm_hw_l_pin[6] = {IO_PORTA_01, IO_PORTB_02, IO_PORTB_06, IO_PORTB_10, IO_PORTA_10, IO_PORTC_05};
 //fpin
@@ -95,8 +95,8 @@ static u32 _pow(u32 num, int n)
 }
 
 /*
- * @brief Êõ¥ÊîπMCPWMÁöÑÈ¢ëÁéá
- * @parm frequency È¢ëÁéá
+ * @brief ∏¸∏ƒMCPWMµƒ∆µ¬ 
+ * @parm frequency ∆µ¬ 
  */
 void mcpwm_set_frequency(pwm_timer_num_type ch, pwm_aligned_mode_type align, u32 frequency)
 {
@@ -130,7 +130,7 @@ void mcpwm_set_frequency(pwm_timer_num_type ch, pwm_aligned_mode_type align, u32
     if (frequency == 0) {
         mcpwm_tmr_pr = 0;
     } else {
-        if (align == pwm_center_aligned) { //‰∏≠ÂøÉÂØπÈΩê
+        if (align == pwm_center_aligned) { //÷––ƒ∂‘∆Î
             mcpwm_tmr_pr = mcpwm_div_clk / (frequency * 2) - 1;
         } else {
             mcpwm_tmr_pr = mcpwm_div_clk / frequency - 1;
@@ -139,7 +139,7 @@ void mcpwm_set_frequency(pwm_timer_num_type ch, pwm_aligned_mode_type align, u32
     reg->tmr_pr = mcpwm_tmr_pr;
 
     //timer mode
-    if (align == pwm_center_aligned) { //‰∏≠ÂøÉÂØπÈΩê
+    if (align == pwm_center_aligned) { //÷––ƒ∂‘∆Î
         reg->tmr_con |= 0b10;
     } else {
         reg->tmr_con |= 0b01;
@@ -148,9 +148,9 @@ void mcpwm_set_frequency(pwm_timer_num_type ch, pwm_aligned_mode_type align, u32
 
 
 /*
- * @brief ËÆæÁΩÆ‰∏Ä‰∏™ÈÄöÈÅìÁöÑÂç†Á©∫ÊØî
- * @parm pwm_ch_num ÈÄöÈÅìÂè∑Ôºöpwm_ch0Ôºåpwm_ch1Ôºåpwm_ch2
- * @parm duty Âç†Á©∫ÊØîÔºö0 ~ 10000 ÂØπÂ∫î 0% ~ 100%
+ * @brief …Ë÷√“ª∏ˆÕ®µ¿µƒ’ºø’±»
+ * @parm pwm_ch_num Õ®µ¿∫≈£∫pwm_ch0£¨pwm_ch1£¨pwm_ch2
+ * @parm duty ’ºø’±»£∫0 ~ 10000 ∂‘”¶ 0% ~ 100%
  */
 void mcpwm_set_duty(pwm_ch_num_type pwm_ch, pwm_timer_num_type timer_ch, u16 duty)
 {
@@ -173,9 +173,9 @@ void mcpwm_set_duty(pwm_ch_num_type pwm_ch, pwm_timer_num_type timer_ch, u16 dut
 }
 
 /*
- * @brief ÊâìÂºÄÊàñËÄÖÂÖ≥Èó≠‰∏Ä‰∏™Êó∂Âü∫
- * @parm pwm_ch_num ÈÄöÈÅìÂè∑Ôºöpwm_ch0Ôºåpwm_ch1Ôºåpwm_ch2
- * @parm enable 1ÔºöÊâìÂºÄ  0ÔºöÂÖ≥Èó≠
+ * @brief ¥Úø™ªÚ’ﬂπÿ±’“ª∏ˆ ±ª˘
+ * @parm pwm_ch_num Õ®µ¿∫≈£∫pwm_ch0£¨pwm_ch1£¨pwm_ch2
+ * @parm enable 1£∫¥Úø™  0£∫πÿ±’
  */
 void mctimer_ch_open_or_close(pwm_timer_num_type timer_ch, u8 enable)
 {
@@ -191,9 +191,9 @@ void mctimer_ch_open_or_close(pwm_timer_num_type timer_ch, u8 enable)
 
 
 /*
- * @brief ÊâìÂºÄÊàñËÄÖÂÖ≥Èó≠‰∏Ä‰∏™ÈÄöÈÅì
- * @parm pwm_ch_num ÈÄöÈÅìÂè∑Ôºöpwm_ch0Ôºåpwm_ch1Ôºåpwm_ch2
- * @parm enable 1ÔºöÊâìÂºÄ  0ÔºöÂÖ≥Èó≠
+ * @brief ¥Úø™ªÚ’ﬂπÿ±’“ª∏ˆÕ®µ¿
+ * @parm pwm_ch_num Õ®µ¿∫≈£∫pwm_ch0£¨pwm_ch1£¨pwm_ch2
+ * @parm enable 1£∫¥Úø™  0£∫πÿ±’
  */
 void mcpwm_ch_open_or_close(pwm_ch_num_type pwm_ch, u8 enable)
 {
@@ -209,7 +209,7 @@ void mcpwm_ch_open_or_close(pwm_ch_num_type pwm_ch, u8 enable)
 }
 
 /*
- * @brief ÂÖ≥Èó≠MCPWMÊ®°Âùó
+ * @brief πÿ±’MCPWMƒ£øÈ
  */
 void mcpwm_open(pwm_ch_num_type pwm_ch, pwm_timer_num_type timer_ch)
 {
@@ -226,7 +226,7 @@ void mcpwm_open(pwm_ch_num_type pwm_ch, pwm_timer_num_type timer_ch)
 
 
 /*
- * @brief ÂÖ≥Èó≠MCPWMÊ®°Âùó
+ * @brief πÿ±’MCPWMƒ£øÈ
  */
 void mcpwm_close(pwm_ch_num_type pwm_ch, pwm_timer_num_type timer_ch)
 {
@@ -266,12 +266,12 @@ void mcpwm_init(struct pwm_platform_data *arg)
     pwm_reg->ch_con0 = 0;
 
     //H:
-    if (arg->h_pin == pwm_hw_h_pin[arg->pwm_ch_num]) {    //Á°¨‰ª∂ÂºïËÑö
+    if (arg->h_pin == pwm_hw_h_pin[arg->pwm_ch_num]) {    //”≤º˛“˝Ω≈
         pwm_reg->ch_con0 |= BIT(2); //H_EN
         gpio_set_direction(arg->h_pin, 0); //DIR output
     } else {
         pwm_reg->ch_con0 &= ~BIT(2); //H_DISABLE
-        if (arg->h_pin < IO_MAX_NUM) {    //‰ªªÊÑèÂºïËÑö
+        if (arg->h_pin < IO_MAX_NUM) {    //»Œ“‚“˝Ω≈
             //TODO: output_channle
             if (arg->pwm_ch_num >= pwm_ch3) {
                 printf("error: mcpwm ch %d not support output_channel", arg->pwm_ch_num);
@@ -285,12 +285,12 @@ void mcpwm_init(struct pwm_platform_data *arg)
 
 _CH_L_SET:
     //L:
-    if (arg->l_pin == pwm_hw_l_pin[arg->pwm_ch_num]) {    //Á°¨‰ª∂ÂºïËÑö
+    if (arg->l_pin == pwm_hw_l_pin[arg->pwm_ch_num]) {    //”≤º˛“˝Ω≈
         pwm_reg->ch_con0 |= BIT(3); //L_EN
         gpio_set_direction(arg->l_pin, 0); //DIR output
     } else {
         pwm_reg->ch_con0 &= ~BIT(3); //L_DISABLE
-        if (arg->l_pin < IO_MAX_NUM) {    //‰ªªÊÑèÂºïËÑö
+        if (arg->l_pin < IO_MAX_NUM) {    //»Œ“‚“˝Ω≈
             //TODO:
             if (arg->pwm_ch_num >= pwm_ch3) {
                 printf("error: mcpwm ch %d not support output_channel", arg->pwm_ch_num);
@@ -307,7 +307,7 @@ _CH_L_SET:
         }
     }
 
-    if (arg->complementary_en) {            //ÊòØÂê¶‰∫íË°•
+    if (arg->complementary_en) {            // «∑Òª•≤π
         pwm_reg->ch_con0 &= ~(BIT(5) | BIT(4));
         pwm_reg->ch_con0 |= BIT(5); //L_INV
     } else {
@@ -342,109 +342,109 @@ void mcpwm_test(void)
     struct pwm_platform_data pwm_p_data;
 #if PWM_CH0_ENABLE
     //CH0
-    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //ËæπÊ≤øÂØπÈΩê
+    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //±ﬂ—ÿ∂‘∆Î
     pwm_p_data.frequency = 1000;                     //1KHz
 
-    pwm_p_data.pwm_ch_num = pwm_ch0;                        //ÈÄöÈÅì0
-    pwm_p_data.pwm_timer_num = pwm_timer0;                  //Êó∂Âü∫ÈÄâÊã©ÈÄöÈÅì0
-    pwm_p_data.duty = 5000;                                 //Âç†Á©∫ÊØî50%
+    pwm_p_data.pwm_ch_num = pwm_ch0;                        //Õ®µ¿0
+    pwm_p_data.pwm_timer_num = pwm_timer0;                  // ±ª˘—°‘ÒÕ®µ¿0
+    pwm_p_data.duty = 5000;                                 //’ºø’±»50%
     //hw
-    pwm_p_data.h_pin = IO_PORTA_00;                         //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.l_pin = IO_PORTA_01;                         //Á°¨‰ª∂ÂºïËÑöÔºål_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
+    pwm_p_data.h_pin = IO_PORTA_00;                         //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.l_pin = IO_PORTA_01;                         //”≤º˛“˝Ω≈£¨l_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
     //output_channel
-    /* pwm_p_data.h_pin = IO_PORTB_00;                          //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ */
-    /* pwm_p_data.l_pin = IO_PORTB_01;                         //Á°¨‰ª∂ÂºïËÑöÔºål_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ */
+    /* pwm_p_data.h_pin = IO_PORTB_00;                          //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√ */
+    /* pwm_p_data.l_pin = IO_PORTB_01;                         //”≤º˛“˝Ω≈£¨l_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√ */
     /* pwm_p_data.h_pin_output_ch_num = 0;                          //output channel0 */
     /* pwm_p_data.l_pin_output_ch_num = 1;                          //output channel1 */
-    pwm_p_data.complementary_en = 1;                        //‰∏§‰∏™ÂºïËÑöÁöÑÊ≥¢ÂΩ¢, 1: ‰∫íË°•, 0: ÂêåÊ≠•;
+    pwm_p_data.complementary_en = 1;                        //¡Ω∏ˆ“˝Ω≈µƒ≤®–Œ, 1: ª•≤π, 0: Õ¨≤Ω;
 
     mcpwm_init(&pwm_p_data);
 #endif
 
 #if PWM_CH1_ENABLE
     //CH1
-    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //ËæπÊ≤øÂØπÈΩê
+    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //±ﬂ—ÿ∂‘∆Î
     pwm_p_data.frequency = 100;                     //1KHz
 
-    pwm_p_data.pwm_ch_num = pwm_ch1;                        //ÈÄöÈÅì0
-    pwm_p_data.pwm_timer_num = pwm_timer1;                  //Êó∂Âü∫ÈÄâÊã©ÈÄöÈÅì0
-    pwm_p_data.duty = 5000;                                 //Âç†Á©∫ÊØî50%
+    pwm_p_data.pwm_ch_num = pwm_ch1;                        //Õ®µ¿0
+    pwm_p_data.pwm_timer_num = pwm_timer1;                  // ±ª˘—°‘ÒÕ®µ¿0
+    pwm_p_data.duty = 5000;                                 //’ºø’±»50%
     //hw
-    pwm_p_data.h_pin = IO_PORTB_00;                         //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.l_pin = IO_PORTB_02;                         //Á°¨‰ª∂ÂºïËÑöÔºål_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
+    pwm_p_data.h_pin = IO_PORTB_00;                         //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.l_pin = IO_PORTB_02;                         //”≤º˛“˝Ω≈£¨l_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
     //output_channel
-    /* pwm_p_data.h_pin = IO_PORTA_00;                         //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ */
-    /* pwm_p_data.l_pin = IO_PORTA_04;                         //Á°¨‰ª∂ÂºïËÑöÔºål_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ */
+    /* pwm_p_data.h_pin = IO_PORTA_00;                         //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√ */
+    /* pwm_p_data.l_pin = IO_PORTA_04;                         //”≤º˛“˝Ω≈£¨l_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√ */
     /* pwm_p_data.h_pin_output_ch_num = 0;                          //output channel0 */
     /* pwm_p_data.l_pin_output_ch_num = 2;                          //output channel1 */
-    pwm_p_data.complementary_en = 1;                        //‰∏§‰∏™ÂºïËÑöÁöÑÊ≥¢ÂΩ¢ÂêåÊ≠•
+    pwm_p_data.complementary_en = 1;                        //¡Ω∏ˆ“˝Ω≈µƒ≤®–ŒÕ¨≤Ω
 
     mcpwm_init(&pwm_p_data);
 #endif
 
 #if PWM_CH2_ENABLE
     //CH2
-    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //ËæπÊ≤øÂØπÈΩê
+    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //±ﬂ—ÿ∂‘∆Î
     pwm_p_data.frequency = 2000;                     //1KHz
 
-    pwm_p_data.pwm_ch_num = pwm_ch2;                        //ÈÄöÈÅì0
-    pwm_p_data.pwm_timer_num = pwm_timer2;                  //Êó∂Âü∫ÈÄâÊã©ÈÄöÈÅì0
-    pwm_p_data.duty = 5000;                                 //Âç†Á©∫ÊØî50%
+    pwm_p_data.pwm_ch_num = pwm_ch2;                        //Õ®µ¿0
+    pwm_p_data.pwm_timer_num = pwm_timer2;                  // ±ª˘—°‘ÒÕ®µ¿0
+    pwm_p_data.duty = 5000;                                 //’ºø’±»50%
     //hw
-    pwm_p_data.h_pin = IO_PORTB_04;                                  //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
+    pwm_p_data.h_pin = IO_PORTB_04;                                  //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
     //output_channel
-    /* pwm_p_data.h_pin = IO_PORTB_05;                                  //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ */
+    /* pwm_p_data.h_pin = IO_PORTB_05;                                  //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√ */
     /* pwm_p_data.h_pin_output_ch_num = 1;                          //output channel0 */
     //hw
-    pwm_p_data.l_pin = IO_PORTB_06;                         //Á°¨‰ª∂ÂºïËÑöÔºål_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.complementary_en = 1;                        //‰∏§‰∏™ÂºïËÑöÁöÑÊ≥¢ÂΩ¢ÂêåÊ≠•
+    pwm_p_data.l_pin = IO_PORTB_06;                         //”≤º˛“˝Ω≈£¨l_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.complementary_en = 1;                        //¡Ω∏ˆ“˝Ω≈µƒ≤®–ŒÕ¨≤Ω
 
     mcpwm_init(&pwm_p_data);
 #endif
 
-    //Ê≥®ÊÑè: CH3, CH4, CH5‰∏çÊîØÊåÅÈÄöËøáoutput channelËæìÂá∫
+    //◊¢“‚: CH3, CH4, CH5≤ª÷ß≥÷Õ®π˝output channel ‰≥ˆ
 #if PWM_CH3_ENABLE
     //CH3
-    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //ËæπÊ≤øÂØπÈΩê
+    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //±ﬂ—ÿ∂‘∆Î
     pwm_p_data.frequency = 4000;                     //1KHz
 
-    pwm_p_data.pwm_ch_num = pwm_ch3;                        //ÈÄöÈÅì0
-    pwm_p_data.pwm_timer_num = pwm_timer3;                  //Êó∂Âü∫ÈÄâÊã©ÈÄöÈÅì0
-    pwm_p_data.duty = 5000;                                 //Âç†Á©∫ÊØî50%
-    pwm_p_data.h_pin = IO_PORTB_09;                                  //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.l_pin = IO_PORTB_10;                         //Á°¨‰ª∂ÂºïËÑöÔºål_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.complementary_en = 1;                        //‰∏§‰∏™ÂºïËÑöÁöÑÊ≥¢ÂΩ¢ÂêåÊ≠•
+    pwm_p_data.pwm_ch_num = pwm_ch3;                        //Õ®µ¿0
+    pwm_p_data.pwm_timer_num = pwm_timer3;                  // ±ª˘—°‘ÒÕ®µ¿0
+    pwm_p_data.duty = 5000;                                 //’ºø’±»50%
+    pwm_p_data.h_pin = IO_PORTB_09;                                  //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.l_pin = IO_PORTB_10;                         //”≤º˛“˝Ω≈£¨l_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.complementary_en = 1;                        //¡Ω∏ˆ“˝Ω≈µƒ≤®–ŒÕ¨≤Ω
 
     mcpwm_init(&pwm_p_data);
 #endif
 
 #if PWM_CH4_ENABLE
     //CH4
-    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //ËæπÊ≤øÂØπÈΩê
+    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //±ﬂ—ÿ∂‘∆Î
     pwm_p_data.frequency = 8000;                     //1KHz
 
-    pwm_p_data.pwm_ch_num = pwm_ch4;                        //ÈÄöÈÅì0
-    pwm_p_data.pwm_timer_num = pwm_timer4;                  //Êó∂Âü∫ÈÄâÊã©ÈÄöÈÅì0
-    pwm_p_data.duty = 5000;                                 //Âç†Á©∫ÊØî50%
-    pwm_p_data.h_pin = IO_PORTA_09;                                  //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.l_pin = IO_PORTA_10;                         //Á°¨‰ª∂ÂºïËÑöÔºål_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.complementary_en = 1;                        //‰∏§‰∏™ÂºïËÑöÁöÑÊ≥¢ÂΩ¢ÂêåÊ≠•
+    pwm_p_data.pwm_ch_num = pwm_ch4;                        //Õ®µ¿0
+    pwm_p_data.pwm_timer_num = pwm_timer4;                  // ±ª˘—°‘ÒÕ®µ¿0
+    pwm_p_data.duty = 5000;                                 //’ºø’±»50%
+    pwm_p_data.h_pin = IO_PORTA_09;                                  //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.l_pin = IO_PORTA_10;                         //”≤º˛“˝Ω≈£¨l_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.complementary_en = 1;                        //¡Ω∏ˆ“˝Ω≈µƒ≤®–ŒÕ¨≤Ω
 
     mcpwm_init(&pwm_p_data);
 #endif
 
 #if PWM_CH5_ENABLE
     //CH5
-    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //ËæπÊ≤øÂØπÈΩê
+    pwm_p_data.pwm_aligned_mode = pwm_edge_aligned;         //±ﬂ—ÿ∂‘∆Î
     pwm_p_data.frequency = 16000;                     //1KHz
     //pwm_p_data.frequency = 50000;                     //1KHz
 
-    pwm_p_data.pwm_ch_num = pwm_ch5;                        //ÈÄöÈÅì0
-    pwm_p_data.pwm_timer_num = pwm_timer5;                  //Êó∂Âü∫ÈÄâÊã©ÈÄöÈÅì0
-    pwm_p_data.duty = 5000;                                 //Âç†Á©∫ÊØî50%
-    pwm_p_data.h_pin = IO_PORTC_04;                                  //Ê≤°ÊúâÂàôÂ°´ -1„ÄÇh_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.l_pin = IO_PORTC_05;                         //Á°¨‰ª∂ÂºïËÑöÔºål_pin_output_ch_numÊó†ÊïàÔºåÂèØ‰∏çÈÖçÁΩÆ
-    pwm_p_data.complementary_en = 1;                        //‰∏§‰∏™ÂºïËÑöÁöÑÊ≥¢ÂΩ¢ÂêåÊ≠•
+    pwm_p_data.pwm_ch_num = pwm_ch5;                        //Õ®µ¿0
+    pwm_p_data.pwm_timer_num = pwm_timer5;                  // ±ª˘—°‘ÒÕ®µ¿0
+    pwm_p_data.duty = 5000;                                 //’ºø’±»50%
+    pwm_p_data.h_pin = IO_PORTC_04;                                  //√ª”–‘ÚÃÓ -1°£h_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.l_pin = IO_PORTC_05;                         //”≤º˛“˝Ω≈£¨l_pin_output_ch_numŒﬁ–ß£¨ø…≤ª≈‰÷√
+    pwm_p_data.complementary_en = 1;                        //¡Ω∏ˆ“˝Ω≈µƒ≤®–ŒÕ¨≤Ω
 
     mcpwm_init(&pwm_p_data);
 #endif
@@ -453,7 +453,7 @@ void mcpwm_test(void)
 }
 
 
-/**************************************  Â§ñÈÉ®ÂºïËÑö‰∏≠Êñ≠ÂèÇËÄÉ‰ª£Á†Å  **************************/
+/**************************************  Õ‚≤ø“˝Ω≈÷–∂œ≤Œøº¥˙¬Î  **************************/
 static IO_ISR_FUNC io_isr_cbfun;
 ___interrupt
 void io_interrupt(void)
@@ -478,14 +478,14 @@ void io_ext_interrupt_init(u8 port, trigger_mode_type trigger_mode, IO_ISR_FUNC 
         JL_MCPWM->FPIN_CON = BIT(16);
     }
     if (port == IO_PORTA_14) {
-        JL_IOMAP->CON3 &= ~BIT(12);             //‰ΩøÁî®Á°¨‰ª∂ÂºïËÑö
+        JL_IOMAP->CON3 &= ~BIT(12);             // π”√”≤º˛“˝Ω≈
     } else {
-        JL_IOMAP->CON3 |= BIT(12);              //‰ΩøÁî®input_channel 2
+        JL_IOMAP->CON3 |= BIT(12);              // π”√input_channel 2
         JL_IOMAP->CON2 &= ~(0b111111 << 16);
         JL_IOMAP->CON2 |= (port << 16);
     }
     io_isr_cbfun = cbfun;
-    request_irq(IRQ_CHX_PWM_IDX, 3, io_interrupt, 0);   //Ê≥®ÂÜå‰∏≠Êñ≠ÂáΩÊï∞
+    request_irq(IRQ_CHX_PWM_IDX, 3, io_interrupt, 0);   //◊¢≤·÷–∂œ∫Ø ˝
     JL_MCPWM->CH0_CON1 = BIT(14) | BIT(11) | BIT(4);
     JL_MCPWM->MCPWM_CON0 |= BIT(0);
 }
@@ -501,7 +501,7 @@ void io_ext_interrupt_close(u8 port)
     JL_MCPWM->CH0_CON1 = BIT(14);
 }
 
-///////////// ‰ΩøÁî®‰∏æ‰æãÂ¶Ç‰∏ã //////////////////
+/////////////  π”√æŸ¿˝»Áœ¬ //////////////////
 void my_io_isr_cbfun(void)
 {
     printf("Hello world !\n");
@@ -516,10 +516,10 @@ void io_ext_interrupt_test(void)
 #define		OSC_Hz		24000000
 /**
  * @param JL_TIMERx : JL_TIMER0/1/2/3/4/5
- * @param fre : È¢ëÁéáÔºåÂçï‰ΩçHzÔºå‰∏çÂ∞è‰∫é95
- * @param duty : ÂàùÂßãÂç†Á©∫ÊØîÔºå0~10000ÂØπÂ∫î0~100%
- * @param port : pwmËÑöÔºåÂèØÈÄâÁ°¨‰ª∂ËÑöÔºå‰πüÂèØÈÄâÈùûÁ°¨‰ª∂ËÑö„ÄÇ(Âª∫ËÆÆÈÄâÊã©Á°¨‰ª∂ÂºïËÑö)
- * @param output_ch : Êò†Â∞ÑÈÄöÈÅìÔºåÂΩìpwmËÑöÈÄâÊã©ÈùûÁ°¨‰ª∂ËÑöÊó∂ÊúâÊïàÔºåËøôÊó∂Êàë‰ª¨Áªô‰ªñÂàÜÈÖçoutput_channel 0/1/2
+ * @param fre : ∆µ¬ £¨µ•ŒªHz£¨≤ª–°”⁄95
+ * @param duty : ≥ı º’ºø’±»£¨0~10000∂‘”¶0~100%
+ * @param port : pwmΩ≈£¨ø…—°”≤º˛Ω≈£¨“≤ø…—°∑«”≤º˛Ω≈°£(Ω®“È—°‘Ò”≤º˛“˝Ω≈)
+ * @param output_ch : ”≥…‰Õ®µ¿£¨µ±pwmΩ≈—°‘Ò∑«”≤º˛Ω≈ ±”––ß£¨’‚ ±Œ“√«∏¯À˚∑÷≈‰output_channel 0/1/2
  */
 int timer_pwm_init(JL_TIMER_TypeDef *JL_TIMERx, u32 fre, u32 duty, u32 port, int output_ch)
 {
@@ -546,21 +546,21 @@ int timer_pwm_init(JL_TIMER_TypeDef *JL_TIMERx, u32 fre, u32 duty, u32 port, int
         return (-1);
     }
 
-    //ÂàùÂßãÂåñtimer
+    //≥ı ºªØtimer
     JL_TIMERx->CON = 0;
-    JL_TIMERx->CON |= (0b10 << 2);						//ÈÄâÊã©Êô∂ÊåØÊó∂ÈíüÊ∫êÔºö24MHz
-    JL_TIMERx->CON |= (0b0001 << 4);					//Êó∂ÈíüÊ∫ê4ÂàÜÈ¢ë
-    JL_TIMERx->PRD = OSC_Hz / (4 * fre);				//ËÆæÁΩÆÂë®Êúü
-    JL_TIMERx->PWM = (JL_TIMERx->PRD * duty) / fre;	//0~10000ÂØπÂ∫î0~100g
-    JL_TIMERx->CNT = 0;									//Ê∏ÖËÆ°Êï∞ÂÄº
-    JL_TIMERx->CON |= (0b01 << 0);						//ËÆ°Êï∞Ê®°Âºè
+    JL_TIMERx->CON |= (0b10 << 2);						//—°‘Òæß’Ò ±÷”‘¥£∫24MHz
+    JL_TIMERx->CON |= (0b0001 << 4);					// ±÷”‘¥4∑÷∆µ
+    JL_TIMERx->PRD = OSC_Hz / (4 * fre);				//…Ë÷√÷‹∆⁄
+    JL_TIMERx->PWM = (JL_TIMERx->PRD * duty) / fre;	//0~10000∂‘”¶0~100g
+    JL_TIMERx->CNT = 0;									//«Âº∆ ˝÷µ
+    JL_TIMERx->CON |= (0b01 << 0);						//º∆ ˝ƒ£ Ω
 
     if (hw_port == port) {
         gpio_set_die(hw_port, 1);
         gpio_set_pull_up(hw_port, 0);
         gpio_set_pull_down(hw_port, 0);
         gpio_set_direction(hw_port, 0);
-        JL_TIMERx->CON |= BIT(8);						//PWM‰ΩøËÉΩ
+        JL_TIMERx->CON |= BIT(8);						//PWM πƒ‹
     } else {
 
         gpio_output_channle(port, output_ch);
@@ -571,11 +571,11 @@ int timer_pwm_init(JL_TIMER_TypeDef *JL_TIMERx, u32 fre, u32 duty, u32 port, int
 
 /**
  * @param JL_TIMERx : JL_TIMER0/1/2/3/4/5
- * @param duty : Âç†Á©∫ÊØîÔºå0~10000ÂØπÂ∫î0~100%
+ * @param duty : ’ºø’±»£¨0~10000∂‘”¶0~100%
  */
 void set_timer_pwm_duty(JL_TIMER_TypeDef *JL_TIMERx, u32 duty)
 {
-    JL_TIMERx->PWM = (JL_TIMERx->PRD * duty) / 10000;	//0~10000ÂØπÂ∫î0~100%
+    JL_TIMERx->PWM = (JL_TIMERx->PRD * duty) / 10000;	//0~10000∂‘”¶0~100%
 }
 
 /*  */

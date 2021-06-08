@@ -19,27 +19,27 @@
 
 #if (TCFG_CHARGE_BOX_UI_ENABLE)
 
-//å…³äºä»“uiçš„è¯´æ˜ï¼Œåˆ†ä¸ºä¸‰ä¸ªéƒ¨åˆ†
-//1.uiçŠ¶æ€å±‚
-//2.uiä¸­é—´å±‚
-//3.uié©±åŠ¨å±‚
-//çŠ¶æ€å±‚ä¸»è¦å°±æ˜¯å¤–éƒ¨æŠŠä»“çš„çŠ¶æ€ä¼ è¿›æ¥ï¼Œä¸­é—´å±‚æ˜¯ä¸€ä¸ªè¿‡æ¸¡ï¼Œå¦‚ä¸æƒ³ç”¨æœ¬é©±åŠ¨ï¼Œå¯ä»¥è‡ªå·±æ›´æ¢ä¸­é—´å±‚
-//æˆ–è€…åªä½¿ç”¨æœ¬é©±åŠ¨å±‚ä½œå…¶ä»–ä½¿ç”¨
+//¹ØÓÚ²ÖuiµÄËµÃ÷£¬·ÖÎªÈı¸ö²¿·Ö
+//1.ui×´Ì¬²ã
+//2.uiÖĞ¼ä²ã
+//3.uiÇı¶¯²ã
+//×´Ì¬²ãÖ÷Òª¾ÍÊÇÍâ²¿°Ñ²ÖµÄ×´Ì¬´«½øÀ´£¬ÖĞ¼ä²ãÊÇÒ»¸ö¹ı¶É£¬Èç²»ÏëÓÃ±¾Çı¶¯£¬¿ÉÒÔ×Ô¼º¸ü»»ÖĞ¼ä²ã
+//»òÕßÖ»Ê¹ÓÃ±¾Çı¶¯²ã×÷ÆäËûÊ¹ÓÃ
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-//uiçŠ¶æ€å±‚
+//ui×´Ì¬²ã
 typedef struct _chgbox_ui_var_ {
     int ui_timer;
-    u8  ui_power_on; //ä¸Šç”µæ ‡å¿—
+    u8  ui_power_on; //ÉÏµç±êÖ¾
 } _chgbox_ui_var;
 
 static _chgbox_ui_var chgbox_ui_var;
 #define __this  (&chgbox_ui_var)
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    UIè¶…æ—¶å‡½æ•°
-   @param    priv:uiçŠ¶æ€
-   @return   æ— 
+/**@brief    UI³¬Ê±º¯Êı
+   @param    priv:ui×´Ì¬
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -51,11 +51,11 @@ void chgbox_ui_update_timeout(void *priv)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    UIè¶…æ—¶è®¾ç½®
-   @param    priv:ä¼ åˆ°funcçš„å‚æ•°
-             func:è¶…æ—¶åçš„å›è°ƒå‡½æ•°
-             msec:Næ¯«ç§’åè°ƒç”¨func
-   @return   æ— 
+/**@brief    UI³¬Ê±ÉèÖÃ
+   @param    priv:´«µ½funcµÄ²ÎÊı
+             func:³¬Ê±ºóµÄ»Øµ÷º¯Êı
+             msec:NºÁÃëºóµ÷ÓÃfunc
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -72,9 +72,9 @@ u16 chgbox_ui_timeout_add(int priv, void (*func)(void *priv), u32 msec)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®uiä¸Šç”µæ ‡å¿—ä½
-   @param    æ— 
-   @return   æ— 
+/**@brief    ÉèÖÃuiÉÏµç±êÖ¾Î»
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -84,9 +84,9 @@ void chgbox_ui_set_power_on(u8 flag)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–uiä¸Šç”µæ ‡å¿—ä½
-   @param    æ— 
-   @return   æ— 
+/**@brief    »ñÈ¡uiÉÏµç±êÖ¾Î»
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -96,28 +96,28 @@ u8 chgbox_get_ui_power_on(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“ç”µé‡æ€uiæ›´æ–°
-   @param    æ— 
-   @return   æ— 
+/**@brief    ³äµç²ÖµçÁ¿Ì¬ui¸üĞÂ
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_ui_update_local_power(void)
 {
-    //é…å¯¹çŠ¶æ€,ä¸æ˜¾ç¤ºèˆ±ç”µé‡UI
+    //Åä¶Ô×´Ì¬,²»ÏÔÊ¾²ÕµçÁ¿UI
     if (sys_info.pair_status) {
         return;
     }
     if (sys_info.status[USB_DET] == STATUS_ONLINE) {
         chgbox_ui_timeout_add(0, NULL, 0);
         if (sys_info.localfull) {
-            chgbox_led_set_mode(CHGBOX_LED_GREEN_ON);//å……æ»¡åç»¿ç¯å¸¸äº®
+            chgbox_led_set_mode(CHGBOX_LED_GREEN_ON);//³äÂúºóÂÌµÆ³£ÁÁ
         } else {
-            chgbox_led_set_mode(CHGBOX_LED_RED_SLOW_BRE);//å……ç”µä¸­ç¯æ…¢é—ª
+            chgbox_led_set_mode(CHGBOX_LED_RED_SLOW_BRE);//³äµçÖĞµÆÂıÉÁ
         }
     } else {
         if (sys_info.lowpower_flag) {
-            chgbox_led_set_mode(CHGBOX_LED_RED_FAST_BRE); //å¿«é—ª4ç§’
+            chgbox_led_set_mode(CHGBOX_LED_RED_FAST_BRE); //¿ìÉÁ4Ãë
             chgbox_ui_timeout_add(CHGBOX_LED_RED_OFF, chgbox_ui_update_timeout, 4000);
         } else {
             chgbox_led_set_mode(CHGBOX_LED_GREEN_ON);
@@ -127,9 +127,9 @@ void chgbox_ui_update_local_power(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“å…¬å…±æ€uiæ›´æ–°
-   @param    status:UIçŠ¶æ€
-   @return   æ— 
+/**@brief    ³äµç²Ö¹«¹²Ì¬ui¸üĞÂ
+   @param    status:UI×´Ì¬
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -151,9 +151,9 @@ void chgbox_ui_updata_default_status(u8 status)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“åˆç›–å……ç”µuiæ›´æ–°
-   @param    status:UIçŠ¶æ€
-   @return   æ— 
+/**@brief    ³äµç²ÖºÏ¸Ç³äµçui¸üĞÂ
+   @param    status:UI×´Ì¬
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -183,7 +183,7 @@ void chgbox_ui_updata_charge_status(u8 status)
         if (sys_info.status[USB_DET] == STATUS_ONLINE) {
             chgbox_ui_update_local_power();
         } else {
-            chgbox_led_set_mode(CHGBOX_LED_RED_FAST_BRE); //å¿«é—ª4ç§’
+            chgbox_led_set_mode(CHGBOX_LED_RED_FAST_BRE); //¿ìÉÁ4Ãë
             chgbox_ui_timeout_add(CHGBOX_LED_RED_OFF, chgbox_ui_update_timeout, 4000);
         }
         break;
@@ -194,9 +194,9 @@ void chgbox_ui_updata_charge_status(u8 status)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“å¼€ç›–é€šä¿¡uiæ›´æ–°
-   @param    status:UIçŠ¶æ€
-   @return   æ— 
+/**@brief    ³äµç²Ö¿ª¸ÇÍ¨ĞÅui¸üĞÂ
+   @param    status:UI×´Ì¬
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -266,9 +266,9 @@ void chgbox_ui_updata_comm_status(u8 status)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“ä½ç”µé‡uiæ›´æ–°
-   @param    status:UIçŠ¶æ€
-   @return   æ— 
+/**@brief    ³äµç²ÖµÍµçÁ¿ui¸üĞÂ
+   @param    status:UI×´Ì¬
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -291,11 +291,11 @@ void chgbox_ui_updata_lowpower_status(u8 status)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“UIæ›´æ–°ä»“çŠ¶æ€
-   @param    mode:  å……ç”µä»“å½“å‰çš„UIæ¨¡å¼ï¼ˆä¸å……ç”µä»“çš„ä¸‰ä¸ªæ¨¡å¼å¯¹åº”ï¼‰
-             status:å……ç”µä»“å½“å‰çŠ¶æ€
+/**@brief    ³äµç²ÖUI¸üĞÂ²Ö×´Ì¬
+   @param    mode:  ³äµç²Öµ±Ç°µÄUIÄ£Ê½£¨Óë³äµç²ÖµÄÈı¸öÄ£Ê½¶ÔÓ¦£©
+             status:³äµç²Öµ±Ç°×´Ì¬
    @return
-   @note     å„ä¸ªæ¨¡å¼æ ¹æ®çŠ¶æ€æ§åˆ¶uiå˜åŒ–
+   @note     ¸÷¸öÄ£Ê½¸ù¾İ×´Ì¬¿ØÖÆui±ä»¯
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_ui_update_status(u8 mode, u8 status)
@@ -315,9 +315,9 @@ void chgbox_ui_update_status(u8 mode, u8 status)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“UIåˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
+/**@brief    ³äµç²ÖUI³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -328,13 +328,13 @@ void chgbox_ui_manage_init(void)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-//uiä¸­é—´å±‚
+//uiÖĞ¼ä²ã
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“è®¾ç½®å‘¼å¸ç¯æ¨¡å¼
-   @param    mode: ç¯æ¨¡å¼
-   @return   æ— 
-   @note     è®¾ç½®å……ç”µä»“ç¯çš„çŠ¶æ€,ä¸åŒçš„äº®æš—æˆ–é—ªçƒå¯ä»¥è°ƒé…
+/**@brief    ³äµç²ÖÉèÖÃºôÎüµÆÄ£Ê½
+   @param    mode: µÆÄ£Ê½
+   @return   ÎŞ
+   @note     ÉèÖÃ³äµç²ÖµÆµÄ×´Ì¬,²»Í¬µÄÁÁ°µ»òÉÁË¸¿ÉÒÔµ÷Åä
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_led_set_mode(u8 mode)
@@ -342,13 +342,13 @@ void chgbox_led_set_mode(u8 mode)
     u8 i;
     log_info("CHG_LED_mode:%d\n", mode);
     switch (mode) {
-    case CHGBOX_LED_RED_OFF://çº¢ç¯
+    case CHGBOX_LED_RED_OFF://ºìµÆ
         chgbox_set_led_stu(CHG_LED_RED, 0, 0, 1);
         break;
     case CHGBOX_LED_RED_FAST_OFF:
         chgbox_set_led_stu(CHG_LED_RED, 0, 0, 0);
         break;
-    case CHGBOX_LED_RED_ON://çº¢ç¯
+    case CHGBOX_LED_RED_ON://ºìµÆ
         chgbox_set_led_stu(CHG_LED_RED, 1, 0, 1);
         break;
     case CHGBOX_LED_RED_FAST_ON:

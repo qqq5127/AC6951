@@ -241,20 +241,20 @@ struct dac_platform_data dac_data = {
 /************************** ADC ****************************/
 #if TCFG_AUDIO_ADC_ENABLE
 struct adc_platform_data adc_data = {
-/*MIC LDO电流档位设置：
-    0:0.625ua    1:1.25ua    2:1.875ua    3:2.5ua*/
+/*MIC LDO电流档位设置：0:0.625ua    1:1.25ua    2:1.875ua    3:2.5ua*/
 	.mic_ldo_isel   = TCFG_AUDIO_ADC_LDO_SEL,
-/*MIC 是否省隔直电容：
-    0: 不省电容  1: 省电容 */
+/*MIC 是否省隔直电容：0: 不省电容  1: 省电容 */
 #if ((TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR) || (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_DUAL_LR_DIFF))
 	.mic_capless    = 0,//四声道与双声道差分使用，不省电容接法
 #else
 	.mic_capless    = TCFG_MIC_CAPLESS_ENABLE,
 #endif
-/*MIC免电容方案需要设置，影响MIC的偏置电压
-    21:1.18K	20:1.42K 	19:1.55K 	18:1.99K 	17:2.2K 	16:2.4K 	15:2.6K		14:2.91K	13:3.05K 	12:3.5K 	11:3.73K
-	10:3.91K  	9:4.41K 	8:5.0K  	7:5.6K		6:6K		5:6.5K		4:7K		3:7.6K		2:8.0K		1:8.5K				*/
-    .mic_bias_res   = 16,
+/*
+ MIC免电容方案需要设置，影响MIC的偏置电压
+  21:1.18K	20:1.42K 	19:1.55K 	18:1.99K 	17:2.2K 	16:2.4K 	15:2.6K		14:2.91K	13:3.05K 	12:3.5K 	11:3.73K
+	10:3.91K  	9:4.41K 	8:5.0K  	7:5.6K		6:6K		5:6.5K		4:7K		3:7.6K		2:8.0K		1:8.5K				
+*/
+	.mic_bias_res   = 16,
 /*MIC LDO电压档位设置,也会影响MIC的偏置电压
     0:2.3v  1:2.5v  2:2.7v  3:3.0v */
 	.mic_ldo_vsel  = 2,
@@ -487,13 +487,13 @@ LED_PLATFORM_DATA_END()
 LED7_PLATFORM_DATA_BEGIN(led7_data)
 	.pin_type = LED7_PIN7,
 #if TCFG_SD1_ENABLE
-    .pin_cfg.pin7.pin[0] = IO_PORTA_02,
-    .pin_cfg.pin7.pin[1] = IO_PORTA_03,
-    .pin_cfg.pin7.pin[2] = IO_PORTA_04,
-    .pin_cfg.pin7.pin[3] = IO_PORTA_06,
-    .pin_cfg.pin7.pin[4] = IO_PORTA_07,
-    .pin_cfg.pin7.pin[5] = IO_PORTA_08,
-    .pin_cfg.pin7.pin[6] = IO_PORTA_09,
+    .pin_cfg.pin7.pin[0] = IO_PORTA_12,
+    .pin_cfg.pin7.pin[1] = IO_PORTC_00,
+    .pin_cfg.pin7.pin[2] = IO_PORTC_01,
+    .pin_cfg.pin7.pin[3] = IO_PORTC_02,
+    .pin_cfg.pin7.pin[4] = IO_PORTC_03,
+    .pin_cfg.pin7.pin[5] = IO_PORTC_04,
+    .pin_cfg.pin7.pin[6] = IO_PORTC_05,
 #else
     .pin_cfg.pin7.pin[0] = IO_PORTC_00,
     .pin_cfg.pin7.pin[1] = IO_PORTC_01,

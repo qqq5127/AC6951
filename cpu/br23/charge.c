@@ -19,7 +19,7 @@
 #define LOG_DEBUG_ENABLE
 #include "debug.h"
 
-#define IO_PORT_LDOIN   58//IO编号
+#define IO_PORT_LDOIN   58//IO���
 
 #define BIT_LDO5V_IN		BIT(0)
 #define BIT_LDO5V_OFF		BIT(1)
@@ -45,7 +45,7 @@ static CHARGE_VAR charge_var;
 static u8 charge_flag;
 extern void charge_set_callback(void (*wakup_callback)(void), void (*sub_callback)(void));
 
-//芯片寄存器默认值,这几个寄存器只能写,不能读
+//оƬ�Ĵ���Ĭ��ֵ,�⼸���Ĵ���ֻ��д,���ܶ�
 volatile u8 chg_con0 = 0x03;
 volatile u8 chg_con1 = 0x00;
 volatile u8 chg_con2 = 0x00;
@@ -167,14 +167,14 @@ void charge_reset_pb5_pd_status(void)
     }
 }
 
-//only for br23,还是负载弱问题
+//only for br23,���Ǹ���������
 bool charge_check_wakeup_is_set_ok(void)
 {
 #if TCFG_CHARGE_ENABLE
-    //判断插拔检测设置是否正确
+    //�жϲ�μ�������Ƿ���ȷ
     if (LDO5V_IS_EN() && LDO5V_EDGE_WKUP_IS_EN()) {
-        //设置为下降沿时(bit1 = 1),当前状态应该为插入(bit5 = 1)
-        //设置为上升沿时(bit1 = 0),当前状态应该为拔出(bit5 = 0)
+        //����Ϊ�½���ʱ(bit1 = 1),��ǰ״̬Ӧ��Ϊ����(bit5 = 1)
+        //����Ϊ������ʱ(bit1 = 0),��ǰ״̬Ӧ��Ϊ�γ�(bit5 = 0)
         if (LDO5V_EDGE_GET() ^ LDO5V_DET_GET()) {
             return FALSE;
         }
@@ -221,7 +221,7 @@ void charge_event_to_user(u8 event)
 
 static void set_charge_wkup_source(u8 source)
 {
-    CHARGE_WKUP_EDGE_SEL(0);	//0:上升沿,高电平 1:下降沿，低电平
+    CHARGE_WKUP_EDGE_SEL(0);	//0:������,�ߵ�ƽ 1:�½��أ��͵�ƽ
     CHARGE_WKUP_SOURCE_SEL(source);
     CHARGE_EDGE_DETECT_EN(1);
     CHARGE_LEVEL_DETECT_EN(1);
@@ -247,7 +247,7 @@ void charge_start(void)
 
     CHGBG_EN(1);
     CHARGE_EN(1);
-    /* PDIO_KEEP(1);//防止进入pdown后充电通路被切断 */
+    /* PDIO_KEEP(1);//��ֹ����pdown����ͨ·���ж� */
 
     charge_event_to_user(CHARGE_EVENT_CHARGE_START);
 }
@@ -280,7 +280,7 @@ void charge_close(void)
 static u8 CHARGE_FULL_FLAG_GET(void)
 {
     u8 sfr;
-    //若保证timer中断优先级和RTC中断优先级一致则不用开关总中断
+    //����֤timer�ж����ȼ���RTC�ж����ȼ�һ�����ÿ������ж�
     local_irq_disable();
     CHARGE_LEVEL_DETECT_EN(1);
     sfr = p33_rx_1byte(P3_WKUP_SRC);
@@ -331,7 +331,7 @@ static void charge_full_detect_pre(void *priv)
         goto __exit_det_pre;
     } else {
         if ((!full_flag) && lvcmp_lvl) {
-            //电压正常且连续起了n个充满中断后,进入查询方式
+            //��ѹ��������������n�������жϺ�,�����ѯ��ʽ
             charge_no_full_cnt++;
             if (charge_no_full_cnt > 50) {
                 goto __exit_det_pre;
@@ -344,8 +344,8 @@ static void charge_full_detect_pre(void *priv)
     }
     return;
 __exit_det_pre:
-    //充满信号检测到之后,切换检测方式,采用查询方法(为了提高充电效率)
-    //若不进入查询方式,此时充满中断会频繁唤醒系统,系统功耗会增大,造成充电效率低
+    //�����źż�⵽֮��,�л���ⷽʽ,���ò�ѯ����(Ϊ����߳��Ч��)
+    //���������ѯ��ʽ,��ʱ�����жϻ�Ƶ������ϵͳ,ϵͳ���Ļ�����,��ɳ��Ч�ʵ�
     charge_no_full_cnt = 0;
     __this->charge_timer = sys_timer_add(NULL, charge_full_detect, 10);
     __this->timer_period = CHARGE_TIMER_10_MS;
@@ -381,13 +381,13 @@ static void ldo5v_detect(void *priv)
                 }
 
                 charge_event_to_user(CHARGE_EVENT_LDO5V_IN);
-                LVCMP_EDGE_SEL(1);	//检测ldoin比vbat电压低的情况(充电仓给电池充满后会关断，此时电压会掉下来)
+                LVCMP_EDGE_SEL(1);	//���ldoin��vbat��ѹ�͵����(���ָ���س������ضϣ���ʱ��ѹ�������)
                 LDO5V_EDGE_SEL(1);
                 //only for br23 fix charge wkup bug (ldoin 3.3v to 5v)
                 power_wakeup_index_disable(7);
             }
         }
-    } else if (LDO5V_DET_GET() == 0) {	//ldoin<拔出电压（0.6）
+    } else if (LDO5V_DET_GET() == 0) {	//ldoin<�γ���ѹ��0.6��
         /* putchar('Q'); */
         ldo5v_in_normal_cnt = 0;
         ldo5v_in_err_cnt = 0;
@@ -401,7 +401,7 @@ static void ldo5v_detect(void *priv)
             __this->ldo5v_timer = 0;
             if ((charge_flag & BIT_LDO5V_OFF) == 0) {
                 charge_flag = BIT_LDO5V_OFF;
-                LVCMP_EDGE_SEL(0);//拔出后重新检测插入
+                LVCMP_EDGE_SEL(0);//�γ������¼�����
                 LDO5V_EDGE_SEL(0);
 
                 //only for br23 fix charge load too small
@@ -414,7 +414,7 @@ static void ldo5v_detect(void *priv)
                 power_wakeup_index_disable(7);
             }
         }
-    } else {	//拔出电压（0.6左右）< ldoin < vbat
+    } else {	//�γ���ѹ��0.6���ң�< ldoin < vbat
         ldo5v_in_normal_cnt = 0;
         /* putchar('E'); */
         ldo5v_off_cnt = 0;
@@ -508,7 +508,7 @@ static void charge_config(void)
     if (get_vbat_trim() == 0xf) {
         log_info("vbat not trim, use default config!!!!!!");
     } else {
-        charge_4202_trim_val = get_vbat_trim();		//4.2V对应的trim出来的实际档位
+        charge_4202_trim_val = get_vbat_trim();		//4.2V��Ӧ��trim������ʵ�ʵ�λ
     }
 
     log_info("charge_4202_trim_val = %d\n", charge_4202_trim_val);
@@ -544,7 +544,7 @@ int charge_init(const struct dev_node *node, void *arg)
 
     ASSERT(__this->data);
 
-    //充电相关寄存器设置默认值
+    //�����ؼĴ�������Ĭ��ֵ
     p33_tx_1byte(P3_CHG_CON0, chg_con0);
     p33_tx_1byte(P3_CHG_CON1, chg_con1);
     p33_tx_1byte(P3_CHG_CON2, chg_con2);
@@ -553,32 +553,32 @@ int charge_init(const struct dev_node *node, void *arg)
     __this->init_ok = 0;
     __this->charge_online_flag = 0;
 
-    /*先关闭充电使能，后面检测到充电插入再开启*/
+    /*�ȹرճ��ʹ�ܣ������⵽�������ٿ���*/
     /* CHGBG_EN(0); */
     /* CHARGE_EN(0); */
 
-    /*LDO5V的100K下拉电阻使能*/
+    /*LDO5V��100K��������ʹ��*/
     L5V_LOAD_EN(__this->data->ldo5v_pulldown_en);
 
-    /*LDO5V,检测上升沿，用于检测ldoin插入*/
+    /*LDO5V,��������أ����ڼ��ldoin����*/
     LDO5V_EN(1);
     LDO5V_EDGE_SEL(0);
     LDO5V_PND_CLR();
     LDO5V_EDGE_WKUP_EN(1);
 
-    /*LVCMP,检测上升沿，用于检测ldoin插入*/
+    /*LVCMP,��������أ����ڼ��ldoin����*/
     LVCMP_EN(1);
     LVCMP_EDGE_SEL(0);
     LVCMP_PND_CLR();
     LVCMP_EDGE_WKUP_EN(1);
-    /*使用COMPH,在LDOIN和VBAT比较接近时检测信号会抖动,所以切成使用COMPL,注意softoff需要切成COMPH*/
+    /*ʹ��COMPH,��LDOIN��VBAT�ȽϽӽ�ʱ����źŻᶶ��,�����г�ʹ��COMPL,ע��softoff��Ҫ�г�COMPH*/
     /*COMPH:LDO5V<->VBAT COMPL:LDO5V<->VDD50*/
     LVCMP_CMP_SEL(1);
 
     charge_config();
 
     //only for br23 fix charge wkup bug (ldoin 3.3v to 5v)
-    //原因:softoff后没有rc时钟唤醒的滤波逻辑不工作给不出唤醒信号
+    //ԭ��:softoff��û��rcʱ�ӻ��ѵ��˲��߼������������������ź�
     struct port_wakeup port;
     port.pullup_down_enable = 0;
     port.edge = RISING_EDGE;

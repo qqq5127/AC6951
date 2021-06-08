@@ -1,7 +1,7 @@
 /*
  *****************************************************************
  *
- * Audio ADC 多通道使用demo
+ * Audio ADC ��ͨ��ʹ��demo
  *
  *****************************************************************
  */
@@ -17,14 +17,14 @@
 
 extern struct audio_adc_hdl adc_hdl;
 
-/*总共使能多少个通道*/
+/*�ܹ�ʹ�ܶ��ٸ�ͨ��*/
 #define LADC_CH_NUM         1
 
 #define LADC_BUF_NUM        2
-#define LADC_IRQ_POINTS     256	/*中断点数*/
+#define LADC_IRQ_POINTS     256	/*�жϵ���*/
 #define LADC_BUFS_SIZE      (LADC_CH_NUM * LADC_BUF_NUM * LADC_IRQ_POINTS)
 
-/*调试使用，推mic数据/linein数据/mic&line混合数据到dac*/
+/*����ʹ�ã���mic����/linein����/mic&line������ݵ�dac*/
 #define  LADC_2_DAC_ENABLE	1
 #define LADC_MIC_2_DAC		BIT(0)
 #define LADC_LIN_2_DAC		BIT(1)
@@ -40,8 +40,8 @@ typedef struct {
 static audio_adc_t *ladc_var = NULL;
 
 /*
- * 使能1个通道,1个linein或者1个mic：
- * 数据结构：DAT0 DAT1 DAT2
+ * ʹ��1��ͨ��,1��linein����1��mic��
+ * ���ݽṹ��DAT0 DAT1 DAT2
  */
 static void audio_adc1_output_demo(void *priv, s16 *data, int len)
 {
@@ -55,13 +55,13 @@ static void audio_adc1_output_demo(void *priv, s16 *data, int len)
     /* printf("linein:%x,len:%d,ch:%d",data,len,hdl->channel); */
 
 #if LADC_2_DAC_ENABLE
-#if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_LR)//双声道数据结构
+#if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_LR)//˫�������ݽṹ
     for (int i = 0; i < (len / 2); i++) {
         ladc_var->temp_buf[i * 2] = data[i];
         ladc_var->temp_buf[i * 2 + 1] = data[i];
     }
     wlen = app_audio_output_write(ladc_var->temp_buf, len * 2);
-#else //单声道数据结构
+#else //���������ݽṹ
     //TODO
     wlen = app_audio_output_write(data, len * hdl->channel);
 #endif/*TCFG_AUDIO_DAC_CONNECT_MODE*/
@@ -69,8 +69,8 @@ static void audio_adc1_output_demo(void *priv, s16 *data, int len)
 }
 
 /*
- * 使能2个通道,1个linein和1个mic：
- * 数据结构：LIN0 MIC0 LIN1 MIC1 LIN2 MIC2
+ * ʹ��2��ͨ��,1��linein��1��mic��
+ * ���ݽṹ��LIN0 MIC0 LIN1 MIC1 LIN2 MIC2
  */
 static void audio_adc2_output_demo(void *priv, s16 *data, int len)
 {
@@ -84,16 +84,16 @@ static void audio_adc2_output_demo(void *priv, s16 *data, int len)
     /* printf("linein:%x,len:%d,ch:%d",data,len,hdl->channel); */
 
 #if LADC_2_DAC_ENABLE
-#if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_LR)//双声道数据结构
+#if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_LR)//˫�������ݽṹ
     wlen = app_audio_output_write(data, len * 2);
-#else //单声道数据结构
+#else //���������ݽṹ
     //TODO
 #endif/*TCFG_AUDIO_DAC_CONNECT_MODE*/
 #endif/*LADC_2_DAC_ENABLE*/
 }
 /*
- * 使能3个通道,2个linein 和 1个mic：
- * 数据结构：LINL0 LINR0 MIC0 LINL1 LINR1 MIC1 LINL2 LINR2 MIC2...
+ * ʹ��3��ͨ��,2��linein �� 1��mic��
+ * ���ݽṹ��LINL0 LINR0 MIC0 LINL1 LINR1 MIC1 LINL2 LINR2 MIC2...
  */
 static void audio_adc3_output_demo(void *priv, s16 *data, int len)
 {
@@ -107,7 +107,7 @@ static void audio_adc3_output_demo(void *priv, s16 *data, int len)
     /* printf("linein:%x,len:%d,ch:%d",data,len,hdl->channel); */
 
 #if LADC_2_DAC_ENABLE
-#if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_LR)//双声道数据结构
+#if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_LR)//˫�������ݽṹ
 #if (LADC_2_DAC == LADC_LIN_2_DAC)
     for (u16 i = 0; i < len / 2; i++) {
         data[2 * i] = data[3 * i];
@@ -141,7 +141,7 @@ static void audio_adc3_output_demo(void *priv, s16 *data, int len)
     }
 #endif/*LADC_2_DAC*/
     wlen = app_audio_output_write(data, len * 2);
-#else //单声道数据结构
+#else //���������ݽṹ
 
 #endif/*TCFG_AUDIO_DAC_CONNECT_MODE*/
 #endif/*LADC_2_DAC_ENABLE*/

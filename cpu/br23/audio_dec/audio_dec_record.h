@@ -6,15 +6,15 @@
 #include "system/includes.h"
 #include "media/audio_decoder.h"
 
-// å½•éŸ³æ–‡ä»¶æ’­æ”¾
+// Â¼ÒôÎÄ¼ş²¥·Å
 int record_file_play(void);
-// æŒ‡å®šè·¯å¾„æ’­æ”¾å½•éŸ³æ–‡ä»¶
+// Ö¸¶¨Â·¾¶²¥·ÅÂ¼ÒôÎÄ¼ş
 int record_file_play_by_path(char *path);
-// å…³é—­å½•éŸ³æ–‡ä»¶æ’­æ”¾
+// ¹Ø±ÕÂ¼ÒôÎÄ¼ş²¥·Å
 void record_file_close(void);
-// è·å–å½•éŸ³æ’­æ”¾æ€»äº‹ä»¶
+// »ñÈ¡Â¼Òô²¥·Å×ÜÊÂ¼ş
 int record_file_get_total_time(void);
-// è·å–å½•éŸ³æ’­æ”¾å½“å‰æ—¶é—´
+// »ñÈ¡Â¼Òô²¥·Åµ±Ç°Ê±¼ä
 int record_file_dec_get_cur_time(void);
 
 #endif /*_AUDIO_DEC_RECORD_H_*/

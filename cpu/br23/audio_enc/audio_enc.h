@@ -14,18 +14,18 @@
 
 
 struct record_file_fmt {
-    u8  gain;//å¢ç›Šé…ç½®
-    u8  channel;//å£°é“æ•°ï¼Œ1:å•å£°é“ï¼Œ 2ï¼šåŒå£°é“
-    u16 sample_rate;//é‡‡æ ·ç‡
-    u32 bit_rate;//ç ç‡
-    u32 coding_type;//ç¼–ç æ ¼å¼
-    char *dev;//å½•éŸ³è®¾å¤‡ç›˜ç¬¦
-    char *folder;//å½•éŸ³æ–‡ä»¶å¤¹
-    char *filename;//å½•éŸ³æ–‡ä»¶å
-    u32 cut_head_time;//å½•éŸ³æ–‡ä»¶å»å¤´æ—¶é—´,å•ä½ms
-    u32 cut_tail_time;//å½•éŸ³æ–‡ä»¶å»å°¾æ—¶é—´,å•ä½ms
-    u32 limit_size;//å½•éŸ³æ–‡ä»¶å¤§å°æœ€å°é™åˆ¶ï¼Œ å•ä½byte
-    u8  source;//å½•éŸ³è¾“å…¥æº
+    u8  gain;//ÔöÒæÅäÖÃ
+    u8  channel;//ÉùµÀÊı£¬1:µ¥ÉùµÀ£¬ 2£ºË«ÉùµÀ
+    u16 sample_rate;//²ÉÑùÂÊ
+    u32 bit_rate;//ÂëÂÊ
+    u32 coding_type;//±àÂë¸ñÊ½
+    char *dev;//Â¼ÒôÉè±¸ÅÌ·û
+    char *folder;//Â¼ÒôÎÄ¼ş¼Ğ
+    char *filename;//Â¼ÒôÎÄ¼şÃû
+    u32 cut_head_time;//Â¼ÒôÎÄ¼şÈ¥Í·Ê±¼ä,µ¥Î»ms
+    u32 cut_tail_time;//Â¼ÒôÎÄ¼şÈ¥Î²Ê±¼ä,µ¥Î»ms
+    u32 limit_size;//Â¼ÒôÎÄ¼ş´óĞ¡×îĞ¡ÏŞÖÆ£¬ µ¥Î»byte
+    u8  source;//Â¼ÒôÊäÈëÔ´
     void (*err_callback)(void);
 };
 

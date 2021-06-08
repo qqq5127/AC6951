@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------*/
 /**@file     qn8035.c
-   @brief    qn8035æ”¶éŸ³åº•å±‚é©±åŠ¨
+   @brief    qn8035ÊÕÒôµ×²ãÇı¶¯
    @details
    @author
    @date   2011-11-24
@@ -18,7 +18,7 @@
 
 //#include "sdmmc_api.h"
 
-//if antenna match circuit is used a inductorï¼Œmacro USING_INDUCTOR will be set to 1
+//if antenna match circuit is used a inductor£¬macro USING_INDUCTOR will be set to 1
 #define USING_INDUCTOR				0
 
 #define INVERSE_IMR						1
@@ -29,10 +29,10 @@
 //#define PILOT_CCA					0
 
 
-//é•¿å¤©çº¿é…ç½®:
+//³¤ÌìÏßÅäÖÃ:
 //u8 _xdata qnd_PreNoiseFloor = 40,qnd_NoiseFloor = 40;
 bool qn8035_online;
-//çŸ­å¤©çº¿é…ç½®:
+//¶ÌÌìÏßÅäÖÃ:
 
 
 extern bool g_iic_busy;
@@ -44,23 +44,23 @@ u8  qnd_CH_STEP  = 1;
 u8  qnd_ChipID;
 
 /*----------------------------------------------------------------------------*/
-/**@brief    QN8035 è¯»å¯„å­˜å™¨å‡½æ•°
-   @param    addrï¼šå¯„å­˜å™¨åœ°å€
-   @return   æ— 
+/**@brief    QN8035 ¶Á¼Ä´æÆ÷º¯Êı
+   @param    addr£º¼Ä´æÆ÷µØÖ·
+   @return   ÎŞ
    @note     u8 QND_ReadReg(u8 addr)
    //5_5_9_5
    //4_5_8_5
    //2_5_8_5
 */
 
-#define	qn8035_rssi 	 	4      //è¶Šå¤§å°è¶Šå°‘
-#define qn8035_if2  		0x05    //è¶Šå¤§å°è¶Šå¤š
-#define qn8035_snr_th1  	0x08    //è¶Šå¤§å°è¶Šå°‘ //
+#define	qn8035_rssi 	 	4      //Ô½´óÌ¨Ô½ÉÙ
+#define qn8035_if2  		0x05    //Ô½´óÌ¨Ô½¶à
+#define qn8035_snr_th1  	0x08    //Ô½´óÌ¨Ô½ÉÙ //
 #define	qn8035_snr_th2 		0x05
 #define	qn8035_pilot_cca  	0
 #define	qn8035_inductor  	1
 #define	qn8075_snr   		25
-u8 _xdata qnd_PreNoiseFloor = 35;   //è¶Šå¤§å°è¶Šå°‘
+u8 _xdata qnd_PreNoiseFloor = 35;   //Ô½´óÌ¨Ô½ÉÙ
 u8 _xdata  qnd_NoiseFloor = 35;
 
 
@@ -69,18 +69,18 @@ u8 QND_ReadReg(u8 addr)
     u8  byte;
 
     g_iic_busy = 1;
-    iic_start();                    //I2Cå¯åŠ¨
-    iic_sendbyte(0x20);             //å†™å‘½ä»¤
-    iic_sendbyte(addr);         //å†™åœ°å€
-    iic_start();                    //å†™è½¬ä¸ºè¯»å‘½ä»¤ï¼Œéœ€è¦å†æ¬¡å¯åŠ¨I2C
-    iic_sendbyte(0x21);             //è¯»å‘½ä»¤
+    iic_start();                    //I2CÆô¶¯
+    iic_sendbyte(0x20);             //Ğ´ÃüÁî
+    iic_sendbyte(addr);         //Ğ´µØÖ·
+    iic_start();                    //Ğ´×ªÎª¶ÁÃüÁî£¬ĞèÒªÔÙ´ÎÆô¶¯I2C
+    iic_sendbyte(0x21);             //¶ÁÃüÁî
     byte = iic_revbyte(1);
-    iic_stop();                     //I2Cåœæ­¢
+    iic_stop();                     //I2CÍ£Ö¹
     g_iic_busy = 0;
     return  byte;
 }
 
-#if 0   //IIC SD IOå¤ç”¨
+#if 0   //IIC SD IO¸´ÓÃ
 u8 sd_iic_readQN(u8 addr)
 {
     u8 p_status;
@@ -92,7 +92,7 @@ u8 sd_iic_readQN(u8 addr)
     }
     sdmmca_force_idle();
     sdmmcb_force_idle();
-    while (check_sd_controller());  //æ ¹æ®SD IDç­‰å¾…æ§åˆ¶å™¨ç¹å¿™
+    while (check_sd_controller());  //¸ù¾İSD IDµÈ´ı¿ØÖÆÆ÷·±Ã¦
     IO_MC0 &= ~BIT(3);
 
     /*IIC Communicate*/
@@ -110,9 +110,9 @@ u8 sd_iic_readQN(u8 addr)
 #endif
 
 /*----------------------------------------------------------------------------*/
-/**@brief    QN8035 å†™å¯„å­˜å™¨å‡½æ•°
-   @param    addrï¼šå¯„å­˜å™¨åœ°å€ dataï¼šå†™å…¥æ•°æ®
-   @return   æ— 
+/**@brief    QN8035 Ğ´¼Ä´æÆ÷º¯Êı
+   @param    addr£º¼Ä´æÆ÷µØÖ· data£ºĞ´ÈëÊı¾İ
+   @return   ÎŞ
    @note     void QND_WriteReg(u8 addr,u8 data)
 */
 /*----------------------------------------------------------------------------*/
@@ -256,7 +256,7 @@ void QND_RXSetTH(void)
 {
     u8 rssi_th;
 
-    rssi_th = qnd_PreNoiseFloor + qn8035_rssi - 28 ;  //10	è¶Šå°å°å¤š0-
+    rssi_th = qnd_PreNoiseFloor + qn8035_rssi - 28 ;  //10	Ô½Ğ¡Ì¨¶à0-
     ///increase reference PLL charge pump current.
     QND_WriteReg(REG_REF, 0x7a);
     //NFILT program is enabled
@@ -264,7 +264,7 @@ void QND_RXSetTH(void)
     //using Filter3
     QND_WriteReg(CCA1, 0x75);
     //setting CCA IF counter error range value(768).
-    QND_WriteReg(CCA_CNT2, qn8035_if2); //0x03	  å¤§å°å¤š 1-5
+    QND_WriteReg(CCA_CNT2, qn8035_if2); //0x03	  ´óÌ¨¶à 1-5
 //#if PILOT_CCA
     if (qn8035_pilot_cca) {
         QND_WriteReg(PLT1, 0x00);
@@ -289,7 +289,7 @@ void QND_RXSetTH(void)
     if (qn8035_pilot_cca) {
         QND_WriteReg(CCA_SNR_TH_1, qn8035_snr_th1);    //setting SNR threshold for CCA
     } else {
-        QND_WriteReg(CCA_SNR_TH_1, qn8035_snr_th1);    //å°å°å¤š 8-12 //setting SNR threshold for CCA  9
+        QND_WriteReg(CCA_SNR_TH_1, qn8035_snr_th1);    //Ğ¡Ì¨¶à 8-12 //setting SNR threshold for CCA  9
     }
 //#endif
 }
@@ -297,9 +297,9 @@ void QND_RXSetTH(void)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    QN0835 åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
+/**@brief    QN0835 ³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
    @note     void qn8035_init(void)
 */
 /*----------------------------------------------------------------------------*/
@@ -345,9 +345,9 @@ void qn8035_init(void)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­ QN0835çš„ç”µæº
-   @param    æ— 
-   @return   æ— 
+/**@brief    ¹Ø±Õ QN0835µÄµçÔ´
+   @param    ÎŞ
+   @return   ÎŞ
    @note     void QN8035_powerdown(void)
 */
 /*----------------------------------------------------------------------------*/
@@ -421,9 +421,9 @@ void QND_TuneToCH(u16 channel)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®ä¸€ä¸ªé¢‘ç‚¹QN0835
-   @param    fre é¢‘ç‚¹  875~1080
-   @return   1ï¼šå½“å‰é¢‘ç‚¹æœ‰å°ï¼Œ0ï¼šå½“å‰é¢‘ç‚¹æ— å°
+/**@brief    ÉèÖÃÒ»¸öÆµµãQN0835
+   @param    fre Æµµã  875~1080
+   @return   1£ºµ±Ç°ÆµµãÓĞÌ¨£¬0£ºµ±Ç°ÆµµãÎŞÌ¨
    @note     bool set_fre_QN8035(u16 freq)
 */
 /*----------------------------------------------------------------------------*/
@@ -560,9 +560,9 @@ void QND_SetVol(u8 vol)
 */
 
 /*----------------------------------------------------------------------------*/
-/**@brief   FMæ¨¡å—æ£€æµ‹ï¼Œè·å–QN0835 æ¨¡å—ID
-   @param   æ— 
-   @return  æ£€æµ‹åˆ°QN0835æ¨¡å—è¿”å›1ï¼Œå¦åˆ™è¿”å›0
+/**@brief   FMÄ£¿é¼ì²â£¬»ñÈ¡QN0835 Ä£¿éID
+   @param   ÎŞ
+   @return  ¼ì²âµ½QN0835Ä£¿é·µ»Ø1£¬·ñÔò·µ»Ø0
    @note    bool QN8035_Read_ID(void)
 */
 /*----------------------------------------------------------------------------*/

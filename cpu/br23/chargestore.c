@@ -20,7 +20,7 @@ static struct chargestore_handle hdl;
 u8 uart_dma_buf[DMA_BUF_LEN] __attribute__((aligned(4)));
 volatile u8 send_busy;
 
-//ä¸²å£æ—¶é’Ÿå’Œä¸²å£è¶…æ—¶æ—¶é’Ÿæ˜¯åˆ†å¼€çš„
+//´®¿ÚÊ±ÖÓºÍ´®¿Ú³¬Ê±Ê±ÖÓÊÇ·Ö¿ªµÄ
 #define UART_SRC_CLK    clk_get("uart")
 #define UART_OT_CLK     clk_get("lsb")
 
@@ -36,7 +36,7 @@ extern void nvram_set_boot_state(u32 state);
 extern void local_irq_disable();
 void chargestore_set_update_ram(void)
 {
-    //éœ€è¦è¡¥å……è®¾ç½®ram
+    //ĞèÒª²¹³äÉèÖÃram
     int tmp;
     __asm__ volatile("%0 =icfg" : "=r"(tmp));
     tmp &= ~(3 << 8);
@@ -57,7 +57,7 @@ static u8 chargestore_get_f95_det_res(u32 equ_res)
     return det_res;
 }
 
-//br23, LDOINç”µå‹ä¸º2Væ—¶ç­‰æ•ˆç”µé˜»çº¦1M, åŠŸè€—çº¦1.8uA
+//br23, LDOINµçÑ¹Îª2VÊ±µÈĞ§µç×èÔ¼1M, ¹¦ºÄÔ¼1.8uA
 u8 chargestore_get_det_level(u8 chip_type)
 {
     switch (chip_type) {
@@ -85,7 +85,7 @@ static void uart_isr(void)
         chargestore_data_deal(CMD_COMPLETE, NULL, 0);
     }
     if ((__this->UART->CON0 & BIT(3)) && (__this->UART->CON0 & BIT(14))) {
-        __this->UART->CON0 |= BIT(12);//æ¸…RX PND
+        __this->UART->CON0 |= BIT(12);//ÇåRX PND
         chargestore_data_deal(CMD_RECVDATA, uart_dma_buf, DMA_ISR_LEN);
         memset((void *)uart_dma_buf, 0, sizeof(uart_dma_buf));
         __this->UART->RXSADR = (u32)uart_dma_buf;
@@ -94,11 +94,11 @@ static void uart_isr(void)
     }
     if ((__this->UART->CON0 & BIT(5)) && (__this->UART->CON0 & BIT(11))) {
         //OTCNT PND
-        __this->UART->CON0 |= BIT(7);//DMAæ¨¡å¼
-        __this->UART->CON0 |= BIT(10);//æ¸…OTCNT PND
+        __this->UART->CON0 |= BIT(7);//DMAÄ£Ê½
+        __this->UART->CON0 |= BIT(10);//ÇåOTCNT PND
         asm volatile("nop");
-        rx_len = __this->UART->HRXCNT;//è¯»å½“å‰ä¸²å£æ¥æ”¶æ•°æ®çš„ä¸ªæ•°
-        __this->UART->CON0 |= BIT(12);//æ¸…RX PND(è¿™é‡Œçš„é¡ºåºä¸èƒ½æ”¹å˜ï¼Œè¿™é‡Œè¦æ¸…ä¸€æ¬¡)
+        rx_len = __this->UART->HRXCNT;//¶Áµ±Ç°´®¿Ú½ÓÊÕÊı¾İµÄ¸öÊı
+        __this->UART->CON0 |= BIT(12);//ÇåRX PND(ÕâÀïµÄË³Ğò²»ÄÜ¸Ä±ä£¬ÕâÀïÒªÇåÒ»´Î)
         chargestore_data_deal(CMD_RECVDATA, uart_dma_buf, rx_len);
         memset((void *)uart_dma_buf, 0, sizeof(uart_dma_buf));
         __this->UART->RXSADR = (u32)uart_dma_buf;
@@ -110,7 +110,7 @@ static void uart_isr(void)
 void chargestore_write(u8 *data, u8 len)
 {
     u32 data_addr = (u32)data;
-    if (data_addr % 4) {//4byteå¯¹é½
+    if (data_addr % 4) {//4byte¶ÔÆë
         ASSERT(0, "%s: unaligned accesses!", __func__);
     }
     send_busy = 1;
@@ -123,13 +123,13 @@ void chargestore_open(u8 mode)
     send_busy = 0;
     __this->UART->CON0 = BIT(13) | BIT(12) | BIT(10);
     if (mode == MODE_RECVDATA) {
-        //çº¦å®š:ut0->input_ch0 ut1->input_ch3(å› ä¸ºinput_ch1è¦ç»™IRç”¨)
+        //Ô¼¶¨:ut0->input_ch0 ut1->input_ch3(ÒòÎªinput_ch1Òª¸øIRÓÃ)
         if (__this->UART == JL_UART0) {
             gpio_uart_rx_input(__this->data->io_port, 0, INPUT_CH0);
         } else {
             gpio_uart_rx_input(__this->data->io_port, 1, INPUT_CH3);
         }
-        //é¿å…æ’å…¥æ™®é€šå……ç”µèˆ±,èˆ±ä½“ä¸å‡å‹ only for br23
+        //±ÜÃâ²åÈëÆÕÍ¨³äµç²Õ,²ÕÌå²»ÉıÑ¹ only for br23
         if (__this->data->io_port == IO_PORTB_05) {
             charge_reset_pb5_pd_status();
         }
@@ -139,7 +139,7 @@ void chargestore_open(u8 mode)
         __this->UART->RXCNT = DMA_ISR_LEN;
         __this->UART->CON0 |= BIT(6) | BIT(5) | BIT(3);
     } else {
-        //çº¦å®š:ut0->output_ch0 ut1->output_ch1
+        //Ô¼¶¨:ut0->output_ch0 ut1->output_ch1
         if (__this->UART == JL_UART0) {
             gpio_output_channle(__this->data->io_port, CH0_UT0_TX);
         } else {
@@ -210,10 +210,10 @@ void chargestore_init(const struct chargestore_platform_data *data)
     gpio_direction_input(__this->data->io_port);
     request_irq(__this->data->uart_irq, 2, uart_isr, 0);
     if (__this->UART == JL_UART0) {
-        //ä¸å ç”¨IO
+        //²»Õ¼ÓÃIO
         gpio_set_uart0(-1);
     } else {
-        //ä¸å ç”¨IO
+        //²»Õ¼ÓÃIO
         gpio_set_uart1(-1);
     }
 #if (!TCFG_CHARGE_ENABLE)
@@ -227,10 +227,10 @@ void chargestore_init(const struct chargestore_platform_data *data)
 static void clock_critical_enter(void)
 {
     u8 cmp_buf[2] = {0x55, 0xAA};
-    //ç­‰å¾…æ•°æ®æ”¶å®Œ
+    //µÈ´ıÊı¾İÊÕÍê
     extern void *memmem(void *srcmem, int src_len, void *desmem, int des_len);
     while (memmem(uart_dma_buf, sizeof(uart_dma_buf), cmp_buf, sizeof(cmp_buf)));
-    //ç­‰å¾…æ•°æ®å‘å®Œ
+    //µÈ´ıÊı¾İ·¢Íê
     while (send_busy);
 }
 

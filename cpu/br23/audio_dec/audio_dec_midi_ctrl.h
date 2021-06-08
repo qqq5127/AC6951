@@ -13,18 +13,18 @@
 #include "midi_ctrl_decoder.h"
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€midi ctrlè§£ç 
-   @param    sample_rate: é‡‡æ ·ç‡
-   @param    *path:éŸ³è‰²æ–‡ä»¶è·¯å¾„
-   @return   0ï¼šæˆåŠŸ
-   @return   é0ï¼šå¤±è´¥
+/**@brief    ´ò¿ªmidi ctrl½âÂë
+   @param    sample_rate: ²ÉÑùÂÊ
+   @param    *path:ÒôÉ«ÎÄ¼şÂ·¾¶
+   @return   0£º³É¹¦
+   @return   ·Ç0£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
 int midi_ctrl_dec_open(u32 sample_rate, char *path);
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­midi ctrlè§£ç 
+/**@brief    ¹Ø±Õmidi ctrl½âÂë
    @param
    @return
    @note
@@ -34,9 +34,9 @@ void midi_ctrl_dec_close(void);
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   ä¹å™¨æ›´æ–°
-   @param   prog:ä¹å™¨å·
-   @param   trk_num :éŸ³è½¨ (0~15)
+/**@brief   ÀÖÆ÷¸üĞÂ
+   @param   prog:ÀÖÆ÷ºÅ
+   @param   trk_num :Òô¹ì (0~15)
    @return
    @note
 */
@@ -44,10 +44,10 @@ void midi_ctrl_dec_close(void);
 void midi_ctrl_set_porg(u8 prog, u8 trk_num);
 
 /*----------------------------------------------------------------------------*/
-/**@brief   æŒ‰é”®æŒ‰ä¸‹
-   @param   nkey:æŒ‰é”®åºå·ï¼ˆ0~127ï¼‰
-   @param   nvel:æŒ‰é”®åŠ›åº¦ï¼ˆ0~127ï¼‰
-   @param   chn :é€šé“(0~15)
+/**@brief   °´¼ü°´ÏÂ
+   @param   nkey:°´¼üĞòºÅ£¨0~127£©
+   @param   nvel:°´¼üÁ¦¶È£¨0~127£©
+   @param   chn :Í¨µÀ(0~15)
    @return
    @note
 */
@@ -56,9 +56,9 @@ void midi_ctrl_note_on(u8 nkey, u8 nvel, u8 chn);
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   æŒ‰é”®æ¾å¼€
-   @param   nkey:æŒ‰é”®åºå·ï¼ˆ0~127ï¼‰
-   @param   chn :é€šé“(0~15)
+/**@brief   °´¼üËÉ¿ª
+   @param   nkey:°´¼üĞòºÅ£¨0~127£©
+   @param   chn :Í¨µÀ(0~15)
    @return
    @note
 */
@@ -67,9 +67,9 @@ void midi_ctrl_note_off(u8 nkey, u8 chn);
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief  midi é…ç½®æ¥å£
-   @param   cmd:å‘½ä»¤
-   @param   priv:å¯¹åº”cmdçš„ç»“æ„ä½“
+/**@brief  midi ÅäÖÃ½Ó¿Ú
+   @param   cmd:ÃüÁî
+   @param   priv:¶ÔÓ¦cmdµÄ½á¹¹Ìå
    @return
    @note
 */
@@ -78,9 +78,9 @@ void midi_ctrl_confing(u32 cmd, void *priv);
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   midi keyboard è®¾ç½®æŒ‰é”®æŒ‰ä¸‹éŸ³ç¬¦å‘å£°çš„è¡°å‡ç³»æ•°
-   @param   obj:æ§åˆ¶å¥æŸ„
-   @param   samp:å¯¹åº”samplerate_tabåæ ‡
+/**@brief   midi keyboard ÉèÖÃ°´¼ü°´ÏÂÒô·û·¢ÉùµÄË¥¼õÏµÊı
+   @param   obj:¿ØÖÆ¾ä±ú
+   @param   samp:¶ÔÓ¦samplerate_tab×ø±ê
    @return
    @note
 */
@@ -88,9 +88,9 @@ void midi_ctrl_confing(u32 cmd, void *priv);
 void midi_ctrl_confing_set_melody_decay(u16 val);
 
 /*----------------------------------------------------------------------------*/
-/**@brief  å¼¯éŸ³è½®é…ç½®
-   @param   pitch_val:å¼¯éŸ³è½®å€¼,1 - 65535 ï¼›256æ˜¯æ­£å¸¸å€¼,å¯¹éŸ³é«˜æœ‰ä½œç”¨
-   @param   chn :é€šé“(0~15)
+/**@brief  ÍäÒôÂÖÅäÖÃ
+   @param   pitch_val:ÍäÒôÂÖÖµ,1 - 65535 £»256ÊÇÕı³£Öµ,¶ÔÒô¸ßÓĞ×÷ÓÃ
+   @param   chn :Í¨µÀ(0~15)
    @return
    @note
 */

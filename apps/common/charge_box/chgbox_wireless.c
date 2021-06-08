@@ -23,7 +23,7 @@ extern void delay_2ms(int cnt);
 extern void wireless_port_set_wakeup_enable(u8 enable);
 
 ///////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////æ— çº¿å……/////////////////////////////////////////////////
+////////////////////////////////ÎŞÏß³ä/////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 #if(defined TCFG_WIRELESS_ENABLE) && (TCFG_WIRELESS_ENABLE)
 
@@ -35,23 +35,23 @@ static int wl_100ms_timer, wl_ad_timer, wl_ad_timeout;
 static u32 g_wireless_voltage;
 static u8  wl_send_over_msg, wl_init_ok;
 
-//æ§åˆ¶å……ç”µå£ç”µå‹èŒƒå›´
+//¿ØÖÆ³äµç¿ÚµçÑ¹·¶Î§
 #define VOLTAGE_MIN     6100
 #define VOLTAGE_MAX     6200
 
-//å–ä¸­é—´ (AD_OK_COUNTS-AD_CUT_COUNTS*2)è®¡ç®—å‡å€¼ï¼ˆå»æ‰å¤´éƒ¨ä¸å°¾éƒ¨ï¼‰
+//È¡ÖĞ¼ä (AD_OK_COUNTS-AD_CUT_COUNTS*2)¼ÆËã¾ùÖµ£¨È¥µôÍ·²¿ÓëÎ²²¿£©
 #define AD_OK_COUNTS    5
 #define AD_CUT_COUNTS   1
 
-//æ— çº¿å……ä¸Šçº¿æ£€æµ‹
-#define WL_ONLINE_VOLT     3500  ///ç”µå‹å¤§äº3.5æ‰è®¤ä¸ºæ˜¯æœ‰å……ç”µå™¨æ”¾ä¸Šæ¥
+//ÎŞÏß³äÉÏÏß¼ì²â
+#define WL_ONLINE_VOLT     3500  ///µçÑ¹´óÓÚ3.5²ÅÈÏÎªÊÇÓĞ³äµçÆ÷·ÅÉÏÀ´
 #define WL_ONLINE_TIMES    3
 #define WL_OFFLINE_TIMES   5
 
 static u16  power_table[AD_OK_COUNTS];
 static u16  power_table_tmp[AD_OK_COUNTS];
 
-//æ— çº¿å……ç”µé€šä¿¡çš„æ—¶å€™ä¸èƒ½è¿›å…¥ä½åŠŸè€—
+//ÎŞÏß³äµçÍ¨ĞÅµÄÊ±ºò²»ÄÜ½øÈëµÍ¹¦ºÄ
 static volatile u8 is_wl_comm_active = 0;
 static u8 wl_comm_idle_query(void)
 {
@@ -63,10 +63,10 @@ REGISTER_LP_TARGET(wl_comm_lp_target) = {
 };
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    timer2ä¸­æ–­å›è°ƒ
-   @param    æ— 
-   @return   æ— 
-   @note     æ³¨æ„è°ƒç”¨çš„æ‰€æœ‰ä»£ç éœ€æ”¾åœ¨ramé‡Œ
+/**@brief    timer2ÖĞ¶Ï»Øµ÷
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ×¢Òâµ÷ÓÃµÄËùÓĞ´úÂëĞè·ÅÔÚramÀï
 */
 /*------------------------------------------------------------------------------------*/
 SEC(.chargebox_code)
@@ -97,11 +97,11 @@ static const u32 timer_div[] = {
 };
 #define MAX_TIME_CNT            0x7fff
 #define MIN_TIME_CNT            0x100
-#define WL_TIMER_UNIT_US        250  //å•ä½us
+#define WL_TIMER_UNIT_US        250  //µ¥Î»us
 /*------------------------------------------------------------------------------------*/
-/**@brief    å¼€å¯timer2æ¨¡å—
-   @param    æ— 
-   @return   æ— 
+/**@brief    ¿ªÆôtimer2Ä£¿é
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -114,7 +114,7 @@ static void wl_timer2_open(void)
 #else
     timer_clk = clk_get("timer");
 #endif
-    JL_TIMER2->CON = BIT(14);//æ¸…pending
+    JL_TIMER2->CON = BIT(14);//Çåpending
     for (index = 0; index < (sizeof(timer_div) / sizeof(timer_div[0])); index++) {
         prd_cnt = WL_TIMER_UNIT_US * (timer_clk / 1000000) / timer_div[index];
         if (prd_cnt > MIN_TIME_CNT && prd_cnt < MAX_TIME_CNT) {
@@ -133,9 +133,9 @@ static void wl_timer2_open(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å…³é—­timer2æ¨¡å—
-   @param    æ— 
-   @return   æ— 
+/**@brief    ¹Ø±Õtimer2Ä£¿é
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -145,7 +145,7 @@ static void wl_timer2_close(void)
     is_wl_comm_active = 0;
 }
 
-///dcdc en IOåˆå§‹åŒ–
+///dcdc en IO³õÊ¼»¯
 static void dcdc_io_init(void)
 {
 #if TCFG_DCDC_CTRL_EN
@@ -157,10 +157,10 @@ static void dcdc_io_init(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    DCDCä½¿èƒ½
-   @param    æ— 
-   @return   æ— 
-   @note     ä½¿èƒ½åæ‰èƒ½æ­£å¸¸å……ç”µ
+/**@brief    DCDCÊ¹ÄÜ
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     Ê¹ÄÜºó²ÅÄÜÕı³£³äµç
 */
 /*------------------------------------------------------------------------------------*/
 static void dcdc_set_en(u8 en)
@@ -176,9 +176,9 @@ static void dcdc_set_en(u8 en)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ— çº¿å……é€šä¿¡å£åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
+/**@brief    ÎŞÏß³äÍ¨ĞÅ¿Ú³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
 */
 /*------------------------------------------------------------------------------------*/
 static void wpc_io_init(void)
@@ -190,9 +190,9 @@ static void wpc_io_init(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ— çº¿å……ADæ£€æµ‹ä¸Šä¸‹çº¿IOåˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
+/**@brief    ÎŞÏß³äAD¼ì²âÉÏÏÂÏßIO³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -229,24 +229,24 @@ static u32 wl_read_ad_io_status(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–æ— çº¿å……è¾“å…¥ç”µå‹
-   @param    æ— 
-   @return   æ— 
+/**@brief    »ñÈ¡ÎŞÏß³äÊäÈëµçÑ¹
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
 static u16 get_wireless_voltage(void)
 {
     u16 volt;
-    //æ³¨æ„åˆ†å‹,ä¸Šä¸‹æ‹‰åŠå¤–éƒ¨è·¯ç›¸å…³ï¼Œ é»˜è®¤å¼€ä¸‹æ‹‰å››åˆ†ä¸€
+    //×¢Òâ·ÖÑ¹,ÉÏÏÂÀ­¼°Íâ²¿Â·Ïà¹Ø£¬ Ä¬ÈÏ¿ªÏÂÀ­ËÄ·ÖÒ»
     volt = adc_get_voltage(TCFG_WL_AD_DET_CH) * 4;
     return volt;
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ— çº¿å……100msè°ƒç”¨
-   @param    æ— 
-   @return   æ— 
+/**@brief    ÎŞÏß³ä100msµ÷ÓÃ
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -259,16 +259,16 @@ static void wireless_100ms_run_app(void *priv)
         }
         return;
     }
-    //æŸ¥çœ‹æ˜¯å¦æœ‰æ•°æ®éœ€è¦å‘é€
+    //²é¿´ÊÇ·ñÓĞÊı¾İĞèÒª·¢ËÍ
     wireless_100ms_run();
     if (__this->info.busy) {
         wl_timer2_open();
     }
 }
 /*------------------------------------------------------------------------------------*/
-/**@brief    é€šè¿‡ç”µå‹æ•°ç»„è®¡ç®—å‡å€¼
-   @param    æ— 
-   @return   æ— 
+/**@brief    Í¨¹ıµçÑ¹Êı×é¼ÆËã¾ùÖµ
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -329,9 +329,9 @@ static void wireless_ad_detect_init(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–æ— çº¿å……å½“å‰æä¾›çš„ç”µå‹
-   @param    æ— 
-   @return   æ— 
+/**@brief    »ñÈ¡ÎŞÏß³äµ±Ç°Ìá¹©µÄµçÑ¹
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -341,10 +341,10 @@ u16 get_wireless_power(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ— çº¿å……é€šä¿¡ioè®¾ç½®
-   @param    æ— 
-   @return   æ— 
-   @note     ä¾›åº“è°ƒç”¨ï¼Œæ³¨æ„ä»£ç è¦æ”¾ram
+/**@brief    ÎŞÏß³äÍ¨ĞÅioÉèÖÃ
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¹©¿âµ÷ÓÃ£¬×¢Òâ´úÂëÒª·Åram
 */
 /*------------------------------------------------------------------------------------*/
 SEC(.chargebox_code)
@@ -357,7 +357,7 @@ void wpc_io_set(u8 mode)
         break;
     case IO_LOW:
         gpio_direction_output(TCFG_WPC_COMM_IO, 0);
-        wl_timer2_close(); //æœ€åä¸€ä¸ªåŠ¨ä½œåå…³é—­
+        wl_timer2_close(); //×îºóÒ»¸ö¶¯×÷ºó¹Ø±Õ
         if (wl_send_over_msg) {
             app_chargebox_event_to_user(CHGBOX_EVENT_WL_DATA_OVER);
         }
@@ -368,7 +368,7 @@ void wpc_io_set(u8 mode)
         gpio_set_pull_up(TCFG_WPC_COMM_IO, 0);
         gpio_direction_output(TCFG_WPC_COMM_IO, 0);
         break;
-    case IO_OVERTURN://ç¿»è½¬
+    case IO_OVERTURN://·­×ª
         io_num = TCFG_WPC_COMM_IO % IO_GROUP_NUM;
 #if(TCFG_WPC_COMM_IO <= IO_PORTA_15)
         JL_PORTA->OUT ^= BIT(io_num);
@@ -380,17 +380,17 @@ void wpc_io_set(u8 mode)
         JL_PORTD->OUT ^= BIT(io_num);
 #endif
         break;
-    case IO_DIR_IN: //é«˜é˜»
+    case IO_DIR_IN: //¸ß×è
         gpio_direction_input(TCFG_WPC_COMM_IO);
         break;
     }
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ— çº¿å……å‘é€ä¸€ä¸ªæ•°æ®åŒ…å°è£…
-   @param    æ— 
-   @return   æ— 
-   @note     ä»…åœ¨æ¡æ‰‹é˜¶æ®µè°ƒç”¨!!!
+/**@brief    ÎŞÏß³ä·¢ËÍÒ»¸öÊı¾İ°ü·â×°
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ½öÔÚÎÕÊÖ½×¶Îµ÷ÓÃ!!!
 */
 /*------------------------------------------------------------------------------------*/
 static bool wireless_send_pack_deal(void)
@@ -420,10 +420,10 @@ static bool wireless_send_pack_deal(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€æ— çº¿å……æ¨¡å—
-   @param    æ— 
-   @return   æ— 
-   @note     æ£€æµ‹åˆ°æ— çº¿å……ä¸Šçº¿æ—¶è°ƒç”¨ï¼Œå‘é€ç›¸å…³çš„åˆå§‹åŒ–æŒ‡ä»¤
+/**@brief    ´ò¿ªÎŞÏß³äÄ£¿é
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¼ì²âµ½ÎŞÏß³äÉÏÏßÊ±µ÷ÓÃ£¬·¢ËÍÏà¹ØµÄ³õÊ¼»¯Ö¸Áî
 */
 /*------------------------------------------------------------------------------------*/
 void wireless_api_open(void)
@@ -436,27 +436,27 @@ void wireless_api_open(void)
 
     wireless_open(VOLTAGE_MIN, VOLTAGE_MAX);
 
-    //å‘é€ä¿¡å·å¼ºåº¦åŒ…
+    //·¢ËÍĞÅºÅÇ¿¶È°ü
     get_signal_value();
     if (wireless_send_pack_deal() == false) {
         goto __err_exit;
     }
 
-    //å‘é€èº«ä»½åŒ…
+    //·¢ËÍÉí·İ°ü
     delay_2ms(3);
     get_identification();
     if (wireless_send_pack_deal() == false) {
         goto __err_exit;
     }
 
-    //å‘é€é…ç½®åŒ…
+    //·¢ËÍÅäÖÃ°ü
     delay_2ms(3);
     get_configuration();
     if (wireless_send_pack_deal() == false) {
         goto __err_exit;
     }
 
-    wl_ad_det_init(0);//åˆå§‹åŒ–æˆæ¨¡æ‹Ÿå£
+    wl_ad_det_init(0);//³õÊ¼»¯³ÉÄ£Äâ¿Ú
     app_chargebox_event_to_user(CHGBOX_EVENT_WL_DATA_OVER);
     wl_100ms_timer = sys_timer_add(NULL, wireless_100ms_run_app, 100);
     wl_send_over_msg = 1;
@@ -468,10 +468,10 @@ __err_exit:
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å…³é—­æ— çº¿å……æ¨¡å—
-   @param    æ— 
-   @return   æ— 
-   @note     æ— çº¿å……ä¸‹çº¿æ—¶è°ƒç”¨
+/**@brief    ¹Ø±ÕÎŞÏß³äÄ£¿é
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÎŞÏß³äÏÂÏßÊ±µ÷ÓÃ
 */
 /*------------------------------------------------------------------------------------*/
 void wireless_api_close(void)
@@ -487,10 +487,10 @@ void wireless_api_close(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ— çº¿å……ä¸Šçº¿æ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     åˆ©ç”¨ADå€¼æ£€æµ‹æ— çº¿å……çš„ä¸Šçº¿
+/**@brief    ÎŞÏß³äÉÏÏß¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÀûÓÃADÖµ¼ì²âÎŞÏß³äµÄÉÏÏß
 */
 /*------------------------------------------------------------------------------------*/
 static int wireless_on_det_timer;
@@ -523,7 +523,7 @@ static void wireless_online_det(void *priv)
     }
     return;
 __online_det_exit:
-    wl_ad_det_init(1);//åˆå§‹åŒ–æˆæ•°å­—å£
+    wl_ad_det_init(1);//³õÊ¼»¯³ÉÊı×Ö¿Ú
     usr_timer_del(wireless_on_det_timer);
     wireless_on_det_timer = 0;
 }
@@ -534,7 +534,7 @@ void wireless_io_wakeup_deal(void)
         return;
     }
     if ((sys_info.status[WIRELESS_DET] == STATUS_OFFLINE) && (wireless_on_det_timer == 0)) {
-        wl_ad_det_init(0);//åˆå§‹åŒ–æˆADå£
+        wl_ad_det_init(0);//³õÊ¼»¯³ÉAD¿Ú
         wireless_on_det_timer = usr_timer_add(NULL, wireless_online_det, 5, 1);//6ms
     }
 }
@@ -548,17 +548,17 @@ void wireless_data_over_run(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ— çº¿å……æ¨¡å—åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
-   @note     åˆå§‹åŒ–æ§åˆ¶ç»“æ„ä½“ã€adã€å¯¹åº”çš„ioï¼Œæ³¨å†Œç›¸å…³æ¥å£
+/**@brief    ÎŞÏß³äÄ£¿é³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ³õÊ¼»¯¿ØÖÆ½á¹¹Ìå¡¢ad¡¢¶ÔÓ¦µÄio£¬×¢²áÏà¹Ø½Ó¿Ú
 */
 /*------------------------------------------------------------------------------------*/
 void wireless_init_api(void)
 {
-    ///æ³¨æ„é¡ºåºä¸èƒ½æ”¹å˜
+    ///×¢ÒâË³Ğò²»ÄÜ¸Ä±ä
     memset(__this, 0x0, sizeof(_wireless_hdl));
-    //ADé‡‡é›†åˆå§‹åŒ–
+    //AD²É¼¯³õÊ¼»¯
     wl_ad_det_init(1);
     dcdc_io_init();
     wpc_io_init();

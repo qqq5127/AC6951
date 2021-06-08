@@ -10,8 +10,8 @@ struct code_type {
     u32 size;
 };
 
-////ç”¨äºåŒºåˆ† overlay code å’Œ bss
-/*æ­¤å¤„ä¸ä½¿ç”¨è¿™ç§ç”¨æ³•ï¼Œç›´æ¥åœ¨overlayæ®µä¸­ä½¿ç”¨LONG(0xFFFFFFFF),é¿å…å°ä»£ç è¢«ä¼˜åŒ–æ‰ï¼Œå¯¼è‡´çš„å‘*/
+////ÓÃÓÚÇø·Ö overlay code ºÍ bss
+/*´Ë´¦²»Ê¹ÓÃÕâÖÖÓÃ·¨£¬Ö±½ÓÔÚoverlay¶ÎÖĞÊ¹ÓÃLONG(0xFFFFFFFF),±ÜÃâÓ¡´úÂë±»ÓÅ»¯µô£¬µ¼ÖÂµÄ¿Ó*/
 /* u32 aec_bss_id sec(.aec_bss_id) = 0xffffffff; */
 /* u32 fm_bss_id sec(.fm_bss_id) = 0xffffffff; */
 /* u32 mp3_bss_id sec(.mp3_bss_id) = 0xffffffff; */

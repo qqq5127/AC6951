@@ -8,7 +8,7 @@
 
 #define AUDIO_DEC_TONE_AT_CODE_EVENT_CB		AT(.audio_dec_tone_event_callback)
 
-#define AUDIO_DEC_TONE_WAIT_USE_PRIO			0 // é‡‡ç”¨ä¼˜å…ˆçº§é¡ºåºæ’­æ”¾æ–¹å¼
+#define AUDIO_DEC_TONE_WAIT_USE_PRIO			0 // ²ÉÓÃÓÅÏÈ¼¶Ë³Ðò²¥·Å·½Ê½
 
 extern struct audio_dac_hdl dac_hdl;
 extern struct audio_dac_channel default_dac;
@@ -25,8 +25,8 @@ static int tone_dec_list_play(struct tone_dec_handle *dec, u8 next);
 //////////////////////////////////////////////////////////////////////////////
 
 /*----------------------------------------------------------------------------*/
-/**@brief    toneè§£ç æ•°æ®æµæŽ¨é€stop
-   @param    *dec: è§£ç å¥æŸ„
+/**@brief    tone½âÂëÊý¾ÝÁ÷ÍÆËÍstop
+   @param    *dec: ½âÂë¾ä±ú
    @return
    @note
 */
@@ -52,10 +52,10 @@ struct tone_dec_list_protect {
     struct audio_res_wait wait;
 };
 /*----------------------------------------------------------------------------*/
-/**@brief    toneé“¾è¡¨æ’­æ”¾ä¿æŠ¤ç”¨çš„ä¸´æ—¶è§£ç èµ„æºç­‰å¾…
-   @param    *wait: å¥æŸ„
-   @param    event: äº‹ä»¶
-   @return   0ï¼šæˆåŠŸ
+/**@brief    toneÁ´±í²¥·Å±£»¤ÓÃµÄÁÙÊ±½âÂë×ÊÔ´µÈ´ý
+   @param    *wait: ¾ä±ú
+   @param    event: ÊÂ¼þ
+   @return   0£º³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -65,8 +65,8 @@ static int tone_dec_list_protect_res_handler(struct audio_res_wait *wait, int ev
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    toneé“¾è¡¨æ’­æ”¾ä¿æŠ¤ç”¨çš„ä¸´æ—¶è§£ç é‡Šæ”¾
-   @param    *dec: è§£ç é“¾è¡¨å¥æŸ„
+/**@brief    toneÁ´±í²¥·Å±£»¤ÓÃµÄÁÙÊ±½âÂëÊÍ·Å
+   @param    *dec: ½âÂëÁ´±í¾ä±ú
    @return
    @note
 */
@@ -83,8 +83,8 @@ static void tone_dec_list_protect_release(struct tone_dec_list_handle *dec_list)
     dec_list->list_protect = NULL;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    toneé“¾è¡¨æ’­æ”¾ä¿æŠ¤ç”¨çš„ä¸´æ—¶è§£ç å¤„ç†
-   @param    *dec_list: è§£ç é“¾è¡¨å¥æŸ„
+/**@brief    toneÁ´±í²¥·Å±£»¤ÓÃµÄÁÙÊ±½âÂë´¦Àí
+   @param    *dec_list: ½âÂëÁ´±í¾ä±ú
    @return
    @note
 */
@@ -119,9 +119,9 @@ static void tone_dec_list_protect_deal(struct tone_dec_list_handle *dec_list)
 #endif
 
 /*----------------------------------------------------------------------------*/
-/**@brief    èŽ·å–æ–‡ä»¶ååŽç¼€
-   @param    *name: æ–‡ä»¶å
-   @return   åŽç¼€
+/**@brief    »ñÈ¡ÎÄ¼þÃûºó×º
+   @param    *name: ÎÄ¼þÃû
+   @return   ºó×º
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -143,11 +143,11 @@ static char *get_file_ext_name(char *name)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³listè§£ç äº‹ä»¶
-   @param    *dec_list: listå¥æŸ„
-   @param    end_flag: ç»“æŸç±»åž‹
-   @return   true: æˆåŠŸ
-   @return   false: æˆåŠŸ
+/**@brief    ÌáÊ¾Òôlist½âÂëÊÂ¼þ
+   @param    *dec_list: list¾ä±ú
+   @param    end_flag: ½áÊøÀàÐÍ
+   @return   true: ³É¹¦
+   @return   false: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -161,7 +161,7 @@ static int tone_dec_list_event_handler(struct tone_dec_list_handle *dec_list, u8
     argv[0] = (int)dec_list->evt_handler;
     argv[1] = 2;
     argv[2] = (int)dec_list->evt_priv;
-    argv[3] = (int)end_flag; //0æ­£å¸¸å…³é—­ï¼Œ1è¢«æ‰“æ–­å…³é—­
+    argv[3] = (int)end_flag; //0Õý³£¹Ø±Õ£¬1±»´ò¶Ï¹Ø±Õ
 
     int ret = os_taskq_post_type(dec_list->evt_owner, Q_CALLBACK, 4, argv);
     if (ret) {
@@ -171,9 +171,9 @@ static int tone_dec_list_event_handler(struct tone_dec_list_handle *dec_list, u8
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åˆ›å»ºæç¤ºéŸ³æ’­æ”¾å¥æŸ„
+/**@brief    ´´½¨ÌáÊ¾Òô²¥·Å¾ä±ú
    @param
-   @return   æç¤ºéŸ³å¥æŸ„
+   @return   ÌáÊ¾Òô¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -189,9 +189,9 @@ struct tone_dec_handle *tone_dec_create(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®sineæ•°ç»„èŽ·å–å›žè°ƒ
-   @param    *dec: æç¤ºéŸ³å¥æŸ„
-   @param    *get_sine: sineæ•°ç»„èŽ·å–
+/**@brief    ÉèÖÃsineÊý×é»ñÈ¡»Øµ÷
+   @param    *dec: ÌáÊ¾Òô¾ä±ú
+   @param    *get_sine: sineÊý×é»ñÈ¡
    @return
    @note
 */
@@ -204,8 +204,8 @@ void tone_dec_set_sin_get_hdl(struct tone_dec_handle *dec, struct sin_param * (*
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³è§£ç å™¨é‡Šæ”¾
-   @param    *dec: æç¤ºéŸ³å¥æŸ„
+/**@brief    ÌáÊ¾Òô½âÂëÆ÷ÊÍ·Å
+   @param    *dec: ÌáÊ¾Òô¾ä±ú
    @return
    @note
 */
@@ -225,10 +225,10 @@ static void tone_dec_hdl_release(struct tone_dec_handle *dec)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³listé‡Šæ”¾
-   @param    *dec_list: listå¥æŸ„
-   @param    push_event: æ™®é€šæç¤ºéŸ³æ˜¯å¦æŽ¨é€æ¶ˆæ¯
-   @param    end_flag: ç»“æŸç±»åž‹
+/**@brief    ÌáÊ¾ÒôlistÊÍ·Å
+   @param    *dec_list: list¾ä±ú
+   @param    push_event: ÆÕÍ¨ÌáÊ¾ÒôÊÇ·ñÍÆËÍÏûÏ¢
+   @param    end_flag: ½áÊøÀàÐÍ
    @return
    @note
 */
@@ -252,8 +252,8 @@ static void tone_dec_list_release(struct tone_dec_list_handle *dec_list, u8 push
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³è§£ç ç»“æŸå¤„ç†
-   @param    *dec: æç¤ºéŸ³å¥æŸ„
+/**@brief    ÌáÊ¾Òô½âÂë½áÊø´¦Àí
+   @param    *dec: ÌáÊ¾Òô¾ä±ú
    @return
    @note
 */
@@ -261,17 +261,17 @@ static void tone_dec_list_release(struct tone_dec_list_handle *dec_list, u8 push
 static void tone_dec_end_ctrl(struct tone_dec_handle *dec)
 {
     os_mutex_pend(&dec->mutex, 0);
-    // æ£€æŸ¥å¾ªçŽ¯æ’­æ”¾
+    // ¼ì²éÑ­»·²¥·Å
     int ret = tone_dec_list_play(dec, 1);
     if (ret == true) {
         os_mutex_post(&dec->mutex);
         return ;
     }
-    // å‘é€æ’­æ”¾å®Œæˆ
+    // ·¢ËÍ²¥·ÅÍê³É
     tone_dec_list_release(dec->cur_list, 1, TONE_DEC_STOP_NOR);
     dec->cur_list = NULL;
 
-    // æ£€æŸ¥é“¾è¡¨æ’­æ”¾
+    // ¼ì²éÁ´±í²¥·Å
     struct list_head *list_entry = dec->head.next;
     if (list_entry && (list_entry != &dec->head)) {
         struct tone_dec_list_handle *dec_list = container_of(list_entry, struct tone_dec_list_handle, list_entry);
@@ -282,11 +282,11 @@ static void tone_dec_end_ctrl(struct tone_dec_handle *dec)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    fileæç¤ºéŸ³è§£ç å›žè°ƒ
-   @param    *priv: ç§æœ‰å¥æŸ„
-   @param    event: äº‹ä»¶
-   @param    *param: äº‹ä»¶å‚æ•°
-   @return   0: æˆåŠŸ
+/**@brief    fileÌáÊ¾Òô½âÂë»Øµ÷
+   @param    *priv: Ë½ÓÐ¾ä±ú
+   @param    event: ÊÂ¼þ
+   @param    *param: ÊÂ¼þ²ÎÊý
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -312,7 +312,7 @@ static int tone_dec_file_app_evt_cb(void *priv, enum audio_dec_app_event event, 
     case AUDIO_DEC_APP_EVENT_START_INIT_OK:
         log_i("tone_file start init ok\n");
         if (dec->cur_list->stream_handler) {
-            // åˆ é™¤åŽŸæœ‰çš„æ•°æ®æµï¼Œéœ€è¦åœ¨å›žè°ƒä¸­é‡æ–°è®¾ç½®
+            // É¾³ýÔ­ÓÐµÄÊý¾ÝÁ÷£¬ÐèÒªÔÚ»Øµ÷ÖÐÖØÐÂÉèÖÃ
             if (file_dec->dec->stream) {
                 audio_stream_del_entry(&file_dec->dec->mix_ch.entry);
                 audio_stream_del_entry(&file_dec->dec->decoder.entry);
@@ -353,7 +353,7 @@ static int tone_dec_file_app_evt_cb(void *priv, enum audio_dec_app_event event, 
             .vol_start = get_max_sys_vol(),
             .vol_max =  get_max_sys_vol(),
             .ch_total = 2,
-            .fade_en = 0,   //æç¤ºéŸ³ä¸èƒ½æ·¡å…¥æ·¡å‡º
+            .fade_en = 0,   //ÌáÊ¾Òô²»ÄÜµ­Èëµ­³ö
             .fade_points_step = 5,
             .fade_gain_step = 10,
             .vol_list = NULL,
@@ -378,11 +378,11 @@ static int tone_dec_file_app_evt_cb(void *priv, enum audio_dec_app_event event, 
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    sineæç¤ºéŸ³è§£ç å›žè°ƒ
-   @param    *priv: ç§æœ‰å¥æŸ„
-   @param    event: äº‹ä»¶
-   @param    *param: äº‹ä»¶å‚æ•°
-   @return   0: æˆåŠŸ
+/**@brief    sineÌáÊ¾Òô½âÂë»Øµ÷
+   @param    *priv: Ë½ÓÐ¾ä±ú
+   @param    event: ÊÂ¼þ
+   @param    *param: ÊÂ¼þ²ÎÊý
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -407,7 +407,7 @@ static int tone_dec_sine_app_evt_cb(void *priv, enum audio_dec_app_event event, 
     case AUDIO_DEC_APP_EVENT_START_INIT_OK:
         log_i("tone_sine start init ok\n");
         if (dec->cur_list->stream_handler) {
-            // åˆ é™¤åŽŸæœ‰çš„æ•°æ®æµï¼Œéœ€è¦åœ¨å›žè°ƒä¸­é‡æ–°è®¾ç½®
+            // É¾³ýÔ­ÓÐµÄÊý¾ÝÁ÷£¬ÐèÒªÔÚ»Øµ÷ÖÐÖØÐÂÉèÖÃ
             if (sine_dec->dec->stream) {
                 audio_stream_del_entry(&sine_dec->dec->mix_ch.entry);
                 audio_stream_del_entry(&sine_dec->dec->decoder.entry);
@@ -449,7 +449,7 @@ static int tone_dec_sine_app_evt_cb(void *priv, enum audio_dec_app_event event, 
             .vol_start = get_max_sys_vol(),
             .vol_max =  get_max_sys_vol(),
             .ch_total = 2,
-            .fade_en = 0,   //æç¤ºéŸ³ä¸èƒ½æ·¡å…¥æ·¡å‡º
+            .fade_en = 0,   //ÌáÊ¾Òô²»ÄÜµ­Èëµ­³ö
             .fade_points_step = 5,
             .fade_gain_step = 10,
             .vol_list = NULL,
@@ -487,11 +487,11 @@ static void _tone_dec_app_comm_deal(struct audio_dec_app_hdl *dec, struct tone_d
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³listæ’­æ”¾
-   @param    *dec: å¥æŸ„
-   @param    next: æ’­æ”¾ä¸‹ä¸€ä¸ª
-   @return   true: æˆåŠŸ
-   @return   false: æˆåŠŸ
+/**@brief    ÌáÊ¾Òôlist²¥·Å
+   @param    *dec: ¾ä±ú
+   @param    next: ²¥·ÅÏÂÒ»¸ö
+   @return   true: ³É¹¦
+   @return   false: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -600,15 +600,15 @@ static int tone_dec_list_play(struct tone_dec_handle *dec, u8 next)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åˆ›å»ºæç¤ºéŸ³æ’­æ”¾listå¥æŸ„
-   @param    *dec: æç¤ºéŸ³å¥æŸ„
-   @param    **file_list: æ–‡ä»¶å
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @param    *evt_handler: äº‹ä»¶å›žè°ƒæŽ¥å£
-   @param    *evt_priv: äº‹ä»¶å›žè°ƒç§æœ‰å¥æŸ„
-   @param    *stream_handler: toneæ•°æ®æµè®¾ç½®å›žè°ƒ
-   @param    *stream_priv: toneæ•°æ®æµè®¾ç½®å›žè°ƒç§æœ‰å¥æŸ„
-   @return   listå¥æŸ„
+/**@brief    ´´½¨ÌáÊ¾Òô²¥·Ålist¾ä±ú
+   @param    *dec: ÌáÊ¾Òô¾ä±ú
+   @param    **file_list: ÎÄ¼þÃû
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @param    *evt_handler: ÊÂ¼þ»Øµ÷½Ó¿Ú
+   @param    *evt_priv: ÊÂ¼þ»Øµ÷Ë½ÓÐ¾ä±ú
+   @param    *stream_handler: toneÊý¾ÝÁ÷ÉèÖÃ»Øµ÷
+   @param    *stream_priv: toneÊý¾ÝÁ÷ÉèÖÃ»Øµ÷Ë½ÓÐ¾ä±ú
+   @return   list¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -648,12 +648,12 @@ struct tone_dec_list_handle *tone_dec_list_create(struct tone_dec_handle *dec,
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³listå¼€å§‹æ’­æ”¾
-   @param    *dec: æç¤ºéŸ³å¥æŸ„
-   @param    *dec_list: listå¥æŸ„
-   @return   true: æˆåŠŸ
-   @return   false: æˆåŠŸ
-   @note     å½“å‰æ²¡æœ‰æ’­æ”¾ï¼Œé©¬ä¸Šå¼€å§‹æ’­æ”¾ã€‚å½“å‰æœ‰æ’­æ”¾ï¼ŒæŒ‚è½½åˆ°é“¾è¡¨åŽé¢ç­‰å¾…æ’­æ”¾
+/**@brief    ÌáÊ¾Òôlist¿ªÊ¼²¥·Å
+   @param    *dec: ÌáÊ¾Òô¾ä±ú
+   @param    *dec_list: list¾ä±ú
+   @return   true: ³É¹¦
+   @return   false: ³É¹¦
+   @note     µ±Ç°Ã»ÓÐ²¥·Å£¬ÂíÉÏ¿ªÊ¼²¥·Å¡£µ±Ç°ÓÐ²¥·Å£¬¹ÒÔØµ½Á´±íºóÃæµÈ´ý²¥·Å
 */
 /*----------------------------------------------------------------------------*/
 int tone_dec_list_add_play(struct tone_dec_handle *dec, struct tone_dec_list_handle *dec_list)
@@ -668,11 +668,11 @@ int tone_dec_list_add_play(struct tone_dec_handle *dec, struct tone_dec_list_han
     list_add_tail(&dec_list->list_entry, &dec->head);
 
     if (dec->cur_list == NULL) {
-        // å½“å‰æ²¡æœ‰æ’­æ”¾ï¼Œå¼€å§‹æ’­æ”¾
+        // µ±Ç°Ã»ÓÐ²¥·Å£¬¿ªÊ¼²¥·Å
         dec->cur_list = dec_list;
         ret = tone_dec_list_play(dec, 0);
     } else {
-        // å½“å‰æœ‰æ’­æ”¾ï¼Œç­‰æ’­æ”¾å®Œè‡ªåŠ¨æ’­æ”¾
+        // µ±Ç°ÓÐ²¥·Å£¬µÈ²¥·ÅÍê×Ô¶¯²¥·Å
         ret = true;
     }
 
@@ -683,10 +683,10 @@ int tone_dec_list_add_play(struct tone_dec_handle *dec, struct tone_dec_list_han
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³æ’­æ”¾åœæ­¢
-   @param    **ppdec: æç¤ºéŸ³å¥æŸ„
-   @param    push_event: æ™®é€šæç¤ºéŸ³æ˜¯å¦æŽ¨é€æ¶ˆæ¯
-   @param    end_flag: ç»“æŸç±»åž‹
+/**@brief    ÌáÊ¾Òô²¥·ÅÍ£Ö¹
+   @param    **ppdec: ÌáÊ¾Òô¾ä±ú
+   @param    push_event: ÆÕÍ¨ÌáÊ¾ÒôÊÇ·ñÍÆËÍÏûÏ¢
+   @param    end_flag: ½áÊøÀàÐÍ
    @return
    @note
 */
@@ -718,12 +718,12 @@ void tone_dec_stop(struct tone_dec_handle **ppdec,
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‡å®šæç¤ºéŸ³æ’­æ”¾åœæ­¢
-   @param    **ppdec: æç¤ºéŸ³å¥æŸ„
-   @param    push_event: æ™®é€šæç¤ºéŸ³æ˜¯å¦æŽ¨é€æ¶ˆæ¯
-   @param    end_flag: ç»“æŸç±»åž‹
+/**@brief    Ö¸¶¨ÌáÊ¾Òô²¥·ÅÍ£Ö¹
+   @param    **ppdec: ÌáÊ¾Òô¾ä±ú
+   @param    push_event: ÆÕÍ¨ÌáÊ¾ÒôÊÇ·ñÍÆËÍÏûÏ¢
+   @param    end_flag: ½áÊøÀàÐÍ
    @return
-   @note     å¦‚æžœè¯¥æç¤ºéŸ³æ­£åœ¨æ’­ï¼Œåœæ­¢æ’­æ”¾å¹¶ä¸”æ’­æ”¾ä¸‹ä¸€ä¸ªã€‚å¦‚æžœä¸åœ¨æ’­æ”¾ï¼Œåªä»Žé“¾è¡¨ä¸­åˆ é™¤
+   @note     Èç¹û¸ÃÌáÊ¾ÒôÕýÔÚ²¥£¬Í£Ö¹²¥·Å²¢ÇÒ²¥·ÅÏÂÒ»¸ö¡£Èç¹û²»ÔÚ²¥·Å£¬Ö»´ÓÁ´±íÖÐÉ¾³ý
 */
 /*----------------------------------------------------------------------------*/
 void tone_dec_stop_spec_file(struct tone_dec_handle **ppdec,
@@ -749,20 +749,20 @@ void tone_dec_stop_spec_file(struct tone_dec_handle **ppdec,
             } else if (strcmp(dec->cur_list->file_list[0], file_name)) {
                 break;
             }
-            // å½“å‰æ­£åœ¨æ’­æ”¾ï¼Œåœæ­¢æ’­æ”¾
+            // µ±Ç°ÕýÔÚ²¥·Å£¬Í£Ö¹²¥·Å
             tone_dec_hdl_release(dec);
             tone_dec_list_release(dec->cur_list, push_event, end_flag);
             dec->cur_list = NULL;
-            // æ£€æŸ¥é“¾è¡¨æ’­æ”¾
+            // ¼ì²éÁ´±í²¥·Å
             struct list_head *list_entry = dec->head.next;
             if (list_entry && (list_entry != &dec->head)) {
-                // å¦‚æžœè¿˜æœ‰ï¼Œåˆ™ç»§ç»­æ’­æ”¾
+                // Èç¹û»¹ÓÐ£¬Ôò¼ÌÐø²¥·Å
                 struct tone_dec_list_handle *dec_list = container_of(list_entry, struct tone_dec_list_handle, list_entry);
                 dec->cur_list = dec_list;
                 tone_dec_list_play(dec, 0);
                 os_mutex_post(&dec->mutex);
             } else {
-                // å¦‚æžœæ²¡æœ‰ï¼Œé‡Šæ”¾
+                // Èç¹ûÃ»ÓÐ£¬ÊÍ·Å
                 os_mutex_post(&dec->mutex);
                 free(dec);
                 *ppdec = NULL;
@@ -771,7 +771,7 @@ void tone_dec_stop_spec_file(struct tone_dec_handle **ppdec,
         } while (0);
     }
 
-    // ä»Žé“¾è¡¨ä¸­åˆ é™¤ï¼Œä¸åœæ­¢è§£ç 
+    // ´ÓÁ´±íÖÐÉ¾³ý£¬²»Í£Ö¹½âÂë
     list_for_each_entry_safe(p, n, &dec->head, list_entry) {
         do {
             if (IS_DEFAULT_SINE(file_name)) {

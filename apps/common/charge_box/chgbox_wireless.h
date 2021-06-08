@@ -3,7 +3,7 @@
 
 #include "device/wireless_charge.h"
 
-//apiå‡½æ•°å£°æ˜Ž
+//apiº¯ÊýÉùÃ÷
 u16 get_wireless_power(void);
 void wireless_api_close(void);
 void wireless_api_open(void);

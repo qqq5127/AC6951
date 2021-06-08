@@ -44,22 +44,22 @@ AUDIO_CONFIG audio_cfg = {
 
 //======================================================================================//
 //                                 		BTIF配置项表                               		//
-//	参数1: 配置项名字                                			   						//
+//	参数1: 配置项名�?                               			   						//
 //	参数2: 配置项需要多少个byte存储														//
-//	说明: 配置项ID注册到该表后该配置项将读写于BTIF区域, 其它没有注册到该表       		//
+//	说明: 配置项ID注册到该表后该配置项将读写于BTIF区域, 其它没有注册到该�?      		//
 //		  的配置项则默认读写于VM区域.													//
 //======================================================================================//
 const struct btif_item btif_table[] = {
 // 	 	item id 		   	   len   	//
     {CFG_BT_MAC_ADDR, 			6 },
-    {CFG_BT_FRE_OFFSET,   		6 },   //测试盒矫正频偏值
+    {CFG_BT_FRE_OFFSET,   		6 },   //测试盒矫正频偏�?
     //{CFG_DAC_DTB,   			2 },
     //{CFG_MC_BIAS,   			1 },
     {0, 						0 },   //reserved cfg
 };
 
-//============================= VM 区域空间最大值 ======================================//
-const int vm_max_size_config = VM_MAX_SIZE_CONFIG; //该宏在app_cfg中配置
+//============================= VM 区域空间最大�?======================================//
+const int vm_max_size_config = VM_MAX_SIZE_CONFIG; //该宏在app_cfg中配�?
 //======================================================================================//
 
 struct lp_ws_t lp_winsize = {
@@ -179,7 +179,7 @@ u8 get_tone_vol(void)
 
 #define USE_CONFIG_BIN_FILE                  0
 
-#define USE_CONFIG_STATUS_SETTING            1                          //状态设置，包括灯状态和提示音
+#define USE_CONFIG_STATUS_SETTING            0                          //状态设置，包括灯状态和提示�?
 #define USE_CONFIG_AUDIO_SETTING             USE_CONFIG_BIN_FILE        //音频设置
 #define USE_CONFIG_CHARGE_SETTING            USE_CONFIG_BIN_FILE        //充电设置
 #define USE_CONFIG_KEY_SETTING               USE_CONFIG_BIN_FILE        //按键消息设置
@@ -267,7 +267,7 @@ void cfg_file_parse(u8 idx)
         log_info_hexdump(&mic_type, sizeof(MIC_TYPE_CONFIG));
         adc_data.mic_capless = mic_type.type;
 #if ((TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR) || (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_DUAL_LR_DIFF))
-        if (adc_data.mic_capless == 1) { //四声道与双声道差分 使用不省电容接法mic_capless = 0
+        if (adc_data.mic_capless == 1) { //四声道与双声道差�?使用不省电容接法mic_capless = 0
             log_error("adc_data.mic_capless err, CHECK !!!\n");
             ASSERT(0);
         }

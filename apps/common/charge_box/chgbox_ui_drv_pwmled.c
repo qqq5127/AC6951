@@ -6,7 +6,7 @@
 #include "chgbox_ui.h"
 #include "app_config.h"
 
-//ä½¿ç”¨PEMLEDæ¨ç¯,æ”¯æŒä½åŠŸè€—
+//Ê¹ÓÃPEMLEDÍÆµÆ,Ö§³ÖµÍ¹¦ºÄ
 
 #if (TCFG_CHARGE_BOX_ENABLE)
 
@@ -21,65 +21,65 @@
 
 #if (TCFG_CHARGE_BOX_UI_ENABLE && TCFG_CHGBOX_UI_PWMLED)
 
-#define CFG_LED_LIGHT						200  	//10 ~ 500, å€¼è¶Šå¤§, äº®åº¦è¶Šé«˜
+#define CFG_LED_LIGHT						200  	//10 ~ 500, ÖµÔ½´ó, ÁÁ¶ÈÔ½¸ß
 
-#define CFG_SINGLE_FAST_FLASH_FREQ			500		//LEDå•ç‹¬å¿«é—ªé€Ÿåº¦, msé—ªçƒä¸€æ¬¡(100 ~ 1000)
-#define CFG_SINGLE_FAST_LIGHT_TIME 			150  	//å•ç¯å¿«é—ªç¯äº®æŒç»­æ—¶é—´, å•ä½ms
+#define CFG_SINGLE_FAST_FLASH_FREQ			500		//LEDµ¥¶À¿ìÉÁËÙ¶È, msÉÁË¸Ò»´Î(100 ~ 1000)
+#define CFG_SINGLE_FAST_LIGHT_TIME 			150  	//µ¥µÆ¿ìÉÁµÆÁÁ³ÖĞøÊ±¼ä, µ¥Î»ms
 
-#define CFG_SINGLE_SLOW_FLASH_FREQ			1000	//LEDå•ç‹¬æ…¢é—ªé€Ÿåº¦, msé—ªçƒä¸€æ¬¡(1000 ~ 20000)
-#define CFG_SINGLE_SLOW_LIGHT_TIME 			300  	//å•ç¯æ…¢é—ªç¯äº®æŒç»­æ—¶é—´, å•ä½ms
-/***************** LED0/LED1å•ç‹¬æ¯éš”5Så•é—ªæ—¶, å¯ä¾›è°ƒèŠ‚å‚æ•° ********************/
-#define CFG_LED_5S_FLASH_LIGHT_TIME			100		//LED 5S é—ªçƒæ—¶ç¯äº®æŒç»­æ—¶é—´, å•ä½ms
-/***************** å‘¼å¸æ¨¡å¼é…ç½®å‚æ•°, å¯ä¾›è°ƒèŠ‚å‚æ•° ********************/
-#define CFG_LED_SLOW_BREATH_TIME			1000	//å‘¼å¸æ—¶é—´ç­->äº®->ç­, å•ä½ms
-#define CFG_LED_FAST_BREATH_TIME			500		//å‘¼å¸æ—¶é—´ç­->äº®->ç­, å•ä½ms
-#define CFG_LED_BREATH_BRIGHT 				300		//å‘¼å¸äº®åº¦, èŒƒå›´: 0 ~ 500
-#define CFG_LED_BREATH_BLINK_TIME 			100		//ç­ç¯å»¶æ—¶, å•ä½ms
+#define CFG_SINGLE_SLOW_FLASH_FREQ			1000	//LEDµ¥¶ÀÂıÉÁËÙ¶È, msÉÁË¸Ò»´Î(1000 ~ 20000)
+#define CFG_SINGLE_SLOW_LIGHT_TIME 			300  	//µ¥µÆÂıÉÁµÆÁÁ³ÖĞøÊ±¼ä, µ¥Î»ms
+/***************** LED0/LED1µ¥¶ÀÃ¿¸ô5Sµ¥ÉÁÊ±, ¿É¹©µ÷½Ú²ÎÊı ********************/
+#define CFG_LED_5S_FLASH_LIGHT_TIME			100		//LED 5S ÉÁË¸Ê±µÆÁÁ³ÖĞøÊ±¼ä, µ¥Î»ms
+/***************** ºôÎüÄ£Ê½ÅäÖÃ²ÎÊı, ¿É¹©µ÷½Ú²ÎÊı ********************/
+#define CFG_LED_SLOW_BREATH_TIME			1000	//ºôÎüÊ±¼äÃğ->ÁÁ->Ãğ, µ¥Î»ms
+#define CFG_LED_FAST_BREATH_TIME			500		//ºôÎüÊ±¼äÃğ->ÁÁ->Ãğ, µ¥Î»ms
+#define CFG_LED_BREATH_BRIGHT 				300		//ºôÎüÁÁ¶È, ·¶Î§: 0 ~ 500
+#define CFG_LED_BREATH_BLINK_TIME 			100		//ÃğµÆÑÓÊ±, µ¥Î»ms
 
 const pwm_led_on_para pwm_led_on_para_table[] = {
     /*
-    u16 led0_bright;//led0_bright, LED0äº®åº¦: 0 ~ 500
-    u16 led1_bright;//led1_bright, LED1äº®åº¦: 0 ~ 500
+    u16 led0_bright;//led0_bright, LED0ÁÁ¶È: 0 ~ 500
+    u16 led1_bright;//led1_bright, LED1ÁÁ¶È: 0 ~ 500
     */
-    {CFG_LED_LIGHT, CFG_LED_LIGHT},//PWM_LED_ON	äº®
+    {CFG_LED_LIGHT, CFG_LED_LIGHT},//PWM_LED_ON	ÁÁ
 };
 
 const pwm_led_one_flash_para pwm_led_one_flash_para_table[] = {
     /*
-    u16 led0_bright;//led0_bright: led0äº®åº¦(0 ~ 500),
-    u16 led1_bright;//led1_bright: led1äº®åº¦(0 ~ 500),
-    u32 period;//period: é—ªç¯å‘¨æœŸ(ms), å¤šå°‘msé—ªä¸€ä¸‹(100 ~ 20000), 100ms - 20S,
-    u32 start_light_time;//start_light_time: åœ¨å‘¨æœŸä¸­å¼€å§‹äº®ç¯çš„æ—¶é—´, -1: å‘¨æœŸæœ€åäº®ç¯, é»˜è®¤å¡«-1å³å¯,
-    u32 light_time;//light_time: ç¯äº®æŒç»­æ—¶é—´,
+    u16 led0_bright;//led0_bright: led0ÁÁ¶È(0 ~ 500),
+    u16 led1_bright;//led1_bright: led1ÁÁ¶È(0 ~ 500),
+    u32 period;//period: ÉÁµÆÖÜÆÚ(ms), ¶àÉÙmsÉÁÒ»ÏÂ(100 ~ 20000), 100ms - 20S,
+    u32 start_light_time;//start_light_time: ÔÚÖÜÆÚÖĞ¿ªÊ¼ÁÁµÆµÄÊ±¼ä, -1: ÖÜÆÚ×îºóÁÁµÆ, Ä¬ÈÏÌî-1¼´¿É,
+    u32 light_time;//light_time: µÆÁÁ³ÖĞøÊ±¼ä,
     */
-    {CFG_LED_LIGHT, CFG_LED_LIGHT, CFG_SINGLE_SLOW_FLASH_FREQ, -1, CFG_SINGLE_SLOW_LIGHT_TIME},//PWM_LED_SLOW_FLASH   æ…¢é—ª
-    {CFG_LED_LIGHT, CFG_LED_LIGHT, CFG_SINGLE_FAST_FLASH_FREQ, -1, CFG_SINGLE_FAST_LIGHT_TIME},//PWM_LED_FAST_FLASH   å¿«é—ª
-    {CFG_LED_LIGHT, CFG_LED_LIGHT, 5000, 10, CFG_LED_5S_FLASH_LIGHT_TIME},//PWM_LED_ONE_FLASH_5S  5ç§’è¿é—ª1ä¸‹
+    {CFG_LED_LIGHT, CFG_LED_LIGHT, CFG_SINGLE_SLOW_FLASH_FREQ, -1, CFG_SINGLE_SLOW_LIGHT_TIME},//PWM_LED_SLOW_FLASH   ÂıÉÁ
+    {CFG_LED_LIGHT, CFG_LED_LIGHT, CFG_SINGLE_FAST_FLASH_FREQ, -1, CFG_SINGLE_FAST_LIGHT_TIME},//PWM_LED_FAST_FLASH   ¿ìÉÁ
+    {CFG_LED_LIGHT, CFG_LED_LIGHT, 5000, 10, CFG_LED_5S_FLASH_LIGHT_TIME},//PWM_LED_ONE_FLASH_5S  5ÃëÁ¬ÉÁ1ÏÂ
 };
 
 const pwm_led_double_flash_para pwm_led_double_flash_para_table[] = {
     /*
-    u16 led0_bright;//led0_bright: led0äº®åº¦,
-    u16 led1_bright;//led1_bright: led1äº®åº¦,
-    u32 period;//period: é—ªç¯å‘¨æœŸ(ms), å¤šå°‘msé—ªä¸€ä¸‹
-    u32 first_light_time;//first_light_time: ç¬¬ä¸€æ¬¡äº®ç¯æŒç»­æ—¶é—´,
-    u32 gap_time;//gap_time: ä¸¤æ¬¡äº®ç¯æ—¶é—´é—´éš”,
-    u32 second_light_time;//second_light_time: ç¬¬äºŒæ¬¡äº®ç¯æŒç»­æ—¶é—´,
+    u16 led0_bright;//led0_bright: led0ÁÁ¶È,
+    u16 led1_bright;//led1_bright: led1ÁÁ¶È,
+    u32 period;//period: ÉÁµÆÖÜÆÚ(ms), ¶àÉÙmsÉÁÒ»ÏÂ
+    u32 first_light_time;//first_light_time: µÚÒ»´ÎÁÁµÆ³ÖĞøÊ±¼ä,
+    u32 gap_time;//gap_time: Á½´ÎÁÁµÆÊ±¼ä¼ä¸ô,
+    u32 second_light_time;//second_light_time: µÚ¶ş´ÎÁÁµÆ³ÖĞøÊ±¼ä,
     */
-    {CFG_LED_LIGHT, CFG_LED_LIGHT, 5000, 100, 200, 100}, //PWM_LED_DOUBLE_FLASH_5S	5ç§’è¿é—ªä¸¤ä¸‹
+    {CFG_LED_LIGHT, CFG_LED_LIGHT, 5000, 100, 200, 100}, //PWM_LED_DOUBLE_FLASH_5S	5ÃëÁ¬ÉÁÁ½ÏÂ
 };
 
 const pwm_led_breathe_para pwm_led_breathe_para_table[] = {
     /*
-    u16 breathe_time;//breathe_time: å‘¼å¸å‘¨æœŸ(ç­->æœ€äº®->ç­), è®¾ç½®èŒƒå›´: 500msä»¥ä¸Š;
-    u16 led0_bright;//led0_bright: led0å‘¼å¸åˆ°æœ€äº®çš„äº®åº¦(0 ~ 500);
-    u16 led1_bright;//led1_bright: led1å‘¼å¸åˆ°æœ€äº®çš„äº®åº¦(0 ~ 500);
-    u32 led0_light_delay_time;//led0_light_delay_time: led0æœ€é«˜äº®åº¦å»¶æ—¶(0 ~ 100ms);
-    u32 led1_light_delay_time;//led1_light_delay_time: led1æœ€é«˜äº®åº¦å»¶æ—¶(0 ~ 100ms);
-    u32 led_blink_delay_time;//led_blink_delay_time: led0å’Œled1ç­ç¯å»¶æ—¶(0 ~ 20000ms), 0 ~ 20S;
+    u16 breathe_time;//breathe_time: ºôÎüÖÜÆÚ(Ãğ->×îÁÁ->Ãğ), ÉèÖÃ·¶Î§: 500msÒÔÉÏ;
+    u16 led0_bright;//led0_bright: led0ºôÎüµ½×îÁÁµÄÁÁ¶È(0 ~ 500);
+    u16 led1_bright;//led1_bright: led1ºôÎüµ½×îÁÁµÄÁÁ¶È(0 ~ 500);
+    u32 led0_light_delay_time;//led0_light_delay_time: led0×î¸ßÁÁ¶ÈÑÓÊ±(0 ~ 100ms);
+    u32 led1_light_delay_time;//led1_light_delay_time: led1×î¸ßÁÁ¶ÈÑÓÊ±(0 ~ 100ms);
+    u32 led_blink_delay_time;//led_blink_delay_time: led0ºÍled1ÃğµÆÑÓÊ±(0 ~ 20000ms), 0 ~ 20S;
     */
-    {CFG_LED_SLOW_BREATH_TIME, CFG_LED_BREATH_BRIGHT, CFG_LED_BREATH_BRIGHT, 0, 0, CFG_LED_BREATH_BLINK_TIME},//PWM_LED_BREATHE  æ…¢å‘¼å¸ç¯æ¨¡å¼
-    {CFG_LED_FAST_BREATH_TIME, CFG_LED_BREATH_BRIGHT, CFG_LED_BREATH_BRIGHT, 0, 0, CFG_LED_BREATH_BLINK_TIME},//PWM_LED_BREATHE  å¿«å‘¼å¸ç¯æ¨¡å¼
+    {CFG_LED_SLOW_BREATH_TIME, CFG_LED_BREATH_BRIGHT, CFG_LED_BREATH_BRIGHT, 0, 0, CFG_LED_BREATH_BLINK_TIME},//PWM_LED_BREATHE  ÂıºôÎüµÆÄ£Ê½
+    {CFG_LED_FAST_BREATH_TIME, CFG_LED_BREATH_BRIGHT, CFG_LED_BREATH_BRIGHT, 0, 0, CFG_LED_BREATH_BLINK_TIME},//PWM_LED_BREATHE  ¿ìºôÎüµÆÄ£Ê½
 };
 
 static void chgbox_led_set_enable(u8 gpio)
@@ -105,15 +105,15 @@ static void chgbox_ui_mode_set(u8 display, u8 sub)
         return;
     }
     switch (display) {
-//ç¯å¸¸ç­
+//µÆ³£Ãğ
     case PWM_LED0_OFF:
         break;
-//ç¯å¸¸äº®
+//µÆ³£ÁÁ
     case PWM_LED0_ON:
         para.on = pwm_led_on_para_table[0];
         break;
 
-//å•ç¯å•é—ª
+//µ¥µÆµ¥ÉÁ
     case PWM_LED0_SLOW_FLASH:
         para.one_flash = pwm_led_one_flash_para_table[0];
         break;
@@ -124,12 +124,12 @@ static void chgbox_ui_mode_set(u8 display, u8 sub)
         para.one_flash = pwm_led_one_flash_para_table[2];
         break;
 
-//å•ç¯åŒé—ª
+//µ¥µÆË«ÉÁ
     case PWM_LED0_DOUBLE_FLASH_5S:
         para.double_flash = pwm_led_double_flash_para_table[0];
         break;
 
-//å‘¼å¸æ¨¡å¼
+//ºôÎüÄ£Ê½
     case PWM_LED0_BREATHE:
         para.breathe = pwm_led_breathe_para_table[sub];
         break;
@@ -138,13 +138,13 @@ static void chgbox_ui_mode_set(u8 display, u8 sub)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®ç¯ä¸ºå¸¸äº®ã€å¸¸æš—æ¨¡å¼
-   @param    led_type:  ç¯åºå·
-             on_off:    1-->å¸¸äº® 0-->å¸¸æš—
-             sp_flicker:æ˜¯å¦é—ªçƒæ ‡å¿— 1-->åœ¨äº®--äº® æš—--æš—è¿‡ç¨‹ä¸­å–åä¸€ä¸‹
-             fade:      1-->å¿«é€Ÿå“åº” 0-->æ¸å˜å“åº”
-   @return   æ— 
-   @note     æŠŠç¯è®¾ç½®ä¸º å¸¸äº®/å¸¸æš— æ¨¡å¼(é»˜è®¤åŒæ—¶è®¾ç½®å…¶ä»–ç¯ä¸ºå¸¸æš—)
+/**@brief    ÉèÖÃµÆÎª³£ÁÁ¡¢³£°µÄ£Ê½
+   @param    led_type:  µÆĞòºÅ
+             on_off:    1-->³£ÁÁ 0-->³£°µ
+             sp_flicker:ÊÇ·ñÉÁË¸±êÖ¾ 1-->ÔÚÁÁ--ÁÁ °µ--°µ¹ı³ÌÖĞÈ¡·´Ò»ÏÂ
+             fade:      1-->¿ìËÙÏìÓ¦ 0-->½¥±äÏìÓ¦
+   @return   ÎŞ
+   @note     °ÑµÆÉèÖÃÎª ³£ÁÁ/³£°µ Ä£Ê½(Ä¬ÈÏÍ¬Ê±ÉèÖÃÆäËûµÆÎª³£°µ)
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_set_led_stu(u8 led_type, u8 on_off, u8 sp_flicker, u8 fade)
@@ -171,13 +171,13 @@ void chgbox_set_led_stu(u8 led_type, u8 on_off, u8 sp_flicker, u8 fade)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®ç¯ä¸ºå‘¼å¸æ¨¡å¼
-   @param    led_type:  ç¯åºå·
-             speed_mode:é—ªçƒå‚æ•°é€‰æ‹©ï¼Œè¿™é‡Œé»˜è®¤ä¸ºå¿«ã€æ…¢ä¸¤ç§
-             is_bre:æ˜¯å¦ä¸ºå‘¼å¸æ¨¡å¼
-             time:å‘¼å¸/é—ªçƒå¤šå°‘æ¬¡
-   @return   æ— 
-   @note     æŠŠç¯è®¾ç½®ä¸ºå‘¼å¸æ¨¡å¼(é»˜è®¤åŒæ—¶å…¶ä»–ç¯ä¸ºå¸¸æš—)
+/**@brief    ÉèÖÃµÆÎªºôÎüÄ£Ê½
+   @param    led_type:  µÆĞòºÅ
+             speed_mode:ÉÁË¸²ÎÊıÑ¡Ôñ£¬ÕâÀïÄ¬ÈÏÎª¿ì¡¢ÂıÁ½ÖÖ
+             is_bre:ÊÇ·ñÎªºôÎüÄ£Ê½
+             time:ºôÎü/ÉÁË¸¶àÉÙ´Î
+   @return   ÎŞ
+   @note     °ÑµÆÉèÖÃÎªºôÎüÄ£Ê½(Ä¬ÈÏÍ¬Ê±ÆäËûµÆÎª³£°µ)
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_set_led_bre(u8 led_type, u8 speed_mode, u8 is_bre, u16 time)
@@ -212,10 +212,10 @@ void chgbox_set_led_bre(u8 led_type, u8 speed_mode, u8 is_bre, u16 time)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å‘¼å¸ç¯å…¨æš—
-   @param    fade:æ˜¯å¦æ·¡å…¥
-   @return   æ— 
-   @note     æŠŠæ‰€æœ‰çš„ç¯è®¾ç½®ä¸ºå¸¸æš—æ¨¡å¼
+/**@brief    ºôÎüµÆÈ«°µ
+   @param    fade:ÊÇ·ñµ­Èë
+   @return   ÎŞ
+   @note     °ÑËùÓĞµÄµÆÉèÖÃÎª³£°µÄ£Ê½
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_set_led_all_off(u8 fade)
@@ -227,10 +227,10 @@ void chgbox_set_led_all_off(u8 fade)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å‘¼å¸ç¯å…¨äº®
-   @param    fade:æ˜¯å¦æ·¡å…¥
-   @return   æ— 
-   @note     æŠŠæ‰€æœ‰çš„ç¯è®¾ç½®ä¸ºå¸¸äº®æ¨¡å¼
+/**@brief    ºôÎüµÆÈ«ÁÁ
+   @param    fade:ÊÇ·ñµ­Èë
+   @return   ÎŞ
+   @note     °ÑËùÓĞµÄµÆÉèÖÃÎª³£ÁÁÄ£Ê½
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_set_led_all_on(u8 fade)
@@ -245,11 +245,11 @@ void chgbox_set_led_all_on(u8 fade)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    ledå‘¼å¸ç¯åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
-   @note     åˆå§‹åŒ–æ¯ä¸ªled:æ¸äº®ã€äº®ã€æ¸æš—ã€æš—ï¼Œæœ€å¤§äº®åº¦ï¼Œå¯¹åº”IOçš„åˆå§‹åŒ–.mc_clkçš„åˆå§‹åŒ–ï¼Œç”¨äº
-             æ§åˆ¶pwm
+/**@brief    ledºôÎüµÆ³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ³õÊ¼»¯Ã¿¸öled:½¥ÁÁ¡¢ÁÁ¡¢½¥°µ¡¢°µ£¬×î´óÁÁ¶È£¬¶ÔÓ¦IOµÄ³õÊ¼»¯.mc_clkµÄ³õÊ¼»¯£¬ÓÃÓÚ
+             ¿ØÖÆpwm
 */
 /*-----------------------------------------------------------------------------------*/
 extern const struct led_platform_data chgbox_pwm_led_data;

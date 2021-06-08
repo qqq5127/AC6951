@@ -16,7 +16,7 @@
 #define AUDIO_SYNTHESIS_LEN     (AUDIO_MIXER_LEN * 2)
 #endif
 
-/*解码任务cpu占用率跟踪*/
+/*��������cpuռ���ʸ���*/
 #define TCFG_AUDIO_DECODER_OCCUPY_TRACE		1
 
 #if BT_SUPPORT_MUSIC_VOL_SYNC
@@ -26,48 +26,48 @@
 #endif
 
 /*
- *该配置适用于没有音量按键的产品，防止打开音量同步之后
- *连接支持音量同步的设备，将音量调小过后，连接不支持音
- *量同步的设备，音量没有恢复，导致音量小的问题
- *默认是没有音量同步的，将音量设置到最大值，可以在vol_sync.c
- *该宏里面修改相应的设置。
+ *������������û�����������Ĳ�Ʒ����ֹ������ͬ��֮��
+ *����֧������ͬ�����豸����������С�������Ӳ�֧����
+ *��ͬ�����豸������û�лָ�����������С������
+ *Ĭ����û������ͬ���ģ����������õ����ֵ��������vol_sync.c
+ *�ú������޸���Ӧ�����á�
  */
-#define TCFG_VOL_RESET_WHEN_NO_SUPPORT_VOL_SYNC	 0	//不支持音量同步的设备默认最大音量
+#define TCFG_VOL_RESET_WHEN_NO_SUPPORT_VOL_SYNC	 0	//��֧������ͬ�����豸Ĭ���������
 
 /*
- *省电容mic偏置电压自动调整(因为校准需要时间，所以有不同的方式)
- *1、烧完程序（完全更新，包括配置区）开机校准一次
- *2、上电复位的时候都校准,即断电重新上电就会校准是否有偏差(默认)
- *3、每次开机都校准，不管有没有断过电，即校准流程每次都跑
+ *ʡ����micƫ�õ�ѹ�Զ�����(��ΪУ׼��Ҫʱ�䣬�����в�ͬ�ķ�ʽ)
+ *1�����������ȫ���£�����������������У׼һ��
+ *2���ϵ縴λ��ʱ��У׼,���ϵ������ϵ�ͻ�У׼�Ƿ���ƫ��(Ĭ��)
+ *3��ÿ�ο�����У׼��������û�жϹ��磬��У׼����ÿ�ζ���
  */
-#define MC_BIAS_ADJUST_DISABLE		0	//省电容mic偏置校准关闭
-#define MC_BIAS_ADJUST_ONE			1	//省电容mic偏置只校准一次（跟dac trim一样）
-#define MC_BIAS_ADJUST_POWER_ON		2	//省电容mic偏置每次上电复位都校准(Power_On_Reset)
-#define MC_BIAS_ADJUST_ALWAYS		3	//省电容mic偏置每次开机都校准(包括上电复位和其他复位)
+#define MC_BIAS_ADJUST_DISABLE		0	//ʡ����micƫ��У׼�ر�
+#define MC_BIAS_ADJUST_ONE			1	//ʡ����micƫ��ֻУ׼һ�Σ���dac trimһ����
+#define MC_BIAS_ADJUST_POWER_ON		2	//ʡ����micƫ��ÿ���ϵ縴λ��У׼(Power_On_Reset)
+#define MC_BIAS_ADJUST_ALWAYS		3	//ʡ����micƫ��ÿ�ο�����У׼(�����ϵ縴λ��������λ)
 #if TCFG_MIC_CAPLESS_ENABLE
 #define TCFG_MC_BIAS_AUTO_ADJUST	MC_BIAS_ADJUST_POWER_ON
 #else
 #define TCFG_MC_BIAS_AUTO_ADJUST	MC_BIAS_ADJUST_DISABLE
 #endif/*TCFG_MIC_CAPLESS_ENABLE*/
-#define TCFG_MC_CONVERGE_TRACE		0	//省电容mic收敛值跟踪
+#define TCFG_MC_CONVERGE_TRACE		0	//ʡ����mic����ֵ����
 /*
- *省电容mic收敛步进限制
- *0:自适应步进调整, >0:收敛步进最大值
- *注：当mic的模拟增益或者数字增益很大的时候，mic_capless模式收敛过程,
- *变化的电压放大后，可能会听到哒哒声，这个时候就可以限制住这个收敛步进
- *让收敛平缓进行(前提是预收敛成功的情况下)
+ *ʡ����mic������������
+ *0:����Ӧ��������, >0:�����������ֵ
+ *ע����mic��ģ�����������������ܴ��ʱ��mic_caplessģʽ��������,
+ *�仯�ĵ�ѹ�Ŵ�󣬿��ܻ����������������ʱ��Ϳ�������ס�����������
+ *������ƽ������(ǰ����Ԥ�����ɹ��������)
  */
-#define TCFG_MC_DTB_STEP_LIMIT		15  //最大收敛步进值
+#define TCFG_MC_DTB_STEP_LIMIT		15  //�����������ֵ
 
 #if TCFG_USER_BLE_ENABLE
-#define TCFG_AEC_SIMPLEX			0  //通话单工模式配置
+#define TCFG_AEC_SIMPLEX			0  //ͨ������ģʽ����
 #else
-#define TCFG_AEC_SIMPLEX			0  //通话单工模式配置
+#define TCFG_AEC_SIMPLEX			0  //ͨ������ģʽ����
 #endif
 
-#define TCFG_ESCO_PLC				1  //通话丢包修复
+#define TCFG_ESCO_PLC				1  //ͨ�������޸�
 
-#define TCFG_ESCO_LIMITER			0  	//通话近端底噪/限幅器
+#define TCFG_ESCO_LIMITER			0  	//ͨ�����˵���/�޷���
 
 #if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_MONO_LR_DIFF || \
      TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_DUAL_LR_DIFF)
@@ -76,10 +76,10 @@
 #define MAX_ANA_VOL             (27)
 #endif/*TCFG_AUDIO_DAC_CONNECT_MODE*/
 
-#define MAX_COM_VOL             (22)    // 具体数值应小于联合音量等级的数组大小 (combined_vol_list)
+#define MAX_COM_VOL             (22)    // ������ֵӦС�����������ȼ��������С (combined_vol_list)
 #define MAX_DIG_VOL             (100)
 
-#define MAX_DIG_GR_VOL          (30)//数字音量组的最大值
+#define MAX_DIG_GR_VOL          (30)//��������������ֵ
 
 #if ((SYS_VOL_TYPE == VOL_TYPE_DIGITAL) || (SYS_VOL_TYPE == VOL_TYPE_DIGITAL_HW))
 #define SYS_MAX_VOL             MAX_DIG_VOL

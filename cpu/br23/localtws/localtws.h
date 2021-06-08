@@ -4,46 +4,46 @@
 #include "application/audio_localtws.h"
 #include "media/localtws_decoder.h"
 
-#define LOCALTWS_ENC_FLAG_STREAM		BIT(0)	// æ•°æ®æºæ˜¯æµæ•°æ®
+#define LOCALTWS_ENC_FLAG_STREAM		BIT(0)	// Êı¾İÔ´ÊÇÁ÷Êı¾İ
 
 
-// localtwsæ£€æµ‹æ˜¯å¦ä½¿èƒ½
+// localtws¼ì²âÊÇ·ñÊ¹ÄÜ
 int localtws_check_enable(void);
 
-// localtwsè“ç‰™äº‹ä»¶å¤„ç†
+// localtwsÀ¶ÑÀÊÂ¼ş´¦Àí
 int localtws_bt_event_deal(struct bt_event *evt);
 
-// æ‰“å¼€localtwsç¼–ç 
+// ´ò¿ªlocaltws±àÂë
 int localtws_enc_api_open(struct audio_fmt *pfmt, u32 flag);
-// å…³é—­localtwsç¼–ç 
+// ¹Ø±Õlocaltws±àÂë
 void localtws_enc_api_close(void);
-// localtwsç¼–ç å†™å…¥
+// localtws±àÂëĞ´Èë
 int localtws_enc_api_write(s16 *data, int len);
 
-// localtwsè®¾ç½®ç­‰å¾…a2dpçŠ¶æ€
+// localtwsÉèÖÃµÈ´ıa2dp×´Ì¬
 void localtws_set_wait_a2dp_start(u8 flag);
 
-// localtwså¯åŠ¨ï¼ˆæ´»åŠ¨è®¾å¤‡ä¸»åŠ¨è°ƒç”¨ï¼‰
+// localtwsÆô¶¯£¨»î¶¯Éè±¸Ö÷¶¯µ÷ÓÃ£©
 void localtws_start(struct audio_fmt *pfmt);
-// localtwsåœæ­¢ï¼ˆæ´»åŠ¨è®¾å¤‡ä¸»åŠ¨è°ƒç”¨ï¼‰
+// localtwsÍ£Ö¹£¨»î¶¯Éè±¸Ö÷¶¯µ÷ÓÃ£©
 void localtws_stop(void);
 
-// æ‰“å¼€localtwsè§£ç 
+// ´ò¿ªlocaltws½âÂë
 int localtws_dec_open(u32 value);
-// å…³é—­localtwsè§£ç 
+// ¹Ø±Õlocaltws½âÂë
 int localtws_dec_close(u8 drop_frame_start);
-// localtwså·²ç»æ‰“å¼€
+// localtwsÒÑ¾­´ò¿ª
 u8 localtws_dec_is_open(void);
-// localtwsè§£ç æ¿€æ´»
+// localtws½âÂë¼¤»î
 void localtws_dec_resume(void);
-// localtwsæŠ›å¼ƒæ•°æ®
+// localtwsÅ×ÆúÊı¾İ
 int localtws_media_dat_abandon(void);
-// localtwsæš‚åœ
+// localtwsÔİÍ£
 void localtws_dec_pause(void);
-// localtwså·²ç»å¼€å§‹è§£ç 
+// localtwsÒÑ¾­¿ªÊ¼½âÂë
 int localtws_dec_out_is_start(void);
 
-// localtwsæš‚åœæ§åˆ¶
+// localtwsÔİÍ£¿ØÖÆ
 void localtws_decoder_pause(u8 pause);
 
 

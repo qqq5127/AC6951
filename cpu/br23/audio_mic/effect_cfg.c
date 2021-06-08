@@ -94,7 +94,7 @@ int mic_eq_get_filter_info(void *eq, int sr, struct audio_eq_filter_info *info)
         if (sr != __this->mode_cfg->sample_rate) {
             cur_mode->eq_design_mask = (u32) - 1;
         }
-        eq_coeff_set(sr, 0);//ç®—å‰äº”æ®µeq
+        eq_coeff_set(sr, 0);//ËãÇ°Îå¶Îeq
         __this->mode_cfg->sample_rate = sr;
         cur_mode->parm.eq.update = 0;
 
@@ -127,8 +127,8 @@ struct eq_seg_info {
 };
 */
 /*----------------------------------------------------------------------------*/
-/**@brief    mic eqè®¾ç½®æ¥å£
-   @param   è¯¦è§struct eq_seg_infoç»“æ„ä½“
+/**@brief    mic eqÉèÖÃ½Ó¿Ú
+   @param   Ïê¼ûstruct eq_seg_info½á¹¹Ìå
    @return
    @note
 */
@@ -156,9 +156,9 @@ int mic_eq_set_info(struct eq_seg_info *info)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    mic eqä¿¡æ¯è·å–æ¥å£
-   @param   index:è·å–ç¬¬å‡ æ®µeq
-   @return  è¿”å›struct eq_seg_infoç»“æ„ä½“
+/**@brief    mic eqĞÅÏ¢»ñÈ¡½Ó¿Ú
+   @param   index:»ñÈ¡µÚ¼¸¶Îeq
+   @return  ·µ»Østruct eq_seg_info½á¹¹Ìå
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -178,7 +178,7 @@ struct eq_seg_info *mic_eq_get_info(u16 index)
 
 #endif
 
-////æ ¹æ®å‘½ä»¤è®¾ç½®å‚æ•°
+////¸ù¾İÃüÁîÉèÖÃ²ÎÊı
 static int effect_cfg_update_parm(void *priv, u16 mode_index, u16 cmd_index, u8 *data, u32 len, u8 online)
 {
     __this = (EFFECT_CFG *)priv;
@@ -275,7 +275,7 @@ static int effect_cfg_update_parm(void *priv, u16 mode_index, u16 cmd_index, u8 
     }
     return 0;
 }
-////æ›´æ–°æ¨¡å¼å‚æ•°
+////¸üĞÂÄ£Ê½²ÎÊı
 static void effect_cfg_fill_mode_parm(u16 mode, u8 online)
 {
     if (__this == NULL) {
@@ -288,50 +288,50 @@ static void effect_cfg_fill_mode_parm(u16 mode, u8 online)
     log_i("mic_effect_change_mode %d\n", mode);
     __this->cur_mode_id = mode;
     struct __effect_mode *cur_mode = &__this->mode[__this->cur_mode_id];
-    ///æ ¹æ®æ¨¡å¼å‚æ•°é…ç½®æ¥æ›´æ–°å‚æ•°
-    //<æ›´æ–°reverbå‚æ•°
+    ///¸ù¾İÄ£Ê½²ÎÊıÅäÖÃÀ´¸üĞÂ²ÎÊı
+    //<¸üĞÂreverb²ÎÊı
     if (cur_mode->parm.reverb.flag) {
         mic_effect_reverb_parm_fill(&cur_mode->parm.reverb.val, 1, online);
     } else {
         mic_effect_reverb_parm_fill(NULL, 1, online);
     }
 
-    //<æ›´æ–°pitchå‚æ•°
+    //<¸üĞÂpitch²ÎÊı
     if (cur_mode->parm.pitch.flag) {
         mic_effect_pitch_parm_fill(&cur_mode->parm.pitch.val, 1, online);
     } else {
         mic_effect_pitch_parm_fill(NULL, 1, online);
     }
 
-    //<æ›´æ–°echoå‚æ•°
+    //<¸üĞÂecho²ÎÊı
     if (cur_mode->parm.ehco.flag) {
         mic_effect_echo_parm_fill(&cur_mode->parm.ehco.val, 1, online);
     } else {
         mic_effect_echo_parm_fill(NULL, 1, online);
     }
 
-    //<æ›´æ–°å™ªå£°é—¨é™å‚æ•°
+    //<¸üĞÂÔëÉùÃÅÏŞ²ÎÊı
     if (cur_mode->parm.noise.flag) {
         mic_effect_noisegate_parm_fill(&cur_mode->parm.noise.val, 1, online);
     } else {
         mic_effect_noisegate_parm_fill(NULL, 1, online);
     }
 
-    //<æ›´æ–°å–Šéº¦å‚æ•°
+    //<¸üĞÂº°Âó²ÎÊı
     if (cur_mode->parm.shout_wheat.flag) {
         mic_effect_shout_wheat_parm_fill(&cur_mode->parm.shout_wheat.val, 1, online);
     } else {
         mic_effect_shout_wheat_parm_fill(NULL, 1, online);
     }
 
-    //<æ›´æ–°ä½éŸ³å‚æ•°
+    //<¸üĞÂµÍÒô²ÎÊı
     if (cur_mode->parm.low_sound.flag) {
         mic_effect_low_sound_parm_fill(&cur_mode->parm.low_sound.val, 1, online);
     } else {
         mic_effect_low_sound_parm_fill(NULL, 1, online);
     }
 
-    //<æ›´æ–°é«˜éŸ³å‚æ•°
+    //<¸üĞÂ¸ßÒô²ÎÊı
     if (cur_mode->parm.high_sound.flag) {
         mic_effect_high_sound_parm_fill(&cur_mode->parm.high_sound.val, 1, online);
     } else {
@@ -339,14 +339,14 @@ static void effect_cfg_fill_mode_parm(u16 mode, u8 online)
     }
 
 
-    //<æ›´æ–°eqå‚æ•°
+    //<¸üĞÂeq²ÎÊı
     if (cur_mode->parm.eq.flag) {
 
     } else {
 
     }
 
-    //<æ›´æ–°micæ¨¡æ‹Ÿå¢ç›Šå‚æ•°
+    //<¸üĞÂmicÄ£ÄâÔöÒæ²ÎÊı
     if (cur_mode->parm.mic_gain.flag) {
         mic_effect_mic_gain_parm_fill(&cur_mode->parm.mic_gain.val, 1, online);
     } else {
@@ -503,7 +503,7 @@ static void effect_eq_default_init()
         cur_mode->seg_num = EFFECT_EQ_SECTION_MAX;
         cur_mode->global_gain = 0;
         float tab[EFFECT_EQ_SECTION_MAX];
-        cal_center_freq(tab, cur_mode->seg_num);//è‡ªå®šä¹‰ç³»æ•°è¡¨çš„ä¸­å¿ƒé¢‘ç‡é‡è®¡ç®—
+        cal_center_freq(tab, cur_mode->seg_num);//×Ô¶¨ÒåÏµÊı±íµÄÖĞĞÄÆµÂÊÖØ¼ÆËã
         for (int j = 0; j < cur_mode->seg_num; j++) {
             eq_tab_normal[0].freq = (int)tab[j];
             memcpy(&cur_mode->parm.eq.val.seg[j],
@@ -536,7 +536,7 @@ bool effect_cfg_open(struct __effect_mode_cfg *parm)
 
     spin_lock_init(&__this->lock);
     __this->effect_file_cfg = 1;
-    if (effect_cfg_get_file_info()) { //è·å–EFFECTSæ–‡ä»¶å¤±è´¥
+    if (effect_cfg_get_file_info()) { //»ñÈ¡EFFECTSÎÄ¼şÊ§°Ü
         __this->effect_file_cfg = 0;
         effect_eq_default_init();
     }

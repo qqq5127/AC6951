@@ -10,27 +10,27 @@
 #endif
 
 /************************************************************
-*                           FMè°ƒè¯•è¯´æ˜Ž
-*çœŸå°å°‘ï¼š                     å‡å°å¤šï¼š 				      å å°å¤šï¼š
-*å‡å°  FMSCAN_CNR(ä¸»)         åŠ å¤§  FMSCAN_CNR(ä¸»)        å‡å°ï¼šFMSCAN_AGC
-*å‡å°  FMSCAN_P_DIFFER(ä¸»)    åŠ å¤§  FMSCAN_P_DIFFER(ä¸»)
-*åŠ å¤§  FMSCAN_N_DIFFER(æ¬¡)    å‡å°  FMSCAN_N_DIFFER(æ¬¡)
+*                           FMµ÷ÊÔËµÃ÷
+*ÕæÌ¨ÉÙ£º                     ¼ÙÌ¨¶à£º 				      µþÌ¨¶à£º
+*¼õÐ¡  FMSCAN_CNR(Ö÷)         ¼Ó´ó  FMSCAN_CNR(Ö÷)        ¼õÐ¡£ºFMSCAN_AGC
+*¼õÐ¡  FMSCAN_P_DIFFER(Ö÷)    ¼Ó´ó  FMSCAN_P_DIFFER(Ö÷)
+*¼Ó´ó  FMSCAN_N_DIFFER(´Î)    ¼õÐ¡  FMSCAN_N_DIFFER(´Î)
 *
-*æ³¨æ„ï¼šä¸è¦æ’ä¸²å£æµ‹è¯•æœå°æ•°
+*×¢Òâ£º²»Òª²å´®¿Ú²âÊÔËÑÌ¨Êý
 *************************************************************/
 
-#define FMSCAN_SEEK_CNT_MIN  400 //æœ€å°è¿‡é›¶ç‚¹æ•° 400å·¦å³
-#define FMSCAN_SEEK_CNT_MAX  600 //æœ€å¤§è¿‡é›¶ç‚¹æ•° 600å·¦å³
-#define FMSCAN_960_CNR       34  //è°æ³¢96Mçš„åŸºç¡€cnr 30~40
-#define FMSCAN_1080_CNR      34  //è°æ³¢108Mçš„åŸºç¡€cnr 30~40
-#define FMSCAN_AGC 			 -1  //AGCé˜ˆå€¼  -55å·¦å³,é»˜è®¤æœ€å¤§å¢žç›Š
-#define FMSCAN_ADD_DIFFER 	 -67 //ä½ŽäºŽæ­¤å€¼å¢žåŠ noise differ, -67å·¦å³
+#define FMSCAN_SEEK_CNT_MIN  400 //×îÐ¡¹ýÁãµãÊý 400×óÓÒ
+#define FMSCAN_SEEK_CNT_MAX  600 //×î´ó¹ýÁãµãÊý 600×óÓÒ
+#define FMSCAN_960_CNR       34  //Ð³²¨96MµÄ»ù´¡cnr 30~40
+#define FMSCAN_1080_CNR      34  //Ð³²¨108MµÄ»ù´¡cnr 30~40
+#define FMSCAN_AGC 			 -1  //AGCãÐÖµ  -55×óÓÒ,Ä¬ÈÏ×î´óÔöÒæ
+#define FMSCAN_ADD_DIFFER 	 -67 //µÍÓÚ´ËÖµÔö¼Ónoise differ, -67×óÓÒ
 
-#define FMSCAN_CNR           2   //cnr  1ä»¥ä¸Š
-#define FMSCAN_P_DIFFER		 2   //power differ  1ä»¥ä¸Š
-#define FMSCAN_N_DIFFER   	 8   //noise differ  8å·¦å³
+#define FMSCAN_CNR           2   //cnr  1ÒÔÉÏ
+#define FMSCAN_P_DIFFER		 2   //power differ  1ÒÔÉÏ
+#define FMSCAN_N_DIFFER   	 8   //noise differ  8×óÓÒ
 
-#define FM_IF                3   //0,1.875; 1,2.143; 2,1.5; 3,cnrä½Žçš„ä¸­é¢‘å¬å°
+#define FM_IF                3   //0,1.875; 1,2.143; 2,1.5; 3,cnrµÍµÄÖÐÆµÌýÌ¨
 
 
 

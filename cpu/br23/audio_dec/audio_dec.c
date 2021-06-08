@@ -60,15 +60,15 @@ void *fmtx_digvol_last_entry = NULL;
 struct audio_stream_entry *fmtx_last_entry = NULL;
 #endif
 
-#define AUDIO_CODEC_SUPPORT_SYNC	1 // åŒæ­¥
+#define AUDIO_CODEC_SUPPORT_SYNC	1 // Í¬²½
 
 #if (RECORDER_MIX_EN)
-#define MAX_SRC_NUMBER      		5 // æœ€å¤§æ”¯æŒsrcä¸ªæ•°
+#define MAX_SRC_NUMBER      		5 // ×î´óÖ§³Ösrc¸öÊı
 #else
-#define MAX_SRC_NUMBER      		3 // æœ€å¤§æ”¯æŒsrcä¸ªæ•°
+#define MAX_SRC_NUMBER      		3 // ×î´óÖ§³Ösrc¸öÊı
 #endif/*RECORDER_MIX_EN*/
 
-#define AUDIO_DECODE_TASK_WAKEUP_TIME	0	// è§£ç å®šæ—¶å”¤é†’ // ms
+#define AUDIO_DECODE_TASK_WAKEUP_TIME	0	// ½âÂë¶¨Ê±»½ĞÑ // ms
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -93,11 +93,11 @@ loudness_hdl *loudness;
 
 #if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR)
 #if !TCFG_EQ_DIVIDE_ENABLE
-struct channel_switch *mix_ch_switch = NULL;//å£°é“å˜æ¢
+struct channel_switch *mix_ch_switch = NULL;//ÉùµÀ±ä»»
 #endif
 #endif
 
-u8  audio_src_hw_filt[SRC_FILT_POINTS * SRC_CHI * 2 * MAX_SRC_NUMBER] ALIGNED(4); /*SRCçš„æ»¤æ³¢å™¨å¿…é¡»4ä¸ªbyteå¯¹é½*/
+u8  audio_src_hw_filt[SRC_FILT_POINTS * SRC_CHI * 2 * MAX_SRC_NUMBER] ALIGNED(4); /*SRCµÄÂË²¨Æ÷±ØĞë4¸öbyte¶ÔÆë*/
 s16 mix_buff[AUDIO_MIXER_LEN / 2] SEC(.dec_mix_buff);
 #if (RECORDER_MIX_EN)
 struct audio_mixer recorder_mixer = {0};
@@ -114,7 +114,7 @@ s16 dac_sync_buff[256];
 #if AUDIO_VOCAL_REMOVE_EN
 vocal_remove_hdl *mix_vocal_remove_hdl = NULL;
 void *vocal_remove_open(u8 ch_num);
-struct channel_switch *vocal_remove_mix_ch_switch = NULL;//å£°é“å˜æ¢,å•å£°é“æ—¶ï¼Œå…ˆè®©è§£ç å‡ºç«‹ä½“å£°ï¼Œåšå®Œäººå£°æ¶ˆé™¤ï¼Œå†å˜å•å£°é“
+struct channel_switch *vocal_remove_mix_ch_switch = NULL;//ÉùµÀ±ä»»,µ¥ÉùµÀÊ±£¬ÏÈÈÃ½âÂë³öÁ¢ÌåÉù£¬×öÍêÈËÉùÏû³ı£¬ÔÙ±äµ¥ÉùµÀ
 #endif
 
 
@@ -128,13 +128,13 @@ void mix_out_eq_drc_close(struct audio_eq_drc *eq_drc);
 
 #if AUDIO_SPECTRUM_CONFIG
 extern spectrum_fft_hdl *spec_hdl;
-struct channel_switch *spectrum_ch_switch = NULL;//å£°é“å˜æ¢
+struct channel_switch *spectrum_ch_switch = NULL;//ÉùµÀ±ä»»
 #endif
 
 
 //////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------*/
-/**@brief   è·å–dacèƒ½é‡å€¼
+/**@brief   »ñÈ¡dacÄÜÁ¿Öµ
    @param
    @return
    @note
@@ -155,7 +155,7 @@ int audio_dac_energy_get(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ¿€æ´»æ‰€æœ‰è§£ç 
+/**@brief    ¼¤»îËùÓĞ½âÂë
    @param
    @return
    @note
@@ -173,8 +173,8 @@ void audio_resume_all_decoder(void)
 #if AUDIO_DECODE_TASK_WAKEUP_TIME
 #include "timer.h"
 /*----------------------------------------------------------------------------*/
-/**@brief    è§£ç å®šæ—¶å¤„ç†
-   @param    *priv: ç§æœ‰å‚æ•°
+/**@brief    ½âÂë¶¨Ê±´¦Àí
+   @param    *priv: Ë½ÓĞ²ÎÊı
    @return
    @note
 */
@@ -186,10 +186,10 @@ static void audio_decoder_wakeup_timer(void *priv)
     audio_decoder_resume_all(task);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    æ·»åŠ ä¸€ä¸ªè§£ç é¢„å¤„ç†
-   @param    *task: è§£ç ä»»åŠ¡
+/**@brief    Ìí¼ÓÒ»¸ö½âÂëÔ¤´¦Àí
+   @param    *task: ½âÂëÈÎÎñ
    @return   0: ok
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int audio_decoder_task_add_probe(struct audio_decoder_task *task)
@@ -201,17 +201,17 @@ int audio_decoder_task_add_probe(struct audio_decoder_task *task)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    åˆ é™¤ä¸€ä¸ªè§£ç é¢„å¤„ç†
-   @param    *task: è§£ç ä»»åŠ¡
+/**@brief    É¾³ıÒ»¸ö½âÂëÔ¤´¦Àí
+   @param    *task: ½âÂëÈÎÎñ
    @return   0: ok
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int audio_decoder_task_del_probe(struct audio_decoder_task *task)
 {
     log_i("audio_decoder_task_del_probe\n");
     if (audio_decoder_task_wait_state(task) > 0) {
-        /*è§£ç ä»»åŠ¡åˆ—è¡¨è¿˜æœ‰ä»»åŠ¡*/
+        /*½âÂëÈÎÎñÁĞ±í»¹ÓĞÈÎÎñ*/
         return 0;
     }
     if (task->wakeup_timer) {
@@ -222,8 +222,8 @@ int audio_decoder_task_del_probe(struct audio_decoder_task *task)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    é‡å®šä¹‰å”¤é†’æ—¶é—´
-   @param    msecs: å”¤é†’æ—¶é—´ms
+/**@brief    ÖØ¶¨Òå»½ĞÑÊ±¼ä
+   @param    msecs: »½ĞÑÊ±¼äms
    @return   0: ok
    @note
 */
@@ -239,8 +239,8 @@ int audio_decoder_wakeup_modify(int msecs)
 #endif/*AUDIO_DECODE_TASK_WAKEUP_TIME*/
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å„æ¨¡å¼ä¸»è§£ç open
-   @param	 state: å‚æ•°
+/**@brief    ¸÷Ä£Ê½Ö÷½âÂëopen
+   @param	 state: ²ÎÊı
    @return
    @note
 */
@@ -248,18 +248,18 @@ int audio_decoder_wakeup_modify(int msecs)
 void audio_mode_main_dec_open(u32 state)
 {
 #if 0
-    // ç­‰å¾…æç¤ºéŸ³è§£ç å®Œ
+    // µÈ´ıÌáÊ¾Òô½âÂëÍê
     tone_dec_wait_stop(200);
-    // ç­‰å¾…å½“å‰dacä¸­çš„æ•°æ®è¾“å‡ºå®Œ
+    // µÈ´ıµ±Ç°dacÖĞµÄÊı¾İÊä³öÍê
     os_time_dly(audio_output_buf_time() / 10 + 1);
 #endif
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–è¾“å‡ºé»˜è®¤é‡‡æ ·ç‡
+/**@brief    »ñÈ¡Êä³öÄ¬ÈÏ²ÉÑùÂÊ
    @param
-   @return   0: é‡‡æ ·ç‡å¯å˜
-   @return   é0: å›ºå®šé‡‡æ ·ç‡
+   @return   0: ²ÉÑùÂÊ¿É±ä
+   @return   ·Ç0: ¹Ì¶¨²ÉÑùÂÊ
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -292,9 +292,9 @@ u32 audio_output_nor_rate(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–è¾“å‡ºé‡‡æ ·ç‡
-   @param    input_rate: è¾“å…¥é‡‡æ ·ç‡
-   @return   è¾“å‡ºé‡‡æ ·ç‡
+/**@brief    »ñÈ¡Êä³ö²ÉÑùÂÊ
+   @param    input_rate: ÊäÈë²ÉÑùÂÊ
+   @return   Êä³ö²ÉÑùÂÊ
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -325,16 +325,16 @@ u32 audio_output_rate(int input_rate)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–è¾“å‡ºé€šé“æ•°
+/**@brief    »ñÈ¡Êä³öÍ¨µÀÊı
    @param
-   @return   è¾“å‡ºé€šé“æ•°
+   @return   Êä³öÍ¨µÀÊı
    @note
 */
 /*----------------------------------------------------------------------------*/
 u32 audio_output_channel_num(void)
 {
 #if ((AUDIO_OUTPUT_WAY == AUDIO_OUTPUT_WAY_DAC) || (AUDIO_OUTPUT_WAY == AUDIO_OUTPUT_WAY_BT))
-    /*æ ¹æ®DACè¾“å‡ºçš„æ–¹å¼é€‰æ‹©è¾“å‡ºçš„å£°é“*/
+    /*¸ù¾İDACÊä³öµÄ·½Ê½Ñ¡ÔñÊä³öµÄÉùµÀ*/
     u8 dac_connect_mode =  app_audio_output_mode_get();
     if (dac_connect_mode == DAC_OUTPUT_LR || dac_connect_mode == DAC_OUTPUT_DUAL_LR_DIFF) {
         return 2;
@@ -354,29 +354,29 @@ u32 audio_output_channel_num(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–è¾“å‡ºé€šé“ç±»å‹
+/**@brief    »ñÈ¡Êä³öÍ¨µÀÀàĞÍ
    @param
-   @return   è¾“å‡ºé€šé“ç±»å‹
+   @return   Êä³öÍ¨µÀÀàĞÍ
    @note
 */
 /*----------------------------------------------------------------------------*/
 u32 audio_output_channel_type(void)
 {
 #if ((AUDIO_OUTPUT_WAY == AUDIO_OUTPUT_WAY_DAC) || (AUDIO_OUTPUT_WAY == AUDIO_OUTPUT_WAY_BT))
-    /*æ ¹æ®DACè¾“å‡ºçš„æ–¹å¼é€‰æ‹©è¾“å‡ºçš„å£°é“*/
+    /*¸ù¾İDACÊä³öµÄ·½Ê½Ñ¡ÔñÊä³öµÄÉùµÀ*/
     u8 dac_connect_mode =  app_audio_output_mode_get();
     if (dac_connect_mode == DAC_OUTPUT_LR || dac_connect_mode == DAC_OUTPUT_DUAL_LR_DIFF) {
         return AUDIO_CH_LR;
     } else if (dac_connect_mode == DAC_OUTPUT_FRONT_LR_REAR_LR) {
         return AUDIO_CH_LR;
     } else if (dac_connect_mode == DAC_OUTPUT_MONO_L) {
-        return AUDIO_CH_DIFF;   //è¦è¾“å‡ºå·¦å³åˆæˆçš„å•å£°é“æ•°æ®é€‰è¿™ä¸ª
-        /* return AUDIO_CH_L; */   //åªè¦è¾“å‡ºå·¦å£°é“çš„æ•°æ®é€‰è¿™ä¸ª
+        return AUDIO_CH_DIFF;   //ÒªÊä³ö×óÓÒºÏ³ÉµÄµ¥ÉùµÀÊı¾İÑ¡Õâ¸ö
+        /* return AUDIO_CH_L; */   //Ö»ÒªÊä³ö×óÉùµÀµÄÊı¾İÑ¡Õâ¸ö
     } else if (dac_connect_mode == DAC_OUTPUT_MONO_R) {
 
-        return AUDIO_CH_DIFF;  //è¦è¾“å‡ºå·¦å³åˆæˆçš„å•å£°é“æ•°æ®é€‰è¿™ä¸ª
+        return AUDIO_CH_DIFF;  //ÒªÊä³ö×óÓÒºÏ³ÉµÄµ¥ÉùµÀÊı¾İÑ¡Õâ¸ö
 
-        /* return AUDIO_CH_R; */  //åªè¦è¾“å‡ºå³å£°é“çš„æ•°æ®é€‰è¿™ä¸ª
+        /* return AUDIO_CH_R; */  //Ö»ÒªÊä³öÓÒÉùµÀµÄÊı¾İÑ¡Õâ¸ö
 
     } else {
         return AUDIO_CH_DIFF;
@@ -389,8 +389,8 @@ u32 audio_output_channel_type(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®è¾“å‡ºéŸ³é‡çŠ¶æ€
-   @param    state: è¾“å‡ºéŸ³é‡çŠ¶æ€
+/**@brief    ÉèÖÃÊä³öÒôÁ¿×´Ì¬
+   @param    state: Êä³öÒôÁ¿×´Ì¬
    @return   0: ok
    @note
 */
@@ -407,9 +407,9 @@ int audio_output_set_start_volume(u8 state)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å¼€å§‹éŸ³é¢‘è¾“å‡º
-   @param    sample_rate: è¾“å‡ºé‡‡æ ·ç‡
-   @param    reset_rate: æ›´æ–°è¾“å‡ºé‡‡æ ·ç‡
+/**@brief    ¿ªÊ¼ÒôÆµÊä³ö
+   @param    sample_rate: Êä³ö²ÉÑùÂÊ
+   @param    reset_rate: ¸üĞÂÊä³ö²ÉÑùÂÊ
    @return   0: ok
    @note
 */
@@ -432,7 +432,7 @@ int audio_output_start(u32 sample_rate, u8 reset_rate)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­éŸ³é¢‘è¾“å‡º
+/**@brief    ¹Ø±ÕÒôÆµÊä³ö
    @param
    @return
    @note
@@ -446,13 +446,13 @@ void audio_output_stop(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€ä¸€ä¸ªå˜é‡‡æ ·é€šé“
-   @param    *priv: outputå›è°ƒç§æœ‰å¥æŸ„
-   @param    *output_handler: å˜é‡‡æ ·è¾“å‡ºå›è°ƒ
-   @param    *channel: å£°é“æ•°
-   @param    *input_sample_rate: è¾“å…¥é‡‡æ ·ç‡
-   @param    *output_sample_rate: è¾“å‡ºé‡‡æ ·ç‡
-   @return   å˜é‡‡æ ·å¥æŸ„
+/**@brief    ´ò¿ªÒ»¸ö±ä²ÉÑùÍ¨µÀ
+   @param    *priv: output»Øµ÷Ë½ÓĞ¾ä±ú
+   @param    *output_handler: ±ä²ÉÑùÊä³ö»Øµ÷
+   @param    *channel: ÉùµÀÊı
+   @param    *input_sample_rate: ÊäÈë²ÉÑùÂÊ
+   @param    *output_sample_rate: Êä³ö²ÉÑùÂÊ
+   @return   ±ä²ÉÑù¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -474,8 +474,8 @@ struct audio_src_handle *audio_hw_resample_open(void *priv,
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­å˜é‡‡æ ·
-   @param    *hdl: å˜é‡‡æ ·å¥æŸ„
+/**@brief    ¹Ø±Õ±ä²ÉÑù
+   @param    *hdl: ±ä²ÉÑù¾ä±ú
    @return
    @note
 */
@@ -491,9 +491,9 @@ void audio_hw_resample_close(struct audio_src_handle *hdl)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    mixeräº‹ä»¶å¤„ç†
-   @param    *mixer: å¥æŸ„
-   @param    event: äº‹ä»¶
+/**@brief    mixerÊÂ¼ş´¦Àí
+   @param    *mixer: ¾ä±ú
+   @param    event: ÊÂ¼ş
    @return
    @note
 */
@@ -513,9 +513,9 @@ static void mixer_event_handler(struct audio_mixer *mixer, int event)
         if (config_mixer_en) {
             os_mutex_pend(&mixer->mutex, 0);
             if (audio_mixer_get_active_ch_num(mixer) == 0) {
-                /*è¾“å‡ºé€šé“å¯ä»¥è¿›è¡Œstopå¤„ç†*/
+                /*Êä³öÍ¨µÀ¿ÉÒÔ½øĞĞstop´¦Àí*/
                 audio_mixer_output_stop(mixer);
-                //é€šé“å…³é—­æ—¶ï¼Œæ¸…æ‰èŠ‚ç‚¹è®°å½•çš„åç§»ï¼Œé˜²æ­¢ä¸‹ä¸ªè§£ç æ‰“å¼€æ—¶ï¼Œmixä¹‹åçš„åŒæ­¥èŠ‚ç‚¹æ–­è¨€
+                //Í¨µÀ¹Ø±ÕÊ±£¬Çåµô½Úµã¼ÇÂ¼µÄÆ«ÒÆ£¬·ÀÖ¹ÏÂ¸ö½âÂë´ò¿ªÊ±£¬mixÖ®ºóµÄÍ¬²½½Úµã¶ÏÑÔ
                 audio_stream_clear_from(&mixer->entry);
             }
             os_mutex_post(&mixer->mutex);
@@ -530,10 +530,10 @@ static void mixer_event_handler(struct audio_mixer *mixer, int event)
 
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    æ£€æµ‹mixeré‡‡æ ·ç‡æ”¯æŒ
-   @param    *mixer: å¥æŸ„
-   @param    sr: é‡‡æ ·ç‡
-   @return   æ”¯æŒçš„é‡‡æ ·ç‡
+/**@brief    ¼ì²âmixer²ÉÑùÂÊÖ§³Ö
+   @param    *mixer: ¾ä±ú
+   @param    sr: ²ÉÑùÂÊ
+   @return   Ö§³ÖµÄ²ÉÑùÂÊ
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -543,10 +543,10 @@ static u32 audio_mixer_check_sr(struct audio_mixer *mixer, u32 sr)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–ç³»ç»Ÿè½¯ä»¶æ•°å­—éŸ³é‡
-   @param    æ— 
-   @return   è¿”å›ç³»ç»Ÿè½¯ä»¶æ•°å­—éŸ³é‡å€¼
-   @note    æ”¹å›è°ƒç”±ç”¨æˆ·å®ç°
+/**@brief    »ñÈ¡ÏµÍ³Èí¼şÊı×ÖÒôÁ¿
+   @param    ÎŞ
+   @return   ·µ»ØÏµÍ³Èí¼şÊı×ÖÒôÁ¿Öµ
+   @note    ¸Ä»Øµ÷ÓÉÓÃ»§ÊµÏÖ
 */
 /*----------------------------------------------------------------------------*/
 int vol_get_test()
@@ -557,8 +557,8 @@ int vol_get_test()
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    é‡æ–°è®¾ç½®mixeré‡‡æ ·ç‡
-   @param    sr: é‡‡æ ·ç‡
+/**@brief    ÖØĞÂÉèÖÃmixer²ÉÑùÂÊ
+   @param    sr: ²ÉÑùÂÊ
    @return
    @note
 */
@@ -573,8 +573,8 @@ void audio_mixer_reset_sample_rate(u8 flag, u32 sr)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief 	 audioè§£ç ä»»åŠ¡cpuè·Ÿè¸ªå›è°ƒ
-   @param    idle_total è·Ÿè¸ªå‘¨æœŸå†…çš„ç©ºé—²æ—¶é—´ç»Ÿè®¡
+/**@brief 	 audio½âÂëÈÎÎñcpu¸ú×Ù»Øµ÷
+   @param    idle_total ¸ú×ÙÖÜÆÚÄÚµÄ¿ÕÏĞÊ±¼äÍ³¼Æ
    @return
    @note
 */
@@ -590,7 +590,7 @@ int audio_dec_occupy_trace_hdl(void *priv, u32 idle_total)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    éŸ³é¢‘è§£ç åˆå§‹åŒ–
+/**@brief    ÒôÆµ½âÂë³õÊ¼»¯
    @param
    @return
    @note
@@ -605,7 +605,7 @@ int audio_dec_init()
     printf("audio_dec_init\n");
 
 
-    // åˆ›å»ºè§£ç ä»»åŠ¡
+    // ´´½¨½âÂëÈÎÎñ
     err = audio_decoder_task_create(&decode_task, "audio_dec");
 
 #if TCFG_AUDIO_DECODER_OCCUPY_TRACE
@@ -620,29 +620,29 @@ int audio_dec_init()
 #endif
 
 #if TCFG_DEC2TWS_TASK_ENABLE
-    // åˆ›å»ºæœ¬åœ°è½¬å‘è§£ç ä»»åŠ¡
+    // ´´½¨±¾µØ×ª·¢½âÂëÈÎÎñ
     audio_decoder_task_create(&localtws_decode_task, "local_dec");
 #endif
 
-    // åˆå§‹åŒ–éŸ³é¢‘è¾“å‡º
+    // ³õÊ¼»¯ÒôÆµÊä³ö
     app_audio_output_init();
 
 #if TCFG_KEY_TONE_EN
-    // æŒ‰é”®éŸ³åˆå§‹åŒ–
+    // °´¼üÒô³õÊ¼»¯
     audio_key_tone_init();
 #endif
 
 #if SYS_DIGVOL_GROUP_EN
-    // æ•°å­—é€šé“åˆå§‹åŒ–
+    // Êı×ÖÍ¨µÀ³õÊ¼»¯
     sys_digvol_group_open();
 #endif // SYS_DIGVOL_GROUP_EN
 
-    /*ç¡¬ä»¶SRCæ¨¡å—æ»¤æ³¢å™¨bufferè®¾ç½®ï¼Œå¯æ ¹æ®æœ€å¤§ä½¿ç”¨æ•°é‡è®¾ç½®æ•´ä½“buffer*/
+    /*Ó²¼şSRCÄ£¿éÂË²¨Æ÷bufferÉèÖÃ£¬¿É¸ù¾İ×î´óÊ¹ÓÃÊıÁ¿ÉèÖÃÕûÌåbuffer*/
     audio_src_base_filt_init(audio_src_hw_filt, sizeof(audio_src_hw_filt));
 
     if (!AUDIO_DEC_MIXER_EN) {
 #if AUDIO_OUTPUT_INCLUDE_DAC
-        // åˆ›å»ºdacé€šé“
+        // ´´½¨dacÍ¨µÀ
         audio_dac_new_channel(&dac_hdl, &default_dac);
         struct audio_dac_channel_attr attr;
         audio_dac_channel_get_attr(&default_dac, &attr);
@@ -654,44 +654,44 @@ int audio_dec_init()
         goto __mixer_init_end;
     }
 
-    // åˆå§‹åŒ–mixer
+    // ³õÊ¼»¯mixer
     audio_mixer_open(&mixer);
-    // ä½¿èƒ½mixeräº‹ä»¶å›è°ƒ
+    // Ê¹ÄÜmixerÊÂ¼ş»Øµ÷
     audio_mixer_set_event_handler(&mixer, mixer_event_handler);
-    // ä½¿èƒ½mixeré‡‡æ ·ç‡æ£€æµ‹
+    // Ê¹ÄÜmixer²ÉÑùÂÊ¼ì²â
     audio_mixer_set_check_sr_handler(&mixer, audio_mixer_check_sr);
     if (config_mixer_en) {
-        /*åˆå§‹åŒ–mix_bufçš„é•¿åº¦*/
+        /*³õÊ¼»¯mix_bufµÄ³¤¶È*/
         audio_mixer_set_output_buf(&mixer, mix_buff, sizeof(mix_buff));
 #ifdef CONFIG_MIXER_CYCLIC
 #define MIXER_MIN_LEN		(128*4*2)
-        // è®¾ç½®mixeræœ€å°è¾“å‡ºé•¿åº¦
+        // ÉèÖÃmixer×îĞ¡Êä³ö³¤¶È
         audio_mixer_set_min_len(&mixer, sizeof(mix_buff) < (MIXER_MIN_LEN * 2) ? (sizeof(mix_buff) / 2) : MIXER_MIN_LEN);
 #if (SOUNDCARD_ENABLE)
-        // å…³é—­ç›´é€šè¾“å‡º
+        // ¹Ø±ÕÖ±Í¨Êä³ö
         audio_mixer_set_direct_out(&mixer, 0);
 #endif
 #endif
     }
-    // è·å–éŸ³é¢‘è¾“å‡ºå£°é“æ•°
+    // »ñÈ¡ÒôÆµÊä³öÉùµÀÊı
     u8 ch_num = audio_output_channel_num();
 #if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR)
 #if TCFG_EQ_DIVIDE_ENABLE || defined (CONFIG_MIXER_CYCLIC)
     ch_num = 4;
 #endif
 #endif
-    // è®¾ç½®mixerè¾“å‡ºå£°é“æ•°
+    // ÉèÖÃmixerÊä³öÉùµÀÊı
     audio_mixer_set_channel_num(&mixer, ch_num);
-    // æ£€æµ‹éŸ³é¢‘è¾“å‡ºé‡‡æ ·ç‡æ˜¯å¦ä¸ºå›ºå®šè¾“å‡º
+    // ¼ì²âÒôÆµÊä³ö²ÉÑùÂÊÊÇ·ñÎª¹Ì¶¨Êä³ö
     u32 sr = audio_output_nor_rate();
     if (sr) {
-        // å›ºå®šé‡‡æ ·ç‡è¾“å‡º
+        // ¹Ì¶¨²ÉÑùÂÊÊä³ö
         audio_mixer_set_sample_rate(&mixer, MIXER_SR_SPEC, sr);
     }
 
 #ifdef CONFIG_MIXER_CYCLIC
 #if TCFG_MIXER_CYCLIC_TASK_EN
-    // mixerä½¿ç”¨å•ç‹¬taskè¾“å‡º
+    // mixerÊ¹ÓÃµ¥¶ÀtaskÊä³ö
     audio_mixer_task_init(&mixer_task, "mix_out");
     audio_mixer_task_ch_open(&mixer, &mixer_task);
 #endif
@@ -702,7 +702,7 @@ int audio_dec_init()
 #if (!TCFG_EQ_DIVIDE_ENABLE)// && (!defined(CONFIG_MIXER_CYCLIC))
 
     if (ch_num <= 2) {
-        mix_eq_drc = mix_out_eq_drc_open(sr, ch_num);// é«˜ä½éŸ³
+        mix_eq_drc = mix_out_eq_drc_open(sr, ch_num);// ¸ßµÍÒô
 #if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR)
         mix_ch_switch = channel_switch_open(AUDIO_CH_QUAD, AUDIO_SYNTHESIS_LEN / 2);
 #endif
@@ -710,12 +710,12 @@ int audio_dec_init()
 #endif
 
 #if AUDIO_OUTPUT_AUTOMUTE
-    // è‡ªåŠ¨mute
+    // ×Ô¶¯mute
     mix_out_automute_open();
 #endif
 
 #if AUDIO_SPECTRUM_CONFIG
-    //é¢‘å“èƒ½é‡å€¼è·å–æ¥å£
+    //ÆµÏìÄÜÁ¿Öµ»ñÈ¡½Ó¿Ú
     u8 spectrum_num = ch_num;
 #if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR)
     spectrum_ch_switch = channel_switch_open(AUDIO_CH_LR, 512);
@@ -731,7 +731,7 @@ int audio_dec_init()
         parm.ch_num = ch_num;
         parm.threadhold_vol = LOUDNESS_THREADHOLD_VOL;
         parm.vol_cb = vol_get_test;
-        loudness = audio_equal_loudness_open(&parm);//ä¸æ”¯æŒå››å£°é“
+        loudness = audio_equal_loudness_open(&parm);//²»Ö§³ÖËÄÉùµÀ
     }
 #endif
 
@@ -747,7 +747,7 @@ int audio_dec_init()
 #endif
 
 
-    // æ•°æ®æµä¸²è”ã€‚å¯ä»¥åœ¨mixerå’Œlastä¸­é—´æ·»åŠ å…¶ä»–çš„æ•°æ®æµï¼Œæ¯”å¦‚eqç­‰
+    // Êı¾İÁ÷´®Áª¡£¿ÉÒÔÔÚmixerºÍlastÖĞ¼äÌí¼ÓÆäËûµÄÊı¾İÁ÷£¬±ÈÈçeqµÈ
     u8 entry_cnt = 0;
     entries[entry_cnt++] = &mixer.entry;
 
@@ -785,7 +785,7 @@ int audio_dec_init()
 #endif
 
 #if AUDIO_OUTPUT_INCLUDE_DAC
-    // åˆ›å»ºdacé€šé“
+    // ´´½¨dacÍ¨µÀ
     audio_dac_new_channel(&dac_hdl, &default_dac);
     struct audio_dac_channel_attr attr;
     audio_dac_channel_get_attr(&default_dac, &attr);
@@ -797,13 +797,13 @@ int audio_dec_init()
     /*entries[entry_cnt++] = &dac_hdl.entry;*/
 #endif /*AUDIO_OUTPUT_INCLUDE_DAC*/
 
-    // åˆ›å»ºæ•°æ®æµï¼ŒæŠŠæ‰€æœ‰èŠ‚ç‚¹è¿æ¥èµ·æ¥
+    // ´´½¨Êı¾İÁ÷£¬°ÑËùÓĞ½ÚµãÁ¬½ÓÆğÀ´
     mixer.stream = audio_stream_open(&mixer, audio_mixer_stream_resume);
     audio_stream_add_list(mixer.stream, entries, entry_cnt);
 
 #if AUDIO_SPECTRUM_CONFIG
     if (spec_hdl) {
-        //é¢‘å“èƒ½é‡å€¼è·å–æ¥å£ã€‚ä»å€’æ•°ç¬¬äºŒä¸ªèŠ‚ç‚¹åˆ†æµ
+        //ÆµÏìÄÜÁ¿Öµ»ñÈ¡½Ó¿Ú¡£´Óµ¹ÊıµÚ¶ş¸ö½Úµã·ÖÁ÷
         if (spectrum_ch_switch) {
             audio_stream_add_entry(entries[entry_cnt - 2], &spectrum_ch_switch->entry);
             audio_stream_add_entry(&spectrum_ch_switch->entry, &spec_hdl->entry);
@@ -843,7 +843,7 @@ int audio_dec_init()
 #endif
 
 #if (AUDIO_OUTPUT_WAY == AUDIO_OUTPUT_WAY_BT)
-    // è“ç‰™å‘å°„ã€‚ä»å€’æ•°ç¬¬äºŒä¸ªèŠ‚ç‚¹åˆ†æµ
+    // À¶ÑÀ·¢Éä¡£´Óµ¹ÊıµÚ¶ş¸ö½Úµã·ÖÁ÷
     extern int audio_data_set_zero(struct audio_stream_entry * entry,  struct audio_data_frame * data_buf);
     default_dac.entry.prob_handler = audio_data_set_zero;
     audio_dig_vol_param bt_digvol_last_param = {
@@ -864,7 +864,7 @@ int audio_dec_init()
 #endif
 
 #if (TCFG_APP_FM_EMITTER_EN)
-    // fmå‘å°„ã€‚ä»å€’æ•°ç¬¬äºŒä¸ªèŠ‚ç‚¹åˆ†æµ
+    // fm·¢Éä¡£´Óµ¹ÊıµÚ¶ş¸ö½Úµã·ÖÁ÷
     audio_dig_vol_param fmtx_digvol_last_param = {
         .vol_start = app_var.music_volume,
         .vol_max = SYS_MAX_VOL,
@@ -891,17 +891,17 @@ int audio_dec_init()
 __mixer_init_end:
 
 #if (RECORDER_MIX_EN)
-    // å½•éŸ³
+    // Â¼Òô
     recorder_mix_init(&recorder_mixer, recorder_mix_buff, sizeof(recorder_mix_buff));
 #endif//RECORDER_MIX_EN
 
 
-    // éŸ³é¢‘éŸ³é‡åˆå§‹åŒ–
+    // ÒôÆµÒôÁ¿³õÊ¼»¯
     app_audio_volume_init();
     audio_output_set_start_volume(APP_AUDIO_STATE_MUSIC);
 
 #if TCFG_IIS_ENABLE
-    // iiséŸ³é¢‘
+    // iisÒôÆµ
     /* audio_link_init(); */
     /* #if TCFG_IIS_OUTPUT_EN */
     /* audio_link_open(TCFG_IIS_OUTPUT_PORT, ALINK_DIR_TX); */
@@ -909,7 +909,7 @@ __mixer_init_end:
 #endif
 
 #if TCFG_SPDIF_ENABLE
-    // spdiféŸ³é¢‘
+    // spdifÒôÆµ
     spdif_init();
 #endif
 
@@ -919,16 +919,16 @@ __mixer_init_end:
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    éŸ³é¢‘è§£ç åˆå§‹åŒ–åˆ¤æ–­
+/**@brief    ÒôÆµ½âÂë³õÊ¼»¯ÅĞ¶Ï
    @param
-   @return   1: è¿˜æ²¡åˆå§‹åŒ–
-   @return   0: å·²ç»åˆå§‹åŒ–
+   @return   1: »¹Ã»³õÊ¼»¯
+   @return   0: ÒÑ¾­³õÊ¼»¯
    @note
 */
 /*----------------------------------------------------------------------------*/
 static u8 audio_dec_init_complete()
 {
-    /*ä¸æ”¯æŒAudioåŠŸèƒ½ï¼Œè¿”å›idle*/
+    /*²»Ö§³ÖAudio¹¦ÄÜ£¬·µ»Øidle*/
 #if (defined TCFG_AUDIO_ENABLE && (TCFG_AUDIO_ENABLE == 0))
     return 1;
 #endif/*TCFG_AUDIO_ENABLE*/
@@ -948,9 +948,9 @@ REGISTER_LP_TARGET(audio_dec_init_lp_target) = {
 struct drc_ch high_bass_drc = {0};
 static int high_bass_th = 0;
 /*----------------------------------------------------------------------------*/
-/**@brief    é«˜ä½éŸ³é™å¹…å™¨ç³»æ•°å›è°ƒ
-   @param    *drc: å¥æŸ„
-   @param    *info: ç³»æ•°ç»“æ„åœ°å€
+/**@brief    ¸ßµÍÒôÏŞ·ùÆ÷ÏµÊı»Øµ÷
+   @param    *drc: ¾ä±ú
+   @param    *info: ÏµÊı½á¹¹µØÖ·
    @return
    @note
 */
@@ -974,9 +974,9 @@ int high_bass_drc_set_filter_info(int th)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    é«˜ä½éŸ³é™å¹…å™¨ç³»æ•°å›è°ƒ
-   @param    *drc: å¥æŸ„
-   @param    *info: ç³»æ•°ç»“æ„åœ°å€
+/**@brief    ¸ßµÍÒôÏŞ·ùÆ÷ÏµÊı»Øµ÷
+   @param    *drc: ¾ä±ú
+   @param    *info: ÏµÊı½á¹¹µØÖ·
    @return
    @note
 */
@@ -997,9 +997,9 @@ int high_bass_drc_get_filter_info(void *drc, struct audio_drc_filter_info *info)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    é«˜ä½éŸ³eqæ‰“å¼€
-   @param    sample_rate:é‡‡æ ·ç‡
-   @param    ch_num:é€šé“ä¸ªæ•°
+/**@brief    ¸ßµÍÒôeq´ò¿ª
+   @param    sample_rate:²ÉÑùÂÊ
+   @param    ch_num:Í¨µÀ¸öÊı
    @return
    @note
 */
@@ -1049,8 +1049,8 @@ void *mix_out_eq_drc_open(u16 sample_rate, u8 ch_num)
     return NULL;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    é«˜ä½éŸ³eqå…³é—­
-   @param    *eq_drc:å¥æŸ„
+/**@brief    ¸ßµÍÒôeq¹Ø±Õ
+   @param    *eq_drc:¾ä±ú
    @return
    @note
 */
@@ -1076,9 +1076,9 @@ void mix_out_eq_drc_close(struct audio_eq_drc *eq_drc)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    mix outå åšé«˜ä½éŸ³
-   @param    cmd:AUDIO_EQ_HIGH é«˜éŸ³ ,AUDIO_EQ_BASS ä½éŸ³
-   @param    hb:ä¸­å¿ƒæˆªæ­¢é¢‘ç‡ä¸å¢ç›Š,é¢‘ç‡å†™0æ—¶ï¼Œä½¿ç”¨é»˜è®¤çš„125 125khz
+/**@brief    mix outºó ×ö¸ßµÍÒô
+   @param    cmd:AUDIO_EQ_HIGH ¸ßÒô ,AUDIO_EQ_BASS µÍÒô
+   @param    hb:ÖĞĞÄ½ØÖ¹ÆµÂÊÓëÔöÒæ,ÆµÂÊĞ´0Ê±£¬Ê¹ÓÃÄ¬ÈÏµÄ125 125khz
    @return
    @note
 */
@@ -1091,11 +1091,11 @@ void mix_out_high_bass(u32 cmd, struct high_bass *hb)
     }
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    mix outå æ˜¯å¦åšé«˜ä½éŸ³å¤„ç†
+/**@brief    mix outºó ÊÇ·ñ×ö¸ßµÍÒô´¦Àí
    @param    cmd:AUDIO_EQ_HIGH_BASS_DIS
-   @param    dis:0 é»˜è®¤åšé«˜ä½éŸ³å¤„ç†ï¼Œ1ï¼šä¸åšé«˜ä½éŸ³å¤„ç†
+   @param    dis:0 Ä¬ÈÏ×ö¸ßµÍÒô´¦Àí£¬1£º²»×ö¸ßµÍÒô´¦Àí
    @return
-   @note    è¯¥æ¥å£å¯ç”¨äºæ§åˆ¶æŸäº›æ¨¡å¼ä¸åšé«˜ä½éŸ³
+   @note    ¸Ã½Ó¿Ú¿ÉÓÃÓÚ¿ØÖÆÄ³Ğ©Ä£Ê½²»×ö¸ßµÍÒô
 */
 /*----------------------------------------------------------------------------*/
 void mix_out_high_bass_dis(u32 cmd, u32 dis)
@@ -1166,7 +1166,7 @@ void mix_out_automute_close()
 
 /*****************************************************************************
  *
- *  æ•°å­—éŸ³é‡åˆ†ç»„ç®¡ç†
+ *  Êı×ÖÒôÁ¿·Ö×é¹ÜÀí
  *
  ****************************************************************************/
 
@@ -1202,7 +1202,7 @@ int sys_digvol_group_close(void)
     return -1;
 }
 
-// æ ¹æ®æ¯ä¸ªè§£ç é€šé“çš„logoæ¥å†³å®šå¯åŠ¨æ—¶å€™çš„æ•°å­—éŸ³é‡ç­‰çº§
+// ¸ù¾İÃ¿¸ö½âÂëÍ¨µÀµÄlogoÀ´¾ö¶¨Æô¶¯Ê±ºòµÄÊı×ÖÒôÁ¿µÈ¼¶
 u16 __attribute__((weak)) get_ch_digvol_start(char *logo)
 {
 #if 0
@@ -1218,10 +1218,10 @@ u16 __attribute__((weak)) get_ch_digvol_start(char *logo)
 
 /*******************************************************
 * Function name	: sys_digvol_group_ch_open
-* Description	: è§£ç é€šé“æ•°å­—éŸ³é‡æ‰“å¼€ä¸”åŠ å…¥åˆ†ç»„ç®¡ç†
+* Description	: ½âÂëÍ¨µÀÊı×ÖÒôÁ¿´ò¿ªÇÒ¼ÓÈë·Ö×é¹ÜÀí
 * Parameter		:
-*   @logo           è§£ç é€šé“çš„æ ‡è¯†
-*   @vol_start      è§£ç é€šé“æ•°å­—éŸ³é‡å¯åŠ¨ç­‰çº§, ä¼  -1 æ—¶ä¼šè°ƒç”¨ get_ch_digvol_start è·å–
+*   @logo           ½âÂëÍ¨µÀµÄ±êÊ¶
+*   @vol_start      ½âÂëÍ¨µÀÊı×ÖÒôÁ¿Æô¶¯µÈ¼¶, ´« -1 Ê±»áµ÷ÓÃ get_ch_digvol_start »ñÈ¡
 * Return        : digvol audio stream entry
 *******************************************************/
 void *sys_digvol_group_ch_open(char *logo, int vol_start, audio_dig_vol_param *parm)
@@ -1278,9 +1278,9 @@ int sys_digvol_group_ch_close(char *logo)
 
 #if AUDIO_VOCAL_REMOVE_EN
 /*----------------------------------------------------------------------------*/
-/**@brief    äººå£°æ¶ˆé™¤æ‰“å¼€ä¾‹å­
-   @param    ch_num:é€šé“ä¸ªæ•°
-   @return   å¥æŸ„
+/**@brief    ÈËÉùÏû³ı´ò¿ªÀı×Ó
+   @param    ch_num:Í¨µÀ¸öÊı
+   @return   ¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1293,7 +1293,7 @@ void *vocal_remove_open(u8 ch_num)
     return hdl;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    äººå£°æ¶ˆé™¤å…³é—­ä¾‹å­
+/**@brief    ÈËÉùÏû³ı¹Ø±ÕÀı×Ó
    @param
    @return
    @note

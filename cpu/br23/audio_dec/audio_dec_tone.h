@@ -11,90 +11,90 @@
 #include "application/audio_dec_app.h"
 #include "tone_player.h"
 
-// æç¤ºéŸ³è§£ç ç»“æŸç¼˜ç”±
-#define TONE_DEC_STOP_NOR				0 // æ­£å¸¸æ’­æ”¾å…³é—­
-#define TONE_DEC_STOP_BY_OTHER_PLAY		1 // è¢«å…¶ä»–æ’­æ”¾æ‰“æ–­å…³é—­
+// ÌáÊ¾Òô½âÂë½áÊøÔµÓÉ
+#define TONE_DEC_STOP_NOR				0 // Õı³£²¥·Å¹Ø±Õ
+#define TONE_DEC_STOP_BY_OTHER_PLAY		1 // ±»ÆäËû²¥·Å´ò¶Ï¹Ø±Õ
 
 /*
- * ç”¨äºä¿æŠ¤file_listæ’­æ”¾
- * åŸç†æ˜¯åœ¨å½“å‰æ’­æ”¾ç»“æŸåå…ˆå¯åŠ¨ä¸€ä¸ªç©ºçš„è§£ç å ä½resï¼Œ
- * é¿å…æ’­æ”¾file_listä¸‹ä¸€ä¸ªæ—¶æ’å…¥äº†å…¶ä»–è§£ç 
+ * ÓÃÓÚ±£»¤file_list²¥·Å
+ * Ô­ÀíÊÇÔÚµ±Ç°²¥·Å½áÊøºóÏÈÆô¶¯Ò»¸ö¿ÕµÄ½âÂëÕ¼×¡res£¬
+ * ±ÜÃâ²¥·Åfile_listÏÂÒ»¸öÊ±²åÈëÁËÆäËû½âÂë
  */
 #define TONE_DEC_PROTECT_LIST_PLAY		1
 
 
 /*
- * æç¤ºéŸ³file_listè§£ç ç»“æ„ä½“
- * ä¾æ¬¡æ’­æ”¾"char **file_list"å˜é‡ä¸­å®šä¹‰çš„æ–‡ä»¶ï¼Œç›´åˆ°file_list[n]ä¸ºNULL
- * å¦‚ file_list[0]=123.*; file_list[1]=456.*; file_list[2]=NULL;
- * æ”¯æŒæ–‡ä»¶åè§£ç ã€æ­£å¼¦æ³¢æ•°ç»„å‚æ•°è§£ç ï¼ˆéœ€è¦å®ç°get_sine()æ¥å£è·å–å‚æ•°ï¼‰
- * æ­£å¼¦æ³¢æ•°ç»„æ’­æ”¾æ ¼å¼ç¤ºä¾‹ï¼šfile_list[n]=DEFAULT_SINE_TONE(SINE_WTONE_NORAML);
- * æ”¯æŒå¾ªç¯æ’­æ”¾ï¼Œå¾ªç¯æ’­æ”¾éœ€è¦æŒ‡å®šæ’­æ”¾èµ·å§‹ï¼ˆå‚æ•°æ˜¯ä»£è¡¨å¾ªç¯æ¬¡æ•°ï¼‰å’Œç»“æŸï¼Œ
- * å¦‚ï¼šfile_list[n]=TONE_REPEAT_BEGIN(-1); file_list[n+1]=456.*; file_list[n+2]=TONE_REPEAT_END();
- * å½“éœ€è¦ä½¿ç”¨å¤–éƒ¨è‡ªå®šä¹‰æ•°æ®æµæ—¶ï¼Œå¯ä»¥é€šè¿‡å®ç°*stream_handleræ¥å£æ¥å¤„ç†
+ * ÌáÊ¾Òôfile_list½âÂë½á¹¹Ìå
+ * ÒÀ´Î²¥·Å"char **file_list"±äÁ¿ÖĞ¶¨ÒåµÄÎÄ¼ş£¬Ö±µ½file_list[n]ÎªNULL
+ * Èç file_list[0]=123.*; file_list[1]=456.*; file_list[2]=NULL;
+ * Ö§³ÖÎÄ¼şÃû½âÂë¡¢ÕıÏÒ²¨Êı×é²ÎÊı½âÂë£¨ĞèÒªÊµÏÖget_sine()½Ó¿Ú»ñÈ¡²ÎÊı£©
+ * ÕıÏÒ²¨Êı×é²¥·Å¸ñÊ½Ê¾Àı£ºfile_list[n]=DEFAULT_SINE_TONE(SINE_WTONE_NORAML);
+ * Ö§³ÖÑ­»·²¥·Å£¬Ñ­»·²¥·ÅĞèÒªÖ¸¶¨²¥·ÅÆğÊ¼£¨²ÎÊıÊÇ´ú±íÑ­»·´ÎÊı£©ºÍ½áÊø£¬
+ * Èç£ºfile_list[n]=TONE_REPEAT_BEGIN(-1); file_list[n+1]=456.*; file_list[n+2]=TONE_REPEAT_END();
+ * µ±ĞèÒªÊ¹ÓÃÍâ²¿×Ô¶¨ÒåÊı¾İÁ÷Ê±£¬¿ÉÒÔÍ¨¹ıÊµÏÖ*stream_handler½Ó¿ÚÀ´´¦Àí
  */
 struct tone_dec_list_handle {
-    struct list_head list_entry;	// é“¾è¡¨
-    u8 preemption : 1;		// æ‰“æ–­
-    u8 idx;					// å¾ªç¯æ’­æ”¾åºå·
-    u8 repeat_begin;		// å¾ªç¯æ’­æ”¾èµ·å§‹åºå·
-    u8 dec_ok_cnt;			// æ­£å¸¸æ’­æ”¾è®¡æ•°
-    u16 loop;				// å¾ªç¯æ’­æ”¾æ¬¡æ•°
+    struct list_head list_entry;	// Á´±í
+    u8 preemption : 1;		// ´ò¶Ï
+    u8 idx;					// Ñ­»·²¥·ÅĞòºÅ
+    u8 repeat_begin;		// Ñ­»·²¥·ÅÆğÊ¼ĞòºÅ
+    u8 dec_ok_cnt;			// Õı³£²¥·Å¼ÆÊı
+    u16 loop;				// Ñ­»·²¥·Å´ÎÊı
     int sync_confirm_time;
-    char **file_list;		// æ–‡ä»¶å
-    const char *evt_owner;				// äº‹ä»¶æ¥å—ä»»åŠ¡
-    void (*evt_handler)(void *priv, int flag);	// äº‹ä»¶å›è°ƒ
-    void *evt_priv;						// äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-    void (*stream_handler)(void *priv, int event, struct audio_dec_app_hdl *);	// æ•°æ®æµè®¾ç½®å›è°ƒ
-    void *stream_priv;						// æ•°æ®æµè®¾ç½®å›è°ƒç§æœ‰å¥æŸ„
+    char **file_list;		// ÎÄ¼şÃû
+    const char *evt_owner;				// ÊÂ¼ş½ÓÊÜÈÎÎñ
+    void (*evt_handler)(void *priv, int flag);	// ÊÂ¼ş»Øµ÷
+    void *evt_priv;						// ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+    void (*stream_handler)(void *priv, int event, struct audio_dec_app_hdl *);	// Êı¾İÁ÷ÉèÖÃ»Øµ÷
+    void *stream_priv;						// Êı¾İÁ÷ÉèÖÃ»Øµ÷Ë½ÓĞ¾ä±ú
 #if TONE_DEC_PROTECT_LIST_PLAY
     void *list_protect;
 #endif
 };
 
 /*
- * æç¤ºéŸ³è§£ç ç»“æ„ä½“
- * å¯ä»¥å®ç°å¤šä¸ªtone_dec_list_handleæ’­æ”¾ï¼Œé€šè¿‡ç»“æ„ä½“ä¸­çš„é“¾è¡¨è¿æ¥
- * å½“è§£ç ä¸­æœ‰æ­£å¼¦æ³¢æ•°ç»„æ’­æ”¾æ—¶ï¼Œå¿…é¡»è¦å®ç°*get_sineæ¥å£
+ * ÌáÊ¾Òô½âÂë½á¹¹Ìå
+ * ¿ÉÒÔÊµÏÖ¶à¸ötone_dec_list_handle²¥·Å£¬Í¨¹ı½á¹¹ÌåÖĞµÄÁ´±íÁ¬½Ó
+ * µ±½âÂëÖĞÓĞÕıÏÒ²¨Êı×é²¥·ÅÊ±£¬±ØĞëÒªÊµÏÖ*get_sine½Ó¿Ú
  */
 struct tone_dec_handle {
-    struct list_head head;	// é“¾è¡¨å¤´
-    struct audio_dec_sine_app_hdl *dec_sin;		// æ–‡ä»¶æ’­æ”¾å¥æŸ„
-    struct audio_dec_file_app_hdl *dec_file;	// sineæ’­æ”¾å¥æŸ„
-    struct tone_dec_list_handle *cur_list;		// å½“å‰æ’­æ”¾list
-    struct sin_param *(*get_sine)(u8 id, u8 *num);	// æŒ‰åºåˆ—å·è·å–sineæ•°ç»„
-    OS_MUTEX mutex;		// äº’æ–¥
+    struct list_head head;	// Á´±íÍ·
+    struct audio_dec_sine_app_hdl *dec_sin;		// ÎÄ¼ş²¥·Å¾ä±ú
+    struct audio_dec_file_app_hdl *dec_file;	// sine²¥·Å¾ä±ú
+    struct tone_dec_list_handle *cur_list;		// µ±Ç°²¥·Ålist
+    struct sin_param *(*get_sine)(u8 id, u8 *num);	// °´ĞòÁĞºÅ»ñÈ¡sineÊı×é
+    OS_MUTEX mutex;		// »¥³â
 };
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åˆ›å»ºæç¤ºéŸ³æ’­æ”¾å¥æŸ„
+/**@brief    ´´½¨ÌáÊ¾Òô²¥·Å¾ä±ú
    @param
-   @return   æç¤ºéŸ³å¥æŸ„
+   @return   ÌáÊ¾Òô¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
 struct tone_dec_handle *tone_dec_create(void);
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®sineæ•°ç»„è·å–å›è°ƒ
-   @param    *dec: æç¤ºéŸ³å¥æŸ„
-   @param    *get_sine: sineæ•°ç»„è·å–
+/**@brief    ÉèÖÃsineÊı×é»ñÈ¡»Øµ÷
+   @param    *dec: ÌáÊ¾Òô¾ä±ú
+   @param    *get_sine: sineÊı×é»ñÈ¡
    @return
-   @note     å½“è§£ç ä¸­æœ‰æ­£å¼¦æ³¢æ•°ç»„æ’­æ”¾æ—¶ï¼Œå¿…é¡»è®¾ç½®è¯¥æ¥å£
+   @note     µ±½âÂëÖĞÓĞÕıÏÒ²¨Êı×é²¥·ÅÊ±£¬±ØĞëÉèÖÃ¸Ã½Ó¿Ú
 */
 /*----------------------------------------------------------------------------*/
 void tone_dec_set_sin_get_hdl(struct tone_dec_handle *dec, struct sin_param * (*get_sine)(u8 id, u8 *num));
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åˆ›å»ºæç¤ºéŸ³æ’­æ”¾listå¥æŸ„
-   @param    *dec: æç¤ºéŸ³å¥æŸ„
-   @param    **file_list: æ–‡ä»¶å
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @param    *evt_handler: äº‹ä»¶å›è°ƒæ¥å£
-   @param    *evt_priv: äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-   @param    *stream_handler: toneæ•°æ®æµè®¾ç½®å›è°ƒ
-   @param    *stream_priv: toneæ•°æ®æµè®¾ç½®å›è°ƒç§æœ‰å¥æŸ„
-   @return   listå¥æŸ„
+/**@brief    ´´½¨ÌáÊ¾Òô²¥·Ålist¾ä±ú
+   @param    *dec: ÌáÊ¾Òô¾ä±ú
+   @param    **file_list: ÎÄ¼şÃû
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @param    *evt_handler: ÊÂ¼ş»Øµ÷½Ó¿Ú
+   @param    *evt_priv: ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+   @param    *stream_handler: toneÊı¾İÁ÷ÉèÖÃ»Øµ÷
+   @param    *stream_priv: toneÊı¾İÁ÷ÉèÖÃ»Øµ÷Ë½ÓĞ¾ä±ú
+   @return   list¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -107,21 +107,21 @@ struct tone_dec_list_handle *tone_dec_list_create(struct tone_dec_handle *dec,
         void *stream_priv);
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³listå¼€å§‹æ’­æ”¾
-   @param    *dec: æç¤ºéŸ³å¥æŸ„
-   @param    *dec_list: listå¥æŸ„
-   @return   true: æˆåŠŸ
-   @return   false: æˆåŠŸ
-   @note     å½“å‰æ²¡æœ‰æ’­æ”¾ï¼Œé©¬ä¸Šå¼€å§‹æ’­æ”¾ã€‚å½“å‰æœ‰æ’­æ”¾ï¼ŒæŒ‚è½½åˆ°é“¾è¡¨åé¢ç­‰å¾…æ’­æ”¾
+/**@brief    ÌáÊ¾Òôlist¿ªÊ¼²¥·Å
+   @param    *dec: ÌáÊ¾Òô¾ä±ú
+   @param    *dec_list: list¾ä±ú
+   @return   true: ³É¹¦
+   @return   false: ³É¹¦
+   @note     µ±Ç°Ã»ÓĞ²¥·Å£¬ÂíÉÏ¿ªÊ¼²¥·Å¡£µ±Ç°ÓĞ²¥·Å£¬¹ÒÔØµ½Á´±íºóÃæµÈ´ı²¥·Å
 */
 /*----------------------------------------------------------------------------*/
 int tone_dec_list_add_play(struct tone_dec_handle *dec, struct tone_dec_list_handle *dec_list);
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³æ’­æ”¾åœæ­¢
-   @param    **ppdec: æç¤ºéŸ³å¥æŸ„
-   @param    push_event: æ™®é€šæç¤ºéŸ³æ˜¯å¦æ¨é€æ¶ˆæ¯
-   @param    end_flag: ç»“æŸç±»å‹
+/**@brief    ÌáÊ¾Òô²¥·ÅÍ£Ö¹
+   @param    **ppdec: ÌáÊ¾Òô¾ä±ú
+   @param    push_event: ÆÕÍ¨ÌáÊ¾ÒôÊÇ·ñÍÆËÍÏûÏ¢
+   @param    end_flag: ½áÊøÀàĞÍ
    @return
    @note
 */
@@ -131,12 +131,12 @@ void tone_dec_stop(struct tone_dec_handle **ppdec,
                    u8 end_flag);
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‡å®šæç¤ºéŸ³æ’­æ”¾åœæ­¢
-   @param    **ppdec: æç¤ºéŸ³å¥æŸ„
-   @param    push_event: æ™®é€šæç¤ºéŸ³æ˜¯å¦æ¨é€æ¶ˆæ¯
-   @param    end_flag: ç»“æŸç±»å‹
+/**@brief    Ö¸¶¨ÌáÊ¾Òô²¥·ÅÍ£Ö¹
+   @param    **ppdec: ÌáÊ¾Òô¾ä±ú
+   @param    push_event: ÆÕÍ¨ÌáÊ¾ÒôÊÇ·ñÍÆËÍÏûÏ¢
+   @param    end_flag: ½áÊøÀàĞÍ
    @return
-   @note     å¦‚æœè¯¥æç¤ºéŸ³æ­£åœ¨æ’­ï¼Œåœæ­¢æ’­æ”¾å¹¶ä¸”æ’­æ”¾ä¸‹ä¸€ä¸ªã€‚å¦‚æœä¸åœ¨æ’­æ”¾ï¼Œåªä»é“¾è¡¨ä¸­åˆ é™¤
+   @note     Èç¹û¸ÃÌáÊ¾ÒôÕıÔÚ²¥£¬Í£Ö¹²¥·Å²¢ÇÒ²¥·ÅÏÂÒ»¸ö¡£Èç¹û²»ÔÚ²¥·Å£¬Ö»´ÓÁ´±íÖĞÉ¾³ı
 */
 /*----------------------------------------------------------------------------*/
 void tone_dec_stop_spec_file(struct tone_dec_handle **ppdec,

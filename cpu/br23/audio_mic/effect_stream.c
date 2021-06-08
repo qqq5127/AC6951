@@ -25,15 +25,15 @@ void soundcard_mix_init(struct audio_mixer *mix, s16 *mix_buf, u16 buf_size, str
     audio_mixer_open(mix);
     audio_mixer_set_event_handler(mix, NULL);
     audio_mixer_set_check_sr_handler(mix, soundcard_mix_audio_mixer_check_sr);
-    /*åˆå§‹åŒ–mix_bufçš„é•¿åº¦*/
+    /*³õÊ¼»¯mix_bufµÄ³¤¶È*/
     audio_mixer_set_output_buf(mix, mix_buf, buf_size);
     u8 ch_num = audio_output_channel_num();
     audio_mixer_set_channel_num(mix, ch_num);
-    // å›ºå®šé‡‡æ ·çŽ‡è¾“å‡º
+    // ¹Ì¶¨²ÉÑùÂÊÊä³ö
     audio_mixer_set_sample_rate(mix, MIXER_SR_SPEC, TCFG_REVERB_SAMPLERATE_DEFUAL);
 
     if (flag == 0) {
-        //rrrlåŽç½®dacï¼Œ å£°é“å·¦å³åˆæˆåŽå†è¾“å‡º
+        //rrrlºóÖÃdac£¬ ÉùµÀ×óÓÒºÏ³ÉºóÔÙÊä³ö
         mix->entry.prob_handler = mix_prob_handler;
     }
 

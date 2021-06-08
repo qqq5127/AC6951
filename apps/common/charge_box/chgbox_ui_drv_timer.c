@@ -6,7 +6,7 @@
 #include "chgbox_ui.h"
 #include "app_config.h"
 
-//ä½¿ç”¨timeræ¨ç¯,ç­ç¯æ‰èƒ½è¿›å…¥ä½åŠŸè€—
+//Ê¹ÓÃtimerÍÆµÆ,ÃğµÆ²ÅÄÜ½øÈëµÍ¹¦ºÄ
 
 #if (TCFG_CHARGE_BOX_ENABLE)
 
@@ -21,7 +21,7 @@
 
 #if (TCFG_CHARGE_BOX_UI_ENABLE && TCFG_CHGBOX_UI_TIMERLED)
 
-//å¸¸äº®ã€å¸¸æš—ã€å‘¼å¸
+//³£ÁÁ¡¢³£°µ¡¢ºôÎü
 enum {
     GHGBOX_LED_MODE_ON,
     GHGBOX_LED_MODE_OFF,
@@ -29,7 +29,7 @@ enum {
     CHGBOX_LED_MODE_FLASH,
 };
 
-//å‘¼å¸ç¯çš„æ­¥éª¤ æ¸äº®--äº®--æ¸æš—--æš—
+//ºôÎüµÆµÄ²½Öè ½¥ÁÁ--ÁÁ--½¥°µ--°µ
 enum {
     SOFT_LED_STEP_UP = 0,
     SOFT_LED_STEP_LIGHT,
@@ -38,46 +38,46 @@ enum {
 };
 
 typedef struct _CHG_SOFT_PWM_LED {
-    //åˆå§‹åŒ–ï¼Œäº®æš—æ¥å£æ¥å£
+    //³õÊ¼»¯£¬ÁÁ°µ½Ó¿Ú½Ó¿Ú
     void (*led_init)(void);
     void (*led_on_off)(u8 on_off);
 
-    u16 bre_times;    //å‘¼å¸æ¬¡æ•°,0xffffä¸ºå¾ªç¯
+    u16 bre_times;    //ºôÎü´ÎÊı,0xffffÎªÑ­»·
 
-    u16 up_times;     //æ¸äº®æ¬¡æ•°
-    u16 light_times;  //äº®æ¬¡æ•°
-    u16 down_times;   //æ¸æš—æ¬¡æ•°
-    u16 dark_times;   //æš—æ¬¡æ•°
+    u16 up_times;     //½¥ÁÁ´ÎÊı
+    u16 light_times;  //ÁÁ´ÎÊı
+    u16 down_times;   //½¥°µ´ÎÊı
+    u16 dark_times;   //°µ´ÎÊı
 
     u16 step_cnt;
-    u8  step;         //æ­¥éª¤
+    u8  step;         //²½Öè
 
-    u8  p_cnt;        //å ç©ºæ¯”è®¡æ•°
-    u8  cur_duty;     //å½“å‰å ç©ºæ¯”
-    u8  max_duty;     //æœ€å¤§å ç©ºæ¯”ï¼Œæ§åˆ¶æœ€å¤§äº®åº¦
+    u8  p_cnt;        //Õ¼¿Õ±È¼ÆÊı
+    u8  cur_duty;     //µ±Ç°Õ¼¿Õ±È
+    u8  max_duty;     //×î´óÕ¼¿Õ±È£¬¿ØÖÆ×î´óÁÁ¶È
 
-    u8  busy;         //å¿™æ ‡å¿—ï¼Œæ›´æ¢å‚æ•°æ—¶ä½œä¿æŠ¤ç”¨
-    u8  idle;         //LEDå¯ä»¥è¿›ä½åŠŸè€—
+    u8  busy;         //Ã¦±êÖ¾£¬¸ü»»²ÎÊıÊ±×÷±£»¤ÓÃ
+    u8  idle;         //LED¿ÉÒÔ½øµÍ¹¦ºÄ
 
-    u8  sp_flicker;    //ç‰¹æ®Šé—ªçƒæ ‡å¿—ï¼ˆç”¨äºå¤„ç†äº®-->äº®ï¼Œæš—-->æš—å˜åŒ–æ—¶ç¯å…‰æ— ååº”çš„ç°è±¡ï¼‰
-    u16 sp_flicker_cnt;//ç‰¹æ®Šé—ªçƒç»´æŒæ—¶é—´
+    u8  sp_flicker;    //ÌØÊâÉÁË¸±êÖ¾£¨ÓÃÓÚ´¦ÀíÁÁ-->ÁÁ£¬°µ-->°µ±ä»¯Ê±µÆ¹âÎŞ·´Ó¦µÄÏÖÏó£©
+    u16 sp_flicker_cnt;//ÌØÊâÉÁË¸Î¬³ÖÊ±¼ä
 
-    u8  mode;         //äº®ç¯æ¨¡å¼
+    u8  mode;         //ÁÁµÆÄ£Ê½
 } CHG_SOFT_PWM_LED;
 
-#define MC_TIMER_UNIT_US           30   //å¤šå°‘usèµ·ä¸€æ¬¡ä¸­æ–­
-#define SOFT_MC_PWM_MAX            128  //pwmå‘¨æœŸ(==MC_TIMER_UNIT_US * SOFT_MC_PWM_MAX å•ä½us)
-#define BRIGHTNESS_MAX             40   //äº®åº¦0~100
+#define MC_TIMER_UNIT_US           30   //¶àÉÙusÆğÒ»´ÎÖĞ¶Ï
+#define SOFT_MC_PWM_MAX            128  //pwmÖÜÆÚ(==MC_TIMER_UNIT_US * SOFT_MC_PWM_MAX µ¥Î»us)
+#define BRIGHTNESS_MAX             40   //ÁÁ¶È0~100
 
-//æ³¨æ„æ—¶é—´å°ºåº¦,å³æ˜¯mc_clkåˆå§‹åŒ–å‡ºæ¥çš„æ—¶é—´
+//×¢ÒâÊ±¼ä³ß¶È,¼´ÊÇmc_clk³õÊ¼»¯³öÀ´µÄÊ±¼ä
 #define UP_TIMES_DEFAULT         50
 #define DOWN_TIMES_DEFAULT       50
-#define SP_FLICKER_CNT_DEFAULT   30 //ç‰¹æ®Šé—ªçƒæ—¶é•¿è®¡æ•°
+#define SP_FLICKER_CNT_DEFAULT   30 //ÌØÊâÉÁË¸Ê±³¤¼ÆÊı
 
 
 CHG_SOFT_PWM_LED chgbox_led[CHG_LED_MAX];
 
-//ledäº®çš„æ—¶å€™ä¸èƒ½è¿›å…¥ä½åŠŸè€—
+//ledÁÁµÄÊ±ºò²»ÄÜ½øÈëµÍ¹¦ºÄ
 static volatile u8 is_led_active = 0;
 static u8 led_idle_query(void)
 {
@@ -89,49 +89,49 @@ REGISTER_LP_TARGET(led_lp_target) = {
 };
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®ç¯ä¸ºå¸¸äº®ã€å¸¸æš—æ¨¡å¼
-   @param    led_type:  ç¯åºå·
-             on_off:    1-->å¸¸äº® 0-->å¸¸æš—
-             sp_flicker:æ˜¯å¦é—ªçƒæ ‡å¿— 1-->åœ¨äº®--äº® æš—--æš—è¿‡ç¨‹ä¸­å–åä¸€ä¸‹
-             fade:      1-->å¿«é€Ÿå“åº” 0-->æ¸å˜å“åº”
-   @return   æ— 
-   @note     æŠŠç¯è®¾ç½®ä¸º å¸¸äº®/å¸¸æš— æ¨¡å¼(é»˜è®¤åŒæ—¶è®¾ç½®å…¶ä»–ç¯ä¸ºå¸¸æš—)
+/**@brief    ÉèÖÃµÆÎª³£ÁÁ¡¢³£°µÄ£Ê½
+   @param    led_type:  µÆĞòºÅ
+             on_off:    1-->³£ÁÁ 0-->³£°µ
+             sp_flicker:ÊÇ·ñÉÁË¸±êÖ¾ 1-->ÔÚÁÁ--ÁÁ °µ--°µ¹ı³ÌÖĞÈ¡·´Ò»ÏÂ
+             fade:      1-->¿ìËÙÏìÓ¦ 0-->½¥±äÏìÓ¦
+   @return   ÎŞ
+   @note     °ÑµÆÉèÖÃÎª ³£ÁÁ/³£°µ Ä£Ê½(Ä¬ÈÏÍ¬Ê±ÉèÖÃÆäËûµÆÎª³£°µ)
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_set_led_stu(u8 led_type, u8 on_off, u8 sp_flicker, u8 fade)
 {
-    //åªå¼€å…³ä¸€ä¸ªç¯,å…¶ä»–å…³æ‰
+    //Ö»¿ª¹ØÒ»¸öµÆ,ÆäËû¹Øµô
     u8 i;
     for (i = 0; i < CHG_LED_MAX; i++) {
         chgbox_led[i].busy = 1;
 
         if (led_type == i) {
 
-            //è®¾ç½®ç‰¹æ®Šé—ªçƒ
+            //ÉèÖÃÌØÊâÉÁË¸
             chgbox_led[i].sp_flicker = sp_flicker;
             chgbox_led[i].sp_flicker_cnt = SP_FLICKER_CNT_DEFAULT;
 
             if (on_off) {
                 if (fade) {
-                    //è¦æ ¹æ®å½“å‰å ç©ºæ¯”ï¼ŒæŠŠcntè®¡ç®—å¥½ï¼Œé¿å…äº®åº¦çªå˜
+                    //Òª¸ù¾İµ±Ç°Õ¼¿Õ±È£¬°Ñcnt¼ÆËãºÃ£¬±ÜÃâÁÁ¶ÈÍ»±ä
                     chgbox_led[i].step_cnt = chgbox_led[i].up_times * chgbox_led[i].cur_duty / chgbox_led[i].max_duty;
                 } else {
                     chgbox_led[i].step_cnt = 0;
                     chgbox_led[i].cur_duty = chgbox_led[i].max_duty;
                     chgbox_led[i].sp_flicker = 0;
                 }
-                chgbox_led[i].mode = GHGBOX_LED_MODE_ON; //å¸¸äº®
+                chgbox_led[i].mode = GHGBOX_LED_MODE_ON; //³£ÁÁ
                 chgbox_led[i].up_times = UP_TIMES_DEFAULT;
             } else {
                 if (fade) {
-                    //è¦æ ¹æ®å½“å‰å ç©ºæ¯”ï¼ŒæŠŠcntè®¡ç®—å¥½
+                    //Òª¸ù¾İµ±Ç°Õ¼¿Õ±È£¬°Ñcnt¼ÆËãºÃ
                     chgbox_led[i].step_cnt = chgbox_led[i].down_times - chgbox_led[i].down_times * chgbox_led[i].cur_duty / chgbox_led[i].max_duty;
                 } else {
                     chgbox_led[i].step_cnt = 0;
                     chgbox_led[i].cur_duty = 0;
                     chgbox_led[i].sp_flicker = 0;
                 }
-                chgbox_led[i].mode = GHGBOX_LED_MODE_OFF; //å¸¸æš—
+                chgbox_led[i].mode = GHGBOX_LED_MODE_OFF; //³£°µ
                 chgbox_led[i].down_times = DOWN_TIMES_DEFAULT;
             }
         } else {
@@ -141,7 +141,7 @@ void chgbox_set_led_stu(u8 led_type, u8 on_off, u8 sp_flicker, u8 fade)
                 chgbox_led[i].step_cnt = 0;
                 chgbox_led[i].cur_duty = 0;
             }
-            chgbox_led[i].mode = GHGBOX_LED_MODE_OFF; //å…¶ä»–ç¯å¸¸æš—
+            chgbox_led[i].mode = GHGBOX_LED_MODE_OFF; //ÆäËûµÆ³£°µ
             chgbox_led[i].sp_flicker = 0;
             chgbox_led[i].down_times = 20;
         }
@@ -153,29 +153,29 @@ void chgbox_set_led_stu(u8 led_type, u8 on_off, u8 sp_flicker, u8 fade)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®ç¯ä¸ºå‘¼å¸æ¨¡å¼
-   @param    led_type:  ç¯åºå·
-             speed_mode:é—ªçƒå‚æ•°é€‰æ‹©ï¼Œè¿™é‡Œé»˜è®¤ä¸ºå¿«ã€æ…¢ä¸¤ç§
-             is_bre:æ˜¯å¦ä¸ºå‘¼å¸æ¨¡å¼
-             time:å‘¼å¸/é—ªçƒå¤šå°‘æ¬¡
-   @return   æ— 
-   @note     æŠŠç¯è®¾ç½®ä¸ºå‘¼å¸æ¨¡å¼(é»˜è®¤åŒæ—¶å…¶ä»–ç¯ä¸ºå¸¸æš—)
+/**@brief    ÉèÖÃµÆÎªºôÎüÄ£Ê½
+   @param    led_type:  µÆĞòºÅ
+             speed_mode:ÉÁË¸²ÎÊıÑ¡Ôñ£¬ÕâÀïÄ¬ÈÏÎª¿ì¡¢ÂıÁ½ÖÖ
+             is_bre:ÊÇ·ñÎªºôÎüÄ£Ê½
+             time:ºôÎü/ÉÁË¸¶àÉÙ´Î
+   @return   ÎŞ
+   @note     °ÑµÆÉèÖÃÎªºôÎüÄ£Ê½(Ä¬ÈÏÍ¬Ê±ÆäËûµÆÎª³£°µ)
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_set_led_bre(u8 led_type, u8 speed_mode, u8 is_bre, u16 time)
 {
-    //åªå¼€å…³ä¸€ä¸ªç¯,å…¶ä»–å…³æ‰
+    //Ö»¿ª¹ØÒ»¸öµÆ,ÆäËû¹Øµô
     u8 i;
     for (i = 0; i < CHG_LED_MAX; i++) {
         chgbox_led[i].busy = 1;
 
         if (led_type == i) {
             if (is_bre) {
-                chgbox_led[i].mode = GHGBOX_LED_MODE_BRE; //å‘¼å¸
+                chgbox_led[i].mode = GHGBOX_LED_MODE_BRE; //ºôÎü
             } else {
-                chgbox_led[i].mode = CHGBOX_LED_MODE_FLASH; //é—ªçƒ
+                chgbox_led[i].mode = CHGBOX_LED_MODE_FLASH; //ÉÁË¸
             }
-            chgbox_led[i].bre_times = time;         //å¾ªç¯
+            chgbox_led[i].bre_times = time;         //Ñ­»·
             if (speed_mode == LED_FLASH_FAST) {
                 chgbox_led[i].up_times = 50;
                 chgbox_led[i].light_times = 10;
@@ -187,10 +187,10 @@ void chgbox_set_led_bre(u8 led_type, u8 speed_mode, u8 is_bre, u16 time)
                 chgbox_led[i].down_times = 200;
                 chgbox_led[i].dark_times = 40;
             }
-            //è¦æ ¹æ®å½“å‰å ç©ºæ¯”ï¼ŒæŠŠcntè®¡ç®—å¥½,
+            //Òª¸ù¾İµ±Ç°Õ¼¿Õ±È£¬°Ñcnt¼ÆËãºÃ,
             chgbox_led[i].step_cnt = chgbox_led[i].up_times * chgbox_led[i].cur_duty / chgbox_led[i].max_duty;
         } else {
-            chgbox_led[i].mode = GHGBOX_LED_MODE_OFF; //å¸¸æš—
+            chgbox_led[i].mode = GHGBOX_LED_MODE_OFF; //³£°µ
             chgbox_led[i].down_times = 20;
             chgbox_led[i].step_cnt = chgbox_led[i].down_times - chgbox_led[i].down_times * chgbox_led[i].cur_duty / chgbox_led[i].max_duty;
             chgbox_led[i].bre_times = 0;
@@ -202,10 +202,10 @@ void chgbox_set_led_bre(u8 led_type, u8 speed_mode, u8 is_bre, u16 time)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å‘¼å¸ç¯å…¨æš—
-   @param    fade:æ˜¯å¦æ·¡å…¥
-   @return   æ— 
-   @note     æŠŠæ‰€æœ‰çš„ç¯è®¾ç½®ä¸ºå¸¸æš—æ¨¡å¼
+/**@brief    ºôÎüµÆÈ«°µ
+   @param    fade:ÊÇ·ñµ­Èë
+   @return   ÎŞ
+   @note     °ÑËùÓĞµÄµÆÉèÖÃÎª³£°µÄ£Ê½
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_set_led_all_off(u8 fade)
@@ -221,7 +221,7 @@ void chgbox_set_led_all_off(u8 fade)
             chgbox_led[i].sp_flicker = 0;
             chgbox_led[i].cur_duty = 0;
         }
-        chgbox_led[i].mode = GHGBOX_LED_MODE_OFF; //å¸¸æš—
+        chgbox_led[i].mode = GHGBOX_LED_MODE_OFF; //³£°µ
         chgbox_led[i].down_times = DOWN_TIMES_DEFAULT;
         chgbox_led[i].bre_times = 0;
         chgbox_led[i].idle = 0;
@@ -231,10 +231,10 @@ void chgbox_set_led_all_off(u8 fade)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å‘¼å¸ç¯å…¨äº®
-   @param    fade:æ˜¯å¦æ·¡å…¥
-   @return   æ— 
-   @note     æŠŠæ‰€æœ‰çš„ç¯è®¾ç½®ä¸ºå¸¸äº®æ¨¡å¼
+/**@brief    ºôÎüµÆÈ«ÁÁ
+   @param    fade:ÊÇ·ñµ­Èë
+   @return   ÎŞ
+   @note     °ÑËùÓĞµÄµÆÉèÖÃÎª³£ÁÁÄ£Ê½
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_set_led_all_on(u8 fade)
@@ -250,7 +250,7 @@ void chgbox_set_led_all_on(u8 fade)
             chgbox_led[i].sp_flicker = 0;
             chgbox_led[i].cur_duty = chgbox_led[i].max_duty;
         }
-        chgbox_led[i].mode = GHGBOX_LED_MODE_ON; //å¸¸äº®
+        chgbox_led[i].mode = GHGBOX_LED_MODE_ON; //³£ÁÁ
         chgbox_led[i].up_times = UP_TIMES_DEFAULT;
         chgbox_led[i].bre_times = 0;
         chgbox_led[i].idle = 0;
@@ -260,8 +260,8 @@ void chgbox_set_led_all_on(u8 fade)
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-//ç¡¬ä»¶ã€è½¯pwmé©±åŠ¨éƒ¨åˆ†(æ—¶é’Ÿã€å ç©ºæ¯”æ§åˆ¶ç­‰)
-//è“ç¯åˆå§‹åŒ–
+//Ó²¼ş¡¢ÈípwmÇı¶¯²¿·Ö(Ê±ÖÓ¡¢Õ¼¿Õ±È¿ØÖÆµÈ)
+//À¶µÆ³õÊ¼»¯
 static void chg_red_led_init()
 {
 #if (CHG_RED_LED_IO != NO_CONFIG_PORT)
@@ -270,14 +270,14 @@ static void chg_red_led_init()
     gpio_set_pull_up(CHG_RED_LED_IO, 0);
     gpio_set_die(CHG_RED_LED_IO, 0);
     gpio_set_dieh(CHG_RED_LED_IO, 0);
-    //åˆå§‹åŒ–ä¸ºæš—æ€
+    //³õÊ¼»¯Îª°µÌ¬
     gpio_direction_output(CHG_RED_LED_IO, !CHG_LED_MODE);
 #endif
 }
 
-//è“ç¯é«˜ä½ç”µå¹³æ§åˆ¶
-//on_off:1:è¾“å‡ºé«˜å¹³ç”µ  0:è¾“å‡ºä½ç”µå¹³
-SEC(.chargebox_code)//é¢‘ç¹è°ƒç”¨çš„æ”¾ramé‡Œ
+//À¶µÆ¸ßµÍµçÆ½¿ØÖÆ
+//on_off:1:Êä³ö¸ßÆ½µç  0:Êä³öµÍµçÆ½
+SEC(.chargebox_code)//Æµ·±µ÷ÓÃµÄ·ÅramÀï
 static void chg_set_red_led(u8 on_off)
 {
 #if CHG_RED_LED_IO != NO_CONFIG_PORT
@@ -320,7 +320,7 @@ static void chg_set_red_led(u8 on_off)
 #endif
 }
 
-//ç»¿ç¯åˆå§‹åŒ–
+//ÂÌµÆ³õÊ¼»¯
 static void chg_green_led_init()
 {
 #if (CHG_GREEN_LED_IO != NO_CONFIG_PORT)
@@ -329,14 +329,14 @@ static void chg_green_led_init()
     gpio_set_pull_up(CHG_GREEN_LED_IO, 0);
     gpio_set_die(CHG_GREEN_LED_IO, 0);
     gpio_set_dieh(CHG_GREEN_LED_IO, 0);
-    //åˆå§‹åŒ–ä¸ºæš—æ€
+    //³õÊ¼»¯Îª°µÌ¬
     gpio_direction_output(CHG_GREEN_LED_IO, !CHG_LED_MODE);
 #endif
 }
 
-//ç»¿ç¯é«˜ä½ç”µå¹³æ§åˆ¶
-//on_off:1:è¾“å‡ºé«˜å¹³ç”µ  0:è¾“å‡ºä½ç”µå¹³
-SEC(.chargebox_code)//é¢‘ç¹è°ƒç”¨çš„æ”¾ramé‡Œ
+//ÂÌµÆ¸ßµÍµçÆ½¿ØÖÆ
+//on_off:1:Êä³ö¸ßÆ½µç  0:Êä³öµÍµçÆ½
+SEC(.chargebox_code)//Æµ·±µ÷ÓÃµÄ·ÅramÀï
 static void chg_set_green_led(u8 on_off)
 {
 #if (CHG_GREEN_LED_IO != NO_CONFIG_PORT)
@@ -380,7 +380,7 @@ static void chg_set_green_led(u8 on_off)
 #endif
 }
 
-//è“ç¯åˆå§‹åŒ–
+//À¶µÆ³õÊ¼»¯
 static void chg_blue_led_init()
 {
 #if (CHG_BLUE_LED_IO != NO_CONFIG_PORT)
@@ -390,13 +390,13 @@ static void chg_blue_led_init()
     gpio_direction_output(CHG_BLUE_LED_IO, 0);
     gpio_set_die(CHG_BLUE_LED_IO, 0);
     gpio_set_dieh(CHG_BLUE_LED_IO, 0);
-    //åˆå§‹åŒ–ä¸ºæš—æ€
+    //³õÊ¼»¯Îª°µÌ¬
     gpio_direction_output(CHG_BLUE_LED_IO, !CHG_LED_MODE);
 #endif
 }
 
-//è“ç¯é«˜ä½ç”µå¹³æ§åˆ¶
-//on_off:1:è¾“å‡ºé«˜å¹³ç”µ  0:è¾“å‡ºä½ç”µå¹³
+//À¶µÆ¸ßµÍµçÆ½¿ØÖÆ
+//on_off:1:Êä³ö¸ßÆ½µç  0:Êä³öµÍµçÆ½
 SEC(.chargebox_code)
 static void chg_set_blue_led(u8 on_off)
 {
@@ -441,10 +441,10 @@ static void chg_set_blue_led(u8 on_off)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å‘¼å¸ç¯å ç©ºæ¯”æ§åˆ¶
-   @param    i:ç¯åºå·
-   @return   æ— 
-   @note     æ ¹æ®å¸¸äº®ã€å¸¸æš—ã€å‘¼å¸ç­‰æ¨¡å¼æ§åˆ¶å ç©ºæ¯”
+/**@brief    ºôÎüµÆÕ¼¿Õ±È¿ØÖÆ
+   @param    i:µÆĞòºÅ
+   @return   ÎŞ
+   @note     ¸ù¾İ³£ÁÁ¡¢³£°µ¡¢ºôÎüµÈÄ£Ê½¿ØÖÆÕ¼¿Õ±È
 */
 /*------------------------------------------------------------------------------------*/
 SEC(.chargebox_code)
@@ -452,8 +452,8 @@ static u8 soft_pwm_led_ctrl(u8 i)
 {
     u8 ret = 0;
     switch (chgbox_led[i].mode) {
-    case GHGBOX_LED_MODE_ON: //å¸¸äº®
-        if (chgbox_led[i].sp_flicker) { //æš—ä¸€ä¸‹(åŒ…æ‹¬äº†æ¸æš—+æš— ä¸¤ä¸ªè¿‡ç¨‹)
+    case GHGBOX_LED_MODE_ON: //³£ÁÁ
+        if (chgbox_led[i].sp_flicker) { //°µÒ»ÏÂ(°üÀ¨ÁË½¥°µ+°µ Á½¸ö¹ı³Ì)
             if (chgbox_led[i].cur_duty > 0) {
                 chgbox_led[i].step_cnt++;
                 if (chgbox_led[i].step_cnt >= chgbox_led[i].down_times) {
@@ -463,10 +463,10 @@ static u8 soft_pwm_led_ctrl(u8 i)
                     chgbox_led[i].cur_duty = (chgbox_led[i].down_times - chgbox_led[i].step_cnt) * chgbox_led[i].max_duty / chgbox_led[i].down_times;
                 }
             } else {
-                if (chgbox_led[i].sp_flicker_cnt) { //æŒç»­æš—çš„æ—¶é—´
+                if (chgbox_led[i].sp_flicker_cnt) { //³ÖĞø°µµÄÊ±¼ä
                     chgbox_led[i].sp_flicker_cnt--;
                     if (chgbox_led[i].sp_flicker_cnt == 0) {
-                        chgbox_led[i].sp_flicker = 0; //ç»“æŸæš—ä¸€ä¸‹æµç¨‹
+                        chgbox_led[i].sp_flicker = 0; //½áÊø°µÒ»ÏÂÁ÷³Ì
                     }
                 }
             }
@@ -476,27 +476,27 @@ static u8 soft_pwm_led_ctrl(u8 i)
                 chgbox_led[i].step_cnt = 0;
                 chgbox_led[i].cur_duty  = chgbox_led[i].max_duty;
             } else {
-                //è¿™é‡Œä¸ºäº†é¿å…ç¯å…‰çªå˜ï¼Œæ ¹æ®æ”¹å˜å‰çš„äº®åº¦æ¥è®¡ç®—äº†cnt
+                //ÕâÀïÎªÁË±ÜÃâµÆ¹âÍ»±ä£¬¸ù¾İ¸Ä±äÇ°µÄÁÁ¶ÈÀ´¼ÆËãÁËcnt
                 chgbox_led[i].cur_duty = chgbox_led[i].step_cnt * chgbox_led[i].max_duty / chgbox_led[i].up_times;
             }
         }
         break;
-    case GHGBOX_LED_MODE_OFF://å¸¸æš—
-        if (chgbox_led[i].sp_flicker) { //äº®ä¸€ä¸‹
+    case GHGBOX_LED_MODE_OFF://³£°µ
+        if (chgbox_led[i].sp_flicker) { //ÁÁÒ»ÏÂ
             if (chgbox_led[i].cur_duty < chgbox_led[i].max_duty) {
                 chgbox_led[i].step_cnt++;
                 if (chgbox_led[i].step_cnt >= chgbox_led[i].up_times) {
                     chgbox_led[i].step_cnt = 0;
                     chgbox_led[i].cur_duty  = chgbox_led[i].max_duty;
                 } else {
-                    //è¿™é‡Œä¸ºäº†é¿å…ç¯å…‰çªå˜ï¼Œæ ¹æ®æ”¹å˜å‰çš„äº®åº¦æ¥è®¡ç®—äº†cnt
+                    //ÕâÀïÎªÁË±ÜÃâµÆ¹âÍ»±ä£¬¸ù¾İ¸Ä±äÇ°µÄÁÁ¶ÈÀ´¼ÆËãÁËcnt
                     chgbox_led[i].cur_duty = chgbox_led[i].step_cnt * chgbox_led[i].max_duty / chgbox_led[i].up_times;
                 }
             } else {
-                if (chgbox_led[i].sp_flicker_cnt) { //æŒç»­äº®çš„æ—¶é—´
+                if (chgbox_led[i].sp_flicker_cnt) { //³ÖĞøÁÁµÄÊ±¼ä
                     chgbox_led[i].sp_flicker_cnt--;
                     if (chgbox_led[i].sp_flicker_cnt == 0) {
-                        chgbox_led[i].sp_flicker = 0; //ç»“æŸäº®ä¸€ä¸‹æµç¨‹
+                        chgbox_led[i].sp_flicker = 0; //½áÊøÁÁÒ»ÏÂÁ÷³Ì
                     }
                 }
             }
@@ -506,14 +506,14 @@ static u8 soft_pwm_led_ctrl(u8 i)
                 chgbox_led[i].step_cnt = 0;
                 chgbox_led[i].cur_duty  = 0;
             } else {
-                //è¿™é‡Œä¸ºäº†é¿å…ç¯å…‰çªå˜ï¼Œæ ¹æ®æ”¹å˜å‰çš„äº®åº¦æ¥è®¡ç®—äº†cnt
+                //ÕâÀïÎªÁË±ÜÃâµÆ¹âÍ»±ä£¬¸ù¾İ¸Ä±äÇ°µÄÁÁ¶ÈÀ´¼ÆËãÁËcnt
                 chgbox_led[i].cur_duty = (chgbox_led[i].down_times - chgbox_led[i].step_cnt) * chgbox_led[i].max_duty / chgbox_led[i].down_times;
             }
         } else {
             ret = 1;
         }
         break;
-    case GHGBOX_LED_MODE_BRE://å‘¼å¸ç¯æ¨¡å¼
+    case GHGBOX_LED_MODE_BRE://ºôÎüµÆÄ£Ê½
         if (chgbox_led[i].bre_times == 0) {
             ret = 1;
             break;
@@ -521,9 +521,9 @@ static u8 soft_pwm_led_ctrl(u8 i)
 
         if (chgbox_led[i].step == SOFT_LED_STEP_UP) {
             chgbox_led[i].step_cnt++;
-            if (chgbox_led[i].step_cnt >= chgbox_led[i].up_times) { //å½“å‰æ®µç»“æŸ
+            if (chgbox_led[i].step_cnt >= chgbox_led[i].up_times) { //µ±Ç°¶Î½áÊø
                 chgbox_led[i].step_cnt = 0;
-                chgbox_led[i].step++; //è¿›å…¥ä¸‹ä¸€ä¸ªæ­¥éª¤
+                chgbox_led[i].step++; //½øÈëÏÂÒ»¸ö²½Öè
             } else {
                 chgbox_led[i].cur_duty = chgbox_led[i].step_cnt * chgbox_led[i].max_duty / chgbox_led[i].up_times;
             }
@@ -547,9 +547,9 @@ static u8 soft_pwm_led_ctrl(u8 i)
             chgbox_led[i].cur_duty = 0;
             if (chgbox_led[i].step_cnt >= chgbox_led[i].dark_times) {
                 chgbox_led[i].step_cnt = 0;
-                chgbox_led[i].step = 0;    //é‡æ–°å¼€å§‹ä¸‹ä¸€æ¬¡å‘¼å¸
-                if (chgbox_led[i].bre_times != 0xffff) { //éå¾ªç¯
-                    chgbox_led[i].bre_times--; //å‘¼å¸æ¬¡æ•°é€’å‡
+                chgbox_led[i].step = 0;    //ÖØĞÂ¿ªÊ¼ÏÂÒ»´ÎºôÎü
+                if (chgbox_led[i].bre_times != 0xffff) { //·ÇÑ­»·
+                    chgbox_led[i].bre_times--; //ºôÎü´ÎÊıµİ¼õ
                 }
             }
         }
@@ -572,8 +572,8 @@ static u8 soft_pwm_led_ctrl(u8 i)
             if (chgbox_led[i].step_cnt >= chgbox_led[i].down_times + chgbox_led[i].dark_times) {
                 chgbox_led[i].step_cnt = 0;
                 chgbox_led[i].step = SOFT_LED_STEP_UP;
-                if (chgbox_led[i].bre_times != 0xffff) { //éå¾ªç¯
-                    chgbox_led[i].bre_times--; //æ¬¡æ•°é€’å‡
+                if (chgbox_led[i].bre_times != 0xffff) { //·ÇÑ­»·
+                    chgbox_led[i].bre_times--; //´ÎÊıµİ¼õ
                 }
             }
         } else {
@@ -594,10 +594,10 @@ static u8 soft_pwm_led_ctrl(u8 i)
 #endif
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    mc_clkä¸­æ–­å›è°ƒ
-   @param    æ— 
-   @return   æ— 
-   @note     ç”¨äºå¾ªç¯æ‰€æœ‰çš„å‘¼å¸ç¯ï¼ŒåŒ…æ‹¬äº®æš—æ§åˆ¶,å ç©ºæ¯”è®¾ç½®ç­‰
+/**@brief    mc_clkÖĞ¶Ï»Øµ÷
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÓÃÓÚÑ­»·ËùÓĞµÄºôÎüµÆ£¬°üÀ¨ÁÁ°µ¿ØÖÆ,Õ¼¿Õ±ÈÉèÖÃµÈ
 */
 /*------------------------------------------------------------------------------------*/
 SEC(.chargebox_code)
@@ -605,23 +605,23 @@ ___interrupt
 void soft_pwm_led_isr(void)
 {
 #if TIMER_USE_MC_PWM
-    JL_MCPWM->TMR0_CON |= BIT(10); //æ¸…pending
+    JL_MCPWM->TMR0_CON |= BIT(10); //Çåpending
 #else
     JL_TIMERx->CON |= BIT(14);
 #endif
     u8 i, led_idle = 0;
 
-    for (i = 0; i < CHG_LED_MAX; i++) { //å¾ªç¯æ‰€æœ‰çš„ç¯
+    for (i = 0; i < CHG_LED_MAX; i++) { //Ñ­»·ËùÓĞµÄµÆ
         if (!chgbox_led[i].busy) {
-            if (chgbox_led[i].p_cnt < (chgbox_led[i].cur_duty)) { //å ç©ºæ¯”
-                chgbox_led[i].led_on_off(1); //äº®
+            if (chgbox_led[i].p_cnt < (chgbox_led[i].cur_duty)) { //Õ¼¿Õ±È
+                chgbox_led[i].led_on_off(1); //ÁÁ
             } else {
                 chgbox_led[i].led_on_off(0);
             }
             chgbox_led[i].p_cnt++;
-            if (chgbox_led[i].p_cnt >= SOFT_MC_PWM_MAX) { //å®Œæˆä¸€ä¸ªPWMå‘¨æœŸ
+            if (chgbox_led[i].p_cnt >= SOFT_MC_PWM_MAX) { //Íê³ÉÒ»¸öPWMÖÜÆÚ
                 chgbox_led[i].p_cnt = 0;
-                chgbox_led[i].idle = soft_pwm_led_ctrl(i);//å ç©ºæ¯”æ§åˆ¶
+                chgbox_led[i].idle = soft_pwm_led_ctrl(i);//Õ¼¿Õ±È¿ØÖÆ
             }
         }
         led_idle += chgbox_led[i].idle;
@@ -643,20 +643,20 @@ static const u32 timer_div_mc[] = {
 #define MC_MAX_TIME_CNT            0x7fff
 #define MC_MIN_TIME_CNT            0x10
 /*------------------------------------------------------------------------------------*/
-/**@brief    mc_clkçš„åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
-   @note     åˆå§‹clk,æ³¨å†Œä¸­æ–­,MC_TIMER_UNIT_US ä¸ºèµ·ä¸­æ–­çš„æ—¶é—´,å•ä½us
+/**@brief    mc_clkµÄ³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ³õÊ¼clk,×¢²áÖĞ¶Ï,MC_TIMER_UNIT_US ÎªÆğÖĞ¶ÏµÄÊ±¼ä,µ¥Î»us
 */
 /*------------------------------------------------------------------------------------*/
 void mc_clk_init(void)
 {
 #if TIMER_USE_MC_PWM
-    //br25 æ²¡æœ‰mcpwm
+    //br25 Ã»ÓĞmcpwm
     u32 prd_cnt;
     u8 index;
 
-    JL_MCPWM->TMR0_CON = BIT(10); //æ¸…pending,æ¸…å…¶ä»–bit
+    JL_MCPWM->TMR0_CON = BIT(10); //Çåpending,ÇåÆäËûbit
     JL_MCPWM->MCPWM_CON0 = 0;
 
     for (index = 0; index < (sizeof(timer_div_mc) / sizeof(timer_div_mc[0])); index++) {
@@ -668,14 +668,14 @@ void mc_clk_init(void)
 
     JL_MCPWM->TMR0_CNT = 0;
     JL_MCPWM->TMR0_PR = prd_cnt;
-    JL_MCPWM->TMR0_CON |= index << 3; //åˆ†é¢‘ç³»æ•°
+    JL_MCPWM->TMR0_CON |= index << 3; //·ÖÆµÏµÊı
 
     request_irq(IRQ_MCTMRX_IDX, 3, soft_pwm_led_isr, 0);
 
-    JL_MCPWM->TMR0_CON |= BIT(8);  //å…è®¸å®šæ—¶æº¢å‡ºä¸­æ–­
-    JL_MCPWM->TMR0_CON |= BIT(0);  //é€’å¢æ¨¡å¼
+    JL_MCPWM->TMR0_CON |= BIT(8);  //ÔÊĞí¶¨Ê±Òç³öÖĞ¶Ï
+    JL_MCPWM->TMR0_CON |= BIT(0);  //µİÔöÄ£Ê½
 
-    JL_MCPWM->MCPWM_CON0 |= BIT(8); //åªå¼€mc timer 0
+    JL_MCPWM->MCPWM_CON0 |= BIT(8); //Ö»¿ªmc timer 0
     log_info("prd_cnt:%d,index:%d,t0:%x,MCP:%x\n", prd_cnt, index, JL_MCPWM->TMR0_CON, JL_MCPWM->MCPWM_CON0);
     log_info("lsb:%d\n", clk_get("lsb"));
 #else
@@ -697,30 +697,30 @@ void mc_clk_init(void)
             break;
         }
     }
-    //åˆå§‹åŒ–timer
+    //³õÊ¼»¯timer
     request_irq(IRQ_TIMEX_IDX, 3, soft_pwm_led_isr, 0);
     JL_TIMERx->PRD = prd_cnt;
 #if (TCFG_CLOCK_SYS_SRC == SYS_CLOCK_INPUT_PLL_RCL)
     JL_IOMAP->CON0 |= BIT(TIMERX_IOS_BIT);
-    JL_TIMERx->CON = (index << 4) | BIT(0) | BIT(2);//çœæ™¶æŒ¯ä½¿ç”¨pll12mä¸ºæ—¶é’Ÿæº
+    JL_TIMERx->CON = (index << 4) | BIT(0) | BIT(2);//Ê¡¾§ÕñÊ¹ÓÃpll12mÎªÊ±ÖÓÔ´
 #else
-    JL_TIMERx->CON = (index << 4) | (0b10 << 2) | (0b01 << 0);//OSCæ—¶é’Ÿ
+    JL_TIMERx->CON = (index << 4) | (0b10 << 2) | (0b01 << 0);//OSCÊ±ÖÓ
 #endif
 #endif
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    ledå‘¼å¸ç¯åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
-   @note     åˆå§‹åŒ–æ¯ä¸ªled:æ¸äº®ã€äº®ã€æ¸æš—ã€æš—ï¼Œæœ€å¤§äº®åº¦ï¼Œå¯¹åº”IOçš„åˆå§‹åŒ–.mc_clkçš„åˆå§‹åŒ–ï¼Œç”¨äº
-             æ§åˆ¶pwm
+/**@brief    ledºôÎüµÆ³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ³õÊ¼»¯Ã¿¸öled:½¥ÁÁ¡¢ÁÁ¡¢½¥°µ¡¢°µ£¬×î´óÁÁ¶È£¬¶ÔÓ¦IOµÄ³õÊ¼»¯.mc_clkµÄ³õÊ¼»¯£¬ÓÃÓÚ
+             ¿ØÖÆpwm
 */
 /*-----------------------------------------------------------------------------------*/
 void chgbox_led_init(void)
 {
     u8 i;
-    for (i = 0; i < CHG_LED_MAX; i++) { //å¾ªç¯æ‰€æœ‰çš„ç¯
+    for (i = 0; i < CHG_LED_MAX; i++) { //Ñ­»·ËùÓĞµÄµÆ
         memset(&chgbox_led[i], 0x0, sizeof(CHG_SOFT_PWM_LED));
         chgbox_led[i].up_times = UP_TIMES_DEFAULT;
         chgbox_led[i].light_times = 100;
@@ -728,7 +728,7 @@ void chgbox_led_init(void)
         chgbox_led[i].dark_times = 10;
         chgbox_led[i].bre_times = 0;
 
-        //å¯æ ¹æ®éœ€è¦ä¿®æ”¹åˆå§‹åŒ–ï¼Œä½†è¦æŠŠåˆå§‹åŒ–ä¸äº®ç­æ³¨å†Œè¿›æ¥
+        //¿É¸ù¾İĞèÒªĞŞ¸Ä³õÊ¼»¯£¬µ«Òª°Ñ³õÊ¼»¯ÓëÁÁÃğ×¢²á½øÀ´
         if (i == CHG_LED_RED) {
             chgbox_led[i].led_on_off = chg_set_red_led;
             chgbox_led[i].led_init = chg_red_led_init;

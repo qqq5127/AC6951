@@ -1,6 +1,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 RAM1_LIMIT_L = 0x2C000;
 RAM1_LIMIT_H = 0x30000;
 
@@ -94,6 +111,7 @@ MEMORY
   _MASK_MEM_BEGIN = ABSOLUTE(0x2bdc0);
   _MASK_MEM_SIZE = ABSOLUTE(0x12c);
 
+
 EXTERN(
 _start
 
@@ -185,6 +203,7 @@ adpcm_encoder
 
 pcm_encoder
 sbc_encoder
+
 );
 
 ENTRY(_start)
@@ -388,7 +407,8 @@ SECTIONS
         btctler_code_end = .;
 
   . = ALIGN(4);
- . = ALIGN(4);
+
+  . = ALIGN(4);
 
 
 
@@ -444,7 +464,8 @@ SECTIONS
 
 
         BTSTACK_CODE_TOTAL_SIZE = btstack_code_end - btstack_code_start;
- . = ALIGN(4);
+
+  . = ALIGN(4);
 
 
   . = ALIGN(4);
@@ -617,7 +638,8 @@ SECTIONS
 
 
         system_code_total_size = system_text_end - system_text_start;
- . = ALIGN(4);
+
+        . = ALIGN(4);
 
         lcd_interface_begin = .;
         KEEP(*(.lcd_if_info))
@@ -654,7 +676,8 @@ SECTIONS
         battery_notify_begin = .;
         *(.battery_notify)
         battery_notify_end = .;
- . = ALIGN(4);
+
+        . = ALIGN(4);
 
 
         media_text_start = .;
@@ -1078,6 +1101,7 @@ SECTIONS
 
         media_code_total_size = media_text_end - media_text_start;
 
+
   . = ALIGN(4);
      update_target_begin = .;
      PROVIDE(update_target_begin = .);
@@ -1169,7 +1193,8 @@ SECTIONS
 
         . = ALIGN(4);
         media_data_code_end = .;
- . = ALIGN(4);
+
+        . = ALIGN(4);
 
      _data_code_end = . ;
 
@@ -1210,7 +1235,8 @@ SECTIONS
 
 
         btstack_data_end = .;
- . = ALIGN(4);
+
+        . = ALIGN(4);
 
 
         btctler_data_start = .;
@@ -1243,7 +1269,8 @@ SECTIONS
         BTCTLER_CL_DATA_SIZE = ABSOLUTE(. - BTCTLER_CL_DATA_START);
 
         btctler_data_end = .;
- . = ALIGN(4);
+
+        . = ALIGN(4);
 
 
   . = ALIGN(4);
@@ -1354,7 +1381,8 @@ SECTIONS
          __movable_slot_end = .;
 
         system_data_end = .;
- . = ALIGN(4);
+
+  . = ALIGN(4);
 
 
 
@@ -1492,7 +1520,8 @@ SECTIONS
         . = ALIGN(4);
   *(.dec2tws_mem)
         media_data_end = .;
- . = ALIGN(4);
+
+  . = ALIGN(4);
 
    } > ram0
 
@@ -1588,6 +1617,7 @@ SECTIONS
 
         btctler_bss_end = .;
 
+
         btstack_bss_start = .;
         *(.bt_stack_bss)
         *(.ble_db_bss)
@@ -1604,6 +1634,7 @@ SECTIONS
 
         btstack_bss_end = .;
 
+
         system_bss_start = .;
         . = ALIGN(4);
         *(.os_bss)
@@ -1616,6 +1647,7 @@ SECTIONS
         *(.ECDH_sample_bss)
 
         system_bss_end = .;
+
 
         media_bss_start = .;
         . = ALIGN(4);
@@ -1736,6 +1768,7 @@ SECTIONS
   *(.sbc_hwaccel_bss)
   *(.resample_fastcal_bss)
         media_bss_end = .;
+
 
   . = (( . + 31) / 32 * 32);
 
@@ -2021,6 +2054,7 @@ SECTIONS
 
     UPDATE_CODE_TOTAL_SIZE = update_code_end - update_code_start;
 }
+
 SECTIONS
 {
     .data : ALIGN(4)
@@ -2096,6 +2130,7 @@ SECTIONS
     DRIVER_RAM_TOTAL = (driver_data_end - driver_data_start) + (driver_bss_end - driver_bss_start);
     DRIVER_CODE_TOTAL = (driver_code_end - driver_code_start);
 }
+
 
 text_begin = ADDR(.text) ;
 text_size = SIZEOF(.text) ;

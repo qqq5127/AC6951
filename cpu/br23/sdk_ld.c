@@ -299,7 +299,7 @@ SECTIONS
         //cpu start
    	.data ALIGN(4):
 	  {
-		/// æ”¾åœ¨data é‡Œé¢çš„code å¿…é¡»æ”¾åœ¨è¿™ä¸ªä½ç½®ä¿æŠ¤èµ·æ¥
+		/// ·ÅÔÚdata ÀïÃæµÄcode ±ØÐë·ÅÔÚÕâ¸öÎ»ÖÃ±£»¤ÆðÀ´
 
         *(.data_magic)
         . = ALIGN(4);
@@ -390,7 +390,7 @@ SECTIONS
 
     .bss ALIGN(32) :
     {
-        *(.usb_h_dma)   //ç”±äºŽusbæœ‰ä¸ªbugï¼Œä¼šå¯¼è‡´dmaå†™çš„æ•°æ®è¶…å‡ºé¢„è®¾çš„bufï¼Œæœ€é•¿å¯èƒ½å†™è¶…1kï¼Œä¸ºäº†é¿å…æ­»æœºï¼Œæ‰€ä»¥usb dma bufferåŽé¢æ”¾ä¸€äº›å…¶ä»–æ¨¡å—çš„buffæ¥é¿å…æ­»æœº
+        *(.usb_h_dma)   //ÓÉÓÚusbÓÐ¸öbug£¬»áµ¼ÖÂdmaÐ´µÄÊý¾Ý³¬³öÔ¤ÉèµÄbuf£¬×î³¤¿ÉÄÜÐ´³¬1k£¬ÎªÁË±ÜÃâËÀ»ú£¬ËùÒÔusb dma bufferºóÃæ·ÅÒ»Ð©ÆäËûÄ£¿éµÄbuffÀ´±ÜÃâËÀ»ú
         *(.usb_ep0)
         *(.dec_mix_buff)
         *(.sd0_var)
@@ -673,7 +673,7 @@ SECTIONS
 
 
 	. =ORIGIN(ram1);
-    //TLB èµ·å§‹éœ€è¦16K å¯¹é½ï¼›
+    //TLB ÆðÊ¼ÐèÒª16K ¶ÔÆë£»
     .mmu_tlb ALIGN(0x4000):
     {
         *(.mmu_tlb_segment);

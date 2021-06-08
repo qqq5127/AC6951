@@ -37,15 +37,15 @@ u32 timDiv_trigger(void *priv)
     return 0;
 }
 
-u32 beat_trigger(void *priv, u8 val1/*ä¸€èŠ‚å¤šå°‘æ‹*/, u8 val2/*æ¯æ‹å¤šå°‘åˆ†éŸ³ç¬¦*/)
+u32 beat_trigger(void *priv, u8 val1/*Ò»½Ú¶àÉÙÅÄ*/, u8 val2/*Ã¿ÅÄ¶àÉÙ·ÖÒô·û*/)
 {
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    midiéŸ³è‰²æ–‡ä»¶è¯»
+/**@brief    midiÒôÉ«ÎÄ¼ş¶Á
    @param
    @return
-   @note     å†…éƒ¨è°ƒç”¨
+   @note     ÄÚ²¿µ÷ÓÃ
 */
 /*----------------------------------------------------------------------------*/
 int midi_fread(void *file, void *buf, u32 len)
@@ -60,10 +60,10 @@ int midi_fread(void *file, void *buf, u32 len)
     return len;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    midiéŸ³è‰²æ–‡ä»¶seek
+/**@brief    midiÒôÉ«ÎÄ¼şseek
    @param
    @return
-   @note     å†…éƒ¨è°ƒç”¨
+   @note     ÄÚ²¿µ÷ÓÃ
 */
 /*----------------------------------------------------------------------------*/
 int midi_fseek(void *file, u32 offset, int seek_mode)
@@ -77,16 +77,16 @@ int midi_fseek(void *file, u32 offset, int seek_mode)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    midiåˆå§‹åŒ–å‡½æ•°ï¼Œç”±midi_initè°ƒç”¨
-   @param    midi_init_info_v:midiä¿¡æ¯
-   @param    addr:éŸ³è‰²æ–‡ä»¶å¥æŸ„
+/**@brief    midi³õÊ¼»¯º¯Êı£¬ÓÉmidi_initµ÷ÓÃ
+   @param    midi_init_info_v:midiĞÅÏ¢
+   @param    addr:ÒôÉ«ÎÄ¼ş¾ä±ú
    @return
    @note
 */
 /*----------------------------------------------------------------------------*/
 void init_midi_info_val(MIDI_INIT_STRUCT  *midi_init_info_v, u8 *addr)
 {
-    //midiåˆå§‹åŒ–è¡¨
+    //midi³õÊ¼»¯±í
     midi_init_info_v->init_info.player_t = 8;
     midi_init_info_v->init_info.sample_rate = 4;
     midi_init_info_v->init_info.spi_pos = (u32)addr;
@@ -94,51 +94,51 @@ void init_midi_info_val(MIDI_INIT_STRUCT  *midi_init_info_v, u8 *addr)
     midi_init_info_v->init_info.fseek = midi_fseek;
 
 
-    //midiçš„æ¨¡å¼åˆå§‹åŒ–
+    //midiµÄÄ£Ê½³õÊ¼»¯
     midi_init_info_v->mode_info.mode = 0; //CMD_MIDI_CTRL_MODE_2;
     /* midi_init_info_v->mode_info.mode = 1;//CMD_MIDI_CTRL_MODE_2; */
 
-    //midièŠ‚å¥åˆå§‹åŒ–
+    //midi½Ú×à³õÊ¼»¯
     midi_init_info_v->tempo_info.tempo_val = 1042;
 
     midi_init_info_v->tempo_info.decay_val = ((u16)31 << 11) | 1024;
     midi_init_info_v->tempo_info.mute_threshold = (u16)1L << 29;
 
-    //midiä¸»è½¨é“åˆå§‹åŒ–
-    midi_init_info_v->mainTrack_info.chn = 17; //æŠŠå“ªä¸ªè½¨é“å½“æˆä¸»è½¨é“
+    //midiÖ÷¹ìµÀ³õÊ¼»¯
+    midi_init_info_v->mainTrack_info.chn = 17; //°ÑÄÄ¸ö¹ìµÀµ±³ÉÖ÷¹ìµÀ
 
-    //midiå¤–éƒ¨éŸ³é‡åˆå§‹åŒ–
+    //midiÍâ²¿ÒôÁ¿³õÊ¼»¯
     {
         u32 tmp_i;
         for (tmp_i = 0; tmp_i < 16; tmp_i++) {
-            midi_init_info_v->vol_info.cc_vol[tmp_i] = 4096; //4096å³åŸæ¥çš„éŸ³é‡
+            midi_init_info_v->vol_info.cc_vol[tmp_i] = 4096; //4096¼´Ô­À´µÄÒôÁ¿
         }
     }
 
-    //midiçš„ä¸»è½¨é“ä¹å™¨è®¾ç½®
+    //midiµÄÖ÷¹ìµÀÀÖÆ÷ÉèÖÃ
     midi_init_info_v->prog_info.prog = 0;
     midi_init_info_v->prog_info.ex_vol = 1024;
     midi_init_info_v->prog_info.replace_mode = 0;
 
 
-    //midiçš„markæ§åˆ¶åˆå§‹åŒ–
+    //midiµÄmark¿ØÖÆ³õÊ¼»¯
     midi_init_info_v->mark_info.priv = NULL; //&file_mark;
     midi_init_info_v->mark_info.mark_trigger = tmark_trigger;
 
-    //midiçš„melodyæ§åˆ¶åˆå§‹åŒ–
+    //midiµÄmelody¿ØÖÆ³õÊ¼»¯
     midi_init_info_v->moledy_info.priv = NULL; //&file_melody;
     midi_init_info_v->moledy_info.melody_trigger = melody_trigger;
 
-    //midiçš„å°èŠ‚å›è°ƒæ§åˆ¶åˆå§‹åŒ–
+    //midiµÄĞ¡½Ú»Øµ÷¿ØÖÆ³õÊ¼»¯
     midi_init_info_v->tmDiv_info.priv = NULL;
     midi_init_info_v->tmDiv_info.timeDiv_trigger = timDiv_trigger;
 
-    //midiçš„å°æ‹å›è°ƒæ§åˆ¶åˆå§‹åŒ–
+    //midiµÄĞ¡ÅÄ»Øµ÷¿ØÖÆ³õÊ¼»¯
     midi_init_info_v->beat_info.priv = NULL;
     midi_init_info_v->beat_info.beat_trigger = beat_trigger;
 
-    //ä½¿èƒ½ä½æ§åˆ¶
-    midi_init_info_v->switch_info = MELODY_PLAY_ENABLE | MELODY_ENABLE | EX_VOL_ENABLE;            //ä¸»è½¨é“æ’­æ”¾ä½¿èƒ½
+    //Ê¹ÄÜÎ»¿ØÖÆ
+    midi_init_info_v->switch_info = MELODY_PLAY_ENABLE | MELODY_ENABLE | EX_VOL_ENABLE;            //Ö÷¹ìµÀ²¥·ÅÊ¹ÄÜ
 
     return;
 }
@@ -147,8 +147,8 @@ FILE  *midi_file = NULL;
 int midi_get_cfg_addr(u8 **addr)
 {
 #ifndef CONFIG_MIDI_DEC_ADDR
-    //éŸ³è‰²æ–‡ä»¶æ”¯æŒåœ¨å¤–éƒ¨å­˜å‚¨å¡æˆ–è€…å¤–æŒ‚flash,sdké»˜è®¤ä½¿ç”¨æœ¬æ–¹å¼
-    //è·å–éŸ³è‰²æ–‡ä»¶
+    //ÒôÉ«ÎÄ¼şÖ§³ÖÔÚÍâ²¿´æ´¢¿¨»òÕßÍâ¹Òflash,sdkÄ¬ÈÏÊ¹ÓÃ±¾·½Ê½
+    //»ñÈ¡ÒôÉ«ÎÄ¼ş
     /* FILE  *file = fopen("storage/sd0/C/MIDI.bin\0", "r"); */
     FILE  *file = fopen(SDFILE_RES_ROOT_PATH"MIDI.bin\0", "r");
     if (!file) {
@@ -159,7 +159,7 @@ int midi_get_cfg_addr(u8 **addr)
     midi_file = file;
     printf("midi_file %x\n", midi_file);
 #else
-    //éŸ³è‰²æ–‡ä»¶ä»…æ”¯æŒåœ¨å†…ç½®flash
+    //ÒôÉ«ÎÄ¼ş½öÖ§³ÖÔÚÄÚÖÃflash
     FILE  *file = fopen(SDFILE_RES_ROOT_PATH"MIDI.bin\0", "r");
     if (!file) {
         log_e("MIDI.bin open err\n");
@@ -176,10 +176,10 @@ int midi_get_cfg_addr(u8 **addr)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    midiéŸ³è‰²æ–‡ä»¶å…³é—­
+/**@brief    midiÒôÉ«ÎÄ¼ş¹Ø±Õ
    @param
    @return
-   @note     è¯¥å‡½æ•°åœ¨midiå…³é—­æ—¶è°ƒç”¨,è¯¥å‡½æ•°æ˜¯å¼±å®šä¹‰å‡½æ•°ï¼Œä¸å¯ä¿®æ”¹å®šä¹‰
+   @note     ¸Ãº¯ÊıÔÚmidi¹Ø±ÕÊ±µ÷ÓÃ,¸Ãº¯ÊıÊÇÈõ¶¨Òåº¯Êı£¬²»¿ÉĞŞ¸Ä¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int midi_uninit()
@@ -193,10 +193,10 @@ int midi_uninit()
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    midiåˆå§‹åŒ–å‡½æ•°ï¼Œè¯¥å‡½æ•°ç”±åº“è°ƒç”¨
-   @param    å‚æ•°è¿”å›åœ°å€
+/**@brief    midi³õÊ¼»¯º¯Êı£¬¸Ãº¯ÊıÓÉ¿âµ÷ÓÃ
+   @param    ²ÎÊı·µ»ØµØÖ·
    @return   0
-   @note     è¯¥å‡½æ•°æ˜¯å¼±å®šä¹‰å‡½æ•°ï¼Œä¸å¯ä¿®æ”¹å®šä¹‰
+   @note     ¸Ãº¯ÊıÊÇÈõ¶¨Òåº¯Êı£¬²»¿ÉĞŞ¸Ä¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 int midi_init(void *info)
@@ -206,28 +206,28 @@ int midi_init(void *info)
         log_e("get midi addr err\n");
         return -1;
     }
-    //åˆå§‹åŒ–midiå‚æ•°
-    init_midi_info_val(info, cache_addr);  //éœ€è¦å¤–éƒ¨å†™
+    //³õÊ¼»¯midi²ÎÊı
+    init_midi_info_val(info, cache_addr);  //ĞèÒªÍâ²¿Ğ´
     return 0;
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    midiæ§åˆ¶å‡½æ•°
+/**@brief    midi¿ØÖÆº¯Êı
 	@param   cmd:
-		     CMD_MIDI_SET_CHN_PROG,  //æ›´æ”¹ä¹å™¨,å‚æ•°ç»“æ„å¯¹åº” MIDI_PROG_CTRL_STRUCT
-		     CMD_MIDI_CTRL_TEMPO,    //æ”¹å˜èŠ‚å¥,å‚æ•°ç»“æ„å¯¹åº” MIDI_PLAY_CTRL_TEMPO
-		     CMD_MIDI_GOON,          //one key one noteçš„æ—¶å€™æ¥ç€æ’­æ”¾ä½¿ç”¨,å‚æ•°ä¸ºç©º
-		     CMD_MIDI_CTRL_MODE,     //æ”¹å˜æ¨¡å¼,å‚æ•°ç»“æ„å¯¹åº” MIDI_PLAY_CTRL_MO
-		     CMD_MIDI_SET_SWITCH,    //é…ç½®å¼€å…³ä½¿èƒ½ï¼Œè¦ä¸è¦æ›¿æ¢ä¹å™¨ï¼Œä½¿ç”¨å¤–éƒ¨éŸ³é‡,å‚æ•°å¯¹åº” MIDI_SET_SWITCH
-		     CMD_MIDI_SET_EX_VOL,    //è®¾ç½®å¤–éƒ¨å£°é“éŸ³é‡,å‚æ•°ç»“æ„å¯¹åº” EX_CH_VOL_PARM
-   @param    priv:å¯¹åº”cmdçš„å‚æ•°åœ°å€
+		     CMD_MIDI_SET_CHN_PROG,  //¸ü¸ÄÀÖÆ÷,²ÎÊı½á¹¹¶ÔÓ¦ MIDI_PROG_CTRL_STRUCT
+		     CMD_MIDI_CTRL_TEMPO,    //¸Ä±ä½Ú×à,²ÎÊı½á¹¹¶ÔÓ¦ MIDI_PLAY_CTRL_TEMPO
+		     CMD_MIDI_GOON,          //one key one noteµÄÊ±ºò½Ó×Å²¥·ÅÊ¹ÓÃ,²ÎÊıÎª¿Õ
+		     CMD_MIDI_CTRL_MODE,     //¸Ä±äÄ£Ê½,²ÎÊı½á¹¹¶ÔÓ¦ MIDI_PLAY_CTRL_MO
+		     CMD_MIDI_SET_SWITCH,    //ÅäÖÃ¿ª¹ØÊ¹ÄÜ£¬Òª²»ÒªÌæ»»ÀÖÆ÷£¬Ê¹ÓÃÍâ²¿ÒôÁ¿,²ÎÊı¶ÔÓ¦ MIDI_SET_SWITCH
+		     CMD_MIDI_SET_EX_VOL,    //ÉèÖÃÍâ²¿ÉùµÀÒôÁ¿,²ÎÊı½á¹¹¶ÔÓ¦ EX_CH_VOL_PARM
+   @param    priv:¶ÔÓ¦cmdµÄ²ÎÊıµØÖ·
    @return   0
-   @note    midiè§£ç æ§åˆ¶ä¾‹ç¨‹
+   @note    midi½âÂë¿ØÖÆÀı³Ì
 */
 /*----------------------------------------------------------------------------*/
 void midi_ioctrl(u32 cmd, void *priv)
 {
-    struct file_dec_hdl *dec = get_file_dec_hdl();	// æ–‡ä»¶è§£ç å¥æŸ„
+    struct file_dec_hdl *dec = get_file_dec_hdl();	// ÎÄ¼ş½âÂë¾ä±ú
     if (dec) {
         log_e("file dec NULL\n");
         return ;
@@ -243,7 +243,7 @@ void midi_ioctrl(u32 cmd, void *priv)
     audio_decoder_ioctrl(&dec->file_dec.decoder, cmd, priv);
 }
 #if 0
-//æµ‹è¯•ä¾‹å­
+//²âÊÔÀı×Ó
 void *ex_vol_test()
 {
     static int val = 4096;

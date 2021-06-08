@@ -275,7 +275,7 @@ u32 adc_sample(u32 ch)
     u32 adc_con = 0;
     SFR(adc_con, 0, 3, 0b110);//div 96
 
-    adc_con |= (0xf << 12); //å¯åŠ¨å»¶æ—¶æŽ§åˆ¶ï¼Œå®žé™…å¯åŠ¨å»¶æ—¶ä¸ºæ­¤æ•°å€¼*8ä¸ªADCæ—¶é’Ÿ
+    adc_con |= (0xf << 12); //Æô¶¯ÑÓÊ±¿ØÖÆ£¬Êµ¼ÊÆô¶¯ÑÓÊ±Îª´ËÊýÖµ*8¸öADCÊ±ÖÓ
     adc_con |= (adc_queue[0].ch & 0xf) << 8;
     adc_con |= BIT(3);
     adc_con |= BIT(6);
@@ -349,7 +349,7 @@ void adc_scan(void *priv)
     cur_ch = next_ch;
 }
 
-//èŽ·å–å½“å‰é‡‡é›†adçš„é€šé“æ€»æ•°
+//»ñÈ¡µ±Ç°²É¼¯adµÄÍ¨µÀ×ÜÊý
 u8 get_cur_total_ad_ch(void)
 {
     u8 total_ch = 0;
@@ -516,7 +516,7 @@ void adc_init()
     wvdd_trim();
     if (is_lcd_on()) {
         /*lcd_driver : power_down use vddiow, trim vddiow=vddiom*/
-        /*å‚æ•°ä¸ºvddioå’Œvbatæ˜¯å¦ç»‘å®šåœ¨ä¸€èµ·*/
+        /*²ÎÊýÎªvddioºÍvbatÊÇ·ñ°ó¶¨ÔÚÒ»Æð*/
         check_pmu_voltage(0);
     }
     _adc_init(1);

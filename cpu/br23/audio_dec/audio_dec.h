@@ -49,13 +49,13 @@ enum {
 };
 
 enum {
-    KARAOKE_SPK_OST,//åŸå£°
-    KARAOKE_SPK_DBB,//é‡ä½éŸ³
-    KARAOKE_SPK_SURROUND,//å…¨æ™¯ç¯ç»•
-    KARAOKE_SPK_3D,//3dç¯ç»•
-    KARAOKE_SPK_FLOW_VOICE,//æµåŠ¨äººå£°
-    KARAOKE_SPK_KING,//ç‹è€…è£è€€
-    KARAOKE_SPK_WAR,//åˆºæ¿€æˆ˜åœº
+    KARAOKE_SPK_OST,//Ô­Éù
+    KARAOKE_SPK_DBB,//ÖØµÍÒô
+    KARAOKE_SPK_SURROUND,//È«¾°»·ÈÆ
+    KARAOKE_SPK_3D,//3d»·ÈÆ
+    KARAOKE_SPK_FLOW_VOICE,//Á÷¶¯ÈËÉù
+    KARAOKE_SPK_KING,//ÍõÕßÈÙÒ«
+    KARAOKE_SPK_WAR,//´Ì¼¤Õ½³¡
     KARAOKE_SPK_MAX,
 };
 
@@ -63,14 +63,14 @@ void audio_mode_main_dec_open(u32 state);
 
 //////////////////////////////////////////////////////////////////////////////
 
-// éŸ³é¢‘è§£ç åˆå§‹åŒ–
+// ÒôÆµ½âÂë³õÊ¼»¯
 int audio_dec_init();
 
-// mix outå åšé«˜ä½éŸ³
+// mix outºó ×ö¸ßµÍÒô
 void mix_out_high_bass(u32 cmd, struct high_bass *hb);
-// mix outå æ˜¯å¦åšé«˜ä½éŸ³å¤„ç†
+// mix outºó ÊÇ·ñ×ö¸ßµÍÒô´¦Àí
 void mix_out_high_bass_dis(u32 cmd, u32 dis);
-// åˆ‡æ¢é¢‘å“è®¡ç®—
+// ÇĞ»»ÆµÏì¼ÆËã
 void spectrum_switch_demo(u8 en);
 
 //////////////////////////////////////////////////////////////////////////////
@@ -90,13 +90,13 @@ static inline void audio_pcm_mono_to_dual(s16 *dual_pcm, s16 *mono_pcm, int poin
 //////////////////////////////////////////////////////////////////////////////
 
 extern void *sys_digvol_group;
-// æ•°å­—é€šé“åˆå§‹åŒ–
+// Êı×ÖÍ¨µÀ³õÊ¼»¯
 extern int sys_digvol_group_open(void);
-// æ•°å­—é€šé“å…³é—­
+// Êı×ÖÍ¨µÀ¹Ø±Õ
 extern int sys_digvol_group_close(void);
-// æ‰“å¼€ä¸€ä¸ªæ•°å­—é€šé“
+// ´ò¿ªÒ»¸öÊı×ÖÍ¨µÀ
 extern void *sys_digvol_group_ch_open(char *logo, int vol_start, audio_dig_vol_param *parm);
-// å…³é—­ä¸€ä¸ªæ•°å­—é€šé“
+// ¹Ø±ÕÒ»¸öÊı×ÖÍ¨µÀ
 extern int sys_digvol_group_ch_close(char *logo);
 
 

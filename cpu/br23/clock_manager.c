@@ -10,33 +10,33 @@ struct clock_type {
 
 /*****
 
-idle clk : æ¨¡å¼é‡Œé¢çš„ç©ºé—²æ—¶é’Ÿ
+idle clk : Ä£Ê½ÀïÃæµÄ¿ÕÏÐÊ±ÖÓ
 
-æ—¶é’Ÿé€šè¿‡idle clk åŠ ä¸Šæ¯ä¸€ç§è§£ç æˆ–è€…è¿ç®—çš„æ—¶é’Ÿ
-ç´¯åŠ æ€»å’Œæ¥è®¾ç½®éœ€è¦çš„æ—¶é’Ÿ
+Ê±ÖÓÍ¨¹ýidle clk ¼ÓÉÏÃ¿Ò»ÖÖ½âÂë»òÕßÔËËãµÄÊ±ÖÓ
+ÀÛ¼Ó×ÜºÍÀ´ÉèÖÃÐèÒªµÄÊ±ÖÓ
 
-æ¨¡å¼ç©ºé—²æ—¶é’Ÿè®¾ç½®
+Ä£Ê½¿ÕÏÐÊ±ÖÓÉèÖÃ
 void clock_idle(u32 type)
 
 
-æŠŠæ—¶é’Ÿè®¾ç½®åŠ å…¥åˆ°extä¸­ï¼Œä½†æ˜¯ä¸æ˜¯ç«‹åˆ»è®¾ç½®æ—¶é’Ÿ
-éœ€è¦æœ€åŽè°ƒç”¨clock_set_curæ¥æœ€åŽè®¾ç½®æ—¶é’Ÿ
-ç”¨äºŽè¿žç»­åœ°æ–¹è®¾ç½®æ—¶é’Ÿ
-ç”¨å®ŒåŽå¿…é¡»æŠŠæ—¶é’Ÿremove
+°ÑÊ±ÖÓÉèÖÃ¼ÓÈëµ½extÖÐ£¬µ«ÊÇ²»ÊÇÁ¢¿ÌÉèÖÃÊ±ÖÓ
+ÐèÒª×îºóµ÷ÓÃclock_set_curÀ´×îºóÉèÖÃÊ±ÖÓ
+ÓÃÓÚÁ¬ÐøµØ·½ÉèÖÃÊ±ÖÓ
+ÓÃÍêºó±ØÐë°ÑÊ±ÖÓremove
 void clock_add(u32 type)
 void clock_remove(u32 type)
 void clock_set_cur(void)
 
 
-æŠŠæ—¶é’Ÿè®¾ç½®åŠ å…¥åˆ°extä¸­ï¼Œç«‹åˆ»è®¾ç½®æ—¶é’Ÿ
-éœ€è¦ç«‹åˆ»æ·»åŠ æ—¶é’Ÿ
-ç”¨å®ŒåŽå¿…é¡»æŠŠæ—¶é’Ÿremove
+°ÑÊ±ÖÓÉèÖÃ¼ÓÈëµ½extÖÐ£¬Á¢¿ÌÉèÖÃÊ±ÖÓ
+ÐèÒªÁ¢¿ÌÌí¼ÓÊ±ÖÓ
+ÓÃÍêºó±ØÐë°ÑÊ±ÖÓremove
 void clock_add_set(u32 type)
 void clock_remove_set(u32 type)
 
 *****/
 
-////  å¦‚æžœclock_fix ä¸º0 å°±æŒ‰ç…§é…ç½®è®¾ç½®æ—¶é’Ÿï¼Œå¦‚æžœæœ‰å€¼å°±å›ºå®šé¢‘çŽ‡
+////  Èç¹ûclock_fix Îª0 ¾Í°´ÕÕÅäÖÃÉèÖÃÊ±ÖÓ£¬Èç¹ûÓÐÖµ¾Í¹Ì¶¨ÆµÂÊ
 #if (SOUNDCARD_ENABLE)
 #define CLOCK_FIX   240
 #else
@@ -44,7 +44,7 @@ void clock_remove_set(u32 type)
 #endif
 
 #if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR) && TCFG_EQ_DIVIDE_ENABLE
-#define  EQ4_CLK  (24)  //20æ®µeq double eq
+#define  EQ4_CLK  (24)  //20¶Îeq double eq
 #else
 #define  EQ4_CLK  (0)
 #endif
@@ -137,7 +137,7 @@ const struct clock_type  clock_enum[] = {
     { DEC_UI_CLK, (8),	"DEC_UI_CLK"   },
 
     /* { DEC_MIDI_CLK, (32),	"DEC_MIDI_CLK"   }, */
-    //midiéŸ³è‰²æ–‡ä»¶è·³è½¬è¯»å–é¢‘ç¹ï¼Œå¤–æŒ‚flash baud è°ƒåˆ°6000000L, midi_clk 80Må°±å¤Ÿ
+    //midiÒôÉ«ÎÄ¼þÌø×ª¶ÁÈ¡Æµ·±£¬Íâ¹Òflash baud µ÷µ½6000000L, midi_clk 80M¾Í¹»
     { DEC_MIDI_CLK, (110),	"DEC_MIDI_CLK"   },
     /* { DEC_MIDI_CLK, (80),	"DEC_MIDI_CLK"   }, */
 
@@ -149,7 +149,7 @@ const struct clock_type  clock_enum[] = {
 
     { LCD_UI_CLK, (192),	"LCD_UI_CLK"   },
 
-    { SCAN_DISK_CLK, (120),	"SCAN_DISK_CLK"   },//æé«˜æ‰«ç›˜é€Ÿåº¦
+    { SCAN_DISK_CLK, (120),	"SCAN_DISK_CLK"   },//Ìá¸ßÉ¨ÅÌËÙ¶È
 
 #if TCFG_DEC2TWS_ENABLE
     { LOCALTWS_CLK, (24), "LOCALTWS_CLK"  },
@@ -339,7 +339,7 @@ void clock_idle(u32 type)
     clk_set("sys", cur_clk * 1000000L);
 }
 
-//////æŠŠæ—¶é’Ÿè®¾ç½®åŠ å…¥åˆ°extä¸­ï¼Œä½†æ˜¯ä¸æ˜¯ç«‹åˆ»è®¾ç½®æ—¶é’Ÿ
+//////°ÑÊ±ÖÓÉèÖÃ¼ÓÈëµ½extÖÐ£¬µ«ÊÇ²»ÊÇÁ¢¿ÌÉèÖÃÊ±ÖÓ
 void  clock_add(u32 type)
 {
     u32 cur_clk ;
@@ -367,7 +367,7 @@ void clock_set_cur(void)
     clk_set("sys", cur_clk * 1000000L);
 }
 
-//////æŠŠæ—¶é’Ÿè®¾ç½®åŠ å…¥åˆ°extä¸­ï¼Œç«‹åˆ»è®¾ç½®æ—¶é’Ÿ
+//////°ÑÊ±ÖÓÉèÖÃ¼ÓÈëµ½extÖÐ£¬Á¢¿ÌÉèÖÃÊ±ÖÓ
 void clock_add_set(u32 type)
 {
     u32 cur_clk ;

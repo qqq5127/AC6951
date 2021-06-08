@@ -13,9 +13,9 @@
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    QN8027 å†™å¯„å­˜å™¨å‡½æ•°
-   @param    addrï¼šå¯„å­˜å™¨åœ°å€   dataï¼šå†™å…¥æ•°æ®
-   @return   æ— 
+/**@brief    QN8027 Ğ´¼Ä´æÆ÷º¯Êı
+   @param    addr£º¼Ä´æÆ÷µØÖ·   data£ºĞ´ÈëÊı¾İ
+   @return   ÎŞ
    @note     void qn8027_write(u8 iic_addr,u8 iic_data)
 */
 /*----------------------------------------------------------------------------*/
@@ -25,22 +25,22 @@ void qn8027_write(u8 reg_addr, u8 reg_data)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    QN8027 è¯»å¯„å­˜å™¨å‡½æ•°
-   @param    addrï¼šè¦è¯»å¯„å­˜å™¨åœ°å€
-   @return   è¯»å–åˆ°çš„å¯„å­˜å™¨çš„å€¼
+/**@brief    QN8027 ¶Á¼Ä´æÆ÷º¯Êı
+   @param    addr£ºÒª¶Á¼Ä´æÆ÷µØÖ·
+   @return   ¶ÁÈ¡µ½µÄ¼Ä´æÆ÷µÄÖµ
    @note     u8 qn8027_read(u8 iic_addr)
 */
 /*----------------------------------------------------------------------------*/
 u8 qn8027_read(u8 reg_addr)
 {
     u8 Byte_RecivData;
-    iic_start();                    //I2Cå¯åŠ¨
-    iic_sendbyte(QN8027_ADDR_WRITE);             //å†™å‘½ä»¤
-    iic_sendbyte(reg_addr);             //å†™åœ°å€
-    iic_start();                    //å†™è½¬ä¸ºè¯»å‘½ä»¤ï¼Œéœ€è¦å†æ¬¡å¯åŠ¨I2C
-    iic_sendbyte(QN8027_ADDR_READ);            //è¯»å‘½ä»¤
+    iic_start();                    //I2CÆô¶¯
+    iic_sendbyte(QN8027_ADDR_WRITE);             //Ğ´ÃüÁî
+    iic_sendbyte(reg_addr);             //Ğ´µØÖ·
+    iic_start();                    //Ğ´×ªÎª¶ÁÃüÁî£¬ĞèÒªÔÙ´ÎÆô¶¯I2C
+    iic_sendbyte(QN8027_ADDR_READ);            //¶ÁÃüÁî
     Byte_RecivData = iic_revbyte(1);
-    iic_stop();                     //I2Cåœæ­¢
+    iic_stop();                     //I2CÍ£Ö¹
     return Byte_RecivData;
 }
 
@@ -55,9 +55,9 @@ void qn8027_write_Bit(u8 reg, u8 start, u8 len, u8 data)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    QN8027 åˆå§‹åŒ–å‡½æ•°
-   @param    freï¼šåˆå§‹åŒ–æ—¶è®¾ç½®çš„é¢‘ç‚¹
-   @return   æ— 
+/**@brief    QN8027 ³õÊ¼»¯º¯Êı
+   @param    fre£º³õÊ¼»¯Ê±ÉèÖÃµÄÆµµã
+   @return   ÎŞ
    @note     void qn8027_init(u16 fre)
 */
 /*----------------------------------------------------------------------------*/
@@ -73,9 +73,9 @@ void qn8027_init(u16 fre)
     delay_n10ms(2);
 
 #if (FMTX_CHIP_CLK_SOURCE == CLK_BY_EXTERN_OSC)
-    qn8027_write(QN8027_REG_XTL, 0x3f);		//å¤–æŒ‚æ™¶æŒ¯
+    qn8027_write(QN8027_REG_XTL, 0x3f);		//Íâ¹Ò¾§Õñ
 #else
-    qn8027_write(QN8027_REG_XTL, 0xff);		//å¤–éƒ¨æ—¶é’Ÿè¾“å…¥
+    qn8027_write(QN8027_REG_XTL, 0xff);		//Íâ²¿Ê±ÖÓÊäÈë
 #endif
 
 #if (FMTX_CHIP_OSC_SELECT == OSC_24M)
@@ -88,17 +88,17 @@ void qn8027_init(u16 fre)
     delay_n10ms(2);
 
     qn8027_write(0x18, 0xe4);           //SNR improve xx1x x1xx
-    qn8027_write(0x1b, 0xf0);			//æœ€å¤§å‘å°„åŠŸç‡
-    qn8027_write(QN8027_CH1, 0x7e);		//è®¾ç½®å‘å°„é¢‘ç‡
+    qn8027_write(0x1b, 0xf0);			//×î´ó·¢Éä¹¦ÂÊ
+    qn8027_write(QN8027_CH1, 0x7e);		//ÉèÖÃ·¢ÉäÆµÂÊ
 
 #if PA_OFF_WHEN_NO_AUDIO
-    qn8027_write(QN8027_GPLT, 0xA9);    //å½“æ²¡æœ‰éŸ³é¢‘ä¿¡å·è¾“å…¥æ—¶,ä¸€åˆ†é’Ÿåå…³é—­å‘å°„
+    qn8027_write(QN8027_GPLT, 0xA9);    //µ±Ã»ÓĞÒôÆµĞÅºÅÊäÈëÊ±,Ò»·ÖÖÓºó¹Ø±Õ·¢Éä
 #else
-    qn8027_write(QN8027_GPLT, 0xB9);    //æ”¾å¼ƒQN8027 PAå…³é—­åŠŸèƒ½å½“æ²¡æœ‰éŸ³é¢‘ä¿¡å·è¾“å…¥æ—¶
+    qn8027_write(QN8027_GPLT, 0xB9);    //·ÅÆúQN8027 PA¹Ø±Õ¹¦ÄÜµ±Ã»ÓĞÒôÆµĞÅºÅÊäÈëÊ±
 #endif
     qn8027_write(QN8027_FDEV, 64);
 
-    qn8027_write(QN8027_SYSTEM, 0x22);			//å‘å°„
+    qn8027_write(QN8027_SYSTEM, 0x22);			//·¢Éä
 
     delay_n10ms(10);
     qn8027_set_freq(fre);
@@ -106,13 +106,13 @@ void qn8027_init(u16 fre)
 }
 /*
 void qn8027_set_freq(u16 fre)
-fre æ˜¯é¢‘ç‡å€¼
-ä¾‹å­ï¼š90MHZåº”è¯¥ä¼ å…¥900
+fre ÊÇÆµÂÊÖµ
+Àı×Ó£º90MHZÓ¦¸Ã´«Èë900
 */
 /*----------------------------------------------------------------------------*/
-/**@brief    QN8027 é¢‘ç‚¹è®¾ç½®å‡½æ•°
-   @param    freï¼šè®¾ç½®é¢‘ç‚¹
-   @return   æ— 
+/**@brief    QN8027 ÆµµãÉèÖÃº¯Êı
+   @param    fre£ºÉèÖÃÆµµã
+   @return   ÎŞ
    @note     void qn8027_set_freq(u16 fre)
 */
 /*----------------------------------------------------------------------------*/

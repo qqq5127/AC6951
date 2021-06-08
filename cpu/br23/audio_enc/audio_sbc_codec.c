@@ -12,9 +12,9 @@
 #include "media/pcm_decoder.h"
 #include "audio_dec.h"
 
-#define BT_USE_PCM_DEC         0   //å¤šåŠ ä¸€ä¸ªè§£ç ï¼Œä¼šå¤šè€—èµ„æºï¼Œæ—¶é’Ÿä¹Ÿä¼šå¢åŠ ,ç”¨æ¥è§£å†³å®Œå…¨åˆ‡æ­Œçš„æ—¶å€™å‡ºç°æ‚éŸ³çš„é—®é¢˜
+#define BT_USE_PCM_DEC         0   //¶à¼ÓÒ»¸ö½âÂë£¬»á¶àºÄ×ÊÔ´£¬Ê±ÖÓÒ²»áÔö¼Ó,ÓÃÀ´½â¾öÍêÈ«ÇĞ¸èµÄÊ±ºò³öÏÖÔÓÒôµÄÎÊÌâ
 
-#define  SBC_RESERVED_LAST_PCM  1  //æ·¡å…¥æ·¡å‡ºåŠŸèƒ½ï¼Œè€—èµ„æºå¾ˆå°ï¼Œå¯ä»¥è§£å†³æ­£å¸¸é€Ÿåº¦åˆ‡æ­Œæ‚éŸ³ï¼Œä½†æ˜¯å¿«é€Ÿè¿ç»­åˆ‡æ­Œä¼šæœ‰æ‚éŸ³
+#define  SBC_RESERVED_LAST_PCM  1  //µ­Èëµ­³ö¹¦ÄÜ£¬ºÄ×ÊÔ´ºÜĞ¡£¬¿ÉÒÔ½â¾öÕı³£ËÙ¶ÈÇĞ¸èÔÓÒô£¬µ«ÊÇ¿ìËÙÁ¬ĞøÇĞ¸è»áÓĞÔÓÒô
 
 
 enum {
@@ -32,8 +32,8 @@ extern struct audio_encoder_task *encode_task;
 //static struct audio_encoder_task *encode_task = NULL;
 #define SBC_ENC_WRITING                 BIT(1)
 #define SBC_ENC_START                   BIT(2)
-#define SBC_ENC_WAKEUP_SEND             BIT(3)  /*å‡å°‘å”¤é†’é—®é¢˜*/
-#define SBC_ENC_PCM_MUTE_DATA           BIT(4)  /*å‘ä¸€åŒ…é™éŸ³æ•°æ®*/
+#define SBC_ENC_WAKEUP_SEND             BIT(3)  /*¼õÉÙ»½ĞÑÎÊÌâ*/
+#define SBC_ENC_PCM_MUTE_DATA           BIT(4)  /*·¢Ò»°ü¾²ÒôÊı¾İ*/
 
 static u8 sbc_buf_flag = 0;
 #define ESCO_ADC_BUF_NUM        2
@@ -41,7 +41,7 @@ static u8 sbc_buf_flag = 0;
 #define ESCO_ADC_BUFS_SIZE      (ESCO_ADC_BUF_NUM * ESCO_ADC_IRQ_POINTS)
 
 #define SBC_USE_MIC_CHANNEL     0
-#define SBC_ENC_PACK_ENABLE		0	/*sbcæ•°æ®åŒ…å°è£…*/
+#define SBC_ENC_PACK_ENABLE		0	/*sbcÊı¾İ°ü·â×°*/
 #define SBC_ENC_IN_SIZE			512
 #define SBC_ENC_OUT_SIZE		256
 
@@ -57,7 +57,7 @@ struct sbc_enc_hdl {
     u8 backup_digital_vol;
     cbuffer_t output_cbuf;
     u8 out_cbuf_buf[SBC_ENC_OUT_CBUF_SIZE];
-    cbuffer_t pcm_in_cbuf;/*è¦æ³¨æ„è¦è·ŸDACçš„bufå¤§å°ä¸€è‡´*/
+    cbuffer_t pcm_in_cbuf;/*Òª×¢ÒâÒª¸úDACµÄbuf´óĞ¡Ò»ÖÂ*/
     u8 in_cbuf_buf[SBC_ENC_IN_CBUF_SIZE];
 #if SBC_ENC_PACK_ENABLE
     u16 cp_type;
@@ -82,8 +82,8 @@ struct sbc_enc_hdl {
 #if BT_USE_PCM_DEC
     struct audio_mixer_ch 		mix_ch;
     struct audio_res_wait 		wait;
-    struct pcm_decoder 			pcm_dec;		// pcmè§£ç å¥æŸ„
-    struct audio_stream 		*audio_stream;	// éŸ³é¢‘æµ
+    struct pcm_decoder 			pcm_dec;		// pcm½âÂë¾ä±ú
+    struct audio_stream 		*audio_stream;	// ÒôÆµÁ÷
 #endif
 
     /* dvol_handle *dvol; */
@@ -205,7 +205,7 @@ static int sbc_enc_pcm_get(struct audio_encoder *encoder, s16 **frame, u16 frame
             local_irq_disable();
             if (enc->run_step == SBC_RUN_STEP_WAIT_STOP) {
                 enc->run_step = SBC_RUN_STEP_STOP;
-                enc->run_cnt = 200; // å‘å°„æ¯æ¬¡è¯»å–5åŒ…ï¼Œè‡³å°‘ä¿è¯å‘å°„ä¸€å¸§
+                enc->run_cnt = 200; // ·¢ÉäÃ¿´Î¶ÁÈ¡5°ü£¬ÖÁÉÙ±£Ö¤·¢ÉäÒ»Ö¡
                 sbc_enc_pcm_data_fade_out(enc->pcm_frame, pcm_len);
             } else if (enc->run_step == SBC_RUN_STEP_STOP) {
                 memset(enc->pcm_frame, 0, pcm_len);
@@ -400,8 +400,8 @@ static void pcm_dec_close(struct sbc_enc_hdl *stream)
  };
  SBC_FRAME_SUM defined within sbc_packet_head_buf used for Media Playload parameter:Number of Frames
  */
-#define SBC_PACKET_HEADER_LEN   (14) /*åŒ…å¤´Max Length*/
-#define SBC_FRAME_SUM           (4)	 /*ä¸€åŒ…å¤šå°‘å¸§*/
+#define SBC_PACKET_HEADER_LEN   (14) /*°üÍ·Max Length*/
+#define SBC_FRAME_SUM           (4)	 /*Ò»°ü¶àÉÙÖ¡*/
 static unsigned char sbc_packet_head_buf[SBC_PACKET_HEADER_LEN] = {
     0x80, 0x60,     		//Version:2 Playload Type:0x60
     0x00, 0x64,   			//Sequencenumber
@@ -454,7 +454,7 @@ static int sbc_enc_output_handler(struct audio_encoder *encoder, u8 *frame, int 
     }
     //printf("sbc_enc out,frame:%x,out:%d[0x%x]\n", frame, len, enc->frame_size);
     if (cbuf_get_data_size(&sbc_enc->output_cbuf) >= enc->frame_size * 5) {
-        //è¾¾åˆ°åŸºæœ¬çš„æ•°æ®é‡ï¼Œå”¤é†’è“ç‰™å‘æ•°
+        //´ïµ½»ù±¾µÄÊı¾İÁ¿£¬»½ĞÑÀ¶ÑÀ·¢Êı
         user_emitter_cmd_prepare(USER_CTRL_CMD_RESUME_STACK, 0, NULL);
     }
     return len;
@@ -474,7 +474,7 @@ int a2dp_sbc_encoder_get_data(u8 *packet, u16 buf_len, int *frame_size)
         return 0;
     }
     int debug_frame_size = sbc_enc->frame_size;
-    int number = buf_len / debug_frame_size;  /*å–æ•´æ•°åŒ…*/
+    int number = buf_len / debug_frame_size;  /*È¡ÕûÊı°ü*/
     *frame_size = debug_frame_size;
     u16 rlen = cbuf_read(&sbc_enc->output_cbuf, packet, *frame_size * number);
     if (rlen == 0) {
@@ -483,7 +483,7 @@ int a2dp_sbc_encoder_get_data(u8 *packet, u16 buf_len, int *frame_size)
 
 #if SBC_RESERVED_LAST_PCM
     if (sbc_enc->run_step != SBC_RUN_STEP_NOR) {
-        // éæ­£å¸¸çŠ¶æ€ï¼Œsbcæ•°æ®å–èµ°åæ¿€æ´»ä¸€ä¸‹ç¼–ç 
+        // ·ÇÕı³£×´Ì¬£¬sbcÊı¾İÈ¡×ßºó¼¤»îÒ»ÏÂ±àÂë
         audio_encoder_resume(&sbc_enc->encoder);
     }
 #endif
@@ -658,7 +658,7 @@ static void adc_mic_output_handler(void *priv, s16 *data, int len)
         return 0;
     }
     if (sbc_enc) {
-        //å•å˜åŒ
+        //µ¥±äË«
         for (int i = 0; i < points ; i++) {
             temp_data[i * 2] = data[i];
             temp_data[i * 2 + 1] = data[i];
@@ -751,8 +751,8 @@ int audio_sbc_enc_reset_buf(u8 flag)
     }
     r_printf("audio_sbc_enc_reset_buf %d\n", flag);
     if (flag) {
-        //æœ‰äº›æƒ…å†µï¼ˆæç¤ºéŸ³ï¼‰æ²¡æœ‰è¶³å¤Ÿçš„å‚æ•°å»fade outï¼Œä½¿å¾—ä¸‹æ¬¡fade inå—å½±å“ã€‚
-        //æ‰€ä»¥é»˜è®¤æ¯æ¬¡éƒ½resetä¸€ä¸‹
+        //ÓĞĞ©Çé¿ö£¨ÌáÊ¾Òô£©Ã»ÓĞ×ã¹»µÄ²ÎÊıÈ¥fade out£¬Ê¹µÃÏÂ´Îfade inÊÜÓ°Ïì¡£
+        //ËùÒÔÄ¬ÈÏÃ¿´Î¶¼resetÒ»ÏÂ
         /* audio_digital_vol_reset_fade(sbc_enc->dvol); */
         /* audio_digital_vol_set(sbc_enc->dvol, sbc_enc->backup_digital_vol); */
         if (sbc_enc->mute_data_send_timer) {
@@ -875,7 +875,7 @@ int a2dp_sbc_encoder_init(void *sbc_struct)
 {
     extern void audio_mixer_reset_sample_rate(u8 flag, u32 sr);
     if (sbc_struct) {
-        //æ›´æ–°è¿æ¥è¿‡ç¨‹ä¸­çš„a2dp sourceå‚æ•°
+        //¸üĞÂÁ¬½Ó¹ı³ÌÖĞµÄa2dp source²ÎÊı
         //audio_sbc_enc_config(&sbc_param);
         g_printf("sbc enc open");
         memcpy(&sbc_param, sbc_struct, sizeof(sbc_t));
@@ -925,7 +925,7 @@ static int audio_stream_sbc_emitter_data_handler(struct audio_stream_entry *entr
 
             sbc_enc->run_step = SBC_RUN_STEP_WAIT_NOR;
 
-            sbc_enc->in_cnt = 100;     //ä¸¢æ‰å‰é¢å‡ åŒ…
+            sbc_enc->in_cnt = 100;     //¶ªµôÇ°Ãæ¼¸°ü
 
 
 

@@ -25,11 +25,11 @@
 
 #if TCFG_ESCO_LIMITER
 #include "limiter_noiseGate_api.h"
-/*é™å¹…å™¨ä¸Šé™*/
-#define LIMITER_THR	 -10000 /*-12000 = -12dB,æ”¾å¤§1000å€,(-10000å‚è€ƒ)*/
-/*å°äºCONST_NOISE_GATEçš„å½“æˆå™ªå£°å¤„ç†,é˜²æ­¢æ¸…0è¿‘ç«¯å£°éŸ³*/
-#define LIMITER_NOISE_GATE  -50000 /*-12000 = -12dB,æ”¾å¤§1000å€,(-30000å‚è€ƒ)*/
-/*ä½äºå™ªå£°é—¨é™é˜ˆå€¼çš„å¢ç›Š */
+/*ÏŞ·ùÆ÷ÉÏÏŞ*/
+#define LIMITER_THR	 -10000 /*-12000 = -12dB,·Å´ó1000±¶,(-10000²Î¿¼)*/
+/*Ğ¡ÓÚCONST_NOISE_GATEµÄµ±³ÉÔëÉù´¦Àí,·ÀÖ¹Çå0½ü¶ËÉùÒô*/
+#define LIMITER_NOISE_GATE  -50000 /*-12000 = -12dB,·Å´ó1000±¶,(-30000²Î¿¼)*/
+/*µÍÓÚÔëÉùÃÅÏŞãĞÖµµÄÔöÒæ */
 #define LIMITER_NOISE_GAIN  (0 << 30) /*(0~1)*2^30*/
 #endif/*TCFG_ESCO_LIMITER*/
 
@@ -47,32 +47,32 @@ extern const int config_mixer_en;
 
 
 struct a2dp_dec_hdl {
-    struct a2dp_decoder dec;		// a2dpè§£ç å¥æŸ„
-    struct audio_res_wait wait;		// èµ„æºç­‰å¾…å¥æŸ„
-    struct audio_mixer_ch mix_ch;	// å åŠ å¥æŸ„
+    struct a2dp_decoder dec;		// a2dp½âÂë¾ä±ú
+    struct audio_res_wait wait;		// ×ÊÔ´µÈ´ı¾ä±ú
+    struct audio_mixer_ch mix_ch;	// µş¼Ó¾ä±ú
 #if (RECORDER_MIX_EN)
-    struct audio_mixer_ch rec_mix_ch;	// å åŠ å¥æŸ„
+    struct audio_mixer_ch rec_mix_ch;	// µş¼Ó¾ä±ú
 #endif//RECORDER_MIX_EN
 
-    struct audio_stream *stream;	// éŸ³é¢‘æµ
-    struct audio_eq_drc *eq_drc;    //eq drcå¥æŸ„
+    struct audio_stream *stream;	// ÒôÆµÁ÷
+    struct audio_eq_drc *eq_drc;    //eq drc¾ä±ú
 #if AUDIO_EQUALLOUDNESS_CONFIG
-    equal_loudness_hdl *loudness;   //ç­‰å“åº¦å¥æŸ„
+    equal_loudness_hdl *loudness;   //µÈÏì¶È¾ä±ú
 #endif
 #if AUDIO_SURROUND_CONFIG
-    surround_hdl *surround;         //ç¯ç»•éŸ³æ•ˆå¥æŸ„
+    surround_hdl *surround;         //»·ÈÆÒôĞ§¾ä±ú
 #endif
 #if AUDIO_VBASS_CONFIG
-    vbass_hdl *vbass;               //è™šæ‹Ÿä½éŸ³å¥æŸ„
+    vbass_hdl *vbass;               //ĞéÄâµÍÒô¾ä±ú
 #endif
     struct audio_wireless_sync *sync;
 
 #if TCFG_EQ_DIVIDE_ENABLE
-    struct audio_eq_drc *eq_drc_rl_rr;//eq drcå¥æŸ„
-    struct audio_vocal_tract vocal_tract;//å£°é“åˆå¹¶ç›®æ ‡å¥æŸ„
-    struct audio_vocal_tract_ch synthesis_ch_fl_fr;//å£°é“åˆå¹¶å¥æŸ„
-    struct audio_vocal_tract_ch synthesis_ch_rl_rr;//å£°é“åˆå¹¶å¥æŸ„
-    struct channel_switch *ch_switch;//å£°é“å˜æ¢
+    struct audio_eq_drc *eq_drc_rl_rr;//eq drc¾ä±ú
+    struct audio_vocal_tract vocal_tract;//ÉùµÀºÏ²¢Ä¿±ê¾ä±ú
+    struct audio_vocal_tract_ch synthesis_ch_fl_fr;//ÉùµÀºÏ²¢¾ä±ú
+    struct audio_vocal_tract_ch synthesis_ch_rl_rr;//ÉùµÀºÏ²¢¾ä±ú
+    struct channel_switch *ch_switch;//ÉùµÀ±ä»»
 #endif
 
 
@@ -85,27 +85,27 @@ struct a2dp_dec_hdl {
 };
 
 struct esco_dec_hdl {
-    struct esco_decoder dec;		// escoè§£ç å¥æŸ„
-    struct audio_res_wait wait;		// èµ„æºç­‰å¾…å¥æŸ„
-    struct audio_mixer_ch mix_ch;	// å åŠ å¥æŸ„
+    struct esco_decoder dec;		// esco½âÂë¾ä±ú
+    struct audio_res_wait wait;		// ×ÊÔ´µÈ´ı¾ä±ú
+    struct audio_mixer_ch mix_ch;	// µş¼Ó¾ä±ú
 #if (RECORDER_MIX_EN)
-    struct audio_mixer_ch rec_mix_ch;	// å åŠ å¥æŸ„
+    struct audio_mixer_ch rec_mix_ch;	// µş¼Ó¾ä±ú
 #endif//RECORDER_MIX_EN
 
-    struct audio_stream *stream;	// éŸ³é¢‘æµ
-    struct audio_eq_drc *eq_drc;    //eq drcå¥æŸ„
+    struct audio_stream *stream;	// ÒôÆµÁ÷
+    struct audio_eq_drc *eq_drc;    //eq drc¾ä±ú
 
-    struct channel_switch *ch_switch;//å£°é“å˜æ¢
+    struct channel_switch *ch_switch;//ÉùµÀ±ä»»
 
-    u32 tws_mute_en : 1;	// é™éŸ³
-    u32 remain : 1;			// æœªè¾“å‡ºå®Œæˆ
+    u32 tws_mute_en : 1;	// ¾²Òô
+    u32 remain : 1;			// Î´Êä³öÍê³É
 
 #if TCFG_ESCO_PLC
-    void *plc;				// ä¸¢åŒ…ä¿®æŠ¤
+    void *plc;				// ¶ª°üĞŞ»¤
 #endif
 
 #if TCFG_ESCO_LIMITER
-    void *limiter;			// é™ç¦å™¨
+    void *limiter;			// ÏŞ¸£Æ÷
 #endif
     struct audio_wireless_sync *sync;
 };
@@ -212,7 +212,7 @@ static void audio_dec_slience_entry_free(struct a2dp_dec_hdl *dec)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpè§£ç close
+/**@brief    a2dp½âÂëclose
    @param
    @return
    @note
@@ -266,7 +266,7 @@ static void a2dp_audio_res_close(void)
 
 
 
-    // å…ˆå…³é—­å„ä¸ªèŠ‚ç‚¹ï¼Œæœ€åæ‰closeæ•°æ®æµ
+    // ÏÈ¹Ø±Õ¸÷¸ö½Úµã£¬×îºó²ÅcloseÊı¾İÁ÷
     if (bt_a2dp_dec->stream) {
         audio_stream_close(bt_a2dp_dec->stream);
         bt_a2dp_dec->stream = NULL;
@@ -276,7 +276,7 @@ static void a2dp_audio_res_close(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpè§£ç é‡Šæ”¾
+/**@brief    a2dp½âÂëÊÍ·Å
    @param
    @return
    @note
@@ -300,10 +300,10 @@ static void a2dp_dec_release()
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpè§£ç äº‹ä»¶è¿”å›
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @param    argc: å‚æ•°ä¸ªæ•°
-   @param    *argv: å‚æ•°
+/**@brief    a2dp½âÂëÊÂ¼ş·µ»Ø
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @param    argc: ²ÎÊı¸öÊı
+   @param    *argv: ²ÎÊı
    @return
    @note
 */
@@ -320,8 +320,8 @@ static void a2dp_dec_event_handler(struct audio_decoder *decoder, int argc, int 
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpè§£ç æ•°æ®æµæ¿€æ´»
-   @param    *p: ç§æœ‰å¥æŸ„
+/**@brief    a2dp½âÂëÊı¾İÁ÷¼¤»î
+   @param    *p: Ë½ÓĞ¾ä±ú
    @return
    @note
 */
@@ -334,10 +334,10 @@ static void a2dp_dec_out_stream_resume(void *p)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpæ¥å—å›è°ƒ
+/**@brief    a2dp½ÓÊÜ»Øµ÷
    @param
    @return
-   @note	 è“ç‰™åº“é‡Œé¢æ¥å—åˆ°äº†a2dpéŸ³é¢‘
+   @note	 À¶ÑÀ¿âÀïÃæ½ÓÊÜµ½ÁËa2dpÒôÆµ
 */
 /*----------------------------------------------------------------------------*/
 void a2dp_rx_notice_to_decode(void)
@@ -348,11 +348,11 @@ void a2dp_rx_notice_to_decode(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpè§£ç è¾“å‡ºåˆ°dacæ—¶çš„é¢„å¤„ç†
-   @param    *entry: æ•°æ®æµèŠ‚ç‚¹
-   @param    *in: è¾“å…¥æ•°æ®
+/**@brief    a2dp½âÂëÊä³öµ½dacÊ±µÄÔ¤´¦Àí
+   @param    *entry: Êı¾İÁ÷½Úµã
+   @param    *in: ÊäÈëÊı¾İ
    @return
-   @note	 åº”ç”¨åœ¨æ²¡æœ‰ä½¿ç”¨mixeræƒ…å†µä¸‹ä¼ è¾“syncæ ‡å¿—
+   @note	 Ó¦ÓÃÔÚÃ»ÓĞÊ¹ÓÃmixerÇé¿öÏÂ´«Êäsync±êÖ¾
 */
 /*----------------------------------------------------------------------------*/
 static int a2dp_to_dac_probe_handler(struct audio_stream_entry *entry,  struct audio_data_frame *in)
@@ -367,17 +367,17 @@ static int a2dp_to_dac_probe_handler(struct audio_stream_entry *entry,  struct a
 }
 
 #if 0
-// è§£ç è¾“å‡ºæ•°æ®æµèŠ‚ç‚¹æ•°æ®å¤„ç†å›è°ƒç¤ºä¾‹
+// ½âÂëÊä³öÊı¾İÁ÷½ÚµãÊı¾İ´¦Àí»Øµ÷Ê¾Àı
 static int demo_decoder_data_handler(struct audio_stream_entry *entry,
                                      struct audio_data_frame *in,
                                      struct audio_data_frame *out)
 {
     struct audio_decoder *decoder = container_of(entry, struct audio_decoder, entry);
-    // è‡ªå®šä¹‰æ•°æ®å¤„ç†
+    // ×Ô¶¨ÒåÊı¾İ´¦Àí
     // ...
     put_buf(in->data, 16);
-    // è¾“å‡ºåˆ°æ•°æ®æµç¤ºä¾‹ã€‚
-    // å¦‚æœä¸ä½¿ç”¨audio_streamæµç¨‹ï¼Œè¾“å‡ºåï¼Œéœ€è¦æŠŠå®é™…è¾“å‡ºé•¿åº¦æ›´æ–°åˆ°decoder->process_len
+    // Êä³öµ½Êı¾İÁ÷Ê¾Àı¡£
+    // Èç¹û²»Ê¹ÓÃaudio_streamÁ÷³Ì£¬Êä³öºó£¬ĞèÒª°ÑÊµ¼ÊÊä³ö³¤¶È¸üĞÂµ½decoder->process_len
     decoder->process_len = 0;
     audio_stream_run(&decoder->entry, in);
     int wlen = decoder->process_len;
@@ -386,11 +386,11 @@ static int demo_decoder_data_handler(struct audio_stream_entry *entry,
 #endif
 
 #if 0
-// æ•°æ®æµé¢„å¤„ç†å›è°ƒç¤ºä¾‹
+// Êı¾İÁ÷Ô¤´¦Àí»Øµ÷Ê¾Àı
 static int demo_stream_mix_prob_handler(struct audio_stream_entry *entry,  struct audio_data_frame *in)
 {
-    // è¯¥å‡½æ•°ä¸­å¦‚æœè¿”å›è´Ÿæ•°ï¼Œæ•°æ®æµå°†æˆªæ­¢è¿è¡Œï¼Œè§£ç ä¼šè¢«æŒ‚èµ·
-    // å¯¹æ•°æ®è¿›è¡Œå¤„ç†ï¼Œå¦‚æ‰“å°ä¸€ä¸‹æ•°æ®
+    // ¸Ãº¯ÊıÖĞÈç¹û·µ»Ø¸ºÊı£¬Êı¾İÁ÷½«½ØÖ¹ÔËĞĞ£¬½âÂë»á±»¹ÒÆğ
+    // ¶ÔÊı¾İ½øĞĞ´¦Àí£¬Èç´òÓ¡Ò»ÏÂÊı¾İ
     /* put_buf(in->data, in->data_len); */
     put_buf(in->data, 16);
     /* memset(in->data, 0, in->data_len); */
@@ -399,25 +399,25 @@ static int demo_stream_mix_prob_handler(struct audio_stream_entry *entry,  struc
 #endif
 
 #if 0
-// ä¿å­˜åŸæ¥çš„æ•°æ®æµæ•°æ®å¤„ç†
+// ±£´æÔ­À´µÄÊı¾İÁ÷Êı¾İ´¦Àí
 static void *demo_data_handler_save;
-// æ•°æ®æµdata_handlerå¤„ç†
+// Êı¾İÁ÷data_handler´¦Àí
 static int demo_new_data_handler(struct audio_stream_entry *entry,
                                  struct audio_data_frame *in,
                                  struct audio_data_frame *out)
 {
-    // å¯¹æ•°æ®è¿›è¡Œå¤„ç†
+    // ¶ÔÊı¾İ½øĞĞ´¦Àí
     put_buf(in->data, 8);
-    // è°ƒç”¨åŸæ¥çš„æ¥å£è¾“å‡ºï¼Œè¿™é‡Œå°±å¯ä»¥ä¿å­˜ä¸€ä¸‹æ˜¯å¦è¾“å‡ºå®Œï¼Œå°±å¯ä»¥åšæ¯”è¾ƒå¤šçš„å¤„ç†äº†
+    // µ÷ÓÃÔ­À´µÄ½Ó¿ÚÊä³ö£¬ÕâÀï¾Í¿ÉÒÔ±£´æÒ»ÏÂÊÇ·ñÊä³öÍê£¬¾Í¿ÉÒÔ×ö±È½Ï¶àµÄ´¦ÀíÁË
     int wlen = ((int (*)(struct audio_stream_entry *, struct audio_data_frame *, struct audio_data_frame *))demo_data_handler_save)(entry, in, out);
     return wlen;
 }
 #endif
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å¼€å§‹a2dpè§£ç 
+/**@brief    ¿ªÊ¼a2dp½âÂë
    @param
-   @return   0: æˆåŠŸ
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -435,47 +435,47 @@ static int a2dp_dec_start(void)
 
     log_i("a2dp_dec_start: in\n");
 
-    // æ‰“å¼€a2dpè§£ç 
+    // ´ò¿ªa2dp½âÂë
     err = a2dp_decoder_open(&dec->dec, &decode_task);
     if (err) {
         goto __err1;
     }
-    // ä½¿èƒ½äº‹ä»¶å›è°ƒ
+    // Ê¹ÄÜÊÂ¼ş»Øµ÷
     audio_decoder_set_event_handler(&dec->dec.decoder, a2dp_dec_event_handler, 0);
 
-    // è·å–è§£ç æ ¼å¼
+    // »ñÈ¡½âÂë¸ñÊ½
     err = audio_decoder_get_fmt(&dec->dec.decoder, &fmt);
     if (err) {
         goto __err2;
     }
 
-    // è®¾ç½®è¾“å‡ºå£°é“æ•°å’Œå£°é“ç±»å‹
+    // ÉèÖÃÊä³öÉùµÀÊıºÍÉùµÀÀàĞÍ
     ch_num = audio_output_channel_num();
     ch_type = audio_output_channel_type();
     a2dp_decoder_set_output_channel(&dec->dec, ch_num, ch_type);
 
     if (AUDIO_DEC_BT_MIXER_EN) {
         audio_mode_main_dec_open(AUDIO_MODE_MAIN_STATE_DEC_A2DP);
-        // é…ç½®mixeré€šé“å‚æ•°
-        audio_mixer_ch_open_head(&dec->mix_ch, &mixer); // æŒ‚è½½åˆ°mixeræœ€å‰é¢
+        // ÅäÖÃmixerÍ¨µÀ²ÎÊı
+        audio_mixer_ch_open_head(&dec->mix_ch, &mixer); // ¹ÒÔØµ½mixer×îÇ°Ãæ
 #if (SOUNDCARD_ENABLE)
         audio_mixer_ch_set_aud_ch_out(&dec->mix_ch, 0, BIT(0) | BIT(2) | BIT(3));
         audio_mixer_ch_set_aud_ch_out(&dec->mix_ch, 1, BIT(1) | BIT(2) | BIT(3));
 #endif/*SOUNDCARD_ENABLE*/
         audio_mixer_ch_set_src(&dec->mix_ch, 1, 0);
-        audio_mixer_ch_set_no_wait(&dec->mix_ch, 1, 20); // è¶…æ—¶è‡ªåŠ¨ä¸¢æ•°
-        audio_mixer_ch_sample_sync_enable(&dec->mix_ch, 1); // æ ‡å¿—ä¸ºsyncé€šé“
+        audio_mixer_ch_set_no_wait(&dec->mix_ch, 1, 20); // ³¬Ê±×Ô¶¯¶ªÊı
+        audio_mixer_ch_sample_sync_enable(&dec->mix_ch, 1); // ±êÖ¾ÎªsyncÍ¨µÀ
         audio_mixer_ch_set_sample_rate(&dec->mix_ch, fmt->sample_rate);
     }
 
 #if (RECORDER_MIX_EN)
-    audio_mixer_ch_open_head(&dec->rec_mix_ch, &recorder_mixer); // æŒ‚è½½åˆ°mixeræœ€å‰é¢
+    audio_mixer_ch_open_head(&dec->rec_mix_ch, &recorder_mixer); // ¹ÒÔØµ½mixer×îÇ°Ãæ
     audio_mixer_ch_set_src(&dec->rec_mix_ch, 1, 0);
-    audio_mixer_ch_set_no_wait(&dec->rec_mix_ch, 1, 10); // è¶…æ—¶è‡ªåŠ¨ä¸¢æ•°
+    audio_mixer_ch_set_no_wait(&dec->rec_mix_ch, 1, 10); // ³¬Ê±×Ô¶¯¶ªÊı
     /* audio_mixer_ch_sample_sync_enable(&dec->rec_mix_ch, 1); */
 #endif//RECORDER_MIX_EN
 
-    // eqã€drcéŸ³æ•ˆ
+    // eq¡¢drcÒôĞ§
     dec->eq_drc = a2dp_eq_drc_open(fmt->sample_rate, ch_num);
 
 #if TCFG_EQ_DIVIDE_ENABLE
@@ -512,45 +512,45 @@ static int a2dp_dec_start(void)
 
 
 #if AUDIO_SURROUND_CONFIG
-    //ç¯ç»•éŸ³æ•ˆ
+    //»·ÈÆÒôĞ§
     dec->surround = surround_open_demo(ch_num);
 #endif
 #if AUDIO_VBASS_CONFIG
-    //è™šæ‹Ÿä½éŸ³
+    //ĞéÄâµÍÒô
     dec->vbass = vbass_open_demo(fmt->sample_rate, ch_num);
 #endif
-    // syncåˆå§‹åŒ–
+    // sync³õÊ¼»¯
     if (AUDIO_DEC_BT_MIXER_EN) {
         dec->sync = a2dp_output_sync_open(fmt->sample_rate, audio_mixer_get_sample_rate(&mixer), ch_num);
     } else {
         dec->sync = a2dp_output_sync_open(fmt->sample_rate, fmt->sample_rate, ch_num);
     }
 
-    /*ä½¿èƒ½åŒæ­¥ï¼Œé…ç½®å»¶æ—¶æ—¶é—´*/
+    /*Ê¹ÄÜÍ¬²½£¬ÅäÖÃÑÓÊ±Ê±¼ä*/
     a2dp_decoder_stream_sync_enable(&dec->dec, dec->sync->context, fmt->sample_rate, CONFIG_A2DP_DELAY_TIME);
 
 #if 0
-    // è·å–è§£ç è¾“å‡ºæ•°æ®ç¤ºä¾‹
-    // å¯ä»¥é‡æ–°å®ç°data_handlerï¼Œåœ¨data_handlerä¸­å†è°ƒç”¨æ•°æ®æµè¾“å‡º
-    // æˆ–è€…å¯ä»¥æŸ¥çœ‹ç´§æ¥ç€dec->dec.decoder.entryä¹‹åçš„æ•°æ®æµé¢„å¤„ç†æ•°æ®
+    // »ñÈ¡½âÂëÊä³öÊı¾İÊ¾Àı
+    // ¿ÉÒÔÖØĞÂÊµÏÖdata_handler£¬ÔÚdata_handlerÖĞÔÙµ÷ÓÃÊı¾İÁ÷Êä³ö
+    // »òÕß¿ÉÒÔ²é¿´½ô½Ó×Ådec->dec.decoder.entryÖ®ºóµÄÊı¾İÁ÷Ô¤´¦ÀíÊı¾İ
     dec->dec.decoder.entry.data_handler = demo_decoder_data_handler;
 #endif
 #if 0
-    // è·å–èŠ‚ç‚¹æ•°æ®ç¤ºä¾‹1
-    // è·å–ä¼ å…¥æ•°æ®æµèŠ‚ç‚¹ä¸­çš„æ•°æ®ä»…éœ€å®ç°prob_handleræ¥å£å°±å¯ä»¥äº†
-    // è¯¥æ–¹å¼ä»…ç”¨äºæŸ¥çœ‹èŠ‚ç‚¹æ•°æ®ï¼Œæˆ–è€…åšä¸€äº›æ¸…é›¶ä¹‹ç±»çš„ç®€å•åŠ¨ä½œ
-    // è¿™é‡Œä»¥è·å–ä¼ å…¥mixèŠ‚ç‚¹çš„æ•°æ®ä¸ºä¾‹
+    // »ñÈ¡½ÚµãÊı¾İÊ¾Àı1
+    // »ñÈ¡´«ÈëÊı¾İÁ÷½ÚµãÖĞµÄÊı¾İ½öĞèÊµÏÖprob_handler½Ó¿Ú¾Í¿ÉÒÔÁË
+    // ¸Ã·½Ê½½öÓÃÓÚ²é¿´½ÚµãÊı¾İ£¬»òÕß×öÒ»Ğ©ÇåÁãÖ®ÀàµÄ¼òµ¥¶¯×÷
+    // ÕâÀïÒÔ»ñÈ¡´«Èëmix½ÚµãµÄÊı¾İÎªÀı
     dec->mix_ch.entry.prob_handler = demo_stream_mix_prob_handler;
 #endif
 #if 0
-    // è·å–èŠ‚ç‚¹æ•°æ®ç¤ºä¾‹2
-    // å¯ä»¥ç”¨å˜é‡ä¿å­˜åŸæ¥çš„æ•°æ®å¤„ç†æ¥å£ï¼Œç„¶åé‡æ–°èµ‹å€¼æ–°çš„æ•°æ®å¤„ç†
-    // è¿™é‡Œä»¥è·å–mixèŠ‚ç‚¹çš„æ•°æ®ä¸ºä¾‹
+    // »ñÈ¡½ÚµãÊı¾İÊ¾Àı2
+    // ¿ÉÒÔÓÃ±äÁ¿±£´æÔ­À´µÄÊı¾İ´¦Àí½Ó¿Ú£¬È»ºóÖØĞÂ¸³ÖµĞÂµÄÊı¾İ´¦Àí
+    // ÕâÀïÒÔ»ñÈ¡mix½ÚµãµÄÊı¾İÎªÀı
     demo_data_handler_save = (void *)dec->mix_ch.entry.data_handler;
     dec->mix_ch.entry.data_handler = demo_new_data_handler;
 #endif
 
-    // æ•°æ®æµä¸²è”
+    // Êı¾İÁ÷´®Áª
     struct audio_stream_entry *entries[8] = {NULL};
     u8 entry_cnt = 0;
     entries[entry_cnt++] = &dec->dec.decoder.entry;
@@ -594,7 +594,7 @@ static int a2dp_dec_start(void)
 #endif
 #if TCFG_EQ_DIVIDE_ENABLE
     if (dec->eq_drc_rl_rr) {
-        entries[entry_cnt++] = &dec->synthesis_ch_fl_fr.entry;//å››å£°é“eqç‹¬ç«‹æ—¶ï¼Œè¯¥èŠ‚ç‚¹åä¸æ¥èŠ‚ç‚¹
+        entries[entry_cnt++] = &dec->synthesis_ch_fl_fr.entry;//ËÄÉùµÀeq¶ÀÁ¢Ê±£¬¸Ã½Úµãºó²»½Ó½Úµã
     } else {
         if (dec->ch_switch) {
             entries[entry_cnt++] = &dec->ch_switch->entry;
@@ -614,7 +614,7 @@ static int a2dp_dec_start(void)
     }
 #endif
 
-    // åˆ›å»ºæ•°æ®æµï¼ŒæŠŠæ‰€æœ‰èŠ‚ç‚¹è¿æ¥èµ·æ¥
+    // ´´½¨Êı¾İÁ÷£¬°ÑËùÓĞ½ÚµãÁ¬½ÓÆğÀ´
     dec->stream = audio_stream_open(dec, a2dp_dec_out_stream_resume);
     audio_stream_add_list(dec->stream, entries, entry_cnt);
 
@@ -623,7 +623,7 @@ static int a2dp_dec_start(void)
 #endif//RECORDER_MIX_EN
 
 #if TCFG_EQ_DIVIDE_ENABLE
-    if (dec->eq_drc_rl_rr) { //æ¥åœ¨eq_drcçš„ä¸Šä¸€ä¸ªèŠ‚ç‚¹
+    if (dec->eq_drc_rl_rr) { //½ÓÔÚeq_drcµÄÉÏÒ»¸ö½Úµã
         u8 cnt = 0;
         if (dec->sync) {
             cnt = 2;
@@ -634,22 +634,22 @@ static int a2dp_dec_start(void)
     }
 #endif
 
-    // è®¾ç½®éŸ³é¢‘è¾“å‡ºç±»å‹
+    // ÉèÖÃÒôÆµÊä³öÀàĞÍ
     audio_output_set_start_volume(APP_AUDIO_STATE_MUSIC);
 
     log_i("dec->ch:%d, fmt->channel:%d\n", dec->dec.ch, fmt->channel);
 
-    // å…³é—­ä¸¢æ•°
+    // ¹Ø±Õ¶ªÊı
     a2dp_drop_frame_stop();
 #if TCFG_USER_TWS_ENABLE
     if (tws_network_audio_was_started()) {
-        /*a2dpæ’­æ”¾ä¸­å‰¯æœºåŠ å…¥*/
+        /*a2dp²¥·ÅÖĞ¸±»ú¼ÓÈë*/
         tws_network_local_audio_start();
         a2dp_decoder_join_tws(&dec->dec);
     }
 #endif
 
-    // å¼€å§‹è§£ç 
+    // ¿ªÊ¼½âÂë
     dec->dec.start = 1;
     err = audio_decoder_start(&dec->dec.decoder);
     if (err) {
@@ -696,7 +696,7 @@ __err3:
 #endif // SYS_DIGVOL_GROUP_EN
 
 
-    // å…ˆå…³é—­å„ä¸ªèŠ‚ç‚¹ï¼Œæœ€åæ‰closeæ•°æ®æµ
+    // ÏÈ¹Ø±Õ¸÷¸ö½Úµã£¬×îºó²ÅcloseÊı¾İÁ÷
     if (dec->stream) {
         audio_stream_close(dec->stream);
         dec->stream = NULL;
@@ -711,11 +711,11 @@ __err1:
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpè§£ç èµ„æºç­‰å¾…
-   @param    *wait: å¥æŸ„
-   @param    event: äº‹ä»¶
-   @return   0ï¼šæˆåŠŸ
-   @note     ç”¨äºå¤šè§£ç æ‰“æ–­å¤„ç†
+/**@brief    a2dp½âÂë×ÊÔ´µÈ´ı
+   @param    *wait: ¾ä±ú
+   @param    event: ÊÂ¼ş
+   @return   0£º³É¹¦
+   @note     ÓÃÓÚ¶à½âÂë´ò¶Ï´¦Àí
 */
 /*----------------------------------------------------------------------------*/
 static int a2dp_wait_res_handler(struct audio_res_wait *wait, int event)
@@ -736,9 +736,9 @@ static int a2dp_wait_res_handler(struct audio_res_wait *wait, int event)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€a2dpè§£ç 
-   @param    media_type: åª’ä½“ç±»å‹
-   @return   0: æˆåŠŸ
+/**@brief    ´ò¿ªa2dp½âÂë
+   @param    media_type: Ã½ÌåÀàĞÍ
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -788,9 +788,9 @@ int a2dp_dec_open(int media_type)
     }
 
     bt_a2dp_dec = dec;
-    dec->wait.priority = 1;		// è§£ç ä¼˜å…ˆçº§
-    dec->wait.preemption = 0;	// ä¸ä½¿èƒ½ç›´æ¥æŠ¢æ–­è§£ç 
-    dec->wait.snatch_same_prio = 1;	// å¯æŠ¢æ–­åŒä¼˜å…ˆçº§è§£ç 
+    dec->wait.priority = 1;		// ½âÂëÓÅÏÈ¼¶
+    dec->wait.preemption = 0;	// ²»Ê¹ÄÜÖ±½ÓÇÀ¶Ï½âÂë
+    dec->wait.snatch_same_prio = 1;	// ¿ÉÇÀ¶ÏÍ¬ÓÅÏÈ¼¶½âÂë
 #if SOUNDCARD_ENABLE
     dec->wait.protect = 1;
 #endif
@@ -805,10 +805,10 @@ int a2dp_dec_open(int media_type)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­a2dpè§£ç 
+/**@brief    ¹Ø±Õa2dp½âÂë
    @param
-   @return   0: æ²¡æœ‰a2dpè§£ç 
-   @return   1: æˆåŠŸ
+   @return   0: Ã»ÓĞa2dp½âÂë
+   @return   1: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -834,9 +834,9 @@ int a2dp_dec_close(void)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpæŒ‚èµ·
-   @param    *p: ç§æœ‰å‚æ•°
-   @return   0: æˆåŠŸ
+/**@brief    a2dp¹ÒÆğ
+   @param    *p: Ë½ÓĞ²ÎÊı
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -871,7 +871,7 @@ int a2dp_tws_dec_suspend(void *p)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    a2dpæŒ‚èµ·æ¿€æ´»
+/**@brief    a2dp¹ÒÆğ¼¤»î
    @param
    @return
    @note
@@ -908,9 +908,9 @@ void a2dp_tws_dec_resume(void)
 
 #if TCFG_ESCO_PLC
 /*----------------------------------------------------------------------------*/
-/**@brief    escoä¸¢åŒ…ä¿®æŠ¤åˆå§‹åŒ–
+/**@brief    esco¶ª°üĞŞ»¤³õÊ¼»¯
    @param
-   @return   ä¸¢åŒ…ä¿®æŠ¤å¥æŸ„
+   @return   ¶ª°üĞŞ»¤¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -931,8 +931,8 @@ static void *esco_plc_init(void)
     return plc;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    escoä¸¢åŒ…ä¿®æŠ¤å…³é—­
-   @param    *plc: ä¸¢åŒ…ä¿®æŠ¤å¥æŸ„
+/**@brief    esco¶ª°üĞŞ»¤¹Ø±Õ
+   @param    *plc: ¶ª°üĞŞ»¤¾ä±ú
    @return
    @note
 */
@@ -942,10 +942,10 @@ static void esco_plc_close(void *plc)
     free(plc);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    escoä¸¢åŒ…ä¿®æŠ¤è¿è¡Œ
-   @param    *data: æ•°æ®
-   @param    len: æ•°æ®é•¿åº¦
-   @param    repair: ä¿®æŠ¤æ ‡è®°
+/**@brief    esco¶ª°üĞŞ»¤ÔËĞĞ
+   @param    *data: Êı¾İ
+   @param    len: Êı¾İ³¤¶È
+   @param    repair: ĞŞ»¤±ê¼Ç
    @return
    @note
 */
@@ -982,9 +982,9 @@ static void esco_plc_run(s16 *data, u16 len, u8 repair)
 
 #if TCFG_ESCO_LIMITER
 /*----------------------------------------------------------------------------*/
-/**@brief    escoé™ç¦å™¨åˆå§‹åŒ–
-   @param    sample_rate: è§£ç é‡‡æ ·ç‡
-   @return   é™ç¦å™¨å¥æŸ„
+/**@brief    escoÏŞ¸£Æ÷³õÊ¼»¯
+   @param    sample_rate: ½âÂë²ÉÑùÂÊ
+   @return   ÏŞ¸£Æ÷¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -995,20 +995,20 @@ static void *esco_limiter_init(u16 sample_rate)
     if (!limiter) {
         return NULL;
     }
-    //é™å¹…å™¨å¯åŠ¨å› å­ int32(exp(-0.65/(16000 * 0.005))*2^30)   16000ä¸ºé‡‡æ ·ç‡  0.005 ä¸ºå¯åŠ¨æ—¶é—´(s)
+    //ÏŞ·ùÆ÷Æô¶¯Òò×Ó int32(exp(-0.65/(16000 * 0.005))*2^30)   16000Îª²ÉÑùÂÊ  0.005 ÎªÆô¶¯Ê±¼ä(s)
     int limiter_attfactor = 1065053018;
-    //é™å¹…å™¨é‡Šæ”¾å› å­ int32(exp(-0.15/(16000 * 0.1))*2^30)     16000ä¸ºé‡‡æ ·ç‡  0.1   ä¸ºé‡Šæ”¾æ—¶é—´(s)
+    //ÏŞ·ùÆ÷ÊÍ·ÅÒò×Ó int32(exp(-0.15/(16000 * 0.1))*2^30)     16000Îª²ÉÑùÂÊ  0.1   ÎªÊÍ·ÅÊ±¼ä(s)
     int limiter_relfactor = 1073641165;
-    //é™å¹…å™¨é˜ˆå€¼(mdb)
+    //ÏŞ·ùÆ÷ãĞÖµ(mdb)
     //int limiter_threshold = CONST_LIMITER_THR;
 
-    //å™ªå£°é—¨é™å¯åŠ¨å› å­ int32(exp(-1/(16000 * 0.1))*2^30)       16000ä¸ºé‡‡æ ·ç‡  0.1   ä¸ºé‡Šæ”¾æ—¶é—´(s)
+    //ÔëÉùÃÅÏŞÆô¶¯Òò×Ó int32(exp(-1/(16000 * 0.1))*2^30)       16000Îª²ÉÑùÂÊ  0.1   ÎªÊÍ·ÅÊ±¼ä(s)
     int noiseGate_attfactor = 1073070945;
-    //å™ªå£°é—¨é™é‡Šæ”¾å› å­ int32(exp(-1/(16000 * 0.005))*2^30)     16000ä¸ºé‡‡æ ·ç‡  0.005 ä¸ºå¯åŠ¨æ—¶é—´(s)
+    //ÔëÉùÃÅÏŞÊÍ·ÅÒò×Ó int32(exp(-1/(16000 * 0.005))*2^30)     16000Îª²ÉÑùÂÊ  0.005 ÎªÆô¶¯Ê±¼ä(s)
     int noiseGate_relfactor = 1060403589;
-    //å™ªå£°é—¨é™(mdb)
+    //ÔëÉùÃÅÏŞ(mdb)
     //int noiseGate_threshold = -25000;
-    //ä½äºå™ªå£°é—¨é™é˜ˆå€¼çš„å¢ç›Š (0~1)*2^30
+    //µÍÓÚÔëÉùÃÅÏŞãĞÖµµÄÔöÒæ (0~1)*2^30
     //int noise
     //Gate_low_thr_gain = 0 << 30;
 
@@ -1032,8 +1032,8 @@ static void *esco_limiter_init(u16 sample_rate)
     return limiter;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    escoé™ç¦å™¨å…³é—­
-   @param    *limiter: é™ç¦å™¨å¥æŸ„
+/**@brief    escoÏŞ¸£Æ÷¹Ø±Õ
+   @param    *limiter: ÏŞ¸£Æ÷¾ä±ú
    @return
    @note
 */
@@ -1046,11 +1046,11 @@ static void esco_limiter_close(void *limiter)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    escoè§£ç è¾“å‡ºæ•°æ®å¤„ç†
-   @param    *entry: æ•°æ®æµå…¥å£
-   @param    *in: è¾“å…¥æ•°æ®
-   @param    *out: è¾“å‡ºæ•°æ®
-   @return   å¤„ç†äº†å¤šé•¿æ•°æ®
+/**@brief    esco½âÂëÊä³öÊı¾İ´¦Àí
+   @param    *entry: Êı¾İÁ÷Èë¿Ú
+   @param    *in: ÊäÈëÊı¾İ
+   @param    *out: Êä³öÊı¾İ
+   @return   ´¦ÀíÁË¶à³¤Êı¾İ
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1100,7 +1100,7 @@ static int esco_dec_data_handler(struct audio_stream_entry *entry,
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    escoè§£ç é‡Šæ”¾
+/**@brief    esco½âÂëÊÍ·Å
    @param
    @return
    @note
@@ -1123,10 +1123,10 @@ void esco_dec_release()
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    escoè§£ç äº‹ä»¶è¿”å›
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @param    argc: å‚æ•°ä¸ªæ•°
-   @param    *argv: å‚æ•°
+/**@brief    esco½âÂëÊÂ¼ş·µ»Ø
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @param    argc: ²ÎÊı¸öÊı
+   @param    *argv: ²ÎÊı
    @return
    @note
 */
@@ -1153,7 +1153,7 @@ static int esco_to_dac_probe_handler(struct audio_stream_entry *entry,  struct a
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    escoè§£ç close
+/**@brief    esco½âÂëclose
    @param
    @return
    @note
@@ -1162,8 +1162,8 @@ static int esco_to_dac_probe_handler(struct audio_stream_entry *entry,  struct a
 static void esco_audio_res_close(void)
 {
     /*
-     *å…ˆå…³é—­aecï¼Œé‡Œé¢æœ‰å¤ç”¨åˆ°encçš„buffï¼Œå†å…³é—­encï¼Œ
-     *å¦‚æœæ²¡æœ‰bufå¤ç”¨ï¼Œåˆ™æ²¡æœ‰å…ˆåé¡ºåºè¦æ±‚ã€‚
+     *ÏÈ¹Ø±Õaec£¬ÀïÃæÓĞ¸´ÓÃµ½encµÄbuff£¬ÔÙ¹Ø±Õenc£¬
+     *Èç¹ûÃ»ÓĞbuf¸´ÓÃ£¬ÔòÃ»ÓĞÏÈºóË³ĞòÒªÇó¡£
      */
     if (!bt_esco_dec->dec.start) {
         return ;
@@ -1174,7 +1174,7 @@ static void esco_audio_res_close(void)
     esco_enc_close();
     esco_decoder_close(&bt_esco_dec->dec);
     esco_eq_drc_close(bt_esco_dec->eq_drc);
-    spectrum_switch_demo(1);//æ‰“å¼€é¢‘è°±è®¡ç®—
+    spectrum_switch_demo(1);//´ò¿ªÆµÆ×¼ÆËã
     channel_switch_close(&bt_esco_dec->ch_switch);
     esco_output_sync_close(bt_esco_dec->sync);
     bt_esco_dec->sync = NULL;
@@ -1208,14 +1208,14 @@ static void esco_audio_res_close(void)
 #endif // SYS_DIGVOL_GROUP_EN
 
 
-    // å…ˆå…³é—­å„ä¸ªèŠ‚ç‚¹ï¼Œæœ€åæ‰closeæ•°æ®æµ
+    // ÏÈ¹Ø±Õ¸÷¸ö½Úµã£¬×îºó²ÅcloseÊı¾İÁ÷
     if (bt_esco_dec->stream) {
         audio_stream_close(bt_esco_dec->stream);
         bt_esco_dec->stream = NULL;
     }
 
 #if TCFG_ESCO_USE_SPEC_MIX_LEN
-    /*æ¢å¤mix_bufçš„é•¿åº¦*/
+    /*»Ö¸´mix_bufµÄ³¤¶È*/
     audio_mixer_set_output_buf(&mixer, mix_buff, AUDIO_MIXER_LEN);
 #endif /*TCFG_ESCO_USE_SPEC_MIX_LEN*/
     app_audio_state_exit(APP_AUDIO_STATE_CALL);
@@ -1223,8 +1223,8 @@ static void esco_audio_res_close(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    escoè§£ç æ•°æ®æµæ¿€æ´»
-   @param    *p: ç§æœ‰å¥æŸ„
+/**@brief    esco½âÂëÊı¾İÁ÷¼¤»î
+   @param    *p: Ë½ÓĞ¾ä±ú
    @return
    @note
 */
@@ -1237,10 +1237,10 @@ static void esco_dec_out_stream_resume(void *p)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    escoæ¥å—å›è°ƒ
+/**@brief    esco½ÓÊÜ»Øµ÷
    @param
    @return
-   @note	 è“ç‰™åº“é‡Œé¢æ¥å—åˆ°äº†escoéŸ³é¢‘
+   @note	 À¶ÑÀ¿âÀïÃæ½ÓÊÜµ½ÁËescoÒôÆµ
 */
 /*----------------------------------------------------------------------------*/
 void esco_rx_notice_to_decode(void)
@@ -1255,9 +1255,9 @@ void esco_rx_notice_to_decode(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å¼€å§‹escoè§£ç 
+/**@brief    ¿ªÊ¼esco½âÂë
    @param
-   @return   0: æˆåŠŸ
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1269,47 +1269,47 @@ static int esco_dec_start()
     if (!bt_esco_dec) {
         return -EINVAL;
     }
-    // æ‰“å¼€escoè§£ç 
+    // ´ò¿ªesco½âÂë
     err = esco_decoder_open(&dec->dec, &decode_task);
     if (err) {
         goto __err1;
     }
-    // ä½¿èƒ½äº‹ä»¶å›è°ƒ
+    // Ê¹ÄÜÊÂ¼ş»Øµ÷
     audio_decoder_set_event_handler(&dec->dec.decoder, esco_dec_event_handler, 0);
 
 #if TCFG_ESCO_USE_SPEC_MIX_LEN
     /*
-     *(1)bt_esco_decè¾“å‡ºæ˜¯120æˆ–è€…240ï¼Œæ‰€ä»¥é€šè¯çš„æ—¶å€™ï¼Œä¿®æ”¹mix_buffçš„é•¿åº¦ï¼Œæé«˜æ•ˆç‡
-     *(2)å…¶ä»–å¤§éƒ¨åˆ†æ—¶å€™è§£ç è¾“å‡ºæ˜¯512çš„å€æ•°ï¼Œé€šè¯ç»“æŸï¼Œæ¢å¤mix_buffçš„é•¿åº¦ï¼Œæé«˜æ•ˆç‡
+     *(1)bt_esco_decÊä³öÊÇ120»òÕß240£¬ËùÒÔÍ¨»°µÄÊ±ºò£¬ĞŞ¸Ämix_buffµÄ³¤¶È£¬Ìá¸ßĞ§ÂÊ
+     *(2)ÆäËû´ó²¿·ÖÊ±ºò½âÂëÊä³öÊÇ512µÄ±¶Êı£¬Í¨»°½áÊø£¬»Ö¸´mix_buffµÄ³¤¶È£¬Ìá¸ßĞ§ÂÊ
      */
     audio_mixer_set_output_buf(&mixer, mix_buff, AUDIO_MIXER_LEN / 240 * 240);
 #endif /*TCFG_ESCO_USE_SPEC_MIX_LEN*/
 
     if (AUDIO_DEC_BT_MIXER_EN) {
         audio_mode_main_dec_open(AUDIO_MODE_MAIN_STATE_DEC_ESCO);
-        // é…ç½®mixeré€šé“å‚æ•°
-        audio_mixer_ch_open_head(&dec->mix_ch, &mixer); // æŒ‚è½½åˆ°mixeræœ€å‰é¢
+        // ÅäÖÃmixerÍ¨µÀ²ÎÊı
+        audio_mixer_ch_open_head(&dec->mix_ch, &mixer); // ¹ÒÔØµ½mixer×îÇ°Ãæ
         audio_mixer_ch_set_src(&dec->mix_ch, 1, 0);
-        audio_mixer_ch_set_no_wait(&dec->mix_ch, 1, 10); // è¶…æ—¶è‡ªåŠ¨ä¸¢æ•°
+        audio_mixer_ch_set_no_wait(&dec->mix_ch, 1, 10); // ³¬Ê±×Ô¶¯¶ªÊı
         audio_mixer_ch_sample_sync_enable(&dec->mix_ch, 1);
         audio_mixer_ch_set_sample_rate(&dec->mix_ch, dec->dec.sample_rate);
     }
 
 #if (RECORDER_MIX_EN)
-    audio_mixer_ch_open_head(&dec->rec_mix_ch, &recorder_mixer); // æŒ‚è½½åˆ°mixeræœ€å‰é¢
+    audio_mixer_ch_open_head(&dec->rec_mix_ch, &recorder_mixer); // ¹ÒÔØµ½mixer×îÇ°Ãæ
     audio_mixer_ch_set_src(&dec->rec_mix_ch, 1, 0);
-    audio_mixer_ch_set_no_wait(&dec->rec_mix_ch, 1, 10); // è¶…æ—¶è‡ªåŠ¨ä¸¢æ•°
+    audio_mixer_ch_set_no_wait(&dec->rec_mix_ch, 1, 10); // ³¬Ê±×Ô¶¯¶ªÊı
     audio_mixer_ch_sample_sync_enable(&dec->rec_mix_ch, 1);
     audio_mixer_ch_set_sample_rate(&dec->mix_ch, dec->dec.sample_rate);
     /* audio_mixer_ch_set_sample_rate(&dec->rec_mix_ch, dec->dec.sample_rate); */
     printf("[%s], dec->dec.sample_rate = %d\n", __FUNCTION__, dec->dec.sample_rate);
 #endif//RECORDER_MIX_EN
 
-    // eqã€drcéŸ³æ•ˆ
+    // eq¡¢drcÒôĞ§
     dec->eq_drc = esco_eq_drc_open(dec->dec.sample_rate, dec->dec.ch_num);
-    spectrum_switch_demo(0);//å…³é—­é¢‘è°±è®¡ç®—
+    spectrum_switch_demo(0);//¹Ø±ÕÆµÆ×¼ÆËã
 #ifdef CONFIG_MIXER_CYCLIC
-    // mixer_cyclic ä¸­è‡ªå¸¦å£°é“å¤„ç†
+    // mixer_cyclic ÖĞ×Ô´øÉùµÀ´¦Àí
     audio_mixer_ch_set_aud_ch_out(&dec->mix_ch, 0, BIT(0) | BIT(1) | BIT(2) | BIT(3));
 #if (RECORDER_MIX_EN)
     audio_mixer_ch_set_aud_ch_out(&dec->rec_mix_ch, 0, BIT(0) | BIT(1) | BIT(2) | BIT(3));
@@ -1329,16 +1329,16 @@ static int esco_dec_start()
 
     dec->dec.decoder.entry.data_handler = esco_dec_data_handler;
 
-    // syncåˆå§‹åŒ–
+    // sync³õÊ¼»¯
     if (AUDIO_DEC_BT_MIXER_EN) {
         dec->sync = esco_output_sync_open(dec->dec.sample_rate, audio_mixer_get_sample_rate(&mixer), dec->dec.ch_num);
     } else {
         dec->sync = esco_output_sync_open(dec->dec.sample_rate, dec->dec.sample_rate, dec->dec.ch_num);
 
     }
-    /*ä½¿èƒ½åŒæ­¥ï¼Œé…ç½®å»¶æ—¶æ—¶é—´*/
+    /*Ê¹ÄÜÍ¬²½£¬ÅäÖÃÑÓÊ±Ê±¼ä*/
     esco_decoder_stream_sync_enable(&dec->dec, dec->sync->context, dec->dec.sample_rate, 25);
-    // æ•°æ®æµä¸²è”
+    // Êı¾İÁ÷´®Áª
     struct audio_stream_entry *entries[8] = {NULL};
     u8 entry_cnt = 0;
     entries[entry_cnt++] = &dec->dec.decoder.entry;
@@ -1369,23 +1369,23 @@ static int esco_dec_start()
         default_dac.entry.prob_handler = esco_to_dac_probe_handler;
         entries[entry_cnt++] = &default_dac.entry;
     }
-    // åˆ›å»ºæ•°æ®æµï¼ŒæŠŠæ‰€æœ‰èŠ‚ç‚¹è¿æ¥èµ·æ¥
+    // ´´½¨Êı¾İÁ÷£¬°ÑËùÓĞ½ÚµãÁ¬½ÓÆğÀ´
     dec->stream = audio_stream_open(dec, esco_dec_out_stream_resume);
     audio_stream_add_list(dec->stream, entries, entry_cnt);
 
 #if (RECORDER_MIX_EN)
     audio_stream_add_entry(entries[entry_cnt - 2], &dec->rec_mix_ch.entry);
 #endif//RECORDER_MIX_EN
-    // è®¾ç½®éŸ³é¢‘è¾“å‡ºç±»å‹
+    // ÉèÖÃÒôÆµÊä³öÀàĞÍ
     audio_output_set_start_volume(APP_AUDIO_STATE_CALL);
 
 #if TCFG_ESCO_PLC
-    // ä¸¢åŒ…ä¿®æŠ¤
+    // ¶ª°üĞŞ»¤
     dec->plc = esco_plc_init();
 #endif
 
 #if TCFG_ESCO_LIMITER
-    // é™ç¦å™¨
+    // ÏŞ¸£Æ÷
     dec->limiter = esco_limiter_init(dec->dec.sample_rate);
 #endif /* TCFG_ESCO_LIMITER */
 
@@ -1396,7 +1396,7 @@ static int esco_dec_start()
     }
 #endif
     lmp_private_esco_suspend_resume(2);
-    // å¼€å§‹è§£ç 
+    // ¿ªÊ¼½âÂë
     dec->dec.start = 1;
     err = audio_decoder_start(&dec->dec.decoder);
     if (err) {
@@ -1422,7 +1422,7 @@ static int esco_dec_start()
 __err3:
     dec->dec.start = 0;
     esco_eq_drc_close(dec->eq_drc);
-    spectrum_switch_demo(1);//æ‰“å¼€é¢‘è°±è®¡ç®—
+    spectrum_switch_demo(1);//´ò¿ªÆµÆ×¼ÆËã
     channel_switch_close(&dec->ch_switch);
     if (AUDIO_DEC_BT_MIXER_EN) {
         audio_mixer_ch_close(&dec->mix_ch);
@@ -1455,11 +1455,11 @@ __err1:
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    escoè§£ç èµ„æºç­‰å¾…
-   @param    *wait: å¥æŸ„
-   @param    event: äº‹ä»¶
-   @return   0ï¼šæˆåŠŸ
-   @note     ç”¨äºå¤šè§£ç æ‰“æ–­å¤„ç†
+/**@brief    esco½âÂë×ÊÔ´µÈ´ı
+   @param    *wait: ¾ä±ú
+   @param    event: ÊÂ¼ş
+   @return   0£º³É¹¦
+   @note     ÓÃÓÚ¶à½âÂë´ò¶Ï´¦Àí
 */
 /*----------------------------------------------------------------------------*/
 static int esco_wait_res_handler(struct audio_res_wait *wait, int event)
@@ -1479,10 +1479,10 @@ static int esco_wait_res_handler(struct audio_res_wait *wait, int event)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€escoè§£ç 
-   @param    *param: åª’ä½“ä¿¡æ¯
-   @param    mutw: é™éŸ³
-   @return   0: æˆåŠŸ
+/**@brief    ´ò¿ªesco½âÂë
+   @param    *param: Ã½ÌåĞÅÏ¢
+   @param    mutw: ¾²Òô
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1533,9 +1533,9 @@ int esco_dec_open(void *param, u8 mute)
         clock_add(DEC_CVSD_CLK);
     }
 
-    dec->wait.priority = 2;		// è§£ç ä¼˜å…ˆçº§
-    dec->wait.preemption = 0;	// ä¸ä½¿èƒ½ç›´æ¥æŠ¢æ–­è§£ç 
-    dec->wait.snatch_same_prio = 1;	// å¯æŠ¢æ–­åŒä¼˜å…ˆçº§è§£ç 
+    dec->wait.priority = 2;		// ½âÂëÓÅÏÈ¼¶
+    dec->wait.preemption = 0;	// ²»Ê¹ÄÜÖ±½ÓÇÀ¶Ï½âÂë
+    dec->wait.snatch_same_prio = 1;	// ¿ÉÇÀ¶ÏÍ¬ÓÅÏÈ¼¶½âÂë
     dec->wait.handler = esco_wait_res_handler;
     err = audio_decoder_task_add_wait(&decode_task, &dec->wait);
     if (bt_esco_dec->dec.start == 0) {
@@ -1552,7 +1552,7 @@ int esco_dec_open(void *param, u8 mute)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­escoè§£ç 
+/**@brief    ¹Ø±Õesco½âÂë
    @param    :
    @return
    @note
@@ -1579,9 +1579,9 @@ void esco_dec_close()
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è“ç‰™éŸ³é¢‘æ­£åœ¨è¿è¡Œ
+/**@brief    À¶ÑÀÒôÆµÕıÔÚÔËĞĞ
    @param
-   @return   1: æ­£åœ¨è¿è¡Œ
+   @return   1: ÕıÔÚÔËĞĞ
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1590,9 +1590,9 @@ u8 bt_audio_is_running(void)
     return (bt_a2dp_dec || bt_esco_dec);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    è“ç‰™æ’­æ”¾æ­£åœ¨è¿è¡Œ
+/**@brief    À¶ÑÀ²¥·ÅÕıÔÚÔËĞĞ
    @param
-   @return   1: æ­£åœ¨è¿è¡Œ
+   @return   1: ÕıÔÚÔËĞĞ
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1601,9 +1601,9 @@ u8 bt_media_is_running(void)
     return bt_a2dp_dec != NULL;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    è“ç‰™ç”µè¯æ­£åœ¨è¿è¡Œ
+/**@brief    À¶ÑÀµç»°ÕıÔÚÔËĞĞ
    @param
-   @return   1: æ­£åœ¨è¿è¡Œ
+   @return   1: ÕıÔÚÔËĞĞ
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1614,7 +1614,7 @@ u8 bt_phone_dec_is_running()
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è“ç‰™è§£ç idleåˆ¤æ–­
+/**@brief    À¶ÑÀ½âÂëidleÅĞ¶Ï
    @param
    @return   1: idle
    @return   0: busy
@@ -1637,10 +1637,10 @@ REGISTER_LP_TARGET(bt_dec_lp_target) = {
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è“ç‰™æ¨¡å¼ eq drc æ‰“å¼€
-   @param    sample_rate:é‡‡æ ·ç‡
-   @param    ch_num:é€šé“ä¸ªæ•°
-   @return   å¥æŸ„
+/**@brief    À¶ÑÀÄ£Ê½ eq drc ´ò¿ª
+   @param    sample_rate:²ÉÑùÂÊ
+   @param    ch_num:Í¨µÀ¸öÊı
+   @return   ¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1693,8 +1693,8 @@ void *a2dp_eq_drc_open(u16 sample_rate, u8 ch_num)
     return NULL;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    è“ç‰™æ¨¡å¼ eq drc å…³é—­
-   @param    å¥æŸ„
+/**@brief    À¶ÑÀÄ£Ê½ eq drc ¹Ø±Õ
+   @param    ¾ä±ú
    @return
    @note
 */
@@ -1767,8 +1767,8 @@ void *a2dp_rl_rr_eq_drc_open(u16 sample_rate, u8 ch_num)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è“ç‰™æ¨¡å¼ RL RR é€šé“eq drc å…³é—­
-   @param    å¥æŸ„
+/**@brief    À¶ÑÀÄ£Ê½ RL RR Í¨µÀeq drc ¹Ø±Õ
+   @param    ¾ä±ú
    @return
    @note
 */
@@ -1794,10 +1794,10 @@ void a2dp_rl_rr_eq_drc_close(struct audio_eq_drc *eq_drc)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    é€šè¯æ¨¡å¼ eq drc æ‰“å¼€
-   @param    sample_rate:é‡‡æ ·ç‡
-   @param    ch_num:é€šé“ä¸ªæ•°
-   @return   å¥æŸ„
+/**@brief    Í¨»°Ä£Ê½ eq drc ´ò¿ª
+   @param    sample_rate:²ÉÑùÂÊ
+   @param    ch_num:Í¨µÀ¸öÊı
+   @return   ¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1833,8 +1833,8 @@ void *esco_eq_drc_open(u16 sample_rate, u8 ch_num)
     return NULL;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    é€šè¯æ¨¡å¼ eq drc å…³é—­
-   @param    å¥æŸ„
+/**@brief    Í¨»°Ä£Ê½ eq drc ¹Ø±Õ
+   @param    ¾ä±ú
    @return
    @note
 */
@@ -1858,15 +1858,15 @@ void esco_eq_drc_close(struct audio_eq_drc *eq_drc)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    ç¯ç»•éŸ³æ•ˆåˆ‡æ¢æµ‹è¯•ä¾‹å­
-   @param   surround:å¥æŸ„
+/**@brief    »·ÈÆÒôĞ§ÇĞ»»²âÊÔÀı×Ó
+   @param   surround:¾ä±ú
    @param   effect_type:
-   						EFFECT_3D_PANORAMA,             //3då…¨æ™¯
-    					EFFECT_3D_ROTATES,                  //3dç¯ç»•
-    					EFFECT_FLOATING_VOICE,              //æµåŠ¨äººå£°
-    					EFFECT_GLORY_OF_KINGS,              //ç‹è€…è£è€€
-    					EFFECT_FOUR_SENSION_BATTLEFIELD,    //å››å­£æˆ˜åœº
-    					EFFECT_OFF,//åŸå£°
+   						EFFECT_3D_PANORAMA,             //3dÈ«¾°
+    					EFFECT_3D_ROTATES,                  //3d»·ÈÆ
+    					EFFECT_FLOATING_VOICE,              //Á÷¶¯ÈËÉù
+    					EFFECT_GLORY_OF_KINGS,              //ÍõÕßÈÙÒ«
+    					EFFECT_FOUR_SENSION_BATTLEFIELD,    //ËÄ¼¾Õ½³¡
+    					EFFECT_OFF,//Ô­Éù
    @return
    @note
 */
@@ -1876,22 +1876,22 @@ void surround_effect_switch(surround_hdl *surround, u32 effect_type)
 #if AUDIO_SURROUND_CONFIG
     if (surround) {
         surround_update_parm parm = {0};
-        parm.rotatestep = 2;//æ—‹è½¬é€Ÿåº¦
-        parm.damping = 120;//é«˜é¢‘è¡°å‡é€Ÿåº¦
-        parm.feedback = 110;//æ•´ä½“è¡°å‡é€Ÿåº¦
-        parm.roomsize = 128;//ç©ºé—´å¤§å°
+        parm.rotatestep = 2;//Ğı×ªËÙ¶È
+        parm.damping = 120;//¸ßÆµË¥¼õËÙ¶È
+        parm.feedback = 110;//ÕûÌåË¥¼õËÙ¶È
+        parm.roomsize = 128;//¿Õ¼ä´óĞ¡
         if (EFFECT_OFF == effect_type) {
-            //ä¸­é€”å…³æµ‹è¯•
+            //ÖĞÍ¾¹Ø²âÊÔ
             /* u8 en = 0; */
             /* audio_surround_parm_update(surround, effect_type, (surround_update_parm *)en); */
 
-            //æ­¤å¤„å…³é—­éŸ³æ•ˆå¤„ç†ä½¿ç”¨surround_type = 0çš„æ–¹å¼
+            //´Ë´¦¹Ø±ÕÒôĞ§´¦ÀíÊ¹ÓÃsurround_type = 0µÄ·½Ê½
             u8 en = 1;
             audio_surround_parm_update(surround, effect_type, (surround_update_parm *)en);
             parm.surround_type = 0;
             audio_surround_parm_update(surround, EFFECT_3D_PANORAMA, &parm);
         } else {
-            //éŸ³æ•ˆåˆ‡æ¢æµ‹è¯•
+            //ÒôĞ§ÇĞ»»²âÊÔ
             u8 en = 1;
             audio_surround_parm_update(surround, EFFECT_OFF, (surround_update_parm *)en);
             if (effect_type == EFFECT_3D_PANORAMA) {
@@ -1907,7 +1907,7 @@ void surround_effect_switch(surround_hdl *surround, u32 effect_type)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    ç¯ç»•éŸ³æ•ˆæ¨¡å—æ‰“å¼€ä¾‹å­
+/**@brief    »·ÈÆÒôĞ§Ä£¿é´ò¿ªÀı×Ó
    @param
    @return
    @note
@@ -1919,19 +1919,19 @@ surround_hdl *surround_open_demo(u8 ch_num)
 #if AUDIO_SURROUND_CONFIG
     surround_open_parm parm = {0};
     if (ch_num == 1) {
-        ch_num = EFFECT_CH_L;//å•å£°é“æ—¶ï¼Œé»˜è®¤åšå·¦å£°é“
+        ch_num = EFFECT_CH_L;//µ¥ÉùµÀÊ±£¬Ä¬ÈÏ×ö×óÉùµÀ
     }
     parm.channel = ch_num;
-    parm.surround_effect_type = EFFECT_3D_PANORAMA;//æ‰“å¼€æ—¶é»˜è®¤ä½¿ç”¨3då…¨æ™¯éŸ³,ä½¿ç”¨è€…ï¼Œæ ¹æ®éœ€æ±‚ä¿®æ”¹
+    parm.surround_effect_type = EFFECT_3D_PANORAMA;//´ò¿ªÊ±Ä¬ÈÏÊ¹ÓÃ3dÈ«¾°Òô,Ê¹ÓÃÕß£¬¸ù¾İĞèÇóĞŞ¸Ä
     surround = audio_surround_open(&parm);
 
-    surround_effect_switch(surround, EFFECT_OFF);//ä¸åšå¤„ç†,ä½¿ç”¨è€…æ ¹æ®éœ€æ±‚æ˜¯å¦å…³é—­è¯¥åŠ¨ä½œ
+    surround_effect_switch(surround, EFFECT_OFF);//²»×ö´¦Àí,Ê¹ÓÃÕß¸ù¾İĞèÇóÊÇ·ñ¹Ø±Õ¸Ã¶¯×÷
     clock_add(DEC_3D_CLK);
 #endif
     return surround;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    ç¯ç»•éŸ³æ•ˆå…³é—­ä¾‹å­
+/**@brief    »·ÈÆÒôĞ§¹Ø±ÕÀı×Ó
    @param
    @return
    @note
@@ -1949,7 +1949,7 @@ void surround_close(surround_hdl *surround)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è™šæ‹Ÿä½éŸ³å‚æ•°æ›´æ–°ä¾‹å­
+/**@brief    ĞéÄâµÍÒô²ÎÊı¸üĞÂÀı×Ó
    @param
    @return
    @note
@@ -1960,7 +1960,7 @@ void vbass_switch(vbass_hdl *vbass, u32 vbass_switch)
 {
 #if AUDIO_VBASS_CONFIG
     if (vbass) {
-        //å…³è™šæ‹Ÿä½éŸ³ä¾‹å­
+        //¹ØĞéÄâµÍÒôÀı×Ó
         u8 en = vbass_switch;
         audio_vbass_parm_update(vbass, VBASS_SW, (void *)en);
     }
@@ -1969,7 +1969,7 @@ void vbass_switch(vbass_hdl *vbass, u32 vbass_switch)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è™šæ‹Ÿä½éŸ³æ‰“å¼€ä¾‹å­
+/**@brief    ĞéÄâµÍÒô´ò¿ªÀı×Ó
    @param
    @return
    @note
@@ -1990,14 +1990,14 @@ vbass_hdl *vbass_open_demo(u16 sample_rate, u8 ch_num)
     def_parm.level = 8192;
     audio_vbass_parm_update(vbass, VBASS_UPDATE_PARM, &def_parm);
     clock_add(DEC_VBASS_CLK);
-    vbass_switch(vbass, 0);//é»˜è®¤ä¸åšå¤„ç†ï¼Œä½¿ç”¨è€…æ ¹æ®éœ€è¦æ˜¯å¦å…³é—­è¯¥åŠ¨ä½œ
+    vbass_switch(vbass, 0);//Ä¬ÈÏ²»×ö´¦Àí£¬Ê¹ÓÃÕß¸ù¾İĞèÒªÊÇ·ñ¹Ø±Õ¸Ã¶¯×÷
 #endif
 
     return vbass;
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è™šæ‹Ÿä½éŸ³å…³é—­ä¾‹å­
+/**@brief    ĞéÄâµÍÒô¹Ø±ÕÀı×Ó
    @param
    @return
    @note
@@ -2017,15 +2017,15 @@ void vbass_close_demo(vbass_hdl *vbass)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    ç¯ç»•éŸ³æ•ˆã€è™šæ‹Ÿä½éŸ³åˆ‡æ¢ä¾‹å­
+/**@brief    »·ÈÆÒôĞ§¡¢ĞéÄâµÍÒôÇĞ»»Àı×Ó
    @param    eff_mode:
-			KARAOKE_SPK_OST,//åŸå£°
-			KARAOKE_SPK_DBB,//é‡ä½éŸ³
-			KARAOKE_SPK_SURROUND,//å…¨æ™¯ç¯ç»•
-			KARAOKE_SPK_3D,//3dç¯ç»•
-			KARAOKE_SPK_FLOW_VOICE,//æµåŠ¨äººå£°
-			KARAOKE_SPK_KING,//ç‹è€…è£è€€
-			KARAOKE_SPK_WAR,//å››å­£æˆ˜åœº
+			KARAOKE_SPK_OST,//Ô­Éù
+			KARAOKE_SPK_DBB,//ÖØµÍÒô
+			KARAOKE_SPK_SURROUND,//È«¾°»·ÈÆ
+			KARAOKE_SPK_3D,//3d»·ÈÆ
+			KARAOKE_SPK_FLOW_VOICE,//Á÷¶¯ÈËÉù
+			KARAOKE_SPK_KING,//ÍõÕßÈÙÒ«
+			KARAOKE_SPK_WAR,//ËÄ¼¾Õ½³¡
 			KARAOKE_SPK_MAX,
 
    @return
@@ -2047,40 +2047,40 @@ void audio_bt_effect_switch(u8 eff_mode)
     }
 #endif
     switch (eff_mode) {
-    case KARAOKE_SPK_OST://åŸå£°
+    case KARAOKE_SPK_OST://Ô­Éù
         surround_effect_switch(surround, EFFECT_OFF);
         log_i("spk_OST\n");
         break;
-    case KARAOKE_SPK_DBB://é‡ä½éŸ³
+    case KARAOKE_SPK_DBB://ÖØµÍÒô
         /* tone_play_index(IDEX_TONE_VABSS, 1); */
-        surround_effect_switch(surround, EFFECT_OFF);//è¿™é‡Œè¦ç”¨å›åŸå£°å¤„ç†çš„åœ°æ–¹ä¸ä¸€æ ·
+        surround_effect_switch(surround, EFFECT_OFF);//ÕâÀïÒªÓÃ»ØÔ­Éù´¦ÀíµÄµØ·½²»Ò»Ñù
 
 #if AUDIO_VBASS_CONFIG
         vbass_switch(vbass, 1);
 #endif
         log_i("spk_DDB\n");
         break;
-    case KARAOKE_SPK_SURROUND://å…¨æ™¯ç¯ç»•
+    case KARAOKE_SPK_SURROUND://È«¾°»·ÈÆ
         /* tone_play_index(IDEX_TONE_SURROUND, 1); */
         surround_effect_switch(surround, EFFECT_3D_PANORAMA);
         log_i("spk_SURRROUND\n");
         break;
-    case KARAOKE_SPK_3D://3dæ—‹è½¬
+    case KARAOKE_SPK_3D://3dĞı×ª
         /* tone_play_index(IDEX_TONE_3D, 1); */
         surround_effect_switch(surround, EFFECT_3D_ROTATES);
         log_i("spk_3D\n");
         break;
-    case KARAOKE_SPK_FLOW_VOICE://æµåŠ¨äººå£°
+    case KARAOKE_SPK_FLOW_VOICE://Á÷¶¯ÈËÉù
         /* tone_play_index(IDEX_TONE_FLOW, 1); */
         surround_effect_switch(surround, EFFECT_FLOATING_VOICE);
         log_i("spk_FLOW\n");
         break;
-    case KARAOKE_SPK_KING://ç‹è€…è£è€€
+    case KARAOKE_SPK_KING://ÍõÕßÈÙÒ«
         /* tone_play_index(IDEX_TONE_KING, 1); */
         surround_effect_switch(surround, EFFECT_GLORY_OF_KINGS);
         log_i("spk_KING\n");
         break;
-    case KARAOKE_SPK_WAR://å››å­£æˆ˜åœº
+    case KARAOKE_SPK_WAR://ËÄ¼¾Õ½³¡
         /* tone_play_index(IDEX_TONE_WAR, 1); */
         surround_effect_switch(surround, EFFECT_FOUR_SENSION_BATTLEFIELD);
         log_i("spk_WAR\n");
@@ -2093,7 +2093,7 @@ void audio_bt_effect_switch(u8 eff_mode)
 }
 
 void audio_file_effect_switch(u8 eff_mode);
-//æ•ˆæœåˆ‡æ¢ æµ‹è¯•
+//Ğ§¹ûÇĞ»» ²âÊÔ
 void effect_test(void *p)
 {
     static u8 cnt = 0;

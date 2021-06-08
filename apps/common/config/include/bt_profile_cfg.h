@@ -13,14 +13,14 @@
 #endif
 
 
-///---sdp service record profile- ç”¨æˆ·é€‰æ‹©æ”¯æŒåè®®--///
+///---sdp service record profile- ÓÃ»§Ñ¡ÔñÖ§³ÖĞ­Òé--///
 #if (BT_FOR_APP_EN || APP_ONLINE_DEBUG)
 #undef USER_SUPPORT_PROFILE_SPP
 #define USER_SUPPORT_PROFILE_SPP    1
 #endif
 
-//ble demoçš„ä¾‹å­
-#define DEF_BLE_DEMO_NULL                 0 //ble æ²¡æœ‰ä½¿èƒ½
+//ble demoµÄÀı×Ó
+#define DEF_BLE_DEMO_NULL                 0 //ble Ã»ÓĞÊ¹ÄÜ
 #define DEF_BLE_DEMO_ADV                  1 //only adv,can't connect
 #define DEF_BLE_DEMO_TRANS_DATA           2 //
 #define DEF_BLE_DEMO_DUEROS_DMA           3 //
@@ -32,7 +32,7 @@
 #define DEF_BLE_ANCS_ADV				  9
 #define DEF_BLE_DEMO_MI 				  10
 
-//é…ç½®é€‰æ‹©çš„demo
+//ÅäÖÃÑ¡ÔñµÄdemo
 #if TCFG_USER_BLE_ENABLE
 
 #if DUEROS_DMA_EN
@@ -70,7 +70,7 @@
 #define TCFG_BLE_DEMO_SELECT          DEF_BLE_DEMO_NULL//ble is closed
 #endif
 
-//é…å¯¹åŠ å¯†ä½¿èƒ½
+//Åä¶Ô¼ÓÃÜÊ¹ÄÜ
 #define TCFG_BLE_SECURITY_EN          0
 
 

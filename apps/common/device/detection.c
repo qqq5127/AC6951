@@ -48,12 +48,12 @@ VDET_STATUS vdet_check(u8 cnt)
         g_VDET_VAR.status_cnt++;
     }
     if (g_VDET_VAR.status_cnt < cnt) {
-        ///æ£€æµ‹åˆ°æ’å…¥//æ¶ˆæŠ–
+        ///¼ì²âµ½²åÈë//Ïû¶¶
         return NULL_VDET;
     }
     g_VDET_VAR.status_cnt = 0;
 
-    ///æ£€æµ‹åˆ°æ’å…¥
+    ///¼ì²âµ½²åÈë
     if ((VDET_ON == g_VDET_VAR.cur_status) && (!g_VDET_VAR.original_status)) {
         return VDET_ON;
     } else if ((VDET_OFF == g_VDET_VAR.cur_status) && g_VDET_VAR.original_status) {

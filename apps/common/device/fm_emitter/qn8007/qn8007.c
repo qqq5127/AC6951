@@ -32,7 +32,7 @@ void qn8007_init(u16 fre)
     u8 chipid_minor = 0, chipid_major = 0;
     u8 retry = 0, temp = 0;
 
-    /*qn8007有时会初始化失败没有发射，这里先判断写进去的与读出来的一不一致*/
+    /*qn8007��ʱ���ʼ��ʧ��û�з��䣬�������ж�д��ȥ�����������һ��һ��*/
     while ((temp != 0x29) && (retry < 5)) {
         qn8007_write(QN8007_SYSTEM2, 0x80); 	//reset all reg
         delay_n10ms(1);
@@ -47,9 +47,9 @@ void qn8007_init(u16 fre)
     qn8007_write(QN8007_SYSTEM2, 0x08);
 
 #if (FMTX_CHIP_CLK_SOURCE == CLK_BY_EXTERN_OSC)
-    qn8007_write(QN8007_REG_XLT3, 0x04); 	//外挂晶振
+    qn8007_write(QN8007_REG_XLT3, 0x04); 	//��Ҿ���
 #else
-    qn8007_write(QN8007_REG_XLT3, 0x14); 	//外部时钟输入
+    qn8007_write(QN8007_REG_XLT3, 0x14); 	//�ⲿʱ������
 #endif
 
 #if (FMTX_CHIP_OSC_SELECT == OSC_12M)
@@ -58,7 +58,7 @@ void qn8007_init(u16 fre)
     qn8007_write(QN8007_ANACTL1, 0x29);	//select 24M
 #endif
     delay_n10ms(40);
-    qn8007_write(QN8007_PAC_TARGET, 0xff);	//发射功率默认最大
+    qn8007_write(QN8007_PAC_TARGET, 0xff);	//���书��Ĭ�����
 
     chipid_minor = qn8007_read(QN8007_CID1);
     chipid_major = qn8007_read(QN8007_CID2);
@@ -185,10 +185,10 @@ void qn8007_mute(u8 mute)
 
 
 /*----------------------------------------------------------------------------*/
-/*	qn8007自动扫台功能
- 	ch_start:扫描的起始频点
-	ch_stop:扫描的停止频点
-	return:扫描结束后得到的频点
+/*	qn8007�Զ�ɨ̨����
+ 	ch_start:ɨ�����ʼƵ��
+	ch_stop:ɨ���ֹͣƵ��
+	return:ɨ�������õ���Ƶ��
 */
 /*----------------------------------------------------------------------------*/
 u16 qn8007_channel_scan(u16 ch_start, u16 ch_stop)
@@ -234,7 +234,7 @@ u16 qn8007_channel_scan(u16 ch_start, u16 ch_stop)
     /* printf("SYSTEM1=%x\n",temp); */
     /* qn8007_write(QN8007_SYSTEM1,temp); */
 
-    while (qn8007_read(QN8007_SYSTEM1)&BIT(5));	//等待扫描完毕
+    while (qn8007_read(QN8007_SYSTEM1)&BIT(5));	//�ȴ�ɨ�����
 
     fre_low = qn8007_read(QN8007_CH);
     fre_high = qn8007_read(QN8007_CH_STEP);

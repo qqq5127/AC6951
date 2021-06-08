@@ -92,7 +92,7 @@ s32 ac3433_uart_init(u32 baud)
     JL_IOMAP->CON3 &= ~BIT(3);
     JL_IOMAP->CON1 &= ~(BIT(8) | BIT(9) | BIT(10) | BIT(11));	//output channel0 ->UT0_TX
 
-    //ä»»æ„IOå£è¾“å‡º,æ‰€é€‰åˆ™çš„IOå£éœ€è¦è®¾ç½®ä¸ºè¾“å‡º, ä¸”å¼€ä¸Šä¸‹æ‹‰.
+    //ÈÎÒâIO¿ÚÊä³ö,ËùÑ¡ÔòµÄIO¿ÚĞèÒªÉèÖÃÎªÊä³ö, ÇÒ¿ªÉÏÏÂÀ­.
     AC3433_UART_DATA_PORT->DIR &= ~AC3433_UART_DATA_BIT;
     AC3433_UART_DATA_PORT->DIE &= ~AC3433_UART_DATA_BIT;
     AC3433_UART_DATA_PORT->OUT &= ~AC3433_UART_DATA_BIT;
@@ -122,16 +122,16 @@ void ac3433_write_data(u8 chip_id, u8 iic_addr, u8 iic_dat)
 {
     g_iic_busy  = 1;
     ac3433_mult_detect();
-    iic_start();                //I2Cå¯åŠ¨
-    iic_sendbyte(chip_id);         //å†™å‘½ä»¤
+    iic_start();                //I2CÆô¶¯
+    iic_sendbyte(chip_id);         //Ğ´ÃüÁî
 
     if (0xff != iic_addr) {
-        iic_sendbyte(iic_addr);   //å†™åœ°å€
+        iic_sendbyte(iic_addr);   //Ğ´µØÖ·
     }
 
-    iic_sendbyte(iic_dat);      //å†™æ•°æ®
+    iic_sendbyte(iic_dat);      //Ğ´Êı¾İ
 
-    iic_stop();                 //I2Cåœæ­¢æ—¶åº
+    iic_stop();                 //I2CÍ£Ö¹Ê±Ğò
 
     if (iic_dat == FT33_ADDR_READ) {
         iic_start();
@@ -148,16 +148,16 @@ void ac3433_write(u8 chip_id, u8 iic_addr, u8 *iic_dat, u8 n)
 {
     g_iic_busy  = 1;
     ac3433_mult_detect();
-    iic_start();                //I2Cå¯åŠ¨
-    iic_sendbyte(chip_id);         //å†™å‘½ä»¤
+    iic_start();                //I2CÆô¶¯
+    iic_sendbyte(chip_id);         //Ğ´ÃüÁî
 
     if (0xff != iic_addr) {
-        iic_sendbyte(iic_addr);   //å†™åœ°å€
+        iic_sendbyte(iic_addr);   //Ğ´µØÖ·
     }
     for (; n > 0; n--) {
-        iic_sendbyte(*iic_dat++);      //å†™æ•°æ®
+        iic_sendbyte(*iic_dat++);      //Ğ´Êı¾İ
     }
-    iic_stop();                 //I2Cåœæ­¢æ—¶åº
+    iic_stop();                 //I2CÍ£Ö¹Ê±Ğò
     ac3433_mult_release();
     g_iic_busy = 0;
 }
@@ -166,10 +166,10 @@ void ac3433_read(u8 chip_id, u8 iic_addr, u8 *iic_dat)
 {
     g_iic_busy = 1;
     ac3433_mult_detect();
-    iic_start();                //I2Cå¯åŠ¨
-    iic_sendbyte(chip_id);         //å†™å‘½ä»¤
+    iic_start();                //I2CÆô¶¯
+    iic_sendbyte(chip_id);         //Ğ´ÃüÁî
     if (0xff != iic_addr) {
-        iic_sendbyte(iic_addr);   //å†™åœ°å€
+        iic_sendbyte(iic_addr);   //Ğ´µØÖ·
     }
     *iic_dat = iic_revbyte(1);
     if (*iic_dat == FT33_ADDR_READ) {
@@ -188,16 +188,16 @@ void ac3433_readn(u8 chip_id, u8 iic_addr, u8 *iic_dat, u8 n)
 {
     g_iic_busy = 1;
     ac3433_mult_detect();
-    iic_start();                //I2Cå¯åŠ¨
-    iic_sendbyte(chip_id);         //å†™å‘½ä»¤
+    iic_start();                //I2CÆô¶¯
+    iic_sendbyte(chip_id);         //Ğ´ÃüÁî
     if (0xff != iic_addr) {
-        iic_sendbyte(iic_addr);   //å†™åœ°å€
+        iic_sendbyte(iic_addr);   //Ğ´µØÖ·
     }
     for (; n > 1; n--) {
-        *iic_dat++ = iic_revbyte(0);      //è¯»æ•°æ®
+        *iic_dat++ = iic_revbyte(0);      //¶ÁÊı¾İ
     }
     *iic_dat++ = iic_revbyte(1);
-    iic_stop();                 //I2Cåœæ­¢æ—¶åº
+    iic_stop();                 //I2CÍ£Ö¹Ê±Ğò
     ac3433_mult_release();
     g_iic_busy = 0;
 }
@@ -231,9 +231,9 @@ void ac3433_interface_register(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    AC3433 åˆå§‹åŒ–å‡½æ•°
-   @param    freï¼šåˆå§‹åŒ–æ—¶è®¾ç½®çš„é¢‘ç‚¹
-   @return   æ— 
+/**@brief    AC3433 ³õÊ¼»¯º¯Êı
+   @param    fre£º³õÊ¼»¯Ê±ÉèÖÃµÄÆµµã
+   @return   ÎŞ
    @note     void ac3433_init(u16 fre)
 */
 /*----------------------------------------------------------------------------*/
@@ -262,13 +262,13 @@ void ac3433_init(u16 fre)
 
 /*
 void ac3433_set_freq(u16 fre)
-fre æ˜¯é¢‘ç‡å€¼
-ä¾‹å­ï¼š90MHZåº”è¯¥ä¼ å…¥900
+fre ÊÇÆµÂÊÖµ
+Àı×Ó£º90MHZÓ¦¸Ã´«Èë900
 */
 /*----------------------------------------------------------------------------*/
-/**@brief    AC3433 é¢‘ç‚¹è®¾ç½®å‡½æ•°
-   @param    freï¼šè®¾ç½®é¢‘ç‚¹
-   @return   æ— 
+/**@brief    AC3433 ÆµµãÉèÖÃº¯Êı
+   @param    fre£ºÉèÖÃÆµµã
+   @return   ÎŞ
    @note     void ac3433_set_freq(u16 fre)
 */
 /*----------------------------------------------------------------------------*/

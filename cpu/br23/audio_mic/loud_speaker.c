@@ -20,11 +20,11 @@
 #define LOG_DUMP_ENABLE
 #include "debug.h"
 
-#define ECHO_ENABLE    			    0 //Kæ­Œæ··å“
-#define HOWLING_ENABLE    			1 //å•¸å«æŠ‘åˆ¶
-#define PITCH_ENABLE    			0 //å˜å£°
+#define ECHO_ENABLE    			    0 //K¸è»ìÏì
+#define HOWLING_ENABLE    			1 //Ð¥½ÐÒÖÖÆ
+#define PITCH_ENABLE    			0 //±äÉù
 
-//æ‰©éŸ³å™¨åŠŸèƒ½ ä½¿ç”¨mic_effect.cæµç¨‹ï¼ŒåŠŸèƒ½é€‰é…åœ¨effect_reg.cä¸­ é…ç½®
+//À©ÒôÆ÷¹¦ÄÜ Ê¹ÓÃmic_effect.cÁ÷³Ì£¬¹¦ÄÜÑ¡ÅäÔÚeffect_reg.cÖÐ ÅäÖÃ
 #if 0//(TCFG_LOUDSPEAKER_ENABLE)
 
 /* extern u32 audio_output_channel_num(void); */
@@ -55,7 +55,7 @@ struct s_speaker_hdl {
     struct adc_mic_ch mic_ch;
 
     u32 process_len;
-    struct audio_stream *stream;		// éŸ³é¢‘æµ
+    struct audio_stream *stream;		// ÒôÆµÁ÷
 
     int mic_gain;
     u16 mic_sr;
@@ -84,7 +84,7 @@ struct s_speaker_hdl {
     struct audio_res_wait wait;
     struct audio_mixer_ch mix_ch;
 
-    struct pcm_decoder pcm_dec;		// pcmè§£ç å¥æŸ„
+    struct pcm_decoder pcm_dec;		// pcm½âÂë¾ä±ú
 #if REVERB_ENABLE
     REVERBN_API_STRUCT *p_reverb_hdl;
 #endif
@@ -188,12 +188,12 @@ static void pcm_dec_event_handler(struct audio_decoder *decoder, int argc, int *
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    pcmè§£ç æ•°æ®è¾“å‡º
-   @param    *entry: éŸ³é¢‘æµå¥æŸ„
-   @param    *in: è¾“å…¥ä¿¡æ¯
-   @param    *out: è¾“å‡ºä¿¡æ¯
-   @return   è¾“å‡ºé•¿åº¦
-   @note     *outæœªä½¿ç”¨
+/**@brief    pcm½âÂëÊý¾ÝÊä³ö
+   @param    *entry: ÒôÆµÁ÷¾ä±ú
+   @param    *in: ÊäÈëÐÅÏ¢
+   @param    *out: Êä³öÐÅÏ¢
+   @return   Êä³ö³¤¶È
+   @note     *outÎ´Ê¹ÓÃ
 */
 /*----------------------------------------------------------------------------*/
 static int pcm_dec_data_handler(struct audio_stream_entry *entry,
@@ -207,8 +207,8 @@ static int pcm_dec_data_handler(struct audio_stream_entry *entry,
     return decoder->process_len;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    pcmè§£ç æ•°æ®æµæ¿€æ´»
-   @param    *p: ç§æœ‰å¥æŸ„
+/**@brief    pcm½âÂëÊý¾ÝÁ÷¼¤»î
+   @param    *p: Ë½ÓÐ¾ä±ú
    @return
    @note
 */
@@ -238,10 +238,10 @@ static int pcm_dec_start(void)
 
     audio_mixer_ch_open(&dec->mix_ch, &mixer);
     audio_mixer_ch_set_src(&dec->mix_ch, 1, 1);
-    /* audio_mixer_ch_set_no_wait(&dec->mix_ch, 1, 10); // è¶…æ—¶è‡ªåŠ¨ä¸¢æ•° */
+    /* audio_mixer_ch_set_no_wait(&dec->mix_ch, 1, 10); // ³¬Ê±×Ô¶¯¶ªÊý */
 
 
-// æ•°æ®æµä¸²è”
+// Êý¾ÝÁ÷´®Áª
     struct audio_stream_entry *entries[8] = {NULL};
     u8 entry_cnt = 0;
     entries[entry_cnt++] = &dec->pcm_dec.decoder.entry;

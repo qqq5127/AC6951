@@ -18,12 +18,12 @@
 #define LOG_CLI_ENABLE
 #include "debug.h"
 
-//å……ç”µæ¶“æµè½¬æ’æµçš„ç”µå‹ç‚¹--ä½¿ç”¨å†…ç½®å……ç”µæ—¶æœ‰æ•ˆ
+//³äµçä¸Á÷×ªºãÁ÷µÄµçÑ¹µã--Ê¹ÓÃÄÚÖÃ³äµçÊ±ÓĞĞ§
 #define CHARGE_CURRENT_CHANGE   (3000)
 #define CHARGE_FULL_MA          (CHARGE_FULL_mA_30)
 #define CHARGE_SLOW_MA          (CHARGE_mA_40)
-#define CHARGE_WL_FAST_MA       (CHARGE_mA_200)//æ— çº¿å……ç”µæ—¶,ä½¿ç”¨200mAå……ç”µç”µæµ
-#define CHARGE_FAST_MA          (CHARGE_mA_320)//çº¿å……æ˜¯ä½¿ç”¨320mAå……ç”µç”µæµ
+#define CHARGE_WL_FAST_MA       (CHARGE_mA_200)//ÎŞÏß³äµçÊ±,Ê¹ÓÃ200mA³äµçµçÁ÷
+#define CHARGE_FAST_MA          (CHARGE_mA_320)//Ïß³äÊÇÊ¹ÓÃ320mA³äµçµçÁ÷
 
 #if (TCFG_CHARGE_MOUDLE_OUTSIDE == DISABLE)
 static volatile u8 inside_ma;
@@ -36,10 +36,10 @@ extern void short_det_wakeup_enable();
 static volatile u8 charge_en;
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ ¹æ®ç”µæ± ç”µå‹è®¾ç½®ç”µæµæ¡£ä½
-   @param    æ— 
-   @return   æ— 
-   @note     å¼€å§‹å……ç”µæ—¶è°ƒç”¨è¯¥æ¥å£åˆ‡åˆ°å¯¹åº”æ¡£ä½
+/**@brief    ¸ù¾İµç³ØµçÑ¹ÉèÖÃµçÁ÷µµÎ»
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¿ªÊ¼³äµçÊ±µ÷ÓÃ¸Ã½Ó¿ÚÇĞµ½¶ÔÓ¦µµÎ»
 */
 /*------------------------------------------------------------------------------------*/
 #if (TCFG_CHARGE_MOUDLE_OUTSIDE == DISABLE)
@@ -57,7 +57,7 @@ void chargebox_charge_change_current(void *priv)
         CHARGE_mA_SEL(inside_target);
         inside_ma = inside_target;
     } else {
-        //æ¶“æµå……ç”µæ—¶,10sæŸ¥çœ‹ä¸€æ¬¡ç”µé‡
+        //ä¸Á÷³äµçÊ±,10s²é¿´Ò»´ÎµçÁ¿
         CHARGE_mA_SEL(CHARGE_SLOW_MA);
         inside_ma = CHARGE_SLOW_MA;
         charge_timer = sys_timeout_add(NULL, chargebox_charge_change_current, 10000);
@@ -66,9 +66,9 @@ void chargebox_charge_change_current(void *priv)
 #endif
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å¼€å§‹å¯¹ç”µæ± ä»“å……ç”µ
-   @param    æ— 
-   @return   æ— 
+/**@brief    ¿ªÊ¼¶Ôµç³Ø²Ö³äµç
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -77,9 +77,9 @@ void chargebox_charge_start(void)
     log_info("charge start!\n");
 #if TCFG_CHARGE_MOUDLE_OUTSIDE
     gpio_direction_input(TCFG_STOP_CHARGE_IO);
-    usb_charge_full_wakeup_deal();//å¤–æŒ‚å……ç”µ,å¼€å……ç”µæ—¶ä¸»åŠ¨å»æŸ¥è¯¢ä¸€æ¬¡æ˜¯å¦å……æ»¡
+    usb_charge_full_wakeup_deal();//Íâ¹Ò³äµç,¿ª³äµçÊ±Ö÷¶¯È¥²éÑ¯Ò»´ÎÊÇ·ñ³äÂú
 #else
-    //å…ˆåˆ‡æ ¹æ®ç”µå‹åˆ‡æ¢ç”µæµæ¡£ä½,å†å¼€å……ç”µ
+    //ÏÈÇĞ¸ù¾İµçÑ¹ÇĞ»»µçÁ÷µµÎ»,ÔÙ¿ª³äµç
     chargebox_charge_change_current(NULL);
     charge_start();
 #endif
@@ -87,9 +87,9 @@ void chargebox_charge_start(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    åœæ­¢å¯¹ç”µæ± ä»“å……ç”µ
-   @param    æ— 
-   @return   æ— 
+/**@brief    Í£Ö¹¶Ôµç³Ø²Ö³äµç
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -111,9 +111,9 @@ void chargebox_charge_close(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–ç³»ç»Ÿæ˜¯å¦åœ¨å……ç”µ
-   @param    æ— 
-   @return   1:æ­£åœ¨å……ç”µ, 0:å……ç”µå…³é—­
+/**@brief    »ñÈ¡ÏµÍ³ÊÇ·ñÔÚ³äµç
+   @param    ÎŞ
+   @return   1:ÕıÔÚ³äµç, 0:³äµç¹Ø±Õ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -123,9 +123,9 @@ u8 chargebox_get_charge_en(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µå‡å‹å¼€å…³
-   @param    æ— 
-   @return   æ— 
+/**@brief    ³äµçÉıÑ¹¿ª¹Ø
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -144,7 +144,7 @@ void chargeIc_boost_ctrl(u8 en)
     sys_info.status[LDO_DET] = en ? STATUS_ONLINE : STATUS_OFFLINE;
 #endif
 #if TCFG_CURRENT_LIMIT_ENABLE
-    //å¼€å‡å‹æ—¶æ‰å»æ£€æµ‹è€³æœºå……ç”µç”µæµ
+    //¿ªÉıÑ¹Ê±²ÅÈ¥¼ì²â¶ú»ú³äµçµçÁ÷
     ear_current_detect_enable(en);
 #endif
 #if TCFG_SHORT_PROTECT_ENABLE
@@ -155,9 +155,9 @@ void chargeIc_boost_ctrl(u8 en)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è€³æœºå……ç”µç”µæºå¼€å…³
-   @param    æ— 
-   @return   æ— 
+/**@brief    ¶ú»ú³äµçµçÔ´¿ª¹Ø
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -188,21 +188,21 @@ void chargeIc_pwr_ctrl(u8 en)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µICåˆå§‹åŒ–
+/**@brief    ³äµçIC³õÊ¼»¯
    @param    null
    @return   null
-   @note     åˆå§‹åŒ–å……ç”µICç›¸å…³çš„å¼•è„š
+   @note     ³õÊ¼»¯³äµçICÏà¹ØµÄÒı½Å
 */
 /*------------------------------------------------------------------------------------*/
 void chargeIc_init(void)
 {
-    //ä½¿èƒ½IOè¾“å‡ºä½ç”µå¹³
+    //Ê¹ÄÜIOÊä³öµÍµçÆ½
     gpio_set_die(TCFG_BOOST_CTRL_IO, 0);
     gpio_set_pull_down(TCFG_BOOST_CTRL_IO, 0);
     gpio_set_pull_up(TCFG_BOOST_CTRL_IO, 0);
     gpio_direction_output(TCFG_BOOST_CTRL_IO, 0);
 
-    //PWR_CTRLåˆå§‹åŒ–
+    //PWR_CTRL³õÊ¼»¯
     gpio_set_die(TCFG_PWR_CTRL_IO, 0);
     gpio_set_pull_up(TCFG_PWR_CTRL_IO, 0);
     gpio_direction_input(TCFG_PWR_CTRL_IO);
@@ -213,7 +213,7 @@ void chargeIc_init(void)
 #endif
 
 #if TCFG_CHARGE_MOUDLE_OUTSIDE
-    //å……ç”µæ§åˆ¶è„š,é«˜é˜»æ—¶æ­£å¸¸å……ç”µ,è¾“å‡º1æ—¶å……ç”µæˆªæ­¢
+    //³äµç¿ØÖÆ½Å,¸ß×èÊ±Õı³£³äµç,Êä³ö1Ê±³äµç½ØÖ¹
     charge_en = 1;
     gpio_set_die(TCFG_STOP_CHARGE_IO, 1);
     gpio_set_pull_down(TCFG_STOP_CHARGE_IO, 0);
@@ -224,7 +224,7 @@ void chargeIc_init(void)
         gpio_direction_output(TCFG_STOP_CHARGE_IO, 1);
     }
 #else
-    //å†…ç½®å……ç”µåˆå§‹åŒ–
+    //ÄÚÖÃ³äµç³õÊ¼»¯
     CHGBG_EN(0);
     CHARGE_EN(0);
     CHARGE_WKUP_PND_CLR();

@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------*/
 /**@file     bk1080.c
-   @brief    BK1080æ”¶éŸ³åº•å±‚é©±åŠ¨
+   @brief    BK1080ÊÕÒôµ×²ãÇı¶¯
    @details
    @author
    @date   2011-3-30
@@ -193,9 +193,9 @@ __gdend:
 #define app_IIC_readn bk1080_iic_readn
 
 /*----------------------------------------------------------------------------*/
-/**@brief    BK1080è¯»å¯„å­˜å™¨å‡½æ•°
-   @param    num éœ€è¦çš„æ•°ç›®
-   @return   æ— 
+/**@brief    BK1080¶Á¼Ä´æÆ÷º¯Êı
+   @param    num ĞèÒªµÄÊıÄ¿
+   @return   ÎŞ
    @note     void BEKEN_I2c_Read(u8 reg,u8 *pBuf,u8 num)
 */
 /*----------------------------------------------------------------------------*/
@@ -207,9 +207,9 @@ static void BEKEN_I2c_Read(u8 reg, u8 *pBuf, u8 num)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    BK1080è¯»å¯„å­˜å™¨å‡½æ•°
-   @param    num éœ€è¦çš„æ•°ç›®
-   @return   æ— 
+/**@brief    BK1080¶Á¼Ä´æÆ÷º¯Êı
+   @param    num ĞèÒªµÄÊıÄ¿
+   @return   ÎŞ
    @note     void BEKEN_I2c_Write(u8 reg,u8 *pBuf,u8 num)
 */
 /*----------------------------------------------------------------------------*/
@@ -220,9 +220,9 @@ static void BEKEN_I2c_Write(u8 reg, u8 *pBuf, u8 num)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    BK1080 åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
+/**@brief    BK1080 ³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
    @note     void init_BK1080(void)
 */
 /*----------------------------------------------------------------------------*/
@@ -252,9 +252,9 @@ void bk1080_init(void *priv)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®ä¸€ä¸ªé¢‘ç‚¹ BK1080
-   @param    curFreqï¼šè®¾ç½®é¢‘ç‚¹
-   @return   æ— 
+/**@brief    ÉèÖÃÒ»¸öÆµµã BK1080
+   @param    curFreq£ºÉèÖÃÆµµã
+   @return   ÎŞ
    @note     void bk1080_setfreq(u16 curFreq)
 */
 /*----------------------------------------------------------------------------*/
@@ -273,9 +273,9 @@ void bk1080_setfreq(u16 curFreq)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®ä¸€ä¸ªé¢‘ç‚¹BK1080
-   @param    fre é¢‘ç‚¹  875~1080
-   @return   1ï¼šå½“å‰é¢‘ç‚¹æœ‰å°ï¼Œ0ï¼šå½“å‰é¢‘ç‚¹æ— å°
+/**@brief    ÉèÖÃÒ»¸öÆµµãBK1080
+   @param    fre Æµµã  875~1080
+   @return   1£ºµ±Ç°ÆµµãÓĞÌ¨£¬0£ºµ±Ç°ÆµµãÎŞÌ¨
    @note     bool bk1080_set_fre(u16 freq)
 */
 /*----------------------------------------------------------------------------*/
@@ -287,7 +287,7 @@ bool bk1080_set_fre(void *priv, u16 freq)
     u16 cur_freq_deviation;
 
     bk1080_setfreq(freq);
-    delay_n10ms(4);		//å»¶æ—¶æ—¶é—´>=30ms
+    delay_n10ms(4);		//ÑÓÊ±Ê±¼ä>=30ms
 
 ///////////////////////////////////////////////////////////////////
 //new added 2009-05-30
@@ -306,20 +306,20 @@ bool bk1080_set_fre(void *priv, u16 freq)
         return 0;
     }
 
-    if (temp[3] < 8) { //RSSI<10   //æœå°è¾ƒå°‘å¯å‡å°‘è¯¥å€¼ï¼Œå‡å°è¾ƒå¤šå¯å¢å¤§è¯¥å€¼    //8
+    if (temp[3] < 8) { //RSSI<10   //ËÑÌ¨½ÏÉÙ¿É¼õÉÙ¸ÃÖµ£¬¼ÙÌ¨½Ï¶à¿ÉÔö´ó¸ÃÖµ    //8
         last_tuned_freq = freq;			//save last tuned freqency
         g_last_freq_deviation_value = cur_freq_deviation;
         return 0;
     }
 
-    if ((temp[1] & 0x0f) < 2) { //SNR<2 //æœå°è¾ƒå°‘å¯å‡å°‘è¯¥å€¼ï¼Œå‡å°è¾ƒå¤šå¯å¢å¤§è¯¥å€¼
+    if ((temp[1] & 0x0f) < 2) { //SNR<2 //ËÑÌ¨½ÏÉÙ¿É¼õÉÙ¸ÃÖµ£¬¼ÙÌ¨½Ï¶à¿ÉÔö´ó¸ÃÖµ
         last_tuned_freq = freq;			//save last tuned freqency
         g_last_freq_deviation_value = cur_freq_deviation;
         return 0;
     }
 /////////////////////////////////////////////////////////////////////////
 //add frequency devation check
-    if ((cur_freq_deviation >= 192) && (cur_freq_deviation <= (0xfff - 192))) { //0x64 //æœå°è¾ƒå°‘å¯å‡å°‘è¯¥å€¼ï¼Œå‡å°è¾ƒå¤šå¯å¢å¤§è¯¥å€¼
+    if ((cur_freq_deviation >= 192) && (cur_freq_deviation <= (0xfff - 192))) { //0x64 //ËÑÌ¨½ÏÉÙ¿É¼õÉÙ¸ÃÖµ£¬¼ÙÌ¨½Ï¶à¿ÉÔö´ó¸ÃÖµ
         last_tuned_freq = freq;			//save last tuned freqency
         g_last_freq_deviation_value = cur_freq_deviation;
 
@@ -335,7 +335,7 @@ bool bk1080_set_fre(void *priv, u16 freq)
             return 0;
         }
 
-        if (g_last_freq_deviation_value < 150) { //æœå°è¾ƒå°‘å¯å‡å°‘è¯¥å€¼ï¼Œå‡å°è¾ƒå¤šå¯å¢å¤§è¯¥å€¼
+        if (g_last_freq_deviation_value < 150) { //ËÑÌ¨½ÏÉÙ¿É¼õÉÙ¸ÃÖµ£¬¼ÙÌ¨½Ï¶à¿ÉÔö´ó¸ÃÖµ
             last_tuned_freq = freq;		//save last tuned freqency
             g_last_freq_deviation_value = cur_freq_deviation;
             return 0;
@@ -349,7 +349,7 @@ bool bk1080_set_fre(void *priv, u16 freq)
             return 0;
         }
 
-        if (g_last_freq_deviation_value > (0xfff - 150)) { //æœå°è¾ƒå°‘å¯å‡å°‘è¯¥å€¼ï¼Œå‡å°è¾ƒå¤šå¯å¢å¤§è¯¥å€¼
+        if (g_last_freq_deviation_value > (0xfff - 150)) { //ËÑÌ¨½ÏÉÙ¿É¼õÉÙ¸ÃÖµ£¬¼ÙÌ¨½Ï¶à¿ÉÔö´ó¸ÃÖµ
             last_tuned_freq = freq;		//save last tuned freqency
             g_last_freq_deviation_value = cur_freq_deviation;
             return 0;
@@ -364,9 +364,9 @@ bool bk1080_set_fre(void *priv, u16 freq)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­ BK1080çš„ç”µæº
-   @param    æ— 
-   @return   æ— 
+/**@brief    ¹Ø±Õ BK1080µÄµçÔ´
+   @param    ÎŞ
+   @return   ÎŞ
    @note     void BK1080_PowerDown(void)
 */
 /*----------------------------------------------------------------------------*/
@@ -382,9 +382,9 @@ void bk1080_powerdown(void *priv)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    FM æ¨¡å—é™éŸ³æ§åˆ¶
-   @param    dirï¼š1-mute 0-unmute
-   @return   æ— 
+/**@brief    FM Ä£¿é¾²Òô¿ØÖÆ
+   @param    dir£º1-mute 0-unmute
+   @return   ÎŞ
    @note     void BK1080_mute(dir)
 */
 /*----------------------------------------------------------------------------*/
@@ -403,9 +403,9 @@ void bk1080_mute(void *priv, u8 flag)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   FMæ¨¡å—æ£€æµ‹ï¼Œè·å–BK1080 æ¨¡å—ID
-   @param   æ— 
-   @return  æ£€æµ‹åˆ°BK1080æ¨¡å—è¿”å›1ï¼Œå¦åˆ™è¿”å›0
+/**@brief   FMÄ£¿é¼ì²â£¬»ñÈ¡BK1080 Ä£¿éID
+   @param   ÎŞ
+   @return  ¼ì²âµ½BK1080Ä£¿é·µ»Ø1£¬·ñÔò·µ»Ø0
    @note    bool BK1080_Read_ID(void)
 */
 /*----------------------------------------------------------------------------*/

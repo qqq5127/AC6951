@@ -32,7 +32,7 @@
 #if TCFG_APP_MUSIC_EN
 
 
-#define FILE_DEC_PICK_EN			1 // æœ¬åœ°è§£ç æ‹†åŒ…è½¬å‘
+#define FILE_DEC_PICK_EN			1 // ±¾µØ½âÂë²ğ°ü×ª·¢
 
 #if (!TCFG_DEC2TWS_ENABLE)
 #undef FILE_DEC_PICK_EN
@@ -43,21 +43,21 @@
 #define BREAKPOINT_DATA_LEN			32
 #endif
 
-const int FILE_DEC_ONCE_OUT_NUM	= ((512 * 4) * 2);	// ä¸€æ¬¡æœ€å¤šè¾“å‡ºé•¿åº¦ã€‚é¿å…å¤šè§£ç å åŠ æ—¶å¡ä½å…¶ä»–è§£ç å¤ªé•¿æ—¶é—´
+const int FILE_DEC_ONCE_OUT_NUM	= ((512 * 4) * 2);	// Ò»´Î×î¶àÊä³ö³¤¶È¡£±ÜÃâ¶à½âÂëµş¼ÓÊ±¿¨×¡ÆäËû½âÂëÌ«³¤Ê±¼ä
 
-// æ–‡ä»¶è§£ç è¾“å‡ºä½¿ç”¨å•ç‹¬ä»»åŠ¡
+// ÎÄ¼ş½âÂëÊä³öÊ¹ÓÃµ¥¶ÀÈÎÎñ
 #if TCFG_AUDIO_DEC_OUT_TASK
 #define FILE_DEC_USE_OUT_TASK		1
 #else
 #define FILE_DEC_USE_OUT_TASK		0
 #endif
 
-#define  CHECK_SR_WHEN_DECODING   0 //æ¯æ¬¡runéƒ½æ£€æµ‹é‡‡æ ·ç‡
+#define  CHECK_SR_WHEN_DECODING   0 //Ã¿´Îrun¶¼¼ì²â²ÉÑùÂÊ
 //////////////////////////////////////////////////////////////////////////////
 
 struct dec_type {
-    u32 type;	// è§£ç ç±»å‹
-    u32 clk;	// è§£ç æ—¶é’Ÿ
+    u32 type;	// ½âÂëÀàĞÍ
+    u32 clk;	// ½âÂëÊ±ÖÓ
 };
 
 const struct dec_type  dec_clk_tb[] = {
@@ -83,8 +83,8 @@ const struct dec_type  dec_clk_tb[] = {
 
 //////////////////////////////////////////////////////////////////////////////
 
-struct file_dec_hdl *file_dec = NULL;	// æ–‡ä»¶è§£ç å¥æŸ„
-u8 file_dec_start_pause = 0;	// å¯åŠ¨è§£ç åä½†ä¸é©¬ä¸Šå¼€å§‹æ’­æ”¾
+struct file_dec_hdl *file_dec = NULL;	// ÎÄ¼ş½âÂë¾ä±ú
+u8 file_dec_start_pause = 0;	// Æô¶¯½âÂëºóµ«²»ÂíÉÏ¿ªÊ¼²¥·Å
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -110,7 +110,7 @@ void vbass_switch(vbass_hdl *vbass, u32 vbass_switch);
 
 //////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–æ–‡ä»¶è§£ç hdl
+/**@brief    »ñÈ¡ÎÄ¼ş½âÂëhdl
    @param
    @return
    @note
@@ -121,8 +121,8 @@ void *get_file_dec_hdl()
     return file_dec;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    è§£ç æ—¶é’Ÿæ·»åŠ 
-   @param    type: è§£ç ç±»å‹
+/**@brief    ½âÂëÊ±ÖÓÌí¼Ó
+   @param    type: ½âÂëÀàĞÍ
    @return
    @note
 */
@@ -139,8 +139,8 @@ static void dec_clock_add(u32 type)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è§£ç æ—¶é’Ÿç§»é™¤
-   @param    type: è§£ç ç±»å‹
+/**@brief    ½âÂëÊ±ÖÓÒÆ³ı
+   @param    type: ½âÂëÀàĞÍ
    @return
    @note
 */
@@ -157,12 +157,12 @@ static void dec_clock_remove(u32 type)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è¯»å–æ–‡ä»¶æ•°æ®
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @param    *buf: æ•°æ®
-   @param    len: æ•°æ®é•¿åº¦
-   @return   >=0ï¼šè¯»åˆ°çš„æ•°æ®é•¿åº¦
-   @return   <0ï¼šé”™è¯¯
+/**@brief    ¶ÁÈ¡ÎÄ¼şÊı¾İ
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @param    *buf: Êı¾İ
+   @param    len: Êı¾İ³¤¶È
+   @return   >=0£º¶Áµ½µÄÊı¾İ³¤¶È
+   @return   <0£º´íÎó
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -172,12 +172,12 @@ static int file_fread(struct audio_decoder *decoder, void *buf, u32 len)
     struct file_dec_hdl *dec = container_of(file_dec, struct file_dec_hdl, file_dec);
     int rlen;
 #if TCFG_DEC_DECRYPT_ENABLE
-    // è§£å¯†è¯»å–
+    // ½âÃÜ¶ÁÈ¡
     u32 addr;
     addr = fpos(dec->file);
     rlen = fread(dec->file, buf, len);
     if (rlen && (rlen <= len)) {
-        // readåè¿›è¡Œè§£å¯†
+        // readºó½øĞĞ½âÃÜ
         cryptanalysis_buff(&dec->mply_cipher, buf, addr, rlen);
     }
 #else
@@ -201,12 +201,12 @@ static int file_fread(struct audio_decoder *decoder, void *buf, u32 len)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶æŒ‡é’ˆå®šä½
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @param    offset: å®šä½åç§»
-   @param    seek_mode: å®šä½ç±»å‹
-   @return   0ï¼šæˆåŠŸ
-   @return   é0ï¼šé”™è¯¯
+/**@brief    ÎÄ¼şÖ¸Õë¶¨Î»
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @param    offset: ¶¨Î»Æ«ÒÆ
+   @param    seek_mode: ¶¨Î»ÀàĞÍ
+   @return   0£º³É¹¦
+   @return   ·Ç0£º´íÎó
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -218,9 +218,9 @@ static int file_fseek(struct audio_decoder *decoder, u32 offset, int seek_mode)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è¯»å–æ–‡ä»¶é•¿åº¦
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @return   æ–‡ä»¶é•¿åº¦
+/**@brief    ¶ÁÈ¡ÎÄ¼ş³¤¶È
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @return   ÎÄ¼ş³¤¶È
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -233,7 +233,7 @@ static int file_flen(struct audio_decoder *decoder)
     return len;
 }
 
-// å…ˆæ£€æŸ¥å®Œfile_inputä¸­å®šä¹‰çš„ç±»å‹ï¼Œæœ€åæ£€æŸ¥file_input_coding_moreå®šä¹‰çš„æ•°æ®ç±»å‹
+// ÏÈ¼ì²éÍêfile_inputÖĞ¶¨ÒåµÄÀàĞÍ£¬×îºó¼ì²éfile_input_coding_more¶¨ÒåµÄÊı¾İÀàĞÍ
 static const u32 file_input_coding_more[] = {
 #if TCFG_DEC_MP3_ENABLE
     AUDIO_CODING_MP3,
@@ -286,7 +286,7 @@ static const struct audio_dec_input file_input = {
 };
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç é‡Šæ”¾
+/**@brief    ÎÄ¼ş½âÂëÊÍ·Å
    @param
    @return
    @note
@@ -324,10 +324,10 @@ static void file_dec_release(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç äº‹ä»¶å¤„ç†
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @param    argc: å‚æ•°ä¸ªæ•°
-   @param    *argv: å‚æ•°
+/**@brief    ÎÄ¼ş½âÂëÊÂ¼ş´¦Àí
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @param    argc: ²ÎÊı¸öÊı
+   @param    *argv: ²ÎÊı
    @return
    @note
 */
@@ -347,7 +347,7 @@ static void file_dec_event_handler(struct audio_decoder *decoder, int argc, int 
             break;
         }
 
-        // æœ‰å›è°ƒï¼Œè®©ä¸Šå±‚closeï¼Œé¿å…closeåä¸Šå±‚è¯»ä¸åˆ°æ–­ç‚¹ç­‰
+        // ÓĞ»Øµ÷£¬ÈÃÉÏ²ãclose£¬±ÜÃâcloseºóÉÏ²ã¶Á²»µ½¶ÏµãµÈ
         if (file_dec->evt_cb) {
             /* file_dec->evt_cb(file_dec->evt_priv, argc, argv); */
             int msg[2];
@@ -364,8 +364,8 @@ static void file_dec_event_handler(struct audio_decoder *decoder, int argc, int 
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç æ•°æ®æµæ¿€æ´»
-   @param    *p: ç§æœ‰å¥æŸ„
+/**@brief    ÎÄ¼ş½âÂëÊı¾İÁ÷¼¤»î
+   @param    *p: Ë½ÓĞ¾ä±ú
    @return
    @note
 */
@@ -385,9 +385,9 @@ static void file_dec_out_stream_resume(void *p)
 
 #if CHECK_SR_WHEN_DECODING
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç é¢„å¤„ç†
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @return   0ï¼šæˆåŠŸ
+/**@brief    ÎÄ¼ş½âÂëÔ¤´¦Àí
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @return   0£º³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -400,9 +400,9 @@ static int file_decoder_probe_handler_app(struct audio_decoder *decoder)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç åå¤„ç†
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @return   0ï¼šæˆåŠŸ
+/**@brief    ÎÄ¼ş½âÂëºó´¦Àí
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @return   0£º³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -419,17 +419,17 @@ static int file_decoder_post_handler_app(struct audio_decoder *decoder)
     return 0;
 }
 
-//mp3ç‰¹æ®Šå¤„ç†
+//mp3ÌØÊâ´¦Àí
 static const struct audio_dec_handler file_decoder_handler_app = {
     .dec_probe  = file_decoder_probe_handler_app,
     .dec_post   = file_decoder_post_handler_app,
 };
 #endif
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç å¼€å§‹
+/**@brief    ÎÄ¼ş½âÂë¿ªÊ¼
    @param
-   @return   0ï¼šæˆåŠŸ
-   @return   é0ï¼šå¤±è´¥
+   @return   0£º³É¹¦
+   @return   ·Ç0£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -448,26 +448,26 @@ static int file_dec_start(void)
 
 #if FILE_DEC_PICK_EN
     if (localtws_check_enable() == true) {
-        // ä½¿ç”¨æ‹†åŒ…æ–¹å¼ä¼ è¾“
+        // Ê¹ÓÃ²ğ°ü·½Ê½´«Êä
         err = file_decoder_open(&dec->file_dec, &file_input, &decode_task,
                                 dec->bp, 1);
         if (err == 0) {
             dec->pick_flag = 1;
             dec->file_dec.dec_no_out_sound = 1;
-            // åŒæ­¥ä¸éœ€è¦æ£€æŸ¥bufå˜åŒ–
+            // Í¬²½²»ĞèÒª¼ì²ébuf±ä»¯
             local_tws_sync_no_check_data_buf(1);
-            // æ‰“å¼€localtwsæ¨é€
+            // ´ò¿ªlocaltwsÍÆËÍ
             localtws_push_open();
-            // å¯åŠ¨localtwsåŠŸèƒ½
+            // Æô¶¯localtws¹¦ÄÜ
             localtws_start(&dec->file_dec.decoder.fmt);
-            // å…³é—­èµ„æºç­‰å¾…ã€‚æœ€ç»ˆä¼šåœ¨localtwsè§£ç å¤„ç­‰å¾…
+            // ¹Ø±Õ×ÊÔ´µÈ´ı¡£×îÖÕ»áÔÚlocaltws½âÂë´¦µÈ´ı
             audio_decoder_task_del_wait(&decode_task, &dec->wait);
             goto __open_ok;
         }
     }
 #endif
 
-    // æ‰“å¼€fileè§£ç å™¨
+    // ´ò¿ªfile½âÂëÆ÷
     err = file_decoder_open(&dec->file_dec, &file_input, &decode_task,
                             dec->bp, 0);
     if (err) {
@@ -477,13 +477,13 @@ static int file_dec_start(void)
 __open_ok:
 #if CHECK_SR_WHEN_DECODING
     if (dec->file_dec.decoder.dec_ops->coding_type == AUDIO_CODING_MP3) {
-        audio_decoder_set_handler(&dec->file_dec.decoder, &file_decoder_handler_app); //æ³¨å†Œ è§£ç æ—¶æ£€æµ‹é‡‡æ ·ç‡
+        audio_decoder_set_handler(&dec->file_dec.decoder, &file_decoder_handler_app); //×¢²á ½âÂëÊ±¼ì²â²ÉÑùÂÊ
     }
 #endif
 
     file_decoder_set_event_handler(&dec->file_dec, file_dec_event_handler, dec->id);
 
-    // è·å–id3
+    // »ñÈ¡id3
     if (dec->file_dec.decoder.dec_ops->coding_type == AUDIO_CODING_MP3) {
 #if TCFG_DEC_ID3_V1_ENABLE
         if (dec->p_mp3_id3_v1) {
@@ -502,17 +502,17 @@ __open_ok:
 
 #if TCFG_PCM_ENC2TWS_ENABLE
     if (dec->file_dec.dec_no_out_sound == 0) {
-        // æ²¡æœ‰æ‹†åŒ…çš„æƒ…å†µä¸‹ï¼Œå°è¯•ä½¿ç”¨sbcç­‰ç¼–ç è½¬å‘
+        // Ã»ÓĞ²ğ°üµÄÇé¿öÏÂ£¬³¢ÊÔÊ¹ÓÃsbcµÈ±àÂë×ª·¢
         struct audio_fmt enc_f;
         memcpy(&enc_f, &dec->file_dec.decoder.fmt, sizeof(struct audio_fmt));
         enc_f.coding_type = AUDIO_CODING_SBC;
-        enc_f.channel = 2;//dec->file_dec.output_ch_num; // ä½¿ç”¨åŒå£°é“è¾“å‡ºï¼Œlocaltwsåœ¨è§£ç æ—¶æ‰å˜æˆå¯¹åº”å£°é“
+        enc_f.channel = 2;//dec->file_dec.output_ch_num; // Ê¹ÓÃË«ÉùµÀÊä³ö£¬localtwsÔÚ½âÂëÊ±²Å±ä³É¶ÔÓ¦ÉùµÀ
         int ret = localtws_enc_api_open(&enc_f, 0);
         if (ret == true) {
             dec->file_dec.dec_no_out_sound = 1;
-            // é‡å®šå‘mixer
+            // ÖØ¶¨Ïòmixer
             p_mixer = &g_localtws.mixer;
-            // å…³é—­èµ„æºç­‰å¾…ã€‚æœ€ç»ˆä¼šåœ¨localtwsè§£ç å¤„ç­‰å¾…
+            // ¹Ø±Õ×ÊÔ´µÈ´ı¡£×îÖÕ»áÔÚlocaltws½âÂë´¦µÈ´ı
             audio_decoder_task_del_wait(&decode_task, &dec->wait);
             if (dec->file_dec.output_ch_num != enc_f.channel) {
                 dec->file_dec.output_ch_num = dec->file_dec.decoder.fmt.channel = enc_f.channel;
@@ -522,7 +522,7 @@ __open_ok:
                     dec->file_dec.output_ch_type = AUDIO_CH_DIFF;
                 }
             }
-            // é‡æ–°è®¾ç½®è§£ç è¾“å‡ºå£°é“
+            // ÖØĞÂÉèÖÃ½âÂëÊä³öÉùµÀ
             file_decoder_set_output_channel(&dec->file_dec);
         }
     }
@@ -530,8 +530,8 @@ __open_ok:
 
 #if TCFG_SPEED_PITCH_ENABLE
     static	PS69_CONTEXT_CONF pitch_param;
-    pitch_param.pitchV = 32768;//32767 æ˜¯åŸå§‹éŸ³è°ƒ  >32768æ˜¯éŸ³è°ƒå˜é«˜ï¼Œã€Š32768 éŸ³è°ƒå˜ä½ï¼Œå»ºè®®èŒƒå›´20000 - 50000
-    pitch_param.speedV = 40;//>80å˜å¿«,<80 å˜æ…¢ï¼Œå»ºè®®èŒƒå›´30-130
+    pitch_param.pitchV = 32768;//32767 ÊÇÔ­Ê¼Òôµ÷  >32768ÊÇÒôµ÷±ä¸ß£¬¡¶32768 Òôµ÷±äµÍ£¬½¨Òé·¶Î§20000 - 50000
+    pitch_param.speedV = 40;//>80±ä¿ì,<80 ±äÂı£¬½¨Òé·¶Î§30-130
     pitch_param.sr = dec->file_dec.sample_rate ;
     pitch_param.chn = dec->file_dec.output_ch_num ;
     dec->p_pitchspeed_hdl = open_pitchspeed(&pitch_param, NULL);
@@ -539,7 +539,7 @@ __open_ok:
     if (!dec->file_dec.dec_no_out_sound) {
         audio_mode_main_dec_open(AUDIO_MODE_MAIN_STATE_DEC_FILE);
     }
-    // è®¾ç½®å åŠ åŠŸèƒ½
+    // ÉèÖÃµş¼Ó¹¦ÄÜ
     audio_mixer_ch_open_head(&dec->mix_ch, p_mixer);
     audio_mixer_ch_set_src(&dec->mix_ch, 1, 0);
 
@@ -556,7 +556,7 @@ __open_ok:
         dec->stream_handler(dec->stream_priv, FILE_DEC_STREAM_OPEN, dec);
         goto __stream_set_end;
     }
-    // eq\drcéŸ³æ•ˆ
+    // eq\drcÒôĞ§
     dec->eq_drc = file_eq_drc_open(dec->file_dec.sample_rate, dec->file_dec.output_ch_num);
 
 #if TCFG_EQ_DIVIDE_ENABLE
@@ -594,14 +594,14 @@ __open_ok:
 
 
 
-    // æ•°æ®æµä¸²è”
+    // Êı¾İÁ÷´®Áª
     struct audio_stream_entry *entries[8] = {NULL};
     u8 entry_cnt = 0;
     entries[entry_cnt++] = &dec->file_dec.decoder.entry;
 
 #if FILE_DEC_PICK_EN
     if (dec->pick_flag) {
-        // æ‹†åŒ…ç›´æ¥è¾“å‡ºåˆ°localtwsæ¨é€ï¼Œä¸­é—´ä¸ç»è¿‡ä»»ä½•å¤„ç†
+        // ²ğ°üÖ±½ÓÊä³öµ½localtwsÍÆËÍ£¬ÖĞ¼ä²»¾­¹ıÈÎºÎ´¦Àí
         entries[entry_cnt++] = &g_localtws.push.entry;
     } else
 #endif
@@ -637,7 +637,7 @@ __open_ok:
 
 #if TCFG_EQ_DIVIDE_ENABLE
         if (dec->eq_drc_rl_rr) {
-            entries[entry_cnt++] = &dec->synthesis_ch_fl_fr.entry;//å››å£°é“eqç‹¬ç«‹æ—¶ï¼Œè¯¥èŠ‚ç‚¹åä¸æ¥èŠ‚ç‚¹
+            entries[entry_cnt++] = &dec->synthesis_ch_fl_fr.entry;//ËÄÉùµÀeq¶ÀÁ¢Ê±£¬¸Ã½Úµãºó²»½Ó½Úµã
         } else {
             if (dec->ch_switch) {
                 entries[entry_cnt++] = &dec->ch_switch->entry;
@@ -648,12 +648,12 @@ __open_ok:
         entries[entry_cnt++] = &dec->mix_ch.entry;
 #endif
     }
-    // åˆ›å»ºæ•°æ®æµï¼ŒæŠŠæ‰€æœ‰èŠ‚ç‚¹è¿æ¥èµ·æ¥
+    // ´´½¨Êı¾İÁ÷£¬°ÑËùÓĞ½ÚµãÁ¬½ÓÆğÀ´
     dec->stream = audio_stream_open(dec, file_dec_out_stream_resume);
     audio_stream_add_list(dec->stream, entries, entry_cnt);
 
 #if TCFG_EQ_DIVIDE_ENABLE
-    if (dec->eq_drc_rl_rr) { //æ¥åœ¨eq_drcçš„ä¸Šä¸€ä¸ªèŠ‚ç‚¹
+    if (dec->eq_drc_rl_rr) { //½ÓÔÚeq_drcµÄÉÏÒ»¸ö½Úµã
         audio_stream_add_entry(entries[0], &dec->eq_drc_rl_rr->entry);
         audio_stream_add_entry(&dec->eq_drc_rl_rr->entry, &dec->synthesis_ch_rl_rr.entry);
     }
@@ -663,21 +663,21 @@ __stream_set_end:
     log_i("total_time : %d \n", dec->file_dec.dec_total_time);
 
 #if FILE_DEC_REPEAT_EN
-    // æ— ç¼å¾ªç¯æ’­æ”¾
+    // ÎŞ·ìÑ­»·²¥·Å
     file_dec_repeat_set(3);
 #endif
 
 #if FILE_DEC_DEST_PLAY
-    // è·³åˆ°æŒ‡å®šä½ç½®æ’­æ”¾
+    // Ìøµ½Ö¸¶¨Î»ÖÃ²¥·Å
     file_dec_set_start_play(3 * 1000);
     /* u32 file_dec_dest_test_cb(void *priv); */
     /* file_dec_set_start_dest_play(2000, 4000, file_dec_dest_test_cb, dec); */
 #endif
 
-    // è®¾ç½®éŸ³é¢‘è¾“å‡ºéŸ³é‡
+    // ÉèÖÃÒôÆµÊä³öÒôÁ¿
     audio_output_set_start_volume(APP_AUDIO_STATE_MUSIC);
 
-    // æ–‡ä»¶æ‰“å¼€å°±æš‚åœ
+    // ÎÄ¼ş´ò¿ª¾ÍÔİÍ£
     if (file_dec_start_pause) {
         log_i("file_dec_start_pause\n");
         file_dec_start_pause = 0;
@@ -685,7 +685,7 @@ __stream_set_end:
         return 0;
     }
 
-    // è®¾ç½®æ—¶é’Ÿ
+    // ÉèÖÃÊ±ÖÓ
     clock_set_cur();
 
     if (dec->evt_cb) {
@@ -694,7 +694,7 @@ __stream_set_end:
         dec->evt_cb(dec->evt_priv, 2, msg);
     }
 
-    // å¼€å§‹è§£ç 
+    // ¿ªÊ¼½âÂë
     dec->file_dec.status = FILE_DEC_STATUS_PLAY;
     err = audio_decoder_start(&dec->file_dec.decoder);
     if (err) {
@@ -754,17 +754,17 @@ __err1:
         dec->evt_cb(dec->evt_priv, 2, msg);
     }
     file_dec_release();
-    // è®¾ç½®æ—¶é’Ÿ
+    // ÉèÖÃÊ±ÖÓ
     clock_set_cur();
     return err;
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç èµ„æºç­‰å¾…
-   @param    *wait: å¥æŸ„
-   @param    event: äº‹ä»¶
-   @return   0ï¼šæˆåŠŸ
-   @note     ç”¨äºå¤šè§£ç æ‰“æ–­å¤„ç†ã€‚è¢«æ‰“æ–­æ—¶ä»…æš‚åœè§£ç 
+/**@brief    ÎÄ¼ş½âÂë×ÊÔ´µÈ´ı
+   @param    *wait: ¾ä±ú
+   @param    event: ÊÂ¼ş
+   @return   0£º³É¹¦
+   @note     ÓÃÓÚ¶à½âÂë´ò¶Ï´¦Àí¡£±»´ò¶ÏÊ±½öÔİÍ£½âÂë
 */
 /*----------------------------------------------------------------------------*/
 static int file_wait_res_handler(struct audio_res_wait *wait, int event)
@@ -773,7 +773,7 @@ static int file_wait_res_handler(struct audio_res_wait *wait, int event)
 
     log_i("file_wait_res_handler, event:%d, status:%d ", event, file_dec->file_dec.status);
     if (event == AUDIO_RES_GET) {
-        // å¯åŠ¨è§£ç 
+        // Æô¶¯½âÂë
         if (file_dec->file_dec.status == 0) {
             err = file_dec_start();
         } else if (file_dec->file_dec.tmp_pause) {
@@ -788,7 +788,7 @@ static int file_wait_res_handler(struct audio_res_wait *wait, int event)
             }
         }
     } else if (event == AUDIO_RES_PUT) {
-        // è¢«æ‰“æ–­
+        // ±»´ò¶Ï
         if (file_dec->file_dec.status) {
             if (file_dec->file_dec.status == FILE_DEC_STATUS_PLAY || \
                 file_dec->file_dec.status == FILE_DEC_STATUS_PAUSE) {
@@ -808,10 +808,10 @@ static int file_wait_res_handler(struct audio_res_wait *wait, int event)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    fileè§£ç ppå¤„ç†
-   @param    play: 1-æ’­æ”¾ã€‚0-æš‚åœ
+/**@brief    file½âÂëpp´¦Àí
+   @param    play: 1-²¥·Å¡£0-ÔİÍ£
    @return
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 static void file_dec_pp_ctrl(u8 play)
@@ -820,7 +820,7 @@ static void file_dec_pp_ctrl(u8 play)
         return ;
     }
     if (play) {
-        // æ’­æ”¾å‰å¤„ç†
+        // ²¥·ÅÇ°´¦Àí
 #if (!TCFG_MIC_EFFECT_ENABLE)
         clock_pause_play(0);
 #endif/*TCFG_MIC_EFFECT_ENABLE*/
@@ -833,7 +833,7 @@ static void file_dec_pp_ctrl(u8 play)
         }
 #endif
     } else {
-        // æš‚åœåå¤„ç†
+        // ÔİÍ£ºó´¦Àí
 #if TCFG_DEC2TWS_ENABLE
         if (file_dec->file_dec.dec_no_out_sound) {
             localtws_decoder_pause(1);
@@ -852,11 +852,11 @@ static void file_dec_pp_ctrl(u8 play)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åˆ›å»ºä¸€ä¸ªæ–‡ä»¶è§£ç 
-   @param    *priv: äº‹ä»¶å›è°ƒç§æœ‰å‚æ•°
-   @param    *handler: äº‹ä»¶å›è°ƒå¥æŸ„
-   @return   0ï¼šæˆåŠŸ
-   @return   é0ï¼šå¤±è´¥
+/**@brief    ´´½¨Ò»¸öÎÄ¼ş½âÂë
+   @param    *priv: ÊÂ¼ş»Øµ÷Ë½ÓĞ²ÎÊı
+   @param    *handler: ÊÂ¼ş»Øµ÷¾ä±ú
+   @return   0£º³É¹¦
+   @return   ·Ç0£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -880,10 +880,10 @@ int file_dec_create(void *priv, void (*handler)(void *, int argc, int *argv))
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®è§£ç æ•°æ®æµè®¾ç½®å›è°ƒæ¥å£
-   @param    *dec: è§£ç å¥æŸ„
-   @param    *stream_handler: æ•°æ®æµè®¾ç½®å›è°ƒ
-   @param    *stream_priv: æ•°æ®æµè®¾ç½®å›è°ƒç§æœ‰å¥æŸ„
+/**@brief    ÉèÖÃ½âÂëÊı¾İÁ÷ÉèÖÃ»Øµ÷½Ó¿Ú
+   @param    *dec: ½âÂë¾ä±ú
+   @param    *stream_handler: Êı¾İÁ÷ÉèÖÃ»Øµ÷
+   @param    *stream_priv: Êı¾İÁ÷ÉèÖÃ»Øµ÷Ë½ÓĞ¾ä±ú
    @return
    @note
 */
@@ -899,11 +899,11 @@ void file_dec_set_stream_set_hdl(struct file_dec_hdl *dec,
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€æ–‡ä»¶è§£ç 
-   @param    *file: æ–‡ä»¶å¥æŸ„
-   @param    *bp: æ–­ç‚¹ä¿¡æ¯
-   @return   0ï¼šæˆåŠŸ
-   @return   é0ï¼šå¤±è´¥
+/**@brief    ´ò¿ªÎÄ¼ş½âÂë
+   @param    *file: ÎÄ¼ş¾ä±ú
+   @param    *bp: ¶ÏµãĞÅÏ¢
+   @return   0£º³É¹¦
+   @return   ·Ç0£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -931,7 +931,7 @@ int file_dec_open(void *file, struct audio_dec_breakpoint *bp)
 #endif
 
 #if TCFG_DEC2TWS_ENABLE
-    // è®¾ç½®localtwsé‡æ’­æ¥å£
+    // ÉèÖÃlocaltwsÖØ²¥½Ó¿Ú
     localtws_globle_set_dec_restart(file_dec_push_restart);
 #endif
 
@@ -945,7 +945,7 @@ int file_dec_open(void *file, struct audio_dec_breakpoint *bp)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­æ–‡ä»¶è§£ç 
+/**@brief    ¹Ø±ÕÎÄ¼ş½âÂë
    @param
    @return
    @note
@@ -999,7 +999,7 @@ void file_dec_close(void)
 #endif // SYS_DIGVOL_GROUP_EN
 
 
-        // å…ˆå…³é—­å„ä¸ªèŠ‚ç‚¹ï¼Œæœ€åæ‰closeæ•°æ®æµ
+        // ÏÈ¹Ø±Õ¸÷¸ö½Úµã£¬×îºó²ÅcloseÊı¾İÁ÷
         if (file_dec->stream) {
             audio_stream_close(file_dec->stream);
             file_dec->stream = NULL;
@@ -1014,9 +1014,9 @@ void file_dec_close(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–file_decå¥æŸ„
+/**@brief    »ñÈ¡file_dec¾ä±ú
    @param
-   @return   file_decå¥æŸ„
+   @return   file_dec¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1029,9 +1029,9 @@ struct file_decoder *file_dec_get_file_decoder_hdl(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–file_decçŠ¶æ€
+/**@brief    »ñÈ¡file_dec×´Ì¬
    @param
-   @return   è§£ç çŠ¶æ€
+   @return   ½âÂë×´Ì¬
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1045,10 +1045,10 @@ int file_dec_get_status(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶è§£ç é‡æ–°å¼€å§‹
-   @param    id: æ–‡ä»¶è§£ç id
-   @return   0ï¼šæˆåŠŸ
-   @return   é0ï¼šå¤±è´¥
+/**@brief    ÎÄ¼ş½âÂëÖØĞÂ¿ªÊ¼
+   @param    id: ÎÄ¼ş½âÂëid
+   @return   0£º³É¹¦
+   @return   ·Ç0£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1074,27 +1074,27 @@ int file_dec_restart(int id)
     void *evt_cb = file_dec->evt_cb;
     void *evt_priv = file_dec->evt_priv;
     int err;
-    void *dec_bp = file_dec->dec_bp; // å…ˆä¿å­˜ä¸€ä¸‹ï¼Œé¿å…closeè¢«é‡Šæ”¾
+    void *dec_bp = file_dec->dec_bp; // ÏÈ±£´æÒ»ÏÂ£¬±ÜÃâclose±»ÊÍ·Å
     file_dec->dec_bp = NULL;
 
     file_dec_close();
     err = file_dec_create(evt_priv, evt_cb);
     if (!err) {
-        file_dec->dec_bp = dec_bp; // è¿˜åŸå›å»
+        file_dec->dec_bp = dec_bp; // »¹Ô­»ØÈ¥
         err = file_dec_open(file, bp);
     } else {
         if (dec_bp) {
-            free(dec_bp); // å¤±è´¥ï¼Œé‡Šæ”¾
+            free(dec_bp); // Ê§°Ü£¬ÊÍ·Å
         }
     }
     return err;
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ¨é€æ–‡ä»¶è§£ç é‡æ–°å¼€å§‹å‘½ä»¤
+/**@brief    ÍÆËÍÎÄ¼ş½âÂëÖØĞÂ¿ªÊ¼ÃüÁî
    @param
-   @return   trueï¼šæˆåŠŸ
-   @return   falseï¼šå¤±è´¥
+   @return   true£º³É¹¦
+   @return   false£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1130,13 +1130,13 @@ static u32 file_dec_dest_test_cb(void *priv)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·³åˆ°æŒ‡å®šä½ç½®å¼€å§‹æ’­æ”¾ï¼Œæ’­æ”¾åˆ°ç›®æ ‡æ—¶é—´åå›è°ƒ
-   @param    start_time: è¦è·³è½¬è¿‡å»æ’­æ”¾çš„èµ·å§‹æ—¶é—´
-   @param    dest_time: è¦è·³è½¬è¿‡å»æ’­æ”¾çš„ç›®æ ‡æ—¶é—´
-   @param    *cb: åˆ°è¾¾ç›®æ ‡æ—¶é—´åå›è°ƒ
-   @param    *cb_priv: å›è°ƒå‚æ•°
-   @return   trueï¼šæˆåŠŸ
-   @return   falseï¼šå¤±è´¥
+/**@brief    Ìøµ½Ö¸¶¨Î»ÖÃ¿ªÊ¼²¥·Å£¬²¥·Åµ½Ä¿±êÊ±¼äºó»Øµ÷
+   @param    start_time: ÒªÌø×ª¹ıÈ¥²¥·ÅµÄÆğÊ¼Ê±¼ä
+   @param    dest_time: ÒªÌø×ª¹ıÈ¥²¥·ÅµÄÄ¿±êÊ±¼ä
+   @param    *cb: µ½´ïÄ¿±êÊ±¼äºó»Øµ÷
+   @param    *cb_priv: »Øµ÷²ÎÊı
+   @return   true£º³É¹¦
+   @return   false£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1161,10 +1161,10 @@ int file_dec_set_start_dest_play(u32 start_time, u32 dest_time, u32(*cb)(void *)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·³åˆ°æŒ‡å®šä½ç½®å¼€å§‹æ’­æ”¾
-   @param    start_time: è¦è·³è½¬è¿‡å»æ’­æ”¾çš„èµ·å§‹æ—¶é—´
-   @return   trueï¼šæˆåŠŸ
-   @return   falseï¼šå¤±è´¥
+/**@brief    Ìøµ½Ö¸¶¨Î»ÖÃ¿ªÊ¼²¥·Å
+   @param    start_time: ÒªÌø×ª¹ıÈ¥²¥·ÅµÄÆğÊ¼Ê±¼ä
+   @return   true£º³É¹¦
+   @return   false£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1176,10 +1176,10 @@ int file_dec_set_start_play(u32 start_time)
 
 #if FILE_DEC_REPEAT_EN
 /*----------------------------------------------------------------------------*/
-/**@brief    å¾ªç¯æ’­æ”¾å›è°ƒæ¥å£
-   @param    *priv: ç§æœ‰å‚æ•°
-   @return   0ï¼šå¾ªç¯æ’­æ”¾
-   @return   é0ï¼šç»“æŸå¾ªç¯
+/**@brief    Ñ­»·²¥·Å»Øµ÷½Ó¿Ú
+   @param    *priv: Ë½ÓĞ²ÎÊı
+   @return   0£ºÑ­»·²¥·Å
+   @return   ·Ç0£º½áÊøÑ­»·
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1197,10 +1197,10 @@ static int file_dec_repeat_cb(void *priv)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®å¾ªç¯æ’­æ”¾æ¬¡æ•°
-   @param    repeat_num: å¾ªç¯æ¬¡æ•°
-   @return   trueï¼šæˆåŠŸ
-   @return   falseï¼šå¤±è´¥
+/**@brief    ÉèÖÃÑ­»·²¥·Å´ÎÊı
+   @param    repeat_num: Ñ­»·´ÎÊı
+   @return   true£º³É¹¦
+   @return   false£ºÊ§°Ü
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1215,9 +1215,9 @@ int file_dec_repeat_set(u8 repeat_num)
     case AUDIO_CODING_WAV: {
         dec->repeat_num = repeat_num;
         struct audio_repeat_mode_param rep = {0};
-        rep.flag = 1; //ä½¿èƒ½
-        rep.headcut_frame = 2; //ä¾æ®éœ€æ±‚ç æ‰å‰é¢å‡ å¸§ï¼Œä»…mp3æ ¼å¼æœ‰æ•ˆ
-        rep.tailcut_frame = 2; //ä¾æ®éœ€æ±‚ç æ‰åé¢å‡ å¸§ï¼Œä»…mp3æ ¼å¼æœ‰æ•ˆ
+        rep.flag = 1; //Ê¹ÄÜ
+        rep.headcut_frame = 2; //ÒÀ¾İĞèÇó¿³µôÇ°Ãæ¼¸Ö¡£¬½ömp3¸ñÊ½ÓĞĞ§
+        rep.tailcut_frame = 2; //ÒÀ¾İĞèÇó¿³µôºóÃæ¼¸Ö¡£¬½ömp3¸ñÊ½ÓĞĞ§
         rep.repeat_callback = file_dec_repeat_cb;
         rep.callback_priv = dec;
         rep.repair_buf = &dec->repair_buf;
@@ -1241,10 +1241,10 @@ enum {
 };
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®ABç‚¹å¤è¯»å‘½ä»¤
-   @param    ab_cmd: å‘½ä»¤
-   @param    ab_mode: å‚æ•°
-   @return   true:æˆåŠŸ
+/**@brief    ÉèÖÃABµã¸´¶ÁÃüÁî
+   @param    ab_cmd: ÃüÁî
+   @param    ab_mode: ²ÎÊı
+   @return   true:³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1262,9 +1262,9 @@ static int file_dec_ab_repeat_set(int ab_cmd, int ab_mode)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ£€æŸ¥æ˜¯å¦å¯ä»¥ABç‚¹å¤è¯»
+/**@brief    ¼ì²éÊÇ·ñ¿ÉÒÔABµã¸´¶Á
    @param
-   @return   true:æˆåŠŸ
+   @return   true:³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1287,9 +1287,9 @@ static int file_dec_ab_probe_check(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åˆ‡æ¢ABç‚¹å¤è¯»çŠ¶æ€
+/**@brief    ÇĞ»»ABµã¸´¶Á×´Ì¬
    @param
-   @return   true:æˆåŠŸ
+   @return   true:³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1321,9 +1321,9 @@ int file_dec_ab_repeat_switch(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­ABç‚¹å¤è¯»
+/**@brief    ¹Ø±ÕABµã¸´¶Á
    @param
-   @return   true:æˆåŠŸ
+   @return   true:³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1359,11 +1359,11 @@ int file_dec_ab_repeat_close(void)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    file decoder ppå¤„ç†
-   @param    *dec: fileè§£ç å¥æŸ„
-   @param    play: 1-æ’­æ”¾ã€‚0-æš‚åœ
+/**@brief    file decoder pp´¦Àí
+   @param    *dec: file½âÂë¾ä±ú
+   @param    play: 1-²¥·Å¡£0-ÔİÍ£
    @return
-   @note     å¼±å‡½æ•°é‡å®šä¹‰
+   @note     Èõº¯ÊıÖØ¶¨Òå
 */
 /*----------------------------------------------------------------------------*/
 void file_decoder_pp_ctrl(struct file_decoder *dec, u8 play)
@@ -1378,10 +1378,10 @@ void file_decoder_pp_ctrl(struct file_decoder *dec, u8 play)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    éŸ³ä¹æ¨¡å¼ eq drc æ‰“å¼€
-   @param    sample_rate:é‡‡æ ·ç‡
-   @param    ch_num:é€šé“ä¸ªæ•°
-   @return   å¥æŸ„
+/**@brief    ÒôÀÖÄ£Ê½ eq drc ´ò¿ª
+   @param    sample_rate:²ÉÑùÂÊ
+   @param    ch_num:Í¨µÀ¸öÊı
+   @return   ¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1437,8 +1437,8 @@ void *file_eq_drc_open(u16 sample_rate, u8 ch_num)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    éŸ³ä¹æ¨¡å¼ eq drc å…³é—­
-   @param    å¥æŸ„
+/**@brief    ÒôÀÖÄ£Ê½ eq drc ¹Ø±Õ
+   @param    ¾ä±ú
    @return
    @note
 */
@@ -1463,10 +1463,10 @@ void file_eq_drc_close(struct audio_eq_drc *eq_drc)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    éŸ³ä¹æ¨¡å¼ RL RR é€šé“eq drc æ‰“å¼€
-   @param    sample_rate:é‡‡æ ·ç‡
-   @param    ch_num:é€šé“ä¸ªæ•°
-   @return   å¥æŸ„
+/**@brief    ÒôÀÖÄ£Ê½ RL RR Í¨µÀeq drc ´ò¿ª
+   @param    sample_rate:²ÉÑùÂÊ
+   @param    ch_num:Í¨µÀ¸öÊı
+   @return   ¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -1522,8 +1522,8 @@ void *file_rl_rr_eq_drc_open(u16 sample_rate, u8 ch_num)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    éŸ³ä¹æ¨¡å¼ RL RR é€šé“eq drc å…³é—­
-   @param    å¥æŸ„
+/**@brief    ÒôÀÖÄ£Ê½ RL RR Í¨µÀeq drc ¹Ø±Õ
+   @param    ¾ä±ú
    @return
    @note
 */
@@ -1548,15 +1548,15 @@ void file_rl_rr_eq_drc_close(struct audio_eq_drc *eq_drc)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    ç¯ç»•éŸ³æ•ˆã€è™šæ‹Ÿä½éŸ³åˆ‡æ¢ä¾‹å­
+/**@brief    »·ÈÆÒôĞ§¡¢ĞéÄâµÍÒôÇĞ»»Àı×Ó
    @param    eff_mode:
-			KARAOKE_SPK_OST,//åŸå£°
-			KARAOKE_SPK_DBB,//é‡ä½éŸ³
-			KARAOKE_SPK_SURROUND,//å…¨æ™¯ç¯ç»•
-			KARAOKE_SPK_3D,//3dç¯ç»•
-			KARAOKE_SPK_FLOW_VOICE,//æµåŠ¨äººå£°
-			KARAOKE_SPK_KING,//ç‹è€…è£è€€
-			KARAOKE_SPK_WAR,//å››å­£æˆ˜åœº
+			KARAOKE_SPK_OST,//Ô­Éù
+			KARAOKE_SPK_DBB,//ÖØµÍÒô
+			KARAOKE_SPK_SURROUND,//È«¾°»·ÈÆ
+			KARAOKE_SPK_3D,//3d»·ÈÆ
+			KARAOKE_SPK_FLOW_VOICE,//Á÷¶¯ÈËÉù
+			KARAOKE_SPK_KING,//ÍõÕßÈÙÒ«
+			KARAOKE_SPK_WAR,//ËÄ¼¾Õ½³¡
 			KARAOKE_SPK_MAX,
 
    @return
@@ -1579,40 +1579,40 @@ void audio_file_effect_switch(u8 eff_mode)
     }
 #endif
     switch (eff_mode) {
-    case KARAOKE_SPK_OST://åŸå£°
+    case KARAOKE_SPK_OST://Ô­Éù
         surround_effect_switch(surround, EFFECT_OFF);
         log_i("spk_OST\n");
         break;
-    case KARAOKE_SPK_DBB://é‡ä½éŸ³
+    case KARAOKE_SPK_DBB://ÖØµÍÒô
         /* tone_play_index(IDEX_TONE_VABSS, 1); */
-        surround_effect_switch(surround, EFFECT_OFF);//è¿™é‡Œè¦ç”¨å›åŸå£°å¤„ç†çš„åœ°æ–¹ä¸ä¸€æ ·
+        surround_effect_switch(surround, EFFECT_OFF);//ÕâÀïÒªÓÃ»ØÔ­Éù´¦ÀíµÄµØ·½²»Ò»Ñù
 
 #if AUDIO_VBASS_CONFIG
         vbass_switch(vbass, 1);
 #endif
         log_i("spk_DDB\n");
         break;
-    case KARAOKE_SPK_SURROUND://å…¨æ™¯ç¯ç»•
+    case KARAOKE_SPK_SURROUND://È«¾°»·ÈÆ
         /* tone_play_index(IDEX_TONE_SURROUND, 1); */
         surround_effect_switch(surround, EFFECT_3D_PANORAMA);
         log_i("spk_SURRROUND\n");
         break;
-    case KARAOKE_SPK_3D://3dæ—‹è½¬
+    case KARAOKE_SPK_3D://3dĞı×ª
         /* tone_play_index(IDEX_TONE_3D, 1); */
         surround_effect_switch(surround, EFFECT_3D_ROTATES);
         log_i("spk_3D\n");
         break;
-    case KARAOKE_SPK_FLOW_VOICE://æµåŠ¨äººå£°
+    case KARAOKE_SPK_FLOW_VOICE://Á÷¶¯ÈËÉù
         /* tone_play_index(IDEX_TONE_FLOW, 1); */
         surround_effect_switch(surround, EFFECT_FLOATING_VOICE);
         log_i("spk_FLOW\n");
         break;
-    case KARAOKE_SPK_KING://ç‹è€…è£è€€
+    case KARAOKE_SPK_KING://ÍõÕßÈÙÒ«
         /* tone_play_index(IDEX_TONE_KING, 1); */
         surround_effect_switch(surround, EFFECT_GLORY_OF_KINGS);
         log_i("spk_KING\n");
         break;
-    case KARAOKE_SPK_WAR://å››å­£æˆ˜åœº
+    case KARAOKE_SPK_WAR://ËÄ¼¾Õ½³¡
         /* tone_play_index(IDEX_TONE_WAR, 1); */
         surround_effect_switch(surround, EFFECT_FOUR_SENSION_BATTLEFIELD);
         log_i("spk_WAR\n");

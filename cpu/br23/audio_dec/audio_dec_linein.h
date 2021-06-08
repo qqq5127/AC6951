@@ -7,26 +7,26 @@
 #include "system/includes.h"
 #include "media/audio_decoder.h"
 
-// lineinè§£ç é‡Šæ”¾
+// linein½âÂëÊÍ·Å
 void linein_dec_relaese();
-// lineinè§£ç å¼€å§‹
+// linein½âÂë¿ªÊ¼
 int linein_dec_start();
 
-// æ‰“å¼€lineinè§£ç 
+// ´ò¿ªlinein½âÂë
 int linein_dec_open(u8 source, u32 sample_rate);
-// å…³é—­lineinè§£ç 
+// ¹Ø±Õlinein½âÂë
 void linein_dec_close(void);
-// lineinè§£ç é‡æ–°å¼€å§‹
+// linein½âÂëÖØĞÂ¿ªÊ¼
 int linein_dec_restart(int magic);
-// æ¨é€lineinè§£ç é‡æ–°å¼€å§‹å‘½ä»¤
+// ÍÆËÍlinein½âÂëÖØĞÂ¿ªÊ¼ÃüÁî
 int linein_dec_push_restart(void);
 
 /***********************linein pcm enc******************************/
-// lineinå½•éŸ³åœæ­¢
+// lineinÂ¼ÒôÍ£Ö¹
 void linein_pcm_enc_stop(void);
-// lineinå½•éŸ³å¼€å§‹
+// lineinÂ¼Òô¿ªÊ¼
 int linein_pcm_enc_start(void);
-// æ£€æµ‹lineinæ˜¯å¦åœ¨å½•éŸ³
+// ¼ì²âlineinÊÇ·ñÔÚÂ¼Òô
 bool linein_pcm_enc_check();
 
 #endif

@@ -9,10 +9,10 @@
 
 #if TCFG_KEY_TONE_EN
 
-// æŒ‰é”®æç¤ºéŸ³ä»»åŠ¡å
+// °´¼üÌáÊ¾ÒôÈÎÎñÃû
 #define AUDIO_KEY_TONE_TASK_NAME				"key_tone"
 
-// æŒ‰é”®æç¤ºéŸ³æ•°å­—éŸ³é‡æ§åˆ¶
+// °´¼üÌáÊ¾ÒôÊı×ÖÒôÁ¿¿ØÖÆ
 #if SYS_DIGVOL_GROUP_EN
 #define AUDIO_KEY_TONE_DIGVOL_EN				0
 #define AUDIO_KEY_TONE_DIGVOL_NAME				"key_tone"
@@ -24,33 +24,33 @@
 //////////////////////////////////////////////////////////////////////////////
 
 /*
- * ä½¿ç”¨audio_dec_app.hé‡Œé¢çš„æ¥å£ï¼Œå¯ä»¥å®ç°æ™®é€šæ–‡ä»¶ã€æ­£å¼¦æ³¢æ–‡ä»¶ã€æ­£å¼¦æ³¢æ•°ç»„æ’­æ”¾
+ * Ê¹ÓÃaudio_dec_app.hÀïÃæµÄ½Ó¿Ú£¬¿ÉÒÔÊµÏÖÆÕÍ¨ÎÄ¼ş¡¢ÕıÏÒ²¨ÎÄ¼ş¡¢ÕıÏÒ²¨Êı×é²¥·Å
  */
 
-// å‚æ•°
+// ²ÎÊı
 struct __key_tone_play_info {
-    const char *file_name;			// æ–‡ä»¶å
-    struct audio_sin_param *sin;	// æ­£å¼¦æ³¢æ•°ç»„
-    u8 sin_num;						// æ­£å¼¦æ³¢æ•°ç»„é•¿åº¦
-    u8 preemption;					// 1-æŠ¢å ï¼Œ0-å åŠ 
-    void (*evt_handler)(void *priv, int flag);	// äº‹ä»¶å›è°ƒ
-    void *evt_priv;					// äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
+    const char *file_name;			// ÎÄ¼şÃû
+    struct audio_sin_param *sin;	// ÕıÏÒ²¨Êı×é
+    u8 sin_num;						// ÕıÏÒ²¨Êı×é³¤¶È
+    u8 preemption;					// 1-ÇÀÕ¼£¬0-µş¼Ó
+    void (*evt_handler)(void *priv, int flag);	// ÊÂ¼ş»Øµ÷
+    void *evt_priv;					// ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
 };
 
-// æŒ‰é”®æç¤ºéŸ³
+// °´¼üÌáÊ¾Òô
 struct __key_tone {
-    volatile u8	busy;		// ä»»åŠ¡å·¥ä½œä¸­
-    volatile u8	start;		// è¿è¡Œæ ‡å¿—
+    volatile u8	busy;		// ÈÎÎñ¹¤×÷ÖĞ
+    volatile u8	start;		// ÔËĞĞ±êÖ¾
     volatile u8 play;
 #if AUDIO_KEY_TONE_DIGVOL_EN
-    u8 volume;				// éŸ³é‡
+    u8 volume;				// ÒôÁ¿
 #endif
-    struct __key_tone_play_info play_info;		// è¾“å…¥å‚æ•°
-    struct audio_dec_sine_app_hdl *dec_sin;		// æ–‡ä»¶æ’­æ”¾å¥æŸ„
-    struct audio_dec_file_app_hdl *dec_file;	// sineæ’­æ”¾å¥æŸ„
-    void (*evt_handler)(void *priv, int flag);	// äº‹ä»¶å›è°ƒ
-    void *evt_priv;			// äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-    const char *evt_owner;	// äº‹ä»¶å›è°ƒæ‰€åœ¨ä»»åŠ¡
+    struct __key_tone_play_info play_info;		// ÊäÈë²ÎÊı
+    struct audio_dec_sine_app_hdl *dec_sin;		// ÎÄ¼ş²¥·Å¾ä±ú
+    struct audio_dec_file_app_hdl *dec_file;	// sine²¥·Å¾ä±ú
+    void (*evt_handler)(void *priv, int flag);	// ÊÂ¼ş»Øµ÷
+    void *evt_priv;			// ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+    const char *evt_owner;	// ÊÂ¼ş»Øµ÷ËùÔÚÈÎÎñ
 };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -62,9 +62,9 @@ static struct __key_tone *key_tone = NULL;
 /*
 *********************************************************************
 *                  Audio Key Tone Get File Ext Name
-* Description: è·å–æ–‡ä»¶ååç¼€
-* Arguments  : *name		æ–‡ä»¶å
-* Return	 : åç¼€
+* Description: »ñÈ¡ÎÄ¼şÃûºó×º
+* Arguments  : *name		ÎÄ¼şÃû
+* Return	 : ºó×º
 * Note(s)    : None.
 *********************************************************************
 */
@@ -88,10 +88,10 @@ static char *get_file_ext_name(char *name)
 /*
 *********************************************************************
 *                  Audio Key Tone Post Event
-* Description: è§£ç äº‹ä»¶
-* Arguments  : *ktone		æŒ‰é”®æç¤ºéŸ³è§£ç å¥æŸ„
-*              end_flag		ç»“æŸæ ‡å¿—
-* Return	 : true		æˆåŠŸ
+* Description: ½âÂëÊÂ¼ş
+* Arguments  : *ktone		°´¼üÌáÊ¾Òô½âÂë¾ä±ú
+*              end_flag		½áÊø±êÖ¾
+* Return	 : true		³É¹¦
 * Note(s)    : None.
 *********************************************************************
 */
@@ -105,7 +105,7 @@ static int key_tone_dec_event_handler(struct __key_tone *ktone, u8 end_flag)
     argv[0] = (int)ktone->evt_handler;
     argv[1] = 2;
     argv[2] = (int)ktone->evt_priv;
-    argv[3] = (int)end_flag; //0æ­£å¸¸å…³é—­ï¼Œ1è¢«æ‰“æ–­å…³é—­
+    argv[3] = (int)end_flag; //0Õı³£¹Ø±Õ£¬1±»´ò¶Ï¹Ø±Õ
 
     int ret = os_taskq_post_type(ktone->evt_owner, Q_CALLBACK, 4, argv);
     if (ret) {
@@ -117,8 +117,8 @@ static int key_tone_dec_event_handler(struct __key_tone *ktone, u8 end_flag)
 /*
 *********************************************************************
 *                  Audio Key Tone Reelease
-* Description: æç¤ºéŸ³è§£ç å™¨é‡Šæ”¾
-* Arguments  : *ktone		æŒ‰é”®æç¤ºéŸ³è§£ç å¥æŸ„
+* Description: ÌáÊ¾Òô½âÂëÆ÷ÊÍ·Å
+* Arguments  : *ktone		°´¼üÌáÊ¾Òô½âÂë¾ä±ú
 * Return	 : None.
 * Note(s)    : None.
 *********************************************************************
@@ -140,8 +140,8 @@ static void key_tone_dec_hdl_release(struct __key_tone *ktone)
 /*
 *********************************************************************
 *                  Audio Key Tone Init OK
-* Description: è§£ç åˆå§‹åŒ–å®Œæˆ
-* Arguments  : *ktone		æŒ‰é”®æç¤ºéŸ³è§£ç å¥æŸ„
+* Description: ½âÂë³õÊ¼»¯Íê³É
+* Arguments  : *ktone		°´¼üÌáÊ¾Òô½âÂë¾ä±ú
 * Return	 : None.
 * Note(s)    : None.
 *********************************************************************
@@ -155,8 +155,8 @@ static void key_tone_dec_hdl_init_ok(struct __key_tone *ktone)
 /*
 *********************************************************************
 *                  Audio Key Tone Close
-* Description: å…³é—­æç¤ºéŸ³è§£ç 
-* Arguments  : *ktone		æŒ‰é”®æç¤ºéŸ³è§£ç å¥æŸ„
+* Description: ¹Ø±ÕÌáÊ¾Òô½âÂë
+* Arguments  : *ktone		°´¼üÌáÊ¾Òô½âÂë¾ä±ú
 * Return	 : None.
 * Note(s)    : None.
 *********************************************************************
@@ -173,11 +173,11 @@ static void key_tone_play_close(struct __key_tone *ktone)
 /*
 *********************************************************************
 *                  Audio Key Tone Event Callback
-* Description: è§£ç å›è°ƒå¤„ç†
-* Arguments  : *ktone		æŒ‰é”®æç¤ºéŸ³è§£ç å¥æŸ„
-*              event		äº‹ä»¶
-*              *param		äº‹ä»¶å‚æ•°
-* Return	 : 0	æ­£å¸¸
+* Description: ½âÂë»Øµ÷´¦Àí
+* Arguments  : *ktone		°´¼üÌáÊ¾Òô½âÂë¾ä±ú
+*              event		ÊÂ¼ş
+*              *param		ÊÂ¼ş²ÎÊı
+* Return	 : 0	Õı³£
 * Note(s)    : None.
 *********************************************************************
 */
@@ -233,11 +233,11 @@ static int key_tone_dec_app_evt_cb(struct __key_tone *ktone, enum audio_dec_app_
 /*
 *********************************************************************
 *                  Audio Key Tone Sin Event Callback
-* Description: sineæç¤ºéŸ³è§£ç å›è°ƒ
-* Arguments  : *priv		ç§æœ‰å¥æŸ„
-*              event		äº‹ä»¶
-*              *param		äº‹ä»¶å‚æ•°
-* Return	 : 0	æ­£å¸¸
+* Description: sineÌáÊ¾Òô½âÂë»Øµ÷
+* Arguments  : *priv		Ë½ÓĞ¾ä±ú
+*              event		ÊÂ¼ş
+*              *param		ÊÂ¼ş²ÎÊı
+* Return	 : 0	Õı³£
 * Note(s)    : None.
 *********************************************************************
 */
@@ -266,11 +266,11 @@ static int key_tone_dec_sine_app_evt_cb(void *priv, enum audio_dec_app_event eve
 /*
 *********************************************************************
 *                  Audio Key Tone File Event Callback
-* Description: fileæç¤ºéŸ³è§£ç å›è°ƒ
-* Arguments  : *priv		ç§æœ‰å¥æŸ„
-*              event		äº‹ä»¶
-*              *param		äº‹ä»¶å‚æ•°
-* Return	 : 0	æ­£å¸¸
+* Description: fileÌáÊ¾Òô½âÂë»Øµ÷
+* Arguments  : *priv		Ë½ÓĞ¾ä±ú
+*              event		ÊÂ¼ş
+*              *param		ÊÂ¼ş²ÎÊı
+* Return	 : 0	Õı³£
 * Note(s)    : None.
 *********************************************************************
 */
@@ -291,9 +291,9 @@ static int key_tone_dec_file_app_evt_cb(void *priv, enum audio_dec_app_event eve
 /*
 *********************************************************************
 *                  Audio Key Tone Run
-* Description: æŒ‰é”®æç¤ºéŸ³è¿è¡Œ
-* Arguments  : *ktone		æŒ‰é”®æç¤ºéŸ³è§£ç å¥æŸ„
-* Return	 : 0	æ­£å¸¸
+* Description: °´¼üÌáÊ¾ÒôÔËĞĞ
+* Arguments  : *ktone		°´¼üÌáÊ¾Òô½âÂë¾ä±ú
+* Return	 : 0	Õı³£
 * Note(s)    : None.
 *********************************************************************
 */
@@ -309,20 +309,20 @@ static int key_tone_play_run(struct __key_tone *ktone)
         local_irq_enable();
         return 0;
     }
-    // ä¿å­˜æ’­æ”¾å‚æ•°
+    // ±£´æ²¥·Å²ÎÊı
     memcpy(&info, &ktone->play_info, sizeof(struct __key_tone_play_info));
     ktone->play = 0;
     local_irq_enable();
 
-    // å…³é—­ç°æœ‰play
+    // ¹Ø±ÕÏÖÓĞplay
     key_tone_play_close(ktone);
 
-    // è®¾ç½®å‚æ•°
+    // ÉèÖÃ²ÎÊı
     ktone->evt_handler = info.evt_handler;
     ktone->evt_priv = info.evt_priv;
     ktone->evt_owner = "app_core";
 
-    // æ­£å¼¦æ³¢æ•°ç»„æ’­æ”¾
+    // ÕıÏÒ²¨Êı×é²¥·Å
     if (info.sin && info.sin_num) {
         ktone->dec_sin = audio_dec_sine_app_create_by_parm(info.sin, info.sin_num, !info.preemption);
         if (ktone->dec_sin == NULL) {
@@ -334,7 +334,7 @@ static int key_tone_play_run(struct __key_tone *ktone)
         return 0;
     }
 
-    // åˆ¤æ–­æ–‡ä»¶ååç¼€
+    // ÅĞ¶ÏÎÄ¼şÃûºó×º
     u8 file_name[16];
     char *format = NULL;
     FILE *file = fopen(info.file_name, "r");
@@ -345,7 +345,7 @@ static int key_tone_play_run(struct __key_tone *ktone)
     format = get_file_ext_name((char *)file_name);
     fclose(file);
 
-    // æ­£å¼¦æ³¢æ–‡ä»¶æ’­æ”¾
+    // ÕıÏÒ²¨ÎÄ¼ş²¥·Å
     if (ASCII_StrCmpNoCase(format, "sin", 3) == 0) {
         ktone->dec_sin = audio_dec_sine_app_create(info.file_name, !info.preemption);
         if (ktone->dec_sin == NULL) {
@@ -357,7 +357,7 @@ static int key_tone_play_run(struct __key_tone *ktone)
         return 0;
     }
 
-    // æ™®é€šæ–‡ä»¶æ’­æ”¾
+    // ÆÕÍ¨ÎÄ¼ş²¥·Å
     ktone->dec_file = audio_dec_file_app_create(info.file_name, !info.preemption);
     if (ktone->dec_file == NULL) {
         return -1;
@@ -374,8 +374,8 @@ static int key_tone_play_run(struct __key_tone *ktone)
 /*
 *********************************************************************
 *                  Audio Key Tone Task Run
-* Description: æŒ‰é”®æç¤ºéŸ³ä»»åŠ¡å¤„ç†
-* Arguments  : *p		æŒ‰é”®æç¤ºéŸ³è§£ç å¥æŸ„
+* Description: °´¼üÌáÊ¾ÒôÈÎÎñ´¦Àí
+* Arguments  : *p		°´¼üÌáÊ¾Òô½âÂë¾ä±ú
 * Return	 : None.
 * Note(s)    : None.
 *********************************************************************
@@ -391,7 +391,7 @@ static void key_tone_task_deal(void *p)
         __os_taskq_pend(msg, ARRAY_SIZE(msg), portMAX_DELAY);
         res = key_tone_play_run(ktone);
         if (res) {
-            ///ç­‰å¾…åˆ é™¤çº¿ç¨‹
+            ///µÈ´ıÉ¾³ıÏß³Ì
             key_tone_play_close(ktone);
             ktone->busy = 0;
             while (1) {
@@ -404,7 +404,7 @@ static void key_tone_task_deal(void *p)
 /*
 *********************************************************************
 *                  Audio Key Tone Destroy
-* Description: æ³¨é”€æŒ‰é”®æç¤ºéŸ³æ’­æ”¾
+* Description: ×¢Ïú°´¼üÌáÊ¾Òô²¥·Å
 * Arguments  : None.
 * Return	 : None.
 * Note(s)    : None.
@@ -434,9 +434,9 @@ void audio_key_tone_destroy(void)
 /*
 *********************************************************************
 *                  Audio Key Tone Init
-* Description: æŒ‰é”®æç¤ºéŸ³åˆå§‹åŒ–
+* Description: °´¼üÌáÊ¾Òô³õÊ¼»¯
 * Arguments  : None.
-* Return	 : true		æˆåŠŸ
+* Return	 : true		³É¹¦
 * Note(s)    : None.
 *********************************************************************
 */
@@ -462,10 +462,10 @@ int audio_key_tone_init(void)
 
 //////////////////////////////////////////////////////////////////////////////
 
-// æ­£å¼¦æ³¢åºå·
+// ÕıÏÒ²¨ĞòºÅ
 #define KTONE_SINE_NORAML           0
 
-// æŒ‰é”®æç¤ºéŸ³åºå·
+// °´¼üÌáÊ¾ÒôĞòºÅ
 enum {
     KTONE_IDEX_NORAML = 0,
     KTONE_IDEX_NUM_0,
@@ -474,7 +474,7 @@ enum {
     KTONE_IDEX_MAX,
 };
 
-// åºå·å¯¹åº”è¡¨
+// ĞòºÅ¶ÔÓ¦±í
 static const char *const key_tone_index[] = {
     [KTONE_IDEX_NORAML] 	= DEFAULT_SINE_TONE(KTONE_SINE_NORAML),
     [KTONE_IDEX_NUM_0] 		= SDFILE_RES_ROOT_PATH"tone/0.*",
@@ -482,11 +482,11 @@ static const char *const key_tone_index[] = {
 };
 
 /*
- * æ­£å¼¦æ³¢å‚æ•°é…ç½®:
- * freq : å®é™…é¢‘ç‡ * 512
- * points : æ­£å¼¦æ³¢ç‚¹æ•°
- * win : æ­£å¼¦çª—
- * decay : è¡°å‡ç³»æ•°(ç™¾åˆ†æ¯”), æ­£å¼¦çª—æ¨¡å¼ä¸‹ä¸ºé¢‘ç‡è®¾ç½®ï¼šé¢‘ç‡*512
+ * ÕıÏÒ²¨²ÎÊıÅäÖÃ:
+ * freq : Êµ¼ÊÆµÂÊ * 512
+ * points : ÕıÏÒ²¨µãÊı
+ * win : ÕıÏÒ´°
+ * decay : Ë¥¼õÏµÊı(°Ù·Ö±È), ÕıÏÒ´°Ä£Ê½ÏÂÎªÆµÂÊÉèÖÃ£ºÆµÂÊ*512
  */
 static const struct sin_param sine_16k_normal[] = {
     /*{0, 1000, 0, 100},*/
@@ -499,10 +499,10 @@ static const struct sin_param sine_16k_normal[] = {
 /*
 *********************************************************************
 *                  Audio Key Tone Get Sine Param Data
-* Description: è·å–æ­£å¼¦æ³¢æ•°ç»„
-* Arguments  : id		æ­£å¼¦æ³¢åºå·
-*              *num		æ­£å¼¦æ³¢æ•°ç»„é•¿åº¦
-* Return	 : æ­£å¼¦æ³¢æ•°ç»„
+* Description: »ñÈ¡ÕıÏÒ²¨Êı×é
+* Arguments  : id		ÕıÏÒ²¨ĞòºÅ
+*              *num		ÕıÏÒ²¨Êı×é³¤¶È
+* Return	 : ÕıÏÒ²¨Êı×é
 * Note(s)    : None.
 *********************************************************************
 */
@@ -523,14 +523,14 @@ static const struct sin_param *get_sine_param_data(u8 id, u8 *num)
 /*
 *********************************************************************
 *                  Audio Key Tone Open With Callback
-* Description: æ‰“å¼€æ–‡ä»¶æ’­æ”¾
-* Arguments  : *file_name		æ–‡ä»¶å
-*              *sin				æ­£å¼¦æ³¢æ•°ç»„
-*              sin_num			æ­£å¼¦æ³¢æ•°ç»„é•¿åº¦
-*              preemption		1-æŠ¢æ–­æ’­æ”¾ï¼›0-å åŠ æ’­æ”¾
-*              evt_handler		äº‹ä»¶å›è°ƒ
-*              evt_priv			äº‹ä»¶å›è°ƒå‚æ•°
-* Return	 : 0	æ­£å¸¸
+* Description: ´ò¿ªÎÄ¼ş²¥·Å
+* Arguments  : *file_name		ÎÄ¼şÃû
+*              *sin				ÕıÏÒ²¨Êı×é
+*              sin_num			ÕıÏÒ²¨Êı×é³¤¶È
+*              preemption		1-ÇÀ¶Ï²¥·Å£»0-µş¼Ó²¥·Å
+*              evt_handler		ÊÂ¼ş»Øµ÷
+*              evt_priv			ÊÂ¼ş»Øµ÷²ÎÊı
+* Return	 : 0	Õı³£
 * Note(s)    : None.
 *********************************************************************
 */
@@ -568,11 +568,11 @@ static int ktone_play_open_with_callback_base(const char *file_name, struct audi
 /*
 *********************************************************************
 *                  Audio Key Tone Play Sine
-* Description: æ’­æ”¾æ­£å¼¦æ³¢æ•°ç»„
-* Arguments  : *sin				æ­£å¼¦æ³¢æ•°ç»„
-*              sin_num			æ­£å¼¦æ³¢æ•°ç»„é•¿åº¦
-*              preemption		1-æŠ¢æ–­æ’­æ”¾ï¼›0-å åŠ æ’­æ”¾
-* Return	 : 0	æ­£å¸¸
+* Description: ²¥·ÅÕıÏÒ²¨Êı×é
+* Arguments  : *sin				ÕıÏÒ²¨Êı×é
+*              sin_num			ÕıÏÒ²¨Êı×é³¤¶È
+*              preemption		1-ÇÀ¶Ï²¥·Å£»0-µş¼Ó²¥·Å
+* Return	 : 0	Õı³£
 * Note(s)    : None.
 *********************************************************************
 */
@@ -585,10 +585,10 @@ int audio_key_tone_play_sin(struct audio_sin_param *sin, u8 sin_num, u8 preempti
 /*
 *********************************************************************
 *                  Audio Key Tone Play File
-* Description: æ’­æ”¾æ–‡ä»¶
-* Arguments  : *name			æ–‡ä»¶å
-*              preemption		1-æŠ¢æ–­æ’­æ”¾ï¼›0-å åŠ æ’­æ”¾
-* Return	 : 0	æ­£å¸¸
+* Description: ²¥·ÅÎÄ¼ş
+* Arguments  : *name			ÎÄ¼şÃû
+*              preemption		1-ÇÀ¶Ï²¥·Å£»0-µş¼Ó²¥·Å
+* Return	 : 0	Õı³£
 * Note(s)    : None.
 *********************************************************************
 */
@@ -601,11 +601,11 @@ int audio_key_tone_play_name(const char *name, u8 preemption)
 /*
 *********************************************************************
 *                  Audio Key Tone Play Index
-* Description: æŒ‰åºå·æ’­æ”¾æ–‡ä»¶
-* Arguments  : index			åºå·
-*              preemption		1-æŠ¢æ–­æ’­æ”¾ï¼›0-å åŠ æ’­æ”¾
-* Return	 : 0	æ­£å¸¸
-* Note(s)    : ä½¿ç”¨key_tone_index[]æ•°ç»„
+* Description: °´ĞòºÅ²¥·ÅÎÄ¼ş
+* Arguments  : index			ĞòºÅ
+*              preemption		1-ÇÀ¶Ï²¥·Å£»0-µş¼Ó²¥·Å
+* Return	 : 0	Õı³£
+* Note(s)    : Ê¹ÓÃkey_tone_index[]Êı×é
 *********************************************************************
 */
 int audio_key_tone_play_index(u8 index, u8 preemption)
@@ -619,10 +619,10 @@ int audio_key_tone_play_index(u8 index, u8 preemption)
 /*
 *********************************************************************
 *                  Audio Key Tone Play
-* Description: æŒ‰é”®æç¤ºéŸ³æ’­æ”¾
+* Description: °´¼üÌáÊ¾Òô²¥·Å
 * Arguments  : None.
 * Return	 : None.
-* Note(s)    : é»˜è®¤æ’­æ”¾
+* Note(s)    : Ä¬ÈÏ²¥·Å
 *********************************************************************
 */
 void audio_key_tone_play(void)
@@ -635,9 +635,9 @@ void audio_key_tone_play(void)
 /*
 *********************************************************************
 *                  Audio Key Tone Check Play
-* Description: æ£€æµ‹æŒ‰é”®æç¤ºéŸ³æ˜¯å¦åœ¨æ’­æ”¾
+* Description: ¼ì²â°´¼üÌáÊ¾ÒôÊÇ·ñÔÚ²¥·Å
 * Arguments  : None.
-* Return	 : true		æ­£åœ¨æ’­æ”¾
+* Return	 : true		ÕıÔÚ²¥·Å
 * Note(s)    : None.
 *********************************************************************
 */
@@ -655,8 +655,8 @@ int audio_key_tone_is_play(void)
 /*
 *********************************************************************
 *                  Audio Key Tone Set Digvol
-* Description: è®¾ç½®æŒ‰é”®æç¤ºéŸ³çš„éŸ³é‡
-* Arguments  : volume		éŸ³é‡
+* Description: ÉèÖÃ°´¼üÌáÊ¾ÒôµÄÒôÁ¿
+* Arguments  : volume		ÒôÁ¿
 * Return	 : None.
 * Note(s)    : None.
 *********************************************************************

@@ -61,7 +61,7 @@ static const char *const tone_index[] = {
 } ;
 
 #if TCFG_TONE2TWS_ENABLE
-// ç”¨äºè½¬å‘çš„æç¤ºéŸ³
+// ÓÃÓÚ×ª·¢µÄÌáÊ¾Òô
 static const char *const tone2tws_index[] = {
     TONE_BT_MODE,
     TONE_MUSIC,
@@ -76,11 +76,11 @@ static const char *const tone2tws_index[] = {
 #endif
 
 /*
- * å‚æ•°é…ç½®:
- * freq : å®é™…é¢‘ç‡ * 512
- * points : æ­£å¼¦æ³¢ç‚¹æ•°
- * win : æ­£å¼¦çª—
- * decay : è¡°å‡ç³»æ•°(ç™¾åˆ†æ¯”), æ­£å¼¦çª—æ¨¡å¼ä¸‹ä¸ºé¢‘ç‡è®¾ç½®ï¼šé¢‘ç‡*512
+ * ²ÎÊıÅäÖÃ:
+ * freq : Êµ¼ÊÆµÂÊ * 512
+ * points : ÕıÏÒ²¨µãÊı
+ * win : ÕıÏÒ´°
+ * decay : Ë¥¼õÏµÊı(°Ù·Ö±È), ÕıÏÒ´°Ä£Ê½ÏÂÎªÆµÂÊÉèÖÃ£ºÆµÂÊ*512
  *
  */
 static const struct sin_param sine_16k_normal[] = {
@@ -130,10 +130,10 @@ struct tone_dec_handle *tone_dec = NULL;
 
 //////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰åºåˆ—å·è·å–sineæ•°ç»„
-   @param    id: åºå·
-   @param    *num: æ•°ç»„ä¸ªæ•°
-   @return   sineæ•°ç»„
+/**@brief    °´ĞòÁĞºÅ»ñÈ¡sineÊı×é
+   @param    id: ĞòºÅ
+   @param    *num: Êı×é¸öÊı
+   @return   sineÊı×é
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -176,13 +176,13 @@ static const struct sin_param *get_sine_param_data(u8 id, u8 *num)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³æ’­æ”¾åŸºç¡€å‡½æ•°ï¼ˆå¸¦æœ‰äº‹ä»¶å›è°ƒï¼‰
-   @param    **list: æ–‡ä»¶å
-   @param    follow: ç°æœ‰æç¤ºéŸ³æ’­æ”¾å®Œæ¯•åè·Ÿéšç€æ’­æ”¾
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @param    *evt_handler: äº‹ä»¶å›è°ƒæ¥å£
-   @param    *evt_priv: äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-   @return   0: æˆåŠŸ
+/**@brief    ÌáÊ¾Òô²¥·Å»ù´¡º¯Êı£¨´øÓĞÊÂ¼ş»Øµ÷£©
+   @param    **list: ÎÄ¼şÃû
+   @param    follow: ÏÖÓĞÌáÊ¾Òô²¥·ÅÍê±Ïºó¸úËæ×Å²¥·Å
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @param    *evt_handler: ÊÂ¼ş»Øµ÷½Ó¿Ú
+   @param    *evt_priv: ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -224,10 +224,10 @@ static int tone_play_open_with_callback_base(const char **list, u8 follow, u8 pr
 static u32 tone2tws_dat = 0;
 
 /*----------------------------------------------------------------------------*/
-/**@brief    twsæç¤ºéŸ³æ•°æ®å¤„ç†
-   @param    dat: æ•°æ®
+/**@brief    twsÌáÊ¾ÒôÊı¾İ´¦Àí
+   @param    dat: Êı¾İ
    @return
-   @note     åœ¨ä»»åŠ¡ä¸­é›†ä¸­å¤„ç†twsä¿¡æ¯
+   @note     ÔÚÈÎÎñÖĞ¼¯ÖĞ´¦ÀítwsĞÅÏ¢
 */
 /*----------------------------------------------------------------------------*/
 static void tone2tws_rx_play(u32 dat)
@@ -250,10 +250,10 @@ void tone2tws_bt_task_start(u8 tone_play)
         return ;
     }
     if (tone_play) {
-        // æ’­æ”¾è“ç‰™æç¤ºéŸ³ï¼ŒæŠ›å¼ƒè¯¥æç¤ºéŸ³
+        // ²¥·ÅÀ¶ÑÀÌáÊ¾Òô£¬Å×Æú¸ÃÌáÊ¾Òô
         tone2tws_dat = 0;
     } else {
-        // æ’­æ”¾è¯¥æç¤ºéŸ³
+        // ²¥·Å¸ÃÌáÊ¾Òô
         tone2tws_rx_play(tone2tws_dat);
         tone2tws_dat = 0;
     }
@@ -266,13 +266,13 @@ static void tone2tws_rx_callback_func(u32 dat)
         return ;
     }
 #if TCFG_DEC2TWS_ENABLE
-    if (tone2tws_dat) { // é‡Šæ”¾æ—§çš„
+    if (tone2tws_dat) { // ÊÍ·Å¾ÉµÄ
         tone2tws_dat = 0;
     }
     if (APP_BT_TASK != app_get_curr_task()) {
         r_printf("tone2tws task:%d ", app_get_curr_task());
-        // è¯¥æç¤ºéŸ³ä¸€å®šæ˜¯åœ¨è“ç‰™æ¨¡å¼æ’­æ”¾ï¼Œå¦åˆ™ä»£è¡¨æœ‰é—®é¢˜ã€‚
-        // ç­‰è¿”å›è“ç‰™æ¨¡å¼å†æ’­æ”¾
+        // ¸ÃÌáÊ¾ÒôÒ»¶¨ÊÇÔÚÀ¶ÑÀÄ£Ê½²¥·Å£¬·ñÔò´ú±íÓĞÎÊÌâ¡£
+        // µÈ·µ»ØÀ¶ÑÀÄ£Ê½ÔÙ²¥·Å
         tone2tws_dat = dat;
         return ;
     }
@@ -282,10 +282,10 @@ static void tone2tws_rx_callback_func(u32 dat)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³twsç§æœ‰ä¿¡æ¯å¤„ç†
-   @param    *data: æ•°æ®
-   @param    len: æ•°æ®é•¿åº¦
-   @param    rx: 1-æ¥å—ç«¯
+/**@brief    ÌáÊ¾ÒôtwsË½ÓĞĞÅÏ¢´¦Àí
+   @param    *data: Êı¾İ
+   @param    len: Êı¾İ³¤¶È
+   @param    rx: 1-½ÓÊÜ¶Ë
    @return
    @note
 */
@@ -303,7 +303,7 @@ static void tone2tws_tws_rx_data(void *data, u16 len, bool rx)
     memcpy(&dat, data, 4);
     /* y_printf("rx dat:%d \n", dat); */
 
-    // è¯¥å‡½æ•°æ˜¯åœ¨ä¸­æ–­é‡Œé¢è°ƒç”¨ï¼Œå®é™…å¤„ç†æ”¾åœ¨taské‡Œé¢
+    // ¸Ãº¯ÊıÊÇÔÚÖĞ¶ÏÀïÃæµ÷ÓÃ£¬Êµ¼Ê´¦Àí·ÅÔÚtaskÀïÃæ
     int argv[3];
     argv[0] = (int)tone2tws_rx_callback_func;
     argv[1] = 1;
@@ -323,13 +323,13 @@ REGISTER_TWS_FUNC_STUB(tws_tone2tws_rx) = {
 #endif
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³æ’­æ”¾ï¼ˆå¸¦æœ‰äº‹ä»¶å›è°ƒï¼‰
-   @param    **list: æ–‡ä»¶å
-   @param    follow: ç°æœ‰æç¤ºéŸ³æ’­æ”¾å®Œæ¯•åè·Ÿéšç€æ’­æ”¾
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @param    *evt_handler: äº‹ä»¶å›è°ƒæ¥å£
-   @param    *evt_priv: äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-   @return   0: æˆåŠŸ
+/**@brief    ÌáÊ¾Òô²¥·Å£¨´øÓĞÊÂ¼ş»Øµ÷£©
+   @param    **list: ÎÄ¼şÃû
+   @param    follow: ÏÖÓĞÌáÊ¾Òô²¥·ÅÍê±Ïºó¸úËæ×Å²¥·Å
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @param    *evt_handler: ÊÂ¼ş»Øµ÷½Ó¿Ú
+   @param    *evt_priv: ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -339,7 +339,7 @@ int tone_play_open_with_callback(const char **list, u8 follow, u8 preemption, vo
 #if TCFG_TONE2TWS_ENABLE
     int state = tws_api_get_tws_state();
     if (state & TWS_STA_SIBLING_CONNECTED) {
-        // æœ‰twsè¿æ¥ï¼Œæ£€æŸ¥æ˜¯å¦éœ€è¦æŠŠæç¤ºéŸ³æ¨é€ç»™å¯¹æ–¹
+        // ÓĞtwsÁ¬½Ó£¬¼ì²éÊÇ·ñĞèÒª°ÑÌáÊ¾ÒôÍÆËÍ¸ø¶Ô·½
         char *name = list[0];
         for (int i = 0; i < ARRAY_SIZE(tone2tws_index); i++) {
             if (IS_REPEAT_BEGIN(name) || IS_REPEAT_END(name)) {
@@ -367,10 +367,10 @@ int tone_play_open_with_callback(const char **list, u8 follow, u8 preemption, vo
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰æ–‡ä»¶æ’­æ”¾æç¤ºéŸ³
-   @param    *name: æ–‡ä»¶å
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @return   0: æˆåŠŸ
+/**@brief    °´ÎÄ¼ş²¥·ÅÌáÊ¾Òô
+   @param    *name: ÎÄ¼şÃû
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -383,10 +383,10 @@ int tone_play(const char *name, u8 preemption)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰æ–‡ä»¶æ’­æ”¾æç¤ºéŸ³
-   @param    *name: æ–‡ä»¶å
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @return   0: æˆåŠŸ
+/**@brief    °´ÎÄ¼ş²¥·ÅÌáÊ¾Òô
+   @param    *name: ÎÄ¼şÃû
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -396,12 +396,12 @@ int tone_play_by_path(const char *name, u8 preemption)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰åºåˆ—å·æ’­æ”¾æç¤ºéŸ³
-   @param    index: åºåˆ—å·
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @param    *evt_handler: äº‹ä»¶å›è°ƒæ¥å£
-   @param    *evt_priv: äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-   @return   0: æˆåŠŸ
+/**@brief    °´ĞòÁĞºÅ²¥·ÅÌáÊ¾Òô
+   @param    index: ĞòÁĞºÅ
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @param    *evt_handler: ÊÂ¼ş»Øµ÷½Ó¿Ú
+   @param    *evt_priv: ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -417,10 +417,10 @@ int tone_play_index_with_callback(u8 index, u8 preemption, void (*evt_handler)(v
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰åºåˆ—å·æ’­æ”¾æç¤ºéŸ³ï¼ˆå¸¦æœ‰äº‹ä»¶å›è°ƒï¼‰
-   @param    index: åºåˆ—å·
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @return   0: æˆåŠŸ
+/**@brief    °´ĞòÁĞºÅ²¥·ÅÌáÊ¾Òô£¨´øÓĞÊÂ¼ş»Øµ÷£©
+   @param    index: ĞòÁĞºÅ
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -430,10 +430,10 @@ int tone_play_index(u8 index, u8 preemption)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰æ–‡ä»¶ååˆ—è¡¨æ’­æ”¾æç¤ºéŸ³
-   @param    **list: æ–‡ä»¶ååˆ—è¡¨
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @return   0: æˆåŠŸ
+/**@brief    °´ÎÄ¼şÃûÁĞ±í²¥·ÅÌáÊ¾Òô
+   @param    **list: ÎÄ¼şÃûÁĞ±í
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -443,12 +443,12 @@ int tone_file_list_play(const char **list, u8 preemption)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰åºåˆ—å·æ’­æ”¾æç¤ºéŸ³
-   @param    index: åºåˆ—å·
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @param    *evt_handler: äº‹ä»¶å›è°ƒæ¥å£
-   @param    *evt_priv: äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-   @return   0: æˆåŠŸ
+/**@brief    °´ĞòÁĞºÅ²¥·ÅÌáÊ¾Òô
+   @param    index: ĞòÁĞºÅ
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @param    *evt_handler: ÊÂ¼ş»Øµ÷½Ó¿Ú
+   @param    *evt_priv: ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -467,12 +467,12 @@ int tone_play_with_callback_by_index(u8 index,
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰åå­—æ’­æ”¾æç¤ºéŸ³
-   @param    *name: æ–‡ä»¶å
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @param    *evt_handler: äº‹ä»¶å›è°ƒæ¥å£
-   @param    *evt_priv: äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-   @return   0: æˆåŠŸ
+/**@brief    °´Ãû×Ö²¥·ÅÌáÊ¾Òô
+   @param    *name: ÎÄ¼şÃû
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @param    *evt_handler: ÊÂ¼ş»Øµ÷½Ó¿Ú
+   @param    *evt_priv: ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -488,12 +488,12 @@ int tone_play_with_callback_by_name(char *name,
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æŒ‰åˆ—è¡¨æ’­æ”¾æç¤ºéŸ³
-   @param    **list: æ–‡ä»¶åˆ—è¡¨
-   @param    preemption: æ‰“æ–­æ ‡è®°
-   @param    *evt_handler: äº‹ä»¶å›è°ƒæ¥å£
-   @param    *evt_priv: äº‹ä»¶å›è°ƒç§æœ‰å¥æŸ„
-   @return   0: æˆåŠŸ
+/**@brief    °´ÁĞ±í²¥·ÅÌáÊ¾Òô
+   @param    **list: ÎÄ¼şÁĞ±í
+   @param    preemption: ´ò¶Ï±ê¼Ç
+   @param    *evt_handler: ÊÂ¼ş»Øµ÷½Ó¿Ú
+   @param    *evt_priv: ÊÂ¼ş»Øµ÷Ë½ÓĞ¾ä±ú
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -507,9 +507,9 @@ int tone_play_with_callback_by_list(const char **list,
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åœæ­¢æŒ‡å®šåºå·æç¤ºéŸ³
-   @param    index: åºå·
-   @return   0: æˆåŠŸ
+/**@brief    Í£Ö¹Ö¸¶¨ĞòºÅÌáÊ¾Òô
+   @param    index: ĞòºÅ
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -523,9 +523,9 @@ int tone_play_stop_by_index(u8 index)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åœæ­¢æŒ‡å®šåºå·æç¤ºéŸ³
-   @param    path: åºå·
-   @return   0: æˆåŠŸ
+/**@brief    Í£Ö¹Ö¸¶¨ĞòºÅÌáÊ¾Òô
+   @param    path: ĞòºÅ
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -539,9 +539,9 @@ int tone_play_stop_by_path(char *path)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    åœæ­¢æç¤ºéŸ³æ’­æ”¾
+/**@brief    Í£Ö¹ÌáÊ¾Òô²¥·Å
    @param
-   @return   0: æˆåŠŸ
+   @return   0: ³É¹¦
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -552,10 +552,10 @@ int tone_play_stop(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–æç¤ºéŸ³æ’­æ”¾çŠ¶æ€
+/**@brief    »ñÈ¡ÌáÊ¾Òô²¥·Å×´Ì¬
    @param
-   @return   TONE_START: æ­£åœ¨æ’­æ”¾
-   @return   TONE_STOP: ä¸åœ¨æ’­æ”¾
+   @return   TONE_START: ÕıÔÚ²¥·Å
+   @return   TONE_STOP: ²»ÔÚ²¥·Å
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -568,10 +568,10 @@ int tone_get_status(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è·å–æç¤ºéŸ³æ’­æ”¾è§£ç å™¨çŠ¶æ€
+/**@brief    »ñÈ¡ÌáÊ¾Òô²¥·Å½âÂëÆ÷×´Ì¬
    @param
-   @return   TONE_START: æ­£åœ¨è§£ç 
-   @return   TONE_STOP: ä¸åœ¨è§£ç 
+   @return   TONE_START: ÕıÔÚ½âÂë
+   @return   TONE_STOP: ²»ÔÚ½âÂë
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -591,10 +591,10 @@ int tone_get_dec_status()
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è¶…æ—¶ç­‰å¾…æç¤ºéŸ³æ’­æ”¾è§£ç å®Œæˆ
-   @param    timeout_ms: è¶…æ—¶ç­‰å¾…
-   @return   TONE_START: æ­£åœ¨è§£ç 
-   @return   TONE_STOP: ä¸åœ¨è§£ç 
+/**@brief    ³¬Ê±µÈ´ıÌáÊ¾Òô²¥·Å½âÂëÍê³É
+   @param    timeout_ms: ³¬Ê±µÈ´ı
+   @return   TONE_START: ÕıÔÚ½âÂë
+   @return   TONE_STOP: ²»ÔÚ½âÂë
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -615,7 +615,7 @@ int tone_dec_wait_stop(u32 timeout_ms)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æç¤ºéŸ³idleåˆ¤æ–­
+/**@brief    ÌáÊ¾ÒôidleÅĞ¶Ï
    @param
    @return   1: idle
    @return   0: busy

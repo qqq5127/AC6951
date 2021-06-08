@@ -11,7 +11,7 @@
 
 enum {
     ENC_WRITE_FILE_EVT_WRITE_ERR = 0x10,
-    ENC_WRITE_FILE_EVT_FILE_CLOSE,	// 0-err, é0-èµ·å§‹ç°‡å·
+    ENC_WRITE_FILE_EVT_FILE_CLOSE,	// 0-err, ·Ç0-ÆğÊ¼´ØºÅ
 
     ENC_WRITE_FLASH_EVT_WRITE_ERR = 0x20,
     ENC_WRITE_FLASH_EVT_OUTOF_LEN,
@@ -23,41 +23,41 @@ struct audio_enc_write_input {
 };
 
 //////////////////////////////////////////////////////////////////////////////
-int enc_write_file_resume(void *hdl);	// è°ƒç”¨è¯¥å‡½æ•°æ¿€æ´»å†™æ–‡ä»¶
+int enc_write_file_resume(void *hdl);	// µ÷ÓÃ¸Ãº¯Êı¼¤»îĞ´ÎÄ¼ş
 
 void enc_write_file_close(void *hdl);
 void *enc_write_file_open(char *logo, const char *folder, const char *filename);
 
 int enc_write_file_start(void *hdl);
-void enc_write_file_stop(void *hdl, u32 delay_ms); // delay_ms:è¶…æ—¶ç­‰å¾…å®Œæˆ
+void enc_write_file_stop(void *hdl, u32 delay_ms); // delay_ms:³¬Ê±µÈ´ıÍê³É
 
-// å½•éŸ³ç»“æŸåéœ€è¦é‡æ–°å†™å¤´éƒ¨æ•°æ®
+// Â¼Òô½áÊøºóĞèÒªÖØĞÂĞ´Í·²¿Êı¾İ
 void enc_write_file_set_head_handler(void *hdl, int (*set_head)(void *, char **head), void *set_head_hdl);
 void enc_write_file_set_evt_handler(void *hdl, void (*evt_cb)(void *, int, int), void *evt_hdl);
 void enc_write_file_set_input(void *hdl, struct audio_enc_write_input *input, void *input_hdl, u32 input_frame_len);
 
 int get_enc_file_len(void *hdl);
-// cut_size:ç»“æŸåç æ‰çš„å°¾éƒ¨é•¿åº¦
-// limit_size:æ–‡ä»¶å°äºè¯¥é•¿åº¦æ—¶ï¼Œä¸ä¿ç•™æ–‡ä»¶
+// cut_size:½áÊøºó¿³µôµÄÎ²²¿³¤¶È
+// limit_size:ÎÄ¼şĞ¡ÓÚ¸Ã³¤¶ÈÊ±£¬²»±£ÁôÎÄ¼ş
 void enc_write_file_set_limit(void *hdl, u32 cut_size, u32 limit_size);
 
 
 //////////////////////////////////////////////////////////////////////////////
-int enc_write_flash_resume(void *hdl);	// è°ƒç”¨è¯¥å‡½æ•°æ¿€æ´»å†™
+int enc_write_flash_resume(void *hdl);	// µ÷ÓÃ¸Ãº¯Êı¼¤»îĞ´
 
 void enc_write_flash_close(void *hdl);
 void *enc_write_flash_open(const char *dev_name, void *arg, u32 addr_start, u32 max_len);
 
 int enc_write_flash_start(void *hdl);
-void enc_write_flash_stop(void *hdl, u32 delay_ms); // delay_ms:è¶…æ—¶ç­‰å¾…å®Œæˆ
+void enc_write_flash_stop(void *hdl, u32 delay_ms); // delay_ms:³¬Ê±µÈ´ıÍê³É
 
-// å½•éŸ³ç»“æŸåéœ€è¦é‡æ–°å†™å¤´éƒ¨æ•°æ®
+// Â¼Òô½áÊøºóĞèÒªÖØĞÂĞ´Í·²¿Êı¾İ
 void enc_write_flash_set_head_handler(void *hdl, int (*set_head)(void *, char **head), void *set_head_hdl);
 void enc_write_flash_set_evt_handler(void *hdl, void (*evt_cb)(void *, int, int), void *evt_hdl);
 void enc_write_flash_set_input(void *hdl, struct audio_enc_write_input *input, void *input_hdl, u32 input_frame_len);
 
-// cut_size:ç»“æŸåç æ‰çš„å°¾éƒ¨é•¿åº¦
-// limit_size:æ–‡ä»¶å°äºè¯¥é•¿åº¦æ—¶ï¼Œä¸ä¿ç•™æ–‡ä»¶
+// cut_size:½áÊøºó¿³µôµÄÎ²²¿³¤¶È
+// limit_size:ÎÄ¼şĞ¡ÓÚ¸Ã³¤¶ÈÊ±£¬²»±£ÁôÎÄ¼ş
 void enc_write_flash_set_limit(void *hdl, u32 cut_size, u32 limit_size);
 
 void last_enc_file_codeing_type_save(u32 type);

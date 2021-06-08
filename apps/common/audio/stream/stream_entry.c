@@ -11,7 +11,7 @@ static int stream_entry_data_handler(struct audio_stream_entry *entry,
     }
 
     if (hdl->is_end == 0) {
-        //涓棿鑺傜偣鎵嶉渶瑕佸線鍚庝紶鏁版嵁锛岀粓鑺傜偣涓嶇敤
+        //中间节点才需要往后传数据，终节点不用
         out->data = in->data;
         out->data_len = in->data_len;
         out->channel = in->channel;

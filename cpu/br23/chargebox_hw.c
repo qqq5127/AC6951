@@ -32,11 +32,11 @@ static void uart2_isr(void)
 {
     u32 rx_len, timeout;
 
-    if ((JL_UART2->CON0 & BIT(2)) && (JL_UART2->CON0 & BIT(15))) {//å‘é€å®Œæˆ
+    if ((JL_UART2->CON0 & BIT(2)) && (JL_UART2->CON0 & BIT(15))) {//·¢ËÍÍê³É
         JL_UART2->CON0 |= BIT(13);
         chargebox_data_deal(CMD_COMPLETE, EAR_L, NULL, 0);
     }
-    if ((JL_UART2->CON0 & BIT(3)) && (JL_UART2->CON0 & BIT(14))) {//æ¥æ”¶ä¸­æ–­
+    if ((JL_UART2->CON0 & BIT(3)) && (JL_UART2->CON0 & BIT(14))) {//½ÓÊÕÖĞ¶Ï
         JL_UART2->CON0 |= BIT(12);
         JL_UART2->RXSADR = (u32)uart2_buf;
         JL_UART2->RXEADR = (u32)(uart2_buf + BUF_LEN);
@@ -45,11 +45,11 @@ static void uart2_isr(void)
     }
     if ((JL_UART2->CON0 & BIT(5)) && (JL_UART2->CON0 & BIT(11))) {
         //OTCNT PND
-        JL_UART2->CON0 |= BIT(7);//DMAæ¨¡å¼
-        JL_UART2->CON0 |= BIT(10);//æ¸…OTCNT PND
+        JL_UART2->CON0 |= BIT(7);//DMAÄ£Ê½
+        JL_UART2->CON0 |= BIT(10);//ÇåOTCNT PND
         asm volatile("nop");
-        rx_len = JL_UART2->HRXCNT;//è¯»å½“å‰ä¸²å£æ¥æ”¶æ•°æ®çš„ä¸ªæ•°
-        JL_UART2->CON0 |= BIT(12);//æ¸…RX PND(è¿™é‡Œçš„é¡ºåºä¸èƒ½æ”¹å˜ï¼Œè¿™é‡Œè¦æ¸…ä¸€æ¬¡)
+        rx_len = JL_UART2->HRXCNT;//¶Áµ±Ç°´®¿Ú½ÓÊÕÊı¾İµÄ¸öÊı
+        JL_UART2->CON0 |= BIT(12);//ÇåRX PND(ÕâÀïµÄË³Ğò²»ÄÜ¸Ä±ä£¬ÕâÀïÒªÇåÒ»´Î)
         JL_UART2->RXSADR = (u32)uart2_buf;
         JL_UART2->RXEADR = (u32)(uart2_buf + BUF_LEN);
         JL_UART2->RXCNT = BUF_LEN;
@@ -64,12 +64,12 @@ static void uart1_isr(void)
     u32 rx_len, timeout;
 
 
-    if ((JL_UART1->CON0 & BIT(2)) && (JL_UART1->CON0 & BIT(15))) {//å‘é€å®Œæˆ
+    if ((JL_UART1->CON0 & BIT(2)) && (JL_UART1->CON0 & BIT(15))) {//·¢ËÍÍê³É
         JL_UART1->CON0 |= BIT(13);
         /* printf("uart1 sned isr\n"); */
         chargebox_data_deal(CMD_COMPLETE, EAR_R, NULL, 0);
     }
-    if ((JL_UART1->CON0 & BIT(3)) && (JL_UART1->CON0 & BIT(14))) {//æ¥æ”¶ä¸­æ–­
+    if ((JL_UART1->CON0 & BIT(3)) && (JL_UART1->CON0 & BIT(14))) {//½ÓÊÕÖĞ¶Ï
         /* putchar('Z'); */
         JL_UART1->CON0 |= BIT(12);
         JL_UART1->RXSADR = (u32)uart1_buf;
@@ -80,11 +80,11 @@ static void uart1_isr(void)
     if ((JL_UART1->CON0 & BIT(5)) && (JL_UART1->CON0 & BIT(11))) {
         //OTCNT PND
         /* putchar('W'); */
-        JL_UART1->CON0 |= BIT(7);//DMAæ¨¡å¼
-        JL_UART1->CON0 |= BIT(10);//æ¸…OTCNT PND
+        JL_UART1->CON0 |= BIT(7);//DMAÄ£Ê½
+        JL_UART1->CON0 |= BIT(10);//ÇåOTCNT PND
         asm volatile("nop");
-        JL_UART1->CON0 |= BIT(12);//æ¸…RX PND(è¿™é‡Œçš„é¡ºåºä¸èƒ½æ”¹å˜ï¼Œè¿™é‡Œè¦æ¸…ä¸€æ¬¡)
-        rx_len = JL_UART1->HRXCNT;//è¯»å½“å‰ä¸²å£æ¥æ”¶æ•°æ®çš„ä¸ªæ•°
+        JL_UART1->CON0 |= BIT(12);//ÇåRX PND(ÕâÀïµÄË³Ğò²»ÄÜ¸Ä±ä£¬ÕâÀïÒªÇåÒ»´Î)
+        rx_len = JL_UART1->HRXCNT;//¶Áµ±Ç°´®¿Ú½ÓÊÕÊı¾İµÄ¸öÊı
         JL_UART1->RXSADR = (u32)uart1_buf;
         JL_UART1->RXEADR = (u32)(uart1_buf + BUF_LEN);
         JL_UART1->RXCNT = BUF_LEN;
@@ -218,7 +218,7 @@ void chargebox_init(const struct chargebox_platform_data *data)
     gpio_direction_input(__this->data->L_port);
     request_irq(IRQ_UART2_IDX, 3, uart2_isr, 0);
     //used output_channel0 input_ch0
-    JL_IOMAP->CON3 &= ~BIT(11);//ä¸å ç”¨IO
+    JL_IOMAP->CON3 &= ~BIT(11);//²»Õ¼ÓÃIO
 
     //init uart1
     JL_UART1->CON0 = BIT(13) | BIT(12) | BIT(10);
@@ -231,7 +231,7 @@ void chargebox_init(const struct chargebox_platform_data *data)
     gpio_direction_input(__this->data->R_port);
     request_irq(IRQ_UART1_IDX, 3, uart1_isr, 0);
     //used output_channel1, input_ch3
-    JL_IOMAP->CON3 &= ~BIT(7);//ä¸å ç”¨IO
+    JL_IOMAP->CON3 &= ~BIT(7);//²»Õ¼ÓÃIO
 
     __this->init_flag = 1;
 }

@@ -166,7 +166,7 @@ static int effect_tool_get_eq_section_num(EFFECTS_ONLINE_PACKET *packet)
 }
 static int effect_tool_get_mode_counter(EFFECTS_ONLINE_PACKET *packet)
 {
-    //æ¨¡å¼ä¸ªæ•°
+    //Ä£Ê½¸öÊı
     int mode_cnt = __this->parm->mode_max;
     u32 id = packet->cmd;
     ci_send_packet(id, (u8 *)&mode_cnt, sizeof(int));
@@ -174,7 +174,7 @@ static int effect_tool_get_mode_counter(EFFECTS_ONLINE_PACKET *packet)
 }
 static int effect_tool_get_mode_name(EFFECTS_ONLINE_PACKET *packet)
 {
-    //utf8ç¼–ç å¾—åå­—
+    //utf8±àÂëµÃÃû×Ö
     struct __cmd_name {
         int id;
         int modeId;
@@ -305,7 +305,7 @@ static int effect_tool_mode_seq_number(EFFECTS_ONLINE_PACKET *packet)
 static int effect_tool_cmd_inquire(EFFECTS_ONLINE_PACKET *packet)
 {
     u32 id = packet->cmd;
-    ci_send_packet(id, (u8 *)"NO", 2);//OKè¡¨ç¤ºéœ€è¦é‡ä¼ ï¼ŒNOè¡¨ç¤ºä¸éœ€è¦é‡ä¼ ,ERè¿˜æ˜¯è¡¨ç¤ºæœªçŸ¥å‘½ä»¤
+    ci_send_packet(id, (u8 *)"NO", 2);//OK±íÊ¾ĞèÒªÖØ´«£¬NO±íÊ¾²»ĞèÒªÖØ´«,ER»¹ÊÇ±íÊ¾Î´ÖªÃüÁî
     return 0;
 }
 
@@ -358,7 +358,7 @@ static int effect_tool_normal_cmd(EFFECTS_ONLINE_PACKET *packet)
     case EFFECTS_ONLINE_CMD_MODE_SEQ_NUMBER:
         res = effect_tool_mode_seq_number(packet);
         break;
-    case EFFECTS_ONLINE_CMD_INQUIRE://pc æŸ¥è¯¢å°é¸¡æ˜¯å¦åœ¨çº¿
+    case EFFECTS_ONLINE_CMD_INQUIRE://pc ²éÑ¯Ğ¡¼¦ÊÇ·ñÔÚÏß
         res = effect_tool_cmd_inquire(packet);
         break;
     default:
@@ -441,7 +441,7 @@ REGISTER_CONFIG_TARGET(effect_tool_target) = {
     .callback   = effect_tool_callback,
 };
 
-//åœ¨çº¿è°ƒè¯•ä¸è¿›power down
+//ÔÚÏßµ÷ÊÔ²»½øpower down
 static u8 effect_tool_idle_query(void)
 {
     if (!__this) {

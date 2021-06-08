@@ -1,7 +1,7 @@
 #include "effect_reg.h"
 #include "app_config.h"
 #include "audio_enc.h"
-/**********************æ··å“åŠŸèƒ½é€‰é…*********************************/
+/**********************»ìÏì¹¦ÄÜÑ¡Åä*********************************/
 #if (TCFG_MIC_EFFECT_ENABLE)
 #if (TCFG_MIC_EFFECT_SEL == MIC_EFFECT_REVERB)
 #define MIC_EFFECT_CONFIG 	  	  0	\
@@ -30,7 +30,7 @@
 #endif//
 /*********************************************************************/
 
-/**********************æ‰©éŸ³å™¨åŠŸèƒ½é€‰é…*********************************/
+/**********************À©ÒôÆ÷¹¦ÄÜÑ¡Åä*********************************/
 #if (TCFG_LOUDSPEAKER_ENABLE)
 #undef MIC_EFFECT_CONFIG
 #if (TCFG_MIC_EFFECT_SEL == MIC_EFFECT_REVERB)
@@ -57,8 +57,8 @@
 /*********************************************************************/
 
 const struct __mic_effect_parm effect_parm_default = {
-    .effect_config = MIC_EFFECT_CONFIG,///æ··å“é€šè·¯æ”¯æŒå“ªäº›åŠŸèƒ½
-    .effect_run = MIC_EFFECT_CONFIG,///æ··å“æ‰“å¼€ä¹‹æ—¶ï¼Œ é»˜è®¤æ‰“å¼€çš„åŠŸèƒ½
+    .effect_config = MIC_EFFECT_CONFIG,///»ìÏìÍ¨Â·Ö§³ÖÄÄÐ©¹¦ÄÜ
+    .effect_run = MIC_EFFECT_CONFIG,///»ìÏì´ò¿ªÖ®Ê±£¬ Ä¬ÈÏ´ò¿ªµÄ¹¦ÄÜ
     .sample_rate = MIC_EFFECT_SAMPLERATE,
 };
 
@@ -68,17 +68,17 @@ const struct __mic_stream_parm effect_mic_stream_parm_default = {
 #else
     .mic_gain			= 4,
 #endif
-    .sample_rate 		= MIC_EFFECT_SAMPLERATE,//é‡‡æ ·çŽ‡
+    .sample_rate 		= MIC_EFFECT_SAMPLERATE,//²ÉÑùÂÊ
 #if (RECORDER_MIX_EN)
-    .point_unit  		= 160,//ä¸€æ¬¡å¤„ç†æ•°æ®çš„æ•°æ®å•å…ƒï¼Œ å•ä½ç‚¹ 4å¯¹é½(è¦é…åˆmicèµ·ä¸­æ–­ç‚¹æ•°ä¿®æ”¹)
-    .dac_delay			= 20,//dacç¡¬ä»¶æ··å“å»¶æ—¶ï¼Œ å•ä½ms è¦å¤§äºŽ point_unit*2
+    .point_unit  		= 160,//Ò»´Î´¦ÀíÊý¾ÝµÄÊý¾Ýµ¥Ôª£¬ µ¥Î»µã 4¶ÔÆë(ÒªÅäºÏmicÆðÖÐ¶ÏµãÊýÐÞ¸Ä)
+    .dac_delay			= 20,//dacÓ²¼þ»ìÏìÑÓÊ±£¬ µ¥Î»ms Òª´óÓÚ point_unit*2
 #else
 #if (TCFG_MIC_EFFECT_SEL == MIC_EFFECT_REVERB)
-    .point_unit  		= REVERB_LADC_IRQ_POINTS,//ä¸€æ¬¡å¤„ç†æ•°æ®çš„æ•°æ®å•å…ƒï¼Œ å•ä½ç‚¹ 4å¯¹é½(è¦é…åˆmicèµ·ä¸­æ–­ç‚¹æ•°ä¿®æ”¹)
-    .dac_delay			= (int)((REVERB_LADC_IRQ_POINTS * 2) / (TCFG_REVERB_SAMPLERATE_DEFUAL / 1000.0)), //6,//8,//8,//10,//dacç¡¬ä»¶æ··å“å»¶æ—¶ï¼Œ å•ä½ms è¦å¤§äºŽ point_unit*2 // (REVERB_LADC_IRQ_POINTS*1.5)/(TCFG_REVERB_SAMPLERATE_DEFUAL/1000.0)
+    .point_unit  		= REVERB_LADC_IRQ_POINTS,//Ò»´Î´¦ÀíÊý¾ÝµÄÊý¾Ýµ¥Ôª£¬ µ¥Î»µã 4¶ÔÆë(ÒªÅäºÏmicÆðÖÐ¶ÏµãÊýÐÞ¸Ä)
+    .dac_delay			= (int)((REVERB_LADC_IRQ_POINTS * 2) / (TCFG_REVERB_SAMPLERATE_DEFUAL / 1000.0)), //6,//8,//8,//10,//dacÓ²¼þ»ìÏìÑÓÊ±£¬ µ¥Î»ms Òª´óÓÚ point_unit*2 // (REVERB_LADC_IRQ_POINTS*1.5)/(TCFG_REVERB_SAMPLERATE_DEFUAL/1000.0)
 #else
-    .point_unit  		= 80,//ä¸€æ¬¡å¤„ç†æ•°æ®çš„æ•°æ®å•å…ƒï¼Œ å•ä½ç‚¹ 4å¯¹é½(è¦é…åˆmicèµ·ä¸­æ–­ç‚¹æ•°ä¿®æ”¹)
-    .dac_delay			= 10,//dacç¡¬ä»¶æ··å“å»¶æ—¶ï¼Œ å•ä½ms è¦å¤§äºŽ point_unit*2
+    .point_unit  		= 80,//Ò»´Î´¦ÀíÊý¾ÝµÄÊý¾Ýµ¥Ôª£¬ µ¥Î»µã 4¶ÔÆë(ÒªÅäºÏmicÆðÖÐ¶ÏµãÊýÐÞ¸Ä)
+    .dac_delay			= 10,//dacÓ²¼þ»ìÏìÑÓÊ±£¬ µ¥Î»ms Òª´óÓÚ point_unit*2
 #endif
 #endif
 };
@@ -87,13 +87,13 @@ const REVERBN_PARM_SET effect_reverb_parm_default = {
     .dry = 100,						//[0:200]%
     .wet = 80,	  					//[0:300]%
     .delay = 70,					//[0-100]ms
-    .rot60 = 1400,					//[0:15000]ms  //åå°„ç³»æ•° å€¼è¶Šå¤§ å‘å°„è¶ŠåŽ‰å®³ è¡°å‡æ…¢
+    .rot60 = 1400,					//[0:15000]ms  //·´ÉäÏµÊý ÖµÔ½´ó ·¢ÉäÔ½À÷º¦ Ë¥¼õÂý
     .Erwet = 60,					//[5:250]%
     .Erfactor = 180,					//[50:250]%
     .Ewidth = 100,					//[-100:100]%
     .Ertolate  = 100,				//[0:100]%
     .predelay  = 0,					//[0:20]ms
-    //ä»¥ä¸‹å‚æ•°æ— æ•ˆã€å¯ä»¥é€šè¿‡EQè°ƒèŠ‚
+    //ÒÔÏÂ²ÎÊýÎÞÐ§¡¢¿ÉÒÔÍ¨¹ýEQµ÷½Ú
     .width  = 100,					//[0:100]%
     .diffusion  = 70,				//[0:100]%
     .dampinglpf  = 15000,			//[0:18k]
@@ -105,18 +105,18 @@ const REVERBN_PARM_SET effect_reverb_parm_default = {
 
 
 const EF_REVERB_FIX_PARM effect_echo_fix_parm_default = {
-    .wetgain = 2048,			////æ¹¿å£°å¢žç›Šï¼š[0:4096]
-    .drygain = 4096,				////å¹²å£°å¢žç›Š: [0:4096]
-    .sr = MIC_EFFECT_SAMPLERATE,		////é‡‡æ ·çŽ‡
-    .max_ms = 200,				////æ‰€éœ€è¦çš„æœ€å¤§å»¶æ—¶ï¼Œå½±å“ need_buf å¤§å°
+    .wetgain = 2048,			////ÊªÉùÔöÒæ£º[0:4096]
+    .drygain = 4096,				////¸ÉÉùÔöÒæ: [0:4096]
+    .sr = MIC_EFFECT_SAMPLERATE,		////²ÉÑùÂÊ
+    .max_ms = 200,				////ËùÐèÒªµÄ×î´óÑÓÊ±£¬Ó°Ïì need_buf ´óÐ¡
 
 };
 
 const ECHO_PARM_SET effect_echo_parm_default = {
-    .delay = 200,				//å›žå£°çš„å»¶æ—¶æ—¶é—´ 0-300ms
+    .delay = 200,				//»ØÉùµÄÑÓÊ±Ê±¼ä 0-300ms
     .decayval = 50,				// 0-70%
-    .direct_sound_enable = 1,	//ç›´è¾¾å£°ä½¿èƒ½  0/1
-    .filt_enable = 0,			//å‘æ•£æ»¤æ³¢å™¨ä½¿èƒ½
+    .direct_sound_enable = 1,	//Ö±´ïÉùÊ¹ÄÜ  0/1
+    .filt_enable = 0,			//·¢É¢ÂË²¨Æ÷Ê¹ÄÜ
 };
 
 
@@ -186,23 +186,23 @@ audio_dig_vol_param effect_dvol_default_parm = {
 };
 
 
-// å–Šéº¦æ»¤æ³¢å™¨:
+// º°ÂóÂË²¨Æ÷:
 const SHOUT_WHEAT_PARM_SET effect_shout_wheat_default = {
-    .center_frequency = 1500,//ä¸­å¿ƒé¢‘çŽ‡: 800
-    .bandwidth = 4000,//å¸¦å®½:   4000
-    .occupy = 80,//å æ¯”:   100%
+    .center_frequency = 1500,//ÖÐÐÄÆµÂÊ: 800
+    .bandwidth = 4000,//´ø¿í:   4000
+    .occupy = 80,//Õ¼±È:   100%
 };
-// ä½ŽéŸ³ï¼š
+// µÍÒô£º
 const LOW_SOUND_PARM_SET effect_low_sound_default = {
-    .cutoff_frequency = 700,//æˆªæ­¢é¢‘çŽ‡ï¼š600
-    .highest_gain = 1000,//æœ€é«˜å¢žç›Šï¼š0
-    .lowest_gain = -12000,//æœ€ä½Žå¢žç›Š:  -12000
+    .cutoff_frequency = 700,//½ØÖ¹ÆµÂÊ£º600
+    .highest_gain = 1000,//×î¸ßÔöÒæ£º0
+    .lowest_gain = -12000,//×îµÍÔöÒæ:  -12000
 };
-// é«˜éŸ³ï¼š
+// ¸ßÒô£º
 const HIGH_SOUND_PARM_SET effect_high_sound_default = {
-    .cutoff_frequency = 2000,//:æˆªæ­¢é¢‘çŽ‡:  1800
-    .highest_gain = 1000,//æœ€é«˜å¢žç›Šï¼š0
-    .lowest_gain = -12000,// æœ€ä½Žå¢žç›Šï¼š-12000
+    .cutoff_frequency = 2000,//:½ØÖ¹ÆµÂÊ:  1800
+    .highest_gain = 1000,//×î¸ßÔöÒæ£º0
+    .lowest_gain = -12000,// ×îµÍÔöÒæ£º-12000
 };
 
 /* const struct audio_eq_param effect_eq_default_parm = { */
@@ -213,12 +213,12 @@ const HIGH_SOUND_PARM_SET effect_high_sound_default = {
 /* .no_wait   		= 0, */
 /* [> .eq_switch 		= 0, <] */
 /* .eq_name 		= 3, */
-/* .max_nsection 	= EQ_SECTION_MAX + 3,///åŽä¸‰æ®µæ˜¯åšé«˜ä½ŽéŸ³åŠå–Šéº¦çš„ */
+/* .max_nsection 	= EQ_SECTION_MAX + 3,///ºóÈý¶ÎÊÇ×ö¸ßµÍÒô¼°º°ÂóµÄ */
 /* .cb 			= mic_eq_get_filter_info, */
 /* }; */
 
 /* const  */
-//ä¸æ˜¯ä½¿ç”¨ const ,æˆå‘˜samplerateè½¯ä»¶ä¼šæ›´æ”¹
+//²»ÊÇÊ¹ÓÃ const ,³ÉÔ±samplerateÈí¼þ»á¸ü¸Ä
 struct __effect_mode_cfg effect_tool_parm = {
     .debug_en = 1,
     .mode_max = ARRAY_SIZE(MIC_EFFECT_TOOL_CONFIG_ARRAY),
@@ -230,10 +230,10 @@ struct __effect_mode_cfg effect_tool_parm = {
 
 
 const struct __effect_dodge_parm dodge_parm = {
-    .dodge_in_thread = 1000,//è§¦å‘é—ªé¿çš„èƒ½é‡é˜ˆå€¼
-    .dodge_in_time_ms = 1,//èƒ½é‡å€¼æŒç»­å¤§äºŽdodge_in_thread å°±è§¦å‘é—ªé¿
-    .dodge_out_thread = 1000,//é€€å‡ºé—ªé¿çš„èƒ½é‡é˜ˆå€¼
-    .dodge_out_time_ms = 500,//èƒ½é‡å€¼æŒç»­å°äºŽdodge_out_thread å°±é€€å‡ºé—ªé¿
+    .dodge_in_thread = 1000,//´¥·¢ÉÁ±ÜµÄÄÜÁ¿ãÐÖµ
+    .dodge_in_time_ms = 1,//ÄÜÁ¿Öµ³ÖÐø´óÓÚdodge_in_thread ¾Í´¥·¢ÉÁ±Ü
+    .dodge_out_thread = 1000,//ÍË³öÉÁ±ÜµÄÄÜÁ¿ãÐÖµ
+    .dodge_out_time_ms = 500,//ÄÜÁ¿Öµ³ÖÐøÐ¡ÓÚdodge_out_thread ¾ÍÍË³öÉÁ±Ü
 };
 
 

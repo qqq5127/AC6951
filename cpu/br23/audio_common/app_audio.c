@@ -89,7 +89,7 @@ s16 dac_buff[4 * 1024 * BNUM] SEC(.dac_buff);
 s16 dac_buff[4 * 1024 * BNUM] SEC(.dac_buff);
 #endif
 
-/*å…³é—­audioç›¸å…³æ¨¡å—ä½¿èƒ½*/
+/*¹Ø±ÕaudioÏà¹ØÄ£¿éÊ¹ÄÜ*/
 void audio_disable_all(void)
 {
     //DAC:DACEN
@@ -99,7 +99,7 @@ void audio_disable_all(void)
     //EQ:
     JL_EQ->CON0 &= ~BIT(0);
     //FFT:
-    JL_FFT->CON = BIT(1);//ç½®1å¼ºåˆ¶å…³é—­æ¨¡å—ï¼Œä¸ç®¡æ˜¯å¦å·²ç»è¿ç®—å®Œæˆ
+    JL_FFT->CON = BIT(1);//ÖÃ1Ç¿ÖÆ¹Ø±ÕÄ£¿é£¬²»¹ÜÊÇ·ñÒÑ¾­ÔËËãÍê³É
 }
 
 REGISTER_UPDATE_TARGET(audio_update_target) = {
@@ -136,7 +136,7 @@ static void app_audio_volume_change(void)
     local_irq_disable();
     __this->save_vol_cnt = 0;
     if (__this->save_vol_timer == 0) {
-        __this->save_vol_timer = sys_timer_add(NULL, app_audio_volume_save_do, 1000);//è¦ä½¿ç”¨è½¯ä»¶å®šæ—¶å™¨ ä¸­æ–­é‡Œä¸èƒ½æ“ä½œvm
+        __this->save_vol_timer = sys_timer_add(NULL, app_audio_volume_save_do, 1000);//ÒªÊ¹ÓÃÈí¼ş¶¨Ê±Æ÷ ÖĞ¶ÏÀï²»ÄÜ²Ù×÷vm
     }
     local_irq_enable();
 }
@@ -735,7 +735,7 @@ void app_audio_state_switch(u8 state, s16 max_volume)
 #if TCFG_CALL_USE_DIGITAL_VOLUME
     if (__this->state == APP_AUDIO_STATE_CALL) {
         audio_digital_vol_open(max_volume, max_volume, 4);
-        /*è°ƒæ•°å­—éŸ³é‡çš„æ—¶å€™ï¼Œæ¨¡æ‹ŸéŸ³é‡å®šæœ€å¤§*/
+        /*µ÷Êı×ÖÒôÁ¿µÄÊ±ºò£¬Ä£ÄâÒôÁ¿¶¨×î´ó*/
         audio_dac_vol_set(TYPE_DAC_AGAIN, BIT(0) | BIT(1), max_volume, 1);
         audio_dac_vol_set(TYPE_DAC_DGAIN, BIT(0) | BIT(1), DEFAULT_DIGTAL_VOLUME, 1);
     }
@@ -765,7 +765,7 @@ void app_audio_state_switch(u8 state, s16 max_volume)
 
 #endif
 
-    /*é™åˆ¶æœ€å¤§éŸ³é‡*/
+    /*ÏŞÖÆ×î´óÒôÁ¿*/
 #if (SYS_VOL_TYPE == 0)
 #elif (SYS_VOL_TYPE == 3)
 #else
@@ -854,8 +854,8 @@ void dac_power_off(void)
 //#define LADC_CAPLESS_INFO_DEBUG
 #ifdef LADC_CAPLESS_INFO_DEBUG
 /*
- * adcdso:æ­£è´Ÿ1000ä¹‹å†…
- * dacr32(æ­£å¸¸èŒƒå›´:ç¨³å®šåœ¨æ­£è´Ÿ28000ä¹‹å†…)
+ * adcdso:Õı¸º1000Ö®ÄÚ
+ * dacr32(Õı³£·¶Î§:ÎÈ¶¨ÔÚÕı¸º28000Ö®ÄÚ)
  */
 void ladc_capless_info(s16 adcdso, s32 dacr32, s32 pout, s32 tmps8)
 {
@@ -874,7 +874,7 @@ static void mic_capless_feedback_toggle(u8 toggle);
 
 #define MIC_CAPLESS_ADJUST_BUD_DEFAULT	0
 #define MIC_CAPLESS_ADJUST_BUD			100
-/*ä¸æ”¯æŒè‡ªåŠ¨æ ¡å‡†ï¼Œä½¿ç”¨å¿«é€Ÿæ”¶æ•›*/
+/*²»Ö§³Ö×Ô¶¯Ğ£×¼£¬Ê¹ÓÃ¿ìËÙÊÕÁ²*/
 #if TCFG_MC_BIAS_AUTO_ADJUST
 u8	mic_capless_adjust_bud = MIC_CAPLESS_ADJUST_BUD_DEFAULT;
 #else
@@ -886,16 +886,16 @@ s16 read_capless_DTB(void)
     s16 dacr32 = 32767;
     int ret = syscfg_read(CFG_DAC_DTB, &dacr32, 2);
     printf("cfg DAC_DTB:%d,ret = %d\n", dacr32, ret);
-    /*æ²¡æœ‰è®°å¿†å€¼,ä½¿ç”¨é»˜è®¤å€¼*/
+    /*Ã»ÓĞ¼ÇÒäÖµ,Ê¹ÓÃÄ¬ÈÏÖµ*/
     if (ret != 2) {
-        /*æ²¡æœ‰æ”¶æ•›å€¼çš„æ—¶å€™ï¼Œä½¿ç”¨å¿«é€Ÿæ”¶æ•›*/
+        /*Ã»ÓĞÊÕÁ²ÖµµÄÊ±ºò£¬Ê¹ÓÃ¿ìËÙÊÕÁ²*/
         //printf("DAC_DTB NULL,use fast feedback");
         mic_capless_adjust_bud = MIC_CAPLESS_ADJUST_BUD;
         /*
-         *æœªåˆå§‹åŒ–çŠ¶æ€ï¼Œè¿”å›é»˜è®¤æ”¶æ•›å€¼ã€‚å¯ä»¥é€šè¿‡ä¿®æ”¹é»˜è®¤æ”¶æ•›å€¼ï¼Œä½¿å…¶
-         *æ¥è¿‘æœ€ç»ˆæ”¶æ•›å€¼ï¼Œæ¥åŠ å¿«é¢„æ”¶æ•›æ—¶é—´ã€‚æ¯”å¦‚æœ€ç»ˆæ”¶æ•›å€¼æ˜¯-2500ï¼Œåˆ™
-         *å¯ä»¥æŠŠé»˜è®¤æ”¶æ•›å€¼è®¾ç½®æˆ-2000å·¦å³ï¼Œå› ä¸ºä¸åŒçš„æ ·æœºç¨å¾®æœ‰ç‚¹å°å·®
-         *å¼‚ï¼Œæ‰€ä»¥è¿™ä¸ªå€¼ä¸ç”¨é‚£ä¹ˆç²¾ç¡®ï¼Œåªè¦å·®ä¸å¤šå°±è¡Œäº†ã€‚
+         *Î´³õÊ¼»¯×´Ì¬£¬·µ»ØÄ¬ÈÏÊÕÁ²Öµ¡£¿ÉÒÔÍ¨¹ıĞŞ¸ÄÄ¬ÈÏÊÕÁ²Öµ£¬Ê¹Æä
+         *½Ó½ü×îÖÕÊÕÁ²Öµ£¬À´¼Ó¿ìÔ¤ÊÕÁ²Ê±¼ä¡£±ÈÈç×îÖÕÊÕÁ²ÖµÊÇ-2500£¬Ôò
+         *¿ÉÒÔ°ÑÄ¬ÈÏÊÕÁ²ÖµÉèÖÃ³É-2000×óÓÒ£¬ÒòÎª²»Í¬µÄÑù»úÉÔÎ¢ÓĞµãĞ¡²î
+         *Òì£¬ËùÒÔÕâ¸öÖµ²»ÓÃÄÇÃ´¾«È·£¬Ö»Òª²î²»¶à¾ÍĞĞÁË¡£
          */
         return 32767;
     }
@@ -915,13 +915,13 @@ s16 read_vm_capless_DTB(void)
 
 s16 save_dacr32 = DACR32_DEFAULT;
 static u8 adjust_complete = 0;
-static u16 dtb_step_limit = 0; /*dtbæ”¶æ•›æ­¥è¿›é™åˆ¶*/
+static u16 dtb_step_limit = 0; /*dtbÊÕÁ²²½½øÏŞÖÆ*/
 void save_capless_DTB()
 {
     s16 diff;
     //printf("save_capless_DTB\n");
     if ((save_dacr32 != DACR32_DEFAULT) && adjust_complete) {
-        /*æ¯”è¾ƒæ˜¯å¦éœ€è¦æ›´æ–°é…ç½®*/
+        /*±È½ÏÊÇ·ñĞèÒª¸üĞÂÅäÖÃ*/
         s16 cfg_dacr32 = read_vm_capless_DTB();
         adjust_complete = 0;
         diff = save_dacr32 - cfg_dacr32;
@@ -969,7 +969,7 @@ void ladc_capless_adjust_post(s32 dacr32, u8 begin)
             if (adjust_complete == 0) {
                 save_dacr32 = dacr32;
             }
-            /*è°ƒæ•´ç¨³å®š*/
+            /*µ÷ÕûÎÈ¶¨*/
             if ((dacr32_diff > -DIFF_RANGE) && (dacr32_diff < DIFF_RANGE)) {
                 log_info("adjust_OK:%d\n", dacr32);
                 adjust_complete = 1;
@@ -985,7 +985,7 @@ void ladc_capless_adjust_post(s32 dacr32, u8 begin)
 
 #if 0
 /*
- *å†™åˆ°dac bufçš„æ•°æ®æ¥å£
+ *Ğ´µ½dac bufµÄÊı¾İ½Ó¿Ú
  */
 void audio_write_data_hook(void *data, u32 len)
 {
@@ -994,7 +994,7 @@ void audio_write_data_hook(void *data, u32 len)
 #endif
 
 /*
- *dacå¿«é€Ÿæ ¡å‡†
+ *dac¿ìËÙĞ£×¼
  */
 //#define DAC_TRIM_FAST_EN
 #ifdef DAC_TRIM_FAST_EN
@@ -1005,7 +1005,7 @@ u8 dac_trim_fast_en()
 #endif
 
 /*
- *è‡ªå®šä¹‰dacä¸Šç”µå»¶æ—¶æ—¶é—´ï¼Œå…·ä½“å»¶æ—¶å¤šä¹…åº”é€šè¿‡ç¤ºæ³¢å™¨æµ‹é‡
+ *×Ô¶¨ÒådacÉÏµçÑÓÊ±Ê±¼ä£¬¾ßÌåÑÓÊ±¶à¾ÃÓ¦Í¨¹ıÊ¾²¨Æ÷²âÁ¿
  */
 #if 1
 void dac_power_on_delay()
@@ -1019,7 +1019,7 @@ void dac_power_on_delay()
 #endif
 
 /*
- *caplessæ¨¡å¼ä¸€å¼€å§‹ä¸è¦çš„æ•°æ®åŒ…æ•°é‡
+ *caplessÄ£Ê½Ò»¿ªÊ¼²»ÒªµÄÊı¾İ°üÊıÁ¿
  */
 u16 get_ladc_capless_dump_num(void)
 {
@@ -1027,7 +1027,7 @@ u16 get_ladc_capless_dump_num(void)
 }
 
 /*
- *micçœç”µå®¹æ¨¡å¼è‡ªåŠ¨æ”¶æ•›
+ *micÊ¡µçÈİÄ£Ê½×Ô¶¯ÊÕÁ²
  */
 u8 mic_capless_feedback_sw = 0;
 static u8 audio_mc_idle_query(void)
@@ -1039,7 +1039,7 @@ REGISTER_LP_TARGET(audio_mc_device_lp_target) = {
     .is_idle = audio_mc_idle_query,
 };
 
-/*å¿«è°ƒæ…¢è°ƒè¾¹ç•Œ*/
+/*¿ìµ÷Âıµ÷±ß½ç*/
 u16 get_ladc_capless_bud(void)
 {
     //printf("mc_bud:%d",mic_capless_adjust_bud);
@@ -1060,7 +1060,7 @@ int audio_mic_capless_feedback_control(u8 en, u16 sr)
 }
 
 OS_SEM mc_sem;
-/*æ”¶æ•›çš„å‰ææ˜¯åç½®ç”µå‹åˆæ³•*/
+/*ÊÕÁ²µÄÇ°ÌáÊÇÆ«ÖÃµçÑ¹ºÏ·¨*/
 static void mic_capless_feedback_toggle(u8 toggle)
 {
     int ret = 0;
@@ -1106,9 +1106,9 @@ void mic_capless_auto_adjust_exit()
     mic_analog_close(&adc_data);
 }
 
-/*AC695xç³»åˆ—åªæ”¯æŒé«˜å‹æ¨¡å¼*/
-#define MIC_BIAS_HIGH_UPPER_LIMIT	190	/*é«˜å‹ä¸Šé™ï¼š1.90v*/
-#define MIC_BIAS_HIGH_LOWER_LIMIT	140	/*é«˜å‹ä¸‹é™ï¼š1.40v*/
+/*AC695xÏµÁĞÖ»Ö§³Ö¸ßÑ¹Ä£Ê½*/
+#define MIC_BIAS_HIGH_UPPER_LIMIT	190	/*¸ßÑ¹ÉÏÏŞ£º1.90v*/
+#define MIC_BIAS_HIGH_LOWER_LIMIT	140	/*¸ßÑ¹ÏÂÏŞ£º1.40v*/
 
 #define ADC_MIC_IO			IO_PORTC_06
 #define ADC_MIC_CH			AD_CH_PC6
@@ -1117,10 +1117,10 @@ void mic_capless_auto_adjust_exit()
 
 
 /*
- *return -1:éçœç”µå®¹æ¨¡å¼
- *return -2:æ ¡å‡†å¤±è´¥
- *return  0:é»˜è®¤å€¼åˆæ³•ï¼Œä¸ç”¨æ ¡å‡†
- *return  1:é»˜è®¤å€¼éæ³•ï¼Œå¯åŠ¨æ ¡å‡†
+ *return -1:·ÇÊ¡µçÈİÄ£Ê½
+ *return -2:Ğ£×¼Ê§°Ü
+ *return  0:Ä¬ÈÏÖµºÏ·¨£¬²»ÓÃĞ£×¼
+ *return  1:Ä¬ÈÏÖµ·Ç·¨£¬Æô¶¯Ğ£×¼
  */
 s8 mic_capless_auto_adjust(void)
 {
@@ -1141,7 +1141,7 @@ s8 mic_capless_auto_adjust(void)
 
     log_info("mic_bias idx:%d,rsel:%d\n", mic_bias_idx, mic_bias_tab[mic_bias_idx]);
 
-    /*é‡‡æ ·MIC_port(PC6)çš„åç½®ç”µå‹å€¼*/
+    /*²ÉÑùMIC_port(PC6)µÄÆ«ÖÃµçÑ¹Öµ*/
     JL_PORTC->DIE &= ~BIT(6);
     JL_PORTC->DIR |=  BIT(6);
     JL_PORTC->PU  &= ~BIT(6);
@@ -1150,13 +1150,13 @@ s8 mic_capless_auto_adjust(void)
 
 #if 0
     /*
-     *è°ƒè¯•ä½¿ç”¨
-     *å¦‚æœmicçš„åç½®ç”µå‹mic_bias_valç¨³å®šï¼Œåˆ™è¡¨ç¤ºå»¶æ—¶è¶³å¤Ÿï¼Œå¦åˆ™åŠ å¤§å»¶æ—¶çŸ¥é“ç”µå‹å€¼ç¨³å®š
+     *µ÷ÊÔÊ¹ÓÃ
+     *Èç¹ûmicµÄÆ«ÖÃµçÑ¹mic_bias_valÎÈ¶¨£¬Ôò±íÊ¾ÑÓÊ±×ã¹»£¬·ñÔò¼Ó´óÑÓÊ±ÖªµÀµçÑ¹ÖµÎÈ¶¨
      */
     while (1) {
         wdt_clear();
         MIC_BIAS_RSEL(mic_bias_tab[mic_bias_idx]);
-        delay_2ms(50);//å»¶æ—¶ç­‰å¾…åç½®ç”µå‹ç¨³å®š
+        delay_2ms(50);//ÑÓÊ±µÈ´ıÆ«ÖÃµçÑ¹ÎÈ¶¨
         mic_bias_val = adc_get_voltage(ADC_MIC_CH) / 10;
         log_info("mic_bias_val:%d,idx:%d,rsel:%d\n", mic_bias_val, mic_bias_idx, mic_bias_tab[mic_bias_idx]);
     }
@@ -1171,40 +1171,40 @@ s8 mic_capless_auto_adjust(void)
         log_info("mic_bias_val:%d,idx:%d,rsel:%d\n", mic_bias_val, mic_bias_idx, mic_bias_tab[mic_bias_idx]);
 
         if (mic_bias_val < bias_lower_limit) {
-            /*ç”µå‹åå°ï¼Œè°ƒå°å†…éƒ¨ä¸Šæ‹‰åç½®*/
+            /*µçÑ¹Æ«Ğ¡£¬µ÷Ğ¡ÄÚ²¿ÉÏÀ­Æ«ÖÃ*/
             mic_bias_compare |= BIT(0);
             mic_bias_idx++;
             if (mic_bias_idx >= sizeof(mic_bias_tab)) {
                 log_error("mic_bias_auto_adjust faild 0\n");
-                /*æ ¡å‡†å¤±è´¥ï¼Œä½¿ç”¨å¿«é€Ÿæ”¶æ•›*/
+                /*Ğ£×¼Ê§°Ü£¬Ê¹ÓÃ¿ìËÙÊÕÁ²*/
                 //mic_capless_adjust_bud = MIC_CAPLESS_ADJUST_BUD;
                 ret = -2;
                 //break;
             }
         } else if (mic_bias_val > bias_upper_limit) {
-            /*ç”µå‹åå¤§ï¼Œè°ƒå¤§å†…éƒ¨ä¸Šæ‹‰åç½®*/
+            /*µçÑ¹Æ«´ó£¬µ÷´óÄÚ²¿ÉÏÀ­Æ«ÖÃ*/
             mic_bias_compare |= BIT(1);
             if (mic_bias_idx) {
                 mic_bias_idx--;
             } else {
                 log_error("mic_bias_auto_adjust faild 1\n");
-                /*æ ¡å‡†å¤±è´¥ï¼Œä½¿ç”¨å¿«é€Ÿæ”¶æ•›*/
+                /*Ğ£×¼Ê§°Ü£¬Ê¹ÓÃ¿ìËÙÊÕÁ²*/
                 //mic_capless_adjust_bud = MIC_CAPLESS_ADJUST_BUD;
                 ret = -2;
                 //break;
             }
         } else {
             if (mic_bias_compare) {
-                /*è¶…å‡ºèŒƒå›´ï¼Œè°ƒæ•´è¿‡çš„å€¼,ä¿å­˜*/
+                /*³¬³ö·¶Î§£¬µ÷Õû¹ıµÄÖµ,±£´æ*/
                 adc_data.mic_bias_res = mic_bias_idx;
                 log_info("mic_bias_adjust ok,idx:%d,rsel:%d\n", mic_bias_idx, mic_bias_tab[mic_bias_idx]);
-                /*è®°ä½æ ¡å‡†è¿‡çš„å€¼*/
+                /*¼Ç×¡Ğ£×¼¹ıµÄÖµ*/
                 ret = syscfg_write(CFG_MC_BIAS, &adc_data.mic_bias_res, 1);
                 log_info("mic_bias_adjust save ret = %d\n", ret);
                 ret = 1;
             }
 
-            /*åŸæœ¬çš„MICLDOæ¡£ä½ä¸åˆé€‚ï¼Œä¿å­˜æ–°çš„MICLDOæ¡£ä½*/
+            /*Ô­±¾µÄMICLDOµµÎ»²»ºÏÊÊ£¬±£´æĞÂµÄMICLDOµµÎ»*/
             if (err_cnt) {
                 adc_data.mic_ldo_vsel = mic_ldo_idx;
                 log_info("mic_ldo_vsel fix:%d\n", adc_data.mic_ldo_vsel);
@@ -1218,24 +1218,24 @@ s8 mic_capless_auto_adjust(void)
         }
 
         /*
-         *å½“å‰MICLDOåˆ†ä¸å‡ºåˆé€‚çš„åç½®ç”µå‹
-         * é€‰æ‹©1ã€ä¿®æ”¹MICLDOæ¡£ä½ï¼Œé‡æ–°æ ¡å‡†
-         * é€‰æ‹©2ã€ç›´æ¥é€€å‡ºï¼Œè·³å‡ºè‡ªåŠ¨æ ¡å‡†
+         *µ±Ç°MICLDO·Ö²»³öºÏÊÊµÄÆ«ÖÃµçÑ¹
+         * Ñ¡Ôñ1¡¢ĞŞ¸ÄMICLDOµµÎ»£¬ÖØĞÂĞ£×¼
+         * Ñ¡Ôñ2¡¢Ö±½ÓÍË³ö£¬Ìø³ö×Ô¶¯Ğ£×¼
          */
         if ((mic_bias_compare == (BIT(0) | BIT(1))) || (ret == -2)) {
             log_info("mic_bias_trim err,adjust micldo vsel\n");
             ret = 0;
-#if 1	/*é€‰æ‹©1*/
-            /*ä»0å¼€å§‹éå†æŸ¥è¯¢*/
+#if 1	/*Ñ¡Ôñ1*/
+            /*´Ó0¿ªÊ¼±éÀú²éÑ¯*/
             if (err_cnt) {
                 mic_ldo_idx++;
             }
             err_cnt++;
-            /*è·³è¿‡é»˜è®¤çš„ldoç”µå‹æ¡£*/
+            /*Ìø¹ıÄ¬ÈÏµÄldoµçÑ¹µµ*/
             if (mic_ldo_idx == adc_data.mic_ldo_vsel) {
                 mic_ldo_idx++;
             }
-            /*éå†ç»“æŸï¼Œæ²¡æœ‰åˆé€‚çš„MICLDOç”µå‹æ¡£*/
+            /*±éÀú½áÊø£¬Ã»ÓĞºÏÊÊµÄMICLDOµçÑ¹µµ*/
             if (mic_ldo_idx > 3) {
                 log_info("mic_bias_adjust tomeout\n");
                 mic_capless_adjust_bud = MIC_CAPLESS_ADJUST_BUD;
@@ -1244,13 +1244,13 @@ s8 mic_capless_auto_adjust(void)
             }
             log_info("mic_ldo_idx:%d", mic_ldo_idx);
             MIC_LDO_SEL(mic_ldo_idx);
-            /*ä¿®æ”¹MICLDOç”µå‹æ¡£ï¼Œç­‰å¾…ç”µå‹ç¨³å®š*/
+            /*ĞŞ¸ÄMICLDOµçÑ¹µµ£¬µÈ´ıµçÑ¹ÎÈ¶¨*/
             os_time_dly(20);
-            /*å¤ä½åç½®ç”µé˜»æ¡£ä½*/
+            /*¸´Î»Æ«ÖÃµç×èµµÎ»*/
             mic_bias_idx = adc_data.mic_bias_res;
-            /*å¤ä½æ ¡å‡†æ ‡å¿—ä½*/
+            /*¸´Î»Ğ£×¼±êÖ¾Î»*/
             mic_bias_compare = 0;
-#else	/*é€‰æ‹©2*/
+#else	/*Ñ¡Ôñ2*/
             log_info("mic_bias_trim err,break loop\n");
             mic_capless_adjust_bud = MIC_CAPLESS_ADJUST_BUD;
             ret = -3;
@@ -1264,10 +1264,10 @@ s8 mic_capless_auto_adjust(void)
 #endif
 
 /*
- *æ£€æŸ¥micåç½®æ˜¯å¦éœ€è¦æ ¡å‡†,ä»¥ä¸‹æƒ…å†µéœ€è¦é‡æ–°æ ¡å‡†ï¼š
- *1ã€power on reset
- *2ã€vmè¢«æ“¦é™¤
- *3ã€æ¯æ¬¡å¼€æœºéƒ½æ ¡å‡†
+ *¼ì²émicÆ«ÖÃÊÇ·ñĞèÒªĞ£×¼,ÒÔÏÂÇé¿öĞèÒªÖØĞÂĞ£×¼£º
+ *1¡¢power on reset
+ *2¡¢vm±»²Á³ı
+ *3¡¢Ã¿´Î¿ª»ú¶¼Ğ£×¼
  */
 extern u8 power_reset_src;
 u8 mc_bias_adjust_check()
@@ -1300,7 +1300,7 @@ u8 mc_bias_adjust_check()
 }
 
 #if TCFG_MC_DTB_STEP_LIMIT
-/*è·å–çœç”µå®¹micæ”¶æ•›ä¿¡æ¯é…ç½®*/
+/*»ñÈ¡Ê¡µçÈİmicÊÕÁ²ĞÅÏ¢ÅäÖÃ*/
 int get_mc_dtb_step_limit(void)
 {
     return dtb_step_limit;
@@ -1310,9 +1310,9 @@ int get_mc_dtb_step_limit(void)
 /*
  *pos = 1:dac trim begin
  *pos = 2:dac trim end
- *pos = 3:dacå·²ç»trimè¿‡(å¼€æœº)
- *pos = 4:dacå·²ç»è¯»å–è¿‡å˜é‡(è¿‡ç¨‹)
- *pos = 5:dacå·²ç»trimè¿‡(å¼€æœº,dacæ¨¡å—åˆå§‹åŒ–)
+ *pos = 3:dacÒÑ¾­trim¹ı(¿ª»ú)
+ *pos = 4:dacÒÑ¾­¶ÁÈ¡¹ı±äÁ¿(¹ı³Ì)
+ *pos = 5:dacÒÑ¾­trim¹ı(¿ª»ú,dacÄ£¿é³õÊ¼»¯)
  */
 extern void audio_dac2micbias_en(struct audio_dac_hdl *dac, u8 en);
 void _audio_dac_trim_hook(u8 pos)
@@ -1329,7 +1329,7 @@ void _audio_dac_trim_hook(u8 pos)
         if (ret >= 0) {
             mic_capless_feedback_toggle(1);
         } else {
-            /*æ ¡å‡†å‡ºé”™çš„æ—¶å€™ä¸åšé¢„æ”¶æ•›*/
+            /*Ğ£×¼³ö´íµÄÊ±ºò²»×öÔ¤ÊÕÁ²*/
             log_info("auto_adjust err:%d\n", ret);
         }
         return;
@@ -1353,9 +1353,9 @@ void _audio_dac_trim_hook(u8 pos)
             os_time_dly(25);
             ret = mic_capless_auto_adjust();
             /*
-             *é¢„æ”¶æ•›æ¡ä»¶ï¼š
-             *1ã€å¼€æœºæ£€æŸ¥å‘ç°micçš„åç½®éæ³•ï¼Œåˆ™æ ¡å‡†å›æ¥ï¼ŒåŒæ—¶é‡æ–°æ”¶æ•›,æ¯”å¦‚ä¸­é€”æ›´æ¢micå¤´çš„æƒ…å†µ
-             *2ã€æ”¶æ•›å€¼ä¸¢å¤±ï¼ˆvmè¢«æ“¦é™¤ï¼‰ï¼Œé‡æ–°æ”¶æ•›ä¸€æ¬¡(å‰ææ˜¯æ ¡å‡†æˆåŠŸ)
+             *Ô¤ÊÕÁ²Ìõ¼ş£º
+             *1¡¢¿ª»ú¼ì²é·¢ÏÖmicµÄÆ«ÖÃ·Ç·¨£¬ÔòĞ£×¼»ØÀ´£¬Í¬Ê±ÖØĞÂÊÕÁ²,±ÈÈçÖĞÍ¾¸ü»»micÍ·µÄÇé¿ö
+             *2¡¢ÊÕÁ²Öµ¶ªÊ§£¨vm±»²Á³ı£©£¬ÖØĞÂÊÕÁ²Ò»´Î(Ç°ÌáÊÇĞ£×¼³É¹¦)
              */
             if ((ret == 1) || ((ret == 0) && (read_vm_capless_DTB() == DACR32_DEFAULT))) {
                 audio_dac2micbias_en(&dac_hdl, 1);
@@ -1406,7 +1406,7 @@ void _audio_adc_irq_hook(void)
 
 /*******************************************************
 * Function name	: app_audio_output_init
-* Description	: éŸ³é¢‘è¾“å‡ºè®¾å¤‡åˆå§‹åŒ–
+* Description	: ÒôÆµÊä³öÉè±¸³õÊ¼»¯
 * Return        : None
 ********************* -HB ******************************/
 void app_audio_output_init(void)
@@ -1438,16 +1438,16 @@ void app_audio_output_init(void)
 
 /*******************************************************
 * Function name	: app_audio_output_sync_buff_init
-* Description	: è®¾ç½®éŸ³é¢‘è¾“å‡ºè®¾å¤‡åŒæ­¥åŠŸèƒ½ buf
+* Description	: ÉèÖÃÒôÆµÊä³öÉè±¸Í¬²½¹¦ÄÜ buf
 * Parameter		:
-*   @sync_buff		buf èµ·å§‹åœ°å€
-*   @len       		buf é•¿åº¦
+*   @sync_buff		buf ÆğÊ¼µØÖ·
+*   @len       		buf ³¤¶È
 * Return        : None
 ********************* -HB ******************************/
 void app_audio_output_sync_buff_init(void *sync_buff, int len)
 {
 #if AUDIO_OUTPUT_INCLUDE_DAC
-    /*éŸ³é¢‘åŒæ­¥DAç«¯bufferè®¾ç½®*/
+    /*ÒôÆµÍ¬²½DA¶ËbufferÉèÖÃ*/
     /*audio_dac_set_sync_buff(&dac_hdl, sync_buff, len);*/
 #endif
 }
@@ -1455,11 +1455,11 @@ void app_audio_output_sync_buff_init(void *sync_buff, int len)
 
 /*******************************************************
 * Function name	: app_audio_output_samplerate_select
-* Description	: å°†è¾“å…¥é‡‡æ ·ç‡ä¸è¾“å‡ºé‡‡æ ·ç‡è¿›è¡ŒåŒ¹é…å¯¹æ¯”
+* Description	: ½«ÊäÈë²ÉÑùÂÊÓëÊä³ö²ÉÑùÂÊ½øĞĞÆ¥Åä¶Ô±È
 * Parameter		:
-*   @sample_rate    è¾“å…¥é‡‡æ ·ç‡
-*   @high:          0 - ä½ä¸€çº§é‡‡æ ·ç‡ï¼Œ1 - é«˜ä¸€çº§é‡‡æ ·ç‡
-* Return        : åŒ¹é…åçš„é‡‡æ ·ç‡
+*   @sample_rate    ÊäÈë²ÉÑùÂÊ
+*   @high:          0 - µÍÒ»¼¶²ÉÑùÂÊ£¬1 - ¸ßÒ»¼¶²ÉÑùÂÊ
+* Return        : Æ¥ÅäºóµÄ²ÉÑùÂÊ
 ********************* -HB ******************************/
 int app_audio_output_samplerate_select(u32 sample_rate, u8 high)
 {
@@ -1468,9 +1468,9 @@ int app_audio_output_samplerate_select(u32 sample_rate, u8 high)
 
 /*******************************************************
 * Function name	: app_audio_output_samplerate_set
-* Description	: è®¾ç½®éŸ³é¢‘è¾“å‡ºè®¾å¤‡çš„é‡‡æ ·ç‡
+* Description	: ÉèÖÃÒôÆµÊä³öÉè±¸µÄ²ÉÑùÂÊ
 * Parameter		:
-*   @sample_rate	é‡‡æ ·ç‡
+*   @sample_rate	²ÉÑùÂÊ
 * Return        : 0 success, other fail
 ********************* -HB ******************************/
 int app_audio_output_samplerate_set(int sample_rate)
@@ -1483,8 +1483,8 @@ int app_audio_output_samplerate_set(int sample_rate)
 
 /*******************************************************
 * Function name	: app_audio_output_samplerate_get
-* Description	: è·å–éŸ³é¢‘è¾“å‡ºè®¾å¤‡çš„é‡‡æ ·ç‡
-* Return        : éŸ³é¢‘è¾“å‡ºè®¾å¤‡çš„é‡‡æ ·ç‡
+* Description	: »ñÈ¡ÒôÆµÊä³öÉè±¸µÄ²ÉÑùÂÊ
+* Return        : ÒôÆµÊä³öÉè±¸µÄ²ÉÑùÂÊ
 ********************* -HB ******************************/
 int app_audio_output_samplerate_get(void)
 {
@@ -1496,8 +1496,8 @@ int app_audio_output_samplerate_get(void)
 
 /*******************************************************
 * Function name	: app_audio_output_mode_get
-* Description	: è·å–å½“å‰ç¡¬ä»¶è¾“å‡ºæ¨¡å¼
-* Return        : è¾“å‡ºæ¨¡å¼
+* Description	: »ñÈ¡µ±Ç°Ó²¼şÊä³öÄ£Ê½
+* Return        : Êä³öÄ£Ê½
 ********************* -HB ******************************/
 int app_audio_output_mode_get(void)
 {
@@ -1509,7 +1509,7 @@ int app_audio_output_mode_get(void)
 
 /*******************************************************
 * Function name	: app_audio_output_mode_set
-* Description	: è®¾ç½®å½“å‰ç¡¬ä»¶è¾“å‡ºæ¨¡å¼
+* Description	: ÉèÖÃµ±Ç°Ó²¼şÊä³öÄ£Ê½
 * Return        : 0 success, other fail
 ********************* -HB ******************************/
 int app_audio_output_mode_set(u8 output)
@@ -1522,8 +1522,8 @@ int app_audio_output_mode_set(u8 output)
 
 /*******************************************************
 * Function name	: app_audio_output_channel_get
-* Description	: è·å–éŸ³é¢‘è¾“å‡ºè®¾å¤‡è¾“å‡ºé€šé“æ•°
-* Return        : é€šé“æ•°
+* Description	: »ñÈ¡ÒôÆµÊä³öÉè±¸Êä³öÍ¨µÀÊı
+* Return        : Í¨µÀÊı
 ********************* -HB ******************************/
 int app_audio_output_channel_get(void)
 {
@@ -1535,9 +1535,9 @@ int app_audio_output_channel_get(void)
 
 /*******************************************************
 * Function name	: app_audio_output_channel_set
-* Description	: è®¾ç½®éŸ³é¢‘è¾“å‡ºè®¾å¤‡è¾“å‡ºé€šé“æ•°
+* Description	: ÉèÖÃÒôÆµÊä³öÉè±¸Êä³öÍ¨µÀÊı
 * Parameter		:
-*   @channel       	é€šé“æ•°
+*   @channel       	Í¨µÀÊı
 * Return        : 0 success, other fail
 ********************* -HB ******************************/
 int app_audio_output_channel_set(u8 channel)
@@ -1554,11 +1554,11 @@ static u16 iis_remain_len = 0;
 #endif
 /*******************************************************
 * Function name	: app_audio_output_write
-* Description	: å‘éŸ³é¢‘è¾“å‡ºè®¾å¤‡å†™å…¥éœ€è¦è¾“å‡ºçš„éŸ³é¢‘æ•°æ®
+* Description	: ÏòÒôÆµÊä³öÉè±¸Ğ´ÈëĞèÒªÊä³öµÄÒôÆµÊı¾İ
 * Parameter		:
-*   @buf			å†™å…¥éŸ³é¢‘æ•°æ®çš„èµ·å§‹åœ°å€
-*   @len			å†™å…¥éŸ³é¢‘æ•°æ®çš„é•¿åº¦
-* Return        : æˆåŠŸå†™å…¥çš„é•¿åº¦
+*   @buf			Ğ´ÈëÒôÆµÊı¾İµÄÆğÊ¼µØÖ·
+*   @len			Ğ´ÈëÒôÆµÊı¾İµÄ³¤¶È
+* Return        : ³É¹¦Ğ´ÈëµÄ³¤¶È
 ********************* -HB ******************************/
 int app_audio_output_write(void *buf, int len)
 {
@@ -1583,7 +1583,7 @@ int app_audio_output_write(void *buf, int len)
         return wlen2;
     }
 
-    if (output_order) { //è°ƒæ¢è¾“å‡ºé¡ºåºåšè¾“å‡ºå‡è¡¡
+    if (output_order) { //µ÷»»Êä³öË³Ğò×öÊä³ö¾ùºâ
         wlen2 = audio_link_write_stereodata(buf, len, TCFG_IIS_OUTPUT_PORT);
         wlen1 = audio_dac_write(&dac_hdl, buf, len);
     } else {
@@ -1611,7 +1611,7 @@ int app_audio_output_write(void *buf, int len)
 
 /*******************************************************
 * Function name	: app_audio_output_start
-* Description	: éŸ³é¢‘è¾“å‡ºè®¾å¤‡è¾“å‡ºæ‰“å¼€
+* Description	: ÒôÆµÊä³öÉè±¸Êä³ö´ò¿ª
 * Return        : 0 success, other fail
 ********************* -HB ******************************/
 int app_audio_output_start(void)
@@ -1629,7 +1629,7 @@ int app_audio_output_start(void)
 
 /*******************************************************
 * Function name	: app_audio_output_stop
-* Description	: éŸ³é¢‘è¾“å‡ºè®¾å¤‡è¾“å‡ºåœæ­¢
+* Description	: ÒôÆµÊä³öÉè±¸Êä³öÍ£Ö¹
 * Return        : 0 success, other fail
 ********************* -HB ******************************/
 int app_audio_output_stop(void)
@@ -1642,9 +1642,9 @@ int app_audio_output_stop(void)
 
 /*******************************************************
 * Function name	: app_audio_output_reset
-* Description	: éŸ³é¢‘è¾“å‡ºè®¾å¤‡é‡å¯
+* Description	: ÒôÆµÊä³öÉè±¸ÖØÆô
 * Parameter		:
-*   @msecs       	é‡å¯æ—¶é—´ ms
+*   @msecs       	ÖØÆôÊ±¼ä ms
 * Return        : 0 success, other fail
 ********************* -HB ******************************/
 int app_audio_output_reset(u32 msecs)
@@ -1657,9 +1657,9 @@ int app_audio_output_reset(u32 msecs)
 
 /*******************************************************
 * Function name	: app_audio_output_get_cur_buf_points
-* Description	: è·å–å½“å‰éŸ³é¢‘è¾“å‡ºbufè¿˜å¯ä»¥è¾“å‡ºçš„ç‚¹æ•°
+* Description	: »ñÈ¡µ±Ç°ÒôÆµÊä³öbuf»¹¿ÉÒÔÊä³öµÄµãÊı
 * Parameter		:
-* Return        : è¿˜å¯ä»¥è¾“å‡ºçš„ç‚¹æ•°
+* Return        : »¹¿ÉÒÔÊä³öµÄµãÊı
 ********************* -HB ******************************/
 int app_audio_output_get_cur_buf_points(void)
 {

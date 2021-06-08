@@ -26,62 +26,62 @@
 #define HIGHT_LEVEL   1
 #define DETECT_PERIOD   20//ms
 
-//USBä¸Šä¸‹çº¿æ£€æµ‹æ—¶é—´é…ç½®
-#define USB_DET_ONLINE_LEVEL    (HIGHT_LEVEL)//é«˜ç”µå¹³è¡¨ç¤ºåœ¨çº¿
+//USBÉÏÏÂÏß¼ì²âÊ±¼äÅäÖÃ
+#define USB_DET_ONLINE_LEVEL    (HIGHT_LEVEL)//¸ßµçÆ½±íÊ¾ÔÚÏß
 #define USB_DET_OFFLINE_TIME    (500/DETECT_PERIOD)
 #define USB_DET_ONLINE_TIME     (200/DETECT_PERIOD)
 
-//HALLå¼€å…³æ£€æµ‹æ—¶é—´é…ç½®
-#define HALL_DET_OPEN_LEVEL     (HIGHT_LEVEL)//é«˜ç”µå¹³è¡¨ç¤ºå¼€ç›–
+//HALL¿ª¹Ø¼ì²âÊ±¼äÅäÖÃ
+#define HALL_DET_OPEN_LEVEL     (HIGHT_LEVEL)//¸ßµçÆ½±íÊ¾¿ª¸Ç
 #define HALL_DET_OPEN_TIME      (100/DETECT_PERIOD)
 #define HALL_DET_CLOSE_TIME     (300/DETECT_PERIOD)
 
-//å‡å‹æ£€æµ‹ç”µå‹åŠæ—¶é—´é…ç½®
+//ÉıÑ¹¼ì²âµçÑ¹¼°Ê±¼äÅäÖÃ
 #define LDO_SUCC_VOLTAGE        (4300)
 #define LDO_DET_ON_TIME         (60/DETECT_PERIOD)
 #define LDO_DET_OFF_TIME        (60/DETECT_PERIOD)
 
-//æ»¡ç”µæ£€æµ‹æ—¶é—´
-#define CHARGE_FULL_LEVEL       (HIGHT_LEVEL)//é«˜ç”µå¹³è¡¨ç¤ºå……æ»¡
+//Âúµç¼ì²âÊ±¼ä
+#define CHARGE_FULL_LEVEL       (HIGHT_LEVEL)//¸ßµçÆ½±íÊ¾³äÂú
 #define STAT_FULL_POWER_TIME    (1000/DETECT_PERIOD)
 
-//ç»™è€³æœºå……ç”µç”µæµé™åˆ¶
+//¸ø¶ú»ú³äµçµçÁ÷ÏŞÖÆ
 #define CURRENT_DETECT_PERIOD   (1000)
 #define CHARGE_CURRENT_LIMIT    (200)//mA
-#define CHARGE_CURRENT_RES      (500)//500mÎ©
+#define CHARGE_CURRENT_RES      (500)//500m¦¸
 
-//å……ç”µæ¸©åº¦é™åˆ¶
-#define CHARGE_TEMP_DETECT_PERIOD   (10000)//æ¸©åº¦æ£€æµ‹å‘¨æœŸ
-#define CHARGE_TEMP_ABNORMAL_LOW    (330)//æ¸©åº¦å¼‚å¸¸çš„ä½å€¼33k
-#define CHARGE_TEMP_NORMAL_LOW      (250)//æ¸©åº¦æ­£å¸¸çš„ä½å€¼25k
-#define CHARGE_TEMP_NORMAL_HIGH      (53)//æ¸©åº¦æ­£å¸¸çš„ä½å€¼5.3k
-#define CHARGE_TEMP_ABNORMAL_HIGH    (43)//æ¸©åº¦å¼‚å¸¸çš„ä½å€¼4.3k
-#define CHARGE_TEMP_AVG_COUNTS       (10)//å–10æ¬¡å¹³å‡å€¼
+//³äµçÎÂ¶ÈÏŞÖÆ
+#define CHARGE_TEMP_DETECT_PERIOD   (10000)//ÎÂ¶È¼ì²âÖÜÆÚ
+#define CHARGE_TEMP_ABNORMAL_LOW    (330)//ÎÂ¶ÈÒì³£µÄµÍÖµ33k
+#define CHARGE_TEMP_NORMAL_LOW      (250)//ÎÂ¶ÈÕı³£µÄµÍÖµ25k
+#define CHARGE_TEMP_NORMAL_HIGH      (53)//ÎÂ¶ÈÕı³£µÄµÍÖµ5.3k
+#define CHARGE_TEMP_ABNORMAL_HIGH    (43)//ÎÂ¶ÈÒì³£µÄµÍÖµ4.3k
+#define CHARGE_TEMP_AVG_COUNTS       (10)//È¡10´ÎÆ½¾ùÖµ
 
-//å……ç”µèˆ±æ¬ å‹,ä¸å¼€æœºç”µå‹
+//³äµç²ÕÇ·Ñ¹,²»¿ª»úµçÑ¹
 #define POWER_ON_SHUTDOWN_VOLT  (2800)
 
-//ç”µæ± ç”µå‹æ£€æµ‹,è¿›å…¥é€€å‡ºä½ç”µæ£€æµ‹ç”µå‹åŠæ—¶é—´é…ç½®
+//µç³ØµçÑ¹¼ì²â,½øÈëÍË³öµÍµç¼ì²âµçÑ¹¼°Ê±¼äÅäÖÃ
 #define POWER_DETECT_PERIOD     (10000)
 #define LOWPOWER_ENTER_VOLTAGE  (3300)
 #define LOWPOWER_EXIT_VOLTAGE   (3320)
-#define BAT_AVE_COUNTS          (10) //æ£€æµ‹næ¬¡
-#define BAT_CUT_COUNTS          (2)  //é¦–å°¾å„å»nä¸ªåè®¡ç®—å‡å€¼
+#define BAT_AVE_COUNTS          (10) //¼ì²ân´Î
+#define BAT_CUT_COUNTS          (2)  //Ê×Î²¸÷È¥n¸öºó¼ÆËã¾ùÖµ
 static u16 battery_value_tab[BAT_AVE_COUNTS];
-static volatile u16 cur_bat_volt = 0;//å½“å‰å……ç”µç›’å­çš„ç”µé‡
-static volatile u8 battery_detect_skip = 0;//åœ¨USBæ’æ‹”æœŸé—´ç”µå‹ä¸ç¨³å®š,ä¸é‡‡é›†ç”µå‹
+static volatile u16 cur_bat_volt = 0;//µ±Ç°³äµçºĞ×ÓµÄµçÁ¿
+static volatile u8 battery_detect_skip = 0;//ÔÚUSB²å°ÎÆÚ¼äµçÑ¹²»ÎÈ¶¨,²»²É¼¯µçÑ¹
 static volatile u8 detect_init_ok;
-static u16 cur_ear_curr, ear_static_current;//è€³æœºç«¯å……ç”µç”µæµæ£€æµ‹é™æ€å€¼
+static u16 cur_ear_curr, ear_static_current;//¶ú»ú¶Ë³äµçµçÁ÷¼ì²â¾²Ì¬Öµ
 
 extern void delay_2ms(int cnt);
 extern u8 get_cur_total_ad_ch(void);
 extern void clr_wdt(void);
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    ç”µæ± ç”µé‡æ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     ç”¨äºæ£€æµ‹ç”µæ± çš„ç”µé‡,ä½œå‡ºä½ç”µåˆ¤æ–­ç­‰
+/**@brief    µç³ØµçÁ¿¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÓÃÓÚ¼ì²âµç³ØµÄµçÁ¿,×÷³öµÍµçÅĞ¶ÏµÈ
 */
 /*------------------------------------------------------------------------------------*/
 static int power_det_timer;
@@ -98,9 +98,9 @@ static void power_detect_func(void *priv)
         return;
     }
 
-    battery_value_tab[bat_cnt++] = adc_get_voltage(TCFG_BAT_DET_AD_CH) * 4; //æ³¨æ„ç”µè·¯åˆ†å‹
+    battery_value_tab[bat_cnt++] = adc_get_voltage(TCFG_BAT_DET_AD_CH) * 4; //×¢ÒâµçÂ··ÖÑ¹
 
-    if (bat_cnt == BAT_AVE_COUNTS) { //næ¬¡æ£€æµ‹åæ’åº
+    if (bat_cnt == BAT_AVE_COUNTS) { //n´Î¼ì²âºóÅÅĞò
         for (i = 1; i < BAT_AVE_COUNTS; i++) {
             for (j = i; j > 0; j--) {
                 if (battery_value_tab[j] < battery_value_tab[j - 1]) {
@@ -114,8 +114,8 @@ static void power_detect_func(void *priv)
         for (k = BAT_CUT_COUNTS; k < (BAT_AVE_COUNTS - BAT_CUT_COUNTS); k++) {
             bat_volt_tmp = battery_value_tab[k] + bat_volt_tmp;
         }
-        bat_volt_tmp = (bat_volt_tmp / (BAT_AVE_COUNTS - (BAT_CUT_COUNTS * 2))); //å‡å€¼
-        //æ›´æ–°ç”µæ± ç”µé‡,USBåœ¨çº¿æ—¶åªèƒ½å¢,USBä¸åœ¨çº¿æ˜¯åªèƒ½å‡
+        bat_volt_tmp = (bat_volt_tmp / (BAT_AVE_COUNTS - (BAT_CUT_COUNTS * 2))); //¾ùÖµ
+        //¸üĞÂµç³ØµçÁ¿,USBÔÚÏßÊ±Ö»ÄÜÔö,USB²»ÔÚÏßÊÇÖ»ÄÜ¼õ
         if (sys_info.status[USB_DET] == STATUS_ONLINE) {
             if (bat_volt_tmp > cur_bat_volt) {
                 cur_bat_volt = bat_volt_tmp;
@@ -130,7 +130,7 @@ static void power_detect_func(void *priv)
 
         log_info("vbat power: %dmV\n", cur_bat_volt);
 
-        //ä½ç”µä¸é€€å‡ºä½ç”µæ£€æµ‹
+        //µÍµçÓëÍË³öµÍµç¼ì²â
         if (sys_info.lowpower_flag) {
             if ((cur_bat_volt > LOWPOWER_EXIT_VOLTAGE) && (low_flag == 0)) {
                 sys_info.lowpower_flag = 0;
@@ -146,7 +146,7 @@ static void power_detect_func(void *priv)
         }
         usr_timer_del(power_det_timer);
         power_det_timer = 0;
-        bat_cnt = 0;//æ¸…0ï¼Œè¿›è¡Œä¸‹ä¸€æ¬¡ç»Ÿè®¡
+        bat_cnt = 0;//Çå0£¬½øĞĞÏÂÒ»´ÎÍ³¼Æ
     }
 }
 
@@ -165,9 +165,9 @@ static void power_detect_init(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    usbä¸Šä¸‹çº¿æ£€æµ‹
-   @param    æ— 
-   @return   æ— 
+/**@brief    usbÉÏÏÂÏß¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -184,8 +184,8 @@ static void usb_detect_func(void *priv)
 #endif
 
     battery_detect_skip = 1;
-    sys_info.life_cnt = 0;//çŠ¶æ€å˜åŒ–æ—¶ï¼Œæ¸…é™¤ä¼‘çœ è®¡æ—¶
-    if (((USB_DET_ONLINE_LEVEL == LOW_LEVEL) && (!io_level)) || ((USB_DET_ONLINE_LEVEL == HIGHT_LEVEL) && io_level)) {//æ’å…¥
+    sys_info.life_cnt = 0;//×´Ì¬±ä»¯Ê±£¬Çå³ıĞİÃß¼ÆÊ±
+    if (((USB_DET_ONLINE_LEVEL == LOW_LEVEL) && (!io_level)) || ((USB_DET_ONLINE_LEVEL == HIGHT_LEVEL) && io_level)) {//²åÈë
         usb_in_det_cnt++;
         if (usb_in_det_cnt >= USB_DET_ONLINE_TIME) {
             usr_timer_del(usb_det_timer);
@@ -200,11 +200,11 @@ static void usb_detect_func(void *priv)
 #if (TCFG_CHARGE_MOUDLE_OUTSIDE)
                 usb_det_wakeup_set_edge(io_level);
 #else
-                LVCMP_EDGE_SEL(1);	//æ£€æµ‹ldoinæ¯”vbatç”µå‹ä½çš„æƒ…å†µ(å……ç”µä»“ç»™ç”µæ± å……æ»¡åä¼šå…³æ–­ï¼Œæ­¤æ—¶ç”µå‹ä¼šæ‰ä¸‹æ¥)
+                LVCMP_EDGE_SEL(1);	//¼ì²âldoin±ÈvbatµçÑ¹µÍµÄÇé¿ö(³äµç²Ö¸øµç³Ø³äÂúºó»á¹Ø¶Ï£¬´ËÊ±µçÑ¹»áµôÏÂÀ´)
 #endif
             }
         }
-    } else {//æ‹”å‡º
+    } else {//°Î³ö
         usb_out_det_cnt++;
         if (usb_out_det_cnt >= USB_DET_OFFLINE_TIME) {
             usr_timer_del(usb_det_timer);
@@ -213,14 +213,14 @@ static void usb_detect_func(void *priv)
             usb_out_det_cnt = 0;
             battery_detect_skip = 0;
             if (sys_info.status[USB_DET] == STATUS_ONLINE) {
-                sys_info.localfull = 0; ///å……æ»¡æ ‡å¿—æ¸…0
+                sys_info.localfull = 0; ///³äÂú±êÖ¾Çå0
                 sys_info.status[USB_DET] = STATUS_OFFLINE;
                 app_chargebox_event_to_user(CHGBOX_EVENT_USB_OUT);
                 log_info("usb offline!");
 #if (TCFG_CHARGE_MOUDLE_OUTSIDE)
                 usb_det_wakeup_set_edge(io_level);
 #else
-                LVCMP_EDGE_SEL(0);//æ‹”å‡ºåé‡æ–°æ£€æµ‹æ’å…¥
+                LVCMP_EDGE_SEL(0);//°Î³öºóÖØĞÂ¼ì²â²åÈë
 #endif
             }
         }
@@ -240,10 +240,10 @@ static void usb_detect_init(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    éœå°”ä¼ æ„Ÿå™¨å¼€åˆç›–æ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     ä¼ æ„Ÿå™¨ä¸Šä¸‹çº¿å¤„ç†ï¼Œè®¾ç½®çŠ¶æ€ã€å‘é€ç›¸å…³äº‹ä»¶
+/**@brief    »ô¶û´«¸ĞÆ÷¿ªºÏ¸Ç¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ´«¸ĞÆ÷ÉÏÏÂÏß´¦Àí£¬ÉèÖÃ×´Ì¬¡¢·¢ËÍÏà¹ØÊÂ¼ş
 */
 /*------------------------------------------------------------------------------------*/
 static int hall_det_timer;
@@ -301,10 +301,10 @@ static void hall_detect_init(void)
 
 #if TCFG_LDO_DET_ENABLE
 /*------------------------------------------------------------------------------------*/
-/**@brief    LDOå‡å‹æˆåŠŸæ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     ç”¨äºæ£€æµ‹ldoå‡å‹æ˜¯å¦æ­£å¸¸
+/**@brief    LDOÉıÑ¹³É¹¦¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÓÃÓÚ¼ì²âldoÉıÑ¹ÊÇ·ñÕı³£
 */
 /*------------------------------------------------------------------------------------*/
 static int ldo_det_timer;
@@ -326,7 +326,7 @@ static void ldo_detect_func(void *priv)
             }
         }
     } else {
-        if (ldo_voltage < LDO_SUCC_VOLTAGE) { //æ³¨æ„åˆ†å‹
+        if (ldo_voltage < LDO_SUCC_VOLTAGE) { //×¢Òâ·ÖÑ¹
             ldo_off_detect_cnt++;
             if (ldo_off_detect_cnt >= LDO_DET_OFF_TIME) {
                 usr_timer_del(ldo_det_timer);
@@ -342,7 +342,7 @@ static void ldo_detect_func(void *priv)
     }
 }
 
-//æä¾›å‡å‹ä½¿èƒ½å’Œå…³é—­çš„æ—¶å€™è°ƒç”¨ä¸‹
+//Ìá¹©ÉıÑ¹Ê¹ÄÜºÍ¹Ø±ÕµÄÊ±ºòµ÷ÓÃÏÂ
 void ldo_wakeup_deal(void *priv)
 {
     if (detect_init_ok && (!ldo_det_timer)) {
@@ -352,16 +352,16 @@ void ldo_wakeup_deal(void *priv)
 
 static void ldo_detect_init(void)
 {
-    sys_timer_add(NULL, ldo_wakeup_deal, 10000);//10sèµ·æ¥æ£€æµ‹ä¸€æ¬¡
+    sys_timer_add(NULL, ldo_wakeup_deal, 10000);//10sÆğÀ´¼ì²âÒ»´Î
     ldo_det_timer = usr_timer_add(NULL, ldo_detect_func, DETECT_PERIOD, 1);
 }
 #endif
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    èˆ±ç”µæ± å……æ»¡æ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     ç”¨äºæ£€æµ‹æ˜¯å¦å……æ»¡ç”µæ± 
+/**@brief    ²Õµç³Ø³äÂú¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÓÃÓÚ¼ì²âÊÇ·ñ³äÂúµç³Ø
 */
 /*------------------------------------------------------------------------------------*/
 static int usb_charge_full_det_timer;
@@ -386,7 +386,7 @@ static void usb_charge_full_detect_func(void *priv)
     if (((CHARGE_FULL_LEVEL == LOW_LEVEL) && (!io_level)) || ((CHARGE_FULL_LEVEL == HIGHT_LEVEL) && io_level)) {
         charge_full_det_cnt++;
         if (charge_full_det_cnt > STAT_FULL_POWER_TIME) {
-            sys_info.localfull = 1; ///æ³¨æ„æ¸…0åŠ¨ä½œåœ¨usbæ‹”å‡ºåŠ¨ä½œé‚£é‡Œ
+            sys_info.localfull = 1; ///×¢ÒâÇå0¶¯×÷ÔÚusb°Î³ö¶¯×÷ÄÇÀï
             app_chargebox_event_to_user(CHGBOX_EVENT_LOCAL_FULL);
             log_info("Usb charge is Full\n");
             goto __detect_del;
@@ -421,10 +421,10 @@ static void usb_charge_full_detect_init(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è€³æœºå……ç”µç”µæµæ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     ç”¨äºæ£€æµ‹ç»™è€³æœºå……ç”µç”µæµæ˜¯å¦æ­£å¸¸
+/**@brief    ¶ú»ú³äµçµçÁ÷¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÓÃÓÚ¼ì²â¸ø¶ú»ú³äµçµçÁ÷ÊÇ·ñÕı³£
 */
 /*------------------------------------------------------------------------------------*/
 #if TCFG_CURRENT_LIMIT_ENABLE
@@ -501,10 +501,10 @@ void ear_current_detect_enable(u8 en)
 #endif
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ¸©åº¦æ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     ç”¨äºæ£€æµ‹ç”µæ± æ¸©åº¦æ˜¯å¦æ­£å¸¸
+/**@brief    ÎÂ¶È¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÓÃÓÚ¼ì²âµç³ØÎÂ¶ÈÊÇ·ñÕı³£
 */
 /*------------------------------------------------------------------------------------*/
 #if TCFG_TEMPERATURE_ENABLE
@@ -560,9 +560,9 @@ static void charge_temperatue_detect_init(void)
 #endif
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–å½“å‰ä»“ç”µæ± ç”µé‡
-   @param    æ— 
-   @return   ç”µé‡
+/**@brief    »ñÈ¡µ±Ç°²Öµç³ØµçÁ¿
+   @param    ÎŞ
+   @return   µçÁ¿
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -577,9 +577,9 @@ u16 get_vbat_voltage(void)
 
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–å½“å‰ç»™è€³æœºå……ç”µçš„å……ç”µç”µæµ
-   @param    æ— 
-   @return   ç”µæµmA
+/**@brief    »ñÈ¡µ±Ç°¸ø¶ú»ú³äµçµÄ³äµçµçÁ÷
+   @param    ÎŞ
+   @return   µçÁ÷mA
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -590,11 +590,11 @@ u16 get_ear_current(void)
 
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µèˆ±æ£€æµ‹åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
-   @note     åˆå§‹åŒ–ç”µæ± ç”µé‡æ£€æµ‹ã€5vå‡å‹ã€å‡å‹æ£€æµ‹ã€usbåœ¨çº¿æ£€æµ‹ã€æ»¡ç”µæ£€æµ‹
-             çš„IOåˆå§‹åŒ–ã€‚æ£€æµ‹usbæ˜¯å¦åœ¨çº¿ã€ç”µæ± çš„åˆå§‹ç”µé‡æƒ…å†µ
+/**@brief    ³äµç²Õ¼ì²â³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ³õÊ¼»¯µç³ØµçÁ¿¼ì²â¡¢5vÉıÑ¹¡¢ÉıÑ¹¼ì²â¡¢usbÔÚÏß¼ì²â¡¢Âúµç¼ì²â
+             µÄIO³õÊ¼»¯¡£¼ì²âusbÊÇ·ñÔÚÏß¡¢µç³ØµÄ³õÊ¼µçÁ¿Çé¿ö
 */
 /*------------------------------------------------------------------------------------*/
 void chargebox_det_init(void)
@@ -615,7 +615,7 @@ void chargebox_det_init(void)
     sys_info.status[USB_DET] = STATUS_OFFLINE;
     sys_info.status[LID_DET] = STATUS_OFFLINE;
 
-    //ç”µæ± ç”µé‡æ£€æµ‹åˆå§‹åŒ–
+    //µç³ØµçÁ¿¼ì²â³õÊ¼»¯
 #if (TCFG_BAT_DET_AD_CH != AD_CH_VBAT)
     gpio_set_die(TCFG_BAT_DET_IO, 0);
     gpio_set_direction(TCFG_BAT_DET_IO, 1);
@@ -628,7 +628,7 @@ void chargebox_det_init(void)
     adc_set_sample_freq(AD_CH_LDOREF, 2);
 #endif
 
-    //è€³æœºå……ç”µç”µæµæ£€æµ‹åˆå§‹åŒ–
+    //¶ú»ú³äµçµçÁ÷¼ì²â³õÊ¼»¯
 #if TCFG_CURRENT_LIMIT_ENABLE
     gpio_set_die(TCFG_CURRENT_DET_IO, 0);
     gpio_set_direction(TCFG_CURRENT_DET_IO, 1);
@@ -637,7 +637,7 @@ void chargebox_det_init(void)
     adc_add_sample_ch(TCFG_CURRENT_DET_AD_CH);
 #endif
 
-    //æ¸©åº¦æ£€æµ‹åˆå§‹åŒ–
+    //ÎÂ¶È¼ì²â³õÊ¼»¯
 #if TCFG_TEMPERATURE_ENABLE
     gpio_set_pull_down(TCFG_CHARGE_TEMP_IO, 0);
     gpio_set_pull_up(TCFG_CHARGE_TEMP_IO, !TCFG_CHARGE_EXTERN_UP_ENABLE);
@@ -646,14 +646,14 @@ void chargebox_det_init(void)
     adc_add_sample_ch(TCFG_CHARGE_TEMP_AD_CH);
 #endif
 
-    //hallå¼€åˆç›–æ£€æµ‹åˆå§‹åŒ–
+    //hall¿ªºÏ¸Ç¼ì²â³õÊ¼»¯
     gpio_set_direction(TCFG_HALL_PORT, 1);
     gpio_set_die(TCFG_HALL_PORT, 1);
     gpio_set_pull_down(TCFG_HALL_PORT, 0);
     gpio_set_pull_up(TCFG_HALL_PORT, 0);
 
 #if TCFG_LDO_DET_ENABLE
-    //5vå‡å‹æ£€æµ‹åˆå§‹åŒ–
+    //5vÉıÑ¹¼ì²â³õÊ¼»¯
     gpio_set_die(TCFG_CHG_LDO_DET_IO, 0);
     gpio_set_direction(TCFG_CHG_LDO_DET_IO, 1);
     gpio_set_pull_down(TCFG_CHG_LDO_DET_IO, 0);
@@ -661,24 +661,24 @@ void chargebox_det_init(void)
     adc_add_sample_ch(TCFG_CHG_LDO_DET_AD_CH);
 #endif
 
-    //usbåœ¨çº¿æ£€æµ‹IOåˆå§‹åŒ–
+    //usbÔÚÏß¼ì²âIO³õÊ¼»¯
 #if TCFG_CHARGE_MOUDLE_OUTSIDE
     gpio_set_direction(TCFG_USB_ONLE_DET_IO, 1);
     gpio_set_die(TCFG_USB_ONLE_DET_IO, 1);
     gpio_set_pull_down(TCFG_USB_ONLE_DET_IO, 0);
     gpio_set_pull_up(TCFG_USB_ONLE_DET_IO, 0);
 
-    //æ»¡ç”µæ£€æµ‹IOåˆå§‹åŒ–
+    //Âúµç¼ì²âIO³õÊ¼»¯
     gpio_set_direction(TCFG_CHARGE_FULL_DET_IO, 1);
     gpio_set_die(TCFG_CHARGE_FULL_DET_IO, 1);
     gpio_set_pull_down(TCFG_CHARGE_FULL_DET_IO, 0);
     gpio_set_pull_up(TCFG_CHARGE_FULL_DET_IO, 1);
 #endif
 
-    total_ad_ch = get_cur_total_ad_ch();//adæ€»é€šé“æ•°
+    total_ad_ch = get_cur_total_ad_ch();//ad×ÜÍ¨µÀÊı
     sys_info.init_ok = 1;
 
-    //æ£€æµ‹hallæ˜¯å¦å¼€ç›–
+    //¼ì²âhallÊÇ·ñ¿ª¸Ç
     status_init_cnt = 0;
     for (i = 0; i < 20; i++) {
         io_level = gpio_read(TCFG_HALL_PORT);
@@ -691,7 +691,7 @@ void chargebox_det_init(void)
     }
     hall_det_wakeup_set_edge(io_level);
 
-    //æ£€æµ‹usbæ˜¯å¦åœ¨çº¿
+    //¼ì²âusbÊÇ·ñÔÚÏß
     status_init_cnt = 0;
     for (i = 0; i < 20; i++) {
 #if TCFG_CHARGE_MOUDLE_OUTSIDE
@@ -714,7 +714,7 @@ void chargebox_det_init(void)
 #endif
 
 #if TCFG_CHARGE_MOUDLE_OUTSIDE
-    //usbåœ¨çº¿ä¸”é»˜è®¤å……ç”µå¼€å¯æ—¶åˆ¤æ–­æ˜¯å¦å……æ»¡
+    //usbÔÚÏßÇÒÄ¬ÈÏ³äµç¿ªÆôÊ±ÅĞ¶ÏÊÇ·ñ³äÂú
     if ((sys_info.status[USB_DET] == STATUS_ONLINE) && chargebox_get_charge_en()) {
         status_init_cnt = 0;
         for (i = 0; i < 20; i++) {
@@ -730,11 +730,11 @@ void chargebox_det_init(void)
     }
 #endif
 
-    //æ£€æµ‹æ˜¯å¦å¤„äºä½ç”µé‡çŠ¶æ€
+    //¼ì²âÊÇ·ñ´¦ÓÚµÍµçÁ¿×´Ì¬
     for (i = 0; i < 5; i++) {
         clr_wdt();
-        delay_2ms(total_ad_ch + 2);//ç­‰å¾…æ‰€æœ‰é€šé“é‡‡å®Œ
-        val = adc_get_voltage(TCFG_BAT_DET_AD_CH) * 4; //æ³¨æ„ç”µè·¯åˆ†å‹
+        delay_2ms(total_ad_ch + 2);//µÈ´ıËùÓĞÍ¨µÀ²ÉÍê
+        val = adc_get_voltage(TCFG_BAT_DET_AD_CH) * 4; //×¢ÒâµçÂ··ÖÑ¹
         volt_sum += val;
         log_info("Volt:%d", val);
 
@@ -749,10 +749,10 @@ void chargebox_det_init(void)
 #endif
     }
 
-    cur_bat_volt = volt_sum / 5; //ç”µæ± ç”µå‹åˆå§‹å€¼
-    if (cur_bat_volt < LOWPOWER_ENTER_VOLTAGE) {//æ˜¯å¦å°äºä½ç”µç”µå‹
+    cur_bat_volt = volt_sum / 5; //µç³ØµçÑ¹³õÊ¼Öµ
+    if (cur_bat_volt < LOWPOWER_ENTER_VOLTAGE) {//ÊÇ·ñĞ¡ÓÚµÍµçµçÑ¹
         sys_info.lowpower_flag = 1;
-        //åˆ¤æ–­æ˜¯å¦å°äºå…³æœºç”µå‹,ç›´æ¥å…³æœº
+        //ÅĞ¶ÏÊÇ·ñĞ¡ÓÚ¹Ø»úµçÑ¹,Ö±½Ó¹Ø»ú
         if ((cur_bat_volt < POWER_ON_SHUTDOWN_VOLT) && (sys_info.status[USB_DET] == STATUS_OFFLINE)) {
             if (sys_info.wireless_wakeup == 0) {
                 sys_info.init_ok = 0;

@@ -2,14 +2,14 @@
 #define _CHGBOX_UI_H_
 
 #include "typedef.h"
-//å…³äºŽä»“uiçš„è¯´æ˜Žï¼Œåˆ†ä¸ºä¸‰ä¸ªéƒ¨åˆ†
-//1.uiçŠ¶æ€å±‚
-//2.uiä¸­é—´å±‚
-//3.uié©±åŠ¨å±‚
-//çŠ¶æ€å±‚ä¸»è¦å°±æ˜¯å¤–éƒ¨æŠŠä»“çš„çŠ¶æ€ä¼ è¿›æ¥ï¼Œä¸­é—´å±‚æ˜¯ä¸€ä¸ªè¿‡æ¸¡ï¼Œå¦‚ä¸æƒ³ç”¨æœ¬é©±åŠ¨ï¼Œå¯ä»¥è‡ªå·±æ›´æ¢ä¸­é—´å±‚
-//æˆ–è€…åªä½¿ç”¨æœ¬é©±åŠ¨å±‚ä½œå…¶ä»–ä½¿ç”¨
+//¹ØÓÚ²ÖuiµÄËµÃ÷£¬·ÖÎªÈý¸ö²¿·Ö
+//1.ui×´Ì¬²ã
+//2.uiÖÐ¼ä²ã
+//3.uiÇý¶¯²ã
+//×´Ì¬²ãÖ÷Òª¾ÍÊÇÍâ²¿°Ñ²ÖµÄ×´Ì¬´«½øÀ´£¬ÖÐ¼ä²ãÊÇÒ»¸ö¹ý¶É£¬Èç²»ÏëÓÃ±¾Çý¶¯£¬¿ÉÒÔ×Ô¼º¸ü»»ÖÐ¼ä²ã
+//»òÕßÖ»Ê¹ÓÃ±¾Çý¶¯²ã×÷ÆäËûÊ¹ÓÃ
 /////////////////////////////////////////////////////////////////////////////////////////////
-//uiçŠ¶æ€å±‚
+//ui×´Ì¬²ã
 typedef enum {
     CHGBOX_UI_NULL = 0,
 
@@ -55,18 +55,18 @@ u8 chgbox_get_ui_power_on(void);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-//uiä¸­é—´å±‚
+//uiÖÐ¼ä²ã
 
-//ç‚¹ç¯æ¨¡å¼
+//µãµÆÄ£Ê½
 enum {
-    CHGBOX_LED_RED_OFF,//å‘¼å¸ç­
-    CHGBOX_LED_RED_FAST_OFF,//ç›´æŽ¥ç­
-    CHGBOX_LED_RED_ON,//å‘¼å¸äº®
-    CHGBOX_LED_RED_FAST_ON,//ç›´æŽ¥äº®
-    CHGBOX_LED_RED_SLOW_FLASH,//æ…¢é—ª
-    CHGBOX_LED_RED_FLAST_FLASH,//å¿«é—ª
-    CHGBOX_LED_RED_SLOW_BRE,//å‘¼å¸æ…¢é—ª
-    CHGBOX_LED_RED_FAST_BRE,//å‘¼å¸å¿«é—ª
+    CHGBOX_LED_RED_OFF,//ºôÎüÃð
+    CHGBOX_LED_RED_FAST_OFF,//Ö±½ÓÃð
+    CHGBOX_LED_RED_ON,//ºôÎüÁÁ
+    CHGBOX_LED_RED_FAST_ON,//Ö±½ÓÁÁ
+    CHGBOX_LED_RED_SLOW_FLASH,//ÂýÉÁ
+    CHGBOX_LED_RED_FLAST_FLASH,//¿ìÉÁ
+    CHGBOX_LED_RED_SLOW_BRE,//ºôÎüÂýÉÁ
+    CHGBOX_LED_RED_FAST_BRE,//ºôÎü¿ìÉÁ
 
     CHGBOX_LED_GREEN_OFF,
     CHGBOX_LED_GREEN_FAST_OFF,
@@ -95,8 +95,8 @@ void chgbox_led_set_mode(u8 mode);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-//uié©±åŠ¨å±‚
-//å®šä¹‰nä¸ªç¯
+//uiÇý¶¯²ã
+//¶¨Òån¸öµÆ
 enum {
     CHG_LED_RED,
     CHG_LED_GREEN,
@@ -104,13 +104,13 @@ enum {
     CHG_LED_MAX,
 };
 
-//é—ªçƒå¿«æ…¢
+//ÉÁË¸¿ìÂý
 enum {
     LED_FLASH_FAST,
     LED_FLASH_SLOW,
 };
 
-//ledé©±åŠ¨åˆå§‹åŒ–
+//ledÇý¶¯³õÊ¼»¯
 void chgbox_led_init(void);
 void chgbox_set_led_stu(u8 led_type, u8 on_off, u8 sp_flicker, u8 fade);
 void chgbox_set_led_bre(u8 led_type, u8 speed_mode, u8 is_bre, u16 time);

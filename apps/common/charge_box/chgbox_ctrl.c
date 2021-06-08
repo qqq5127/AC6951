@@ -24,16 +24,16 @@
 #define LOG_CLI_ENABLE
 #include "debug.h"
 
-//å¼ºåˆ¶ç»™è€³æœºå……ç”µçš„æ—¶é—´ï¼Œä¸º0åˆ™ä¸éœ€è¦å¼ºåˆ¶å……ç”µ
-#define CHGBOX_FORCE_CHARGE_TIMES 240 //è€³æœºç”µæ± ä¸å¸¦ä¿æŠ¤å»ºè®®è®¾ç½®2min
+//Ç¿ÖÆ¸ø¶ú»ú³äµçµÄÊ±¼ä£¬Îª0Ôò²»ĞèÒªÇ¿ÖÆ³äµç
+#define CHGBOX_FORCE_CHARGE_TIMES 240 //¶ú»úµç³Ø²»´ø±£»¤½¨ÒéÉèÖÃ2min
 
-//è“ç‰™å¼€å¯åå¤šä¹…è‡ªåŠ¨å…³é—­
-#define CHGBOX_BT_AUTO_OFF_TIMES  360 //3minæœªæ£€æµ‹åˆ°å‡çº§å°±å…³é—­è“ç‰™
+//À¶ÑÀ¿ªÆôºó¶à¾Ã×Ô¶¯¹Ø±Õ
+#define CHGBOX_BT_AUTO_OFF_TIMES  360 //3minÎ´¼ì²âµ½Éı¼¶¾Í¹Ø±ÕÀ¶ÑÀ
 
-//è€³æœºæ»¡ç”µæ£€æµ‹æ¬¡æ•°ï¼Œæ»¡ç”µç”µå‹
-#define CHG_EAR_FULL_DET_CNT       6 //æ³¨æ„è°ƒç”¨ä½ç½®ï¼Œå†è®¡ç®—æ€»æ—¶é—´
-#define CHG_EAR_FULL_DET_LEVEL     100 //ç”µå‹å€¼
-#define TEMP_PROTECT_TIMEOUT       300000 //æ¸©åº¦ä¿æŠ¤è¶…æ—¶æœªæ¢å¤å…³æœºæ—¶é—´
+//¶ú»úÂúµç¼ì²â´ÎÊı£¬ÂúµçµçÑ¹
+#define CHG_EAR_FULL_DET_CNT       6 //×¢Òâµ÷ÓÃÎ»ÖÃ£¬ÔÙ¼ÆËã×ÜÊ±¼ä
+#define CHG_EAR_FULL_DET_LEVEL     100 //µçÑ¹Öµ
+#define TEMP_PROTECT_TIMEOUT       300000 //ÎÂ¶È±£»¤³¬Ê±Î´»Ö¸´¹Ø»úÊ±¼ä
 
 void chargebox_set_newstatus(u8 newstatus);
 
@@ -41,15 +41,15 @@ SYS_INFO sys_info;
 EAR_INFO ear_info;
 static int temp_protect_timer;
 static u32 bt_auto_off_cnt;
-static int auto_shutdown_timer = 0;//timer å¥æŸ„
+static int auto_shutdown_timer = 0;//timer ¾ä±ú
 extern void chgbox_enter_soft_power_off(void);
 extern void usb_key_check_entry(u32 timeout);
 extern u16 get_curr_channel_state();
 extern OS_MUTEX power_mutex;
 /*------------------------------------------------------------------------------------*/
-/**@brief    è‡ªåŠ¨å…³æœºè®¡æ•°
-   @param    æ— 
-   @return   æ— 
+/**@brief    ×Ô¶¯¹Ø»ú¼ÆÊı
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -73,10 +73,10 @@ void sys_auto_shutdown_reset(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è‡ªåŠ¨å…³æœºä½¿èƒ½
-   @param    æ— 
-   @return   æ— 
-   @note     å°†è‡ªåŠ¨å…³æœºå¤„ç†å‡½æ•°æ³¨å†Œåˆ°timeré‡Œ
+/**@brief    ×Ô¶¯¹Ø»úÊ¹ÄÜ
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ½«×Ô¶¯¹Ø»ú´¦Àíº¯Êı×¢²áµ½timerÀï
 */
 /*------------------------------------------------------------------------------------*/
 void sys_auto_shutdown_enable(void)
@@ -88,9 +88,9 @@ void sys_auto_shutdown_enable(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è‡ªåŠ¨å…³æœºå…³é—­
-   @param    æ— 
-   @return   æ— 
+/**@brief    ×Ô¶¯¹Ø»ú¹Ø±Õ
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -104,10 +104,10 @@ void sys_auto_shutdown_disable(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è¶…æ—¶æ—¶å…³é—­è‡ªåŠ¨å‡å‹
-   @param    æ— 
-   @return   æ— 
-   @note     è‹¥USBåœ¨çº¿æˆ–è€…æ— çº¿å……åœ¨çº¿åˆ™å»¶é•¿è¶…æ—¶æ—¶é—´
+/**@brief    ³¬Ê±Ê±¹Ø±Õ×Ô¶¯ÉıÑ¹
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÈôUSBÔÚÏß»òÕßÎŞÏß³äÔÚÏßÔòÑÓ³¤³¬Ê±Ê±¼ä
 */
 /*------------------------------------------------------------------------------------*/
 static void chargebox_temp_protect_timeout(void *priv)
@@ -121,10 +121,10 @@ static void chargebox_temp_protect_timeout(void *priv)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    é€šè¿‡IOçŠ¶æ€åˆ¤æ–­è¾“å‡ºæ˜¯å¦çŸ­è·¯
-   @param    æ— 
-   @return   0:æ²¡æœ‰å‘é€æ¶ˆæ¯, 1:åˆæ¬¡è§¦å‘çŸ­è·¯/è¿‡æµä¿æŠ¤å‘é€æ¶ˆæ¯
-   @note     åœ¨å¼€å¯å‡å‹è¾“å‡ºå‰è°ƒç”¨
+/**@brief    Í¨¹ıIO×´Ì¬ÅĞ¶ÏÊä³öÊÇ·ñ¶ÌÂ·
+   @param    ÎŞ
+   @return   0:Ã»ÓĞ·¢ËÍÏûÏ¢, 1:³õ´Î´¥·¢¶ÌÂ·/¹ıÁ÷±£»¤·¢ËÍÏûÏ¢
+   @note     ÔÚ¿ªÆôÉıÑ¹Êä³öÇ°µ÷ÓÃ
 */
 /*------------------------------------------------------------------------------------*/
 u8 chargebox_check_output_short(void)
@@ -146,10 +146,10 @@ u8 chargebox_check_output_short(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µè¿‡ç¨‹ä¸­çŸ­è·¯è§¦å‘çš„ä¿æŠ¤å”¤é†’æ—¶è°ƒç”¨
-   @param    æ— 
-   @return   æ— 
-   @note     åœ¨å”¤é†’ä¸­æ–­é‡Œé¢è°ƒç”¨
+/**@brief    ³äµç¹ı³ÌÖĞ¶ÌÂ·´¥·¢µÄ±£»¤»½ĞÑÊ±µ÷ÓÃ
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÔÚ»½ĞÑÖĞ¶ÏÀïÃæµ÷ÓÃ
 */
 /*------------------------------------------------------------------------------------*/
 void chargebox_set_output_short(void)
@@ -157,16 +157,16 @@ void chargebox_set_output_short(void)
     if (sys_info.current_limit) {
         return;
     }
-    chargeIc_boost_ctrl(0);//å…³é—­å‡å‹
-    chargeIc_pwr_ctrl(0);//å…³é—­å……ç”µå¼€å…³
+    chargeIc_boost_ctrl(0);//¹Ø±ÕÉıÑ¹
+    chargeIc_pwr_ctrl(0);//¹Ø±Õ³äµç¿ª¹Ø
     sys_info.current_limit = 1;
     app_chargebox_event_to_user(CHGBOX_EVENT_ENTER_CURRENT_PROTECT);
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µèˆ±å…¬å…±æ¶ˆæ¯å¤„ç†æ¥å£
-   @param    æ— 
-   @return   æ— 
+/**@brief    ³äµç²Õ¹«¹²ÏûÏ¢´¦Àí½Ó¿Ú
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -190,7 +190,7 @@ static int chargebox_common_event_handler(struct chargebox_event *e)
 #endif
 #if TCFG_TEMPERATURE_ENABLE
     case CHGBOX_EVENT_ENTER_TEMP_PROTECT:
-        //å…³é—­ç»™è€³æœºå……ç”µ
+        //¹Ø±Õ¸ø¶ú»ú³äµç
         if (sys_info.charge) {
             chargeIc_pwr_ctrl(0);
             chargebox_api_open_port(EAR_L);
@@ -200,13 +200,13 @@ static int chargebox_common_event_handler(struct chargebox_event *e)
             }
             temp_protect_timer = sys_timeout_add(NULL, chargebox_temp_protect_timeout, TEMP_PROTECT_TIMEOUT);
         }
-        //å…³é—­ç»™ç”µæ± å……ç”µ
+        //¹Ø±Õ¸øµç³Ø³äµç
         if (sys_info.status[USB_DET] == STATUS_ONLINE) {
             chargebox_charge_close();
         }
         break;
     case CHGBOX_EVENT_EXIT_TEMP_PROTECT:
-        //æ¢å¤ç»™è€³æœºå……ç”µ
+        //»Ö¸´¸ø¶ú»ú³äµç
         if (sys_info.charge) {
             os_mutex_pend(&power_mutex, 0);
             u8 msg_flag = chargebox_check_output_short();
@@ -218,7 +218,7 @@ static int chargebox_common_event_handler(struct chargebox_event *e)
             } else if (msg_flag == 0) {
                 sys_info.force_charge = 0;
                 sys_info.earfull  = 1;
-                app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);//è®©è¿›å…¥ä¼‘çœ 
+                app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);//ÈÃ½øÈëĞİÃß
             }
             os_mutex_post(&power_mutex);
             if (temp_protect_timer) {
@@ -226,7 +226,7 @@ static int chargebox_common_event_handler(struct chargebox_event *e)
                 temp_protect_timer = 0;
             }
         }
-        //æ¢å¤ç»™ç”µæ± å……ç”µ
+        //»Ö¸´¸øµç³Ø³äµç
         if (sys_info.status[USB_DET] == STATUS_ONLINE) {
             chargebox_charge_start();
         }
@@ -237,15 +237,15 @@ static int chargebox_common_event_handler(struct chargebox_event *e)
             sys_info.current_limit = 0;
             app_chargebox_event_to_user(CHGBOX_EVENT_EXIT_CURRENT_PROTECT);
         }
-        //åˆ¤æ–­å½“å‰æ— çº¿å……æ˜¯å¦åœ¨çº¿ï¼Œåœ¨çº¿ä¸å“åº”
+        //ÅĞ¶Ïµ±Ç°ÎŞÏß³äÊÇ·ñÔÚÏß£¬ÔÚÏß²»ÏìÓ¦
         if ((sys_info.status[WIRELESS_DET] == STATUS_OFFLINE) && (app_get_curr_task() != APP_PC_TASK)) {
 #if TCFG_USB_KEY_UPDATE_ENABLE
-            //å…ˆæ£€æµ‹æ˜¯å¦USBå‡çº§å·¥å…·æ’å…¥
+            //ÏÈ¼ì²âÊÇ·ñUSBÉı¼¶¹¤¾ß²åÈë
             usb_key_check_entry(3);
 #endif
 #if TCFG_HANDSHAKE_ENABLE
             chgbox_handshake_run_app();
-            chgbox_handshake_set_repeat(2);//å¤šæ¡æ‰‹å‡ æ¬¡
+            chgbox_handshake_set_repeat(2);//¶àÎÕÊÖ¼¸´Î
 #else
             app_chargebox_event_to_user(CHGBOX_EVENT_HANDSHAKE_OK);
 #endif
@@ -279,15 +279,15 @@ static int chargebox_common_event_handler(struct chargebox_event *e)
 }
 
 /******************************************************************************/
-/*************************åˆç›–å……ç”µæ¨¡å¼ç›¸å…³å¤„ç†**********************************/
+/*************************ºÏ¸Ç³äµçÄ£Ê½Ïà¹Ø´¦Àí**********************************/
 /******************************************************************************/
-static u8 ear_power_check_time;//è€³æœºç”µé‡æ£€æµ‹æ¬¡æ•°
+static u8 ear_power_check_time;//¶ú»úµçÁ¿¼ì²â´ÎÊı
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    åˆç›–å……ç”µæ¨¡å¼  åˆç›–å¤„ç†
-   @param    æ— 
-   @return   æ— 
-   @note     å…ˆå‘åˆç›–å‘½ä»¤ç»™è€³æœº(é‡Œé¢ä¼šæœ‰æ£€æµ‹è€³æœºåœ¨çº¿çš„æ£€æµ‹)ï¼Œå†æ‰“å¼€å‡å‹è¿›è¡Œå……ç”µ
+/**@brief    ºÏ¸Ç³äµçÄ£Ê½  ºÏ¸Ç´¦Àí
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÏÈ·¢ºÏ¸ÇÃüÁî¸ø¶ú»ú(ÀïÃæ»áÓĞ¼ì²â¶ú»úÔÚÏßµÄ¼ì²â)£¬ÔÙ´ò¿ªÉıÑ¹½øĞĞ³äµç
 */
 /*------------------------------------------------------------------------------------*/
 static void charge_app_lid_close_deal(void)
@@ -301,8 +301,8 @@ static void charge_app_lid_close_deal(void)
             ear_power_check_time = 0;
             u8 msg_flag = chargebox_check_output_short();
             if (sys_info.current_limit == 0) {
-                sys_info.charge = 1;//å‘å®Œç›’ç›–å‘½ä»¤å†å¼€å‡å‹
-                //å…ˆå…³é—­IO,åœ¨æ‰“å¼€å¼€å…³è¾“å‡º5V
+                sys_info.charge = 1;//·¢ÍêºĞ¸ÇÃüÁîÔÙ¿ªÉıÑ¹
+                //ÏÈ¹Ø±ÕIO,ÔÚ´ò¿ª¿ª¹ØÊä³ö5V
                 if (sys_info.temperature_limit == 0) {
                     os_mutex_pend(&power_mutex, 0);
                     chargeIc_boost_ctrl(1);
@@ -311,28 +311,28 @@ static void charge_app_lid_close_deal(void)
                     chargeIc_pwr_ctrl(1);
                     os_mutex_post(&power_mutex);
                 } else {
-                    //è¿‡æ¸©ä¿æŠ¤,ç›’ç›–å†æ¨ä¸€æ¬¡æ¶ˆæ¯
+                    //¹ıÎÂ±£»¤,ºĞ¸ÇÔÙÍÆÒ»´ÎÏûÏ¢
                     app_chargebox_event_to_user(CHGBOX_EVENT_ENTER_TEMP_PROTECT);
                 }
-                //å¦‚æœä¸¤åªè€³æœºéƒ½èƒ½æ£€æµ‹åœ¨ä»“ï¼Œè¯´æ˜è€³æœºéƒ½æœ‰ç”µï¼Œä¸éœ€è¦å¼ºåˆ¶å……ç”µ
+                //Èç¹ûÁ½Ö»¶ú»ú¶¼ÄÜ¼ì²âÔÚ²Ö£¬ËµÃ÷¶ú»ú¶¼ÓĞµç£¬²»ĞèÒªÇ¿ÖÆ³äµç
                 if (ear_info.online[EAR_L] && ear_info.online[EAR_R]) {
                     sys_info.force_charge = 0;
                 }
             } else if (msg_flag == 0) {
-                //ç”µæµå¼‚å¸¸è¿›å…¥è€³æœºå…³æœºæµç¨‹
+                //µçÁ÷Òì³£½øÈë¶ú»ú¹Ø»úÁ÷³Ì
                 sys_info.force_charge = 0;
                 sys_info.earfull  = 1;
-                app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);//è®©è¿›å…¥ä¼‘çœ 
+                app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);//ÈÃ½øÈëĞİÃß
             }
         }
     }
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    åˆç›–å……ç”µæ¨¡å¼ è®©è€³æœºè¿›å…¥å…³æœº å¤„ç†
-   @param    æ— 
-   @return   æ— 
-   @note     å…ˆå‘å‘½ä»¤è®©è€³æœºå…³æœºï¼Œå†å…³é—­ç›¸å…³IO
+/**@brief    ºÏ¸Ç³äµçÄ£Ê½ ÈÃ¶ú»ú½øÈë¹Ø»ú ´¦Àí
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÏÈ·¢ÃüÁîÈÃ¶ú»ú¹Ø»ú£¬ÔÙ¹Ø±ÕÏà¹ØIO
 */
 /*------------------------------------------------------------------------------------*/
 static void charge_app_shut_down_deal(void)
@@ -342,7 +342,7 @@ static void charge_app_shut_down_deal(void)
             sys_info.shut_cnt--;
             app_chargebox_send_mag(CHGBOX_MSG_SEND_SHUTDOWN);
         } else {
-            //å…³æœºå‘½ä»¤å,ç”µæºçº¿æ–­ç”µ
+            //¹Ø»úÃüÁîºó,µçÔ´Ïß¶Ïµç
             sys_info.shut_cnt = 0;
             chargebox_api_shutdown_port(EAR_L);
             chargebox_api_shutdown_port(EAR_R);
@@ -351,10 +351,10 @@ static void charge_app_shut_down_deal(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è€³æœºç”µé‡æ»¡æ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     æ£€æµ‹è€³æœºç”µé‡ï¼Œè‹¥æ»¡åˆ™å‘æ»¡ç”µäº‹ä»¶
+/**@brief    ¶ú»úµçÁ¿Âú¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¼ì²â¶ú»úµçÁ¿£¬ÈôÂúÔò·¢ÂúµçÊÂ¼ş
 */
 /*------------------------------------------------------------------------------------*/
 void app_chargebox_ear_full_det(void *priv)
@@ -364,53 +364,53 @@ void app_chargebox_ear_full_det(void *priv)
     }
 
     /* log_info("L:%d,F:%d,C:%d\n",ear_info.online[EAR_L],sys_info.ear_l_full,ear_info.full_cnt[EAR_L]); */
-    if (ear_info.online[EAR_L]) { //åœ¨çº¿
-        if ((ear_info.power[EAR_L] & 0x7f) == CHG_EAR_FULL_DET_LEVEL && sys_info.ear_l_full == 0) { //powerçš„æœ€é«˜bitä¸ºæ ‡å¿—ä½
+    if (ear_info.online[EAR_L]) { //ÔÚÏß
+        if ((ear_info.power[EAR_L] & 0x7f) == CHG_EAR_FULL_DET_LEVEL && sys_info.ear_l_full == 0) { //powerµÄ×î¸ßbitÎª±êÖ¾Î»
             ear_info.full_cnt[EAR_L]++;
             if (ear_info.full_cnt[EAR_L] >= CHG_EAR_FULL_DET_CNT) {
-                sys_info.ear_l_full = 1;       //å……æ»¡æ ‡å¿—ç½®ä½
+                sys_info.ear_l_full = 1;       //³äÂú±êÖ¾ÖÃÎ»
             }
         } else {
             ear_info.full_cnt[EAR_L] = 0;
         }
     } else {
-        ear_info.full_cnt[EAR_L] = 0;  //å·¦è®¡æ•°æ¸…0
-        sys_info.ear_l_full = 0;       //å·¦å……æ»¡æ ‡å¿—æ¸…0
+        ear_info.full_cnt[EAR_L] = 0;  //×ó¼ÆÊıÇå0
+        sys_info.ear_l_full = 0;       //×ó³äÂú±êÖ¾Çå0
     }
 
-    if (ear_info.online[EAR_R]) { //åœ¨çº¿
-        if ((ear_info.power[EAR_R] & 0x7f) == CHG_EAR_FULL_DET_LEVEL && sys_info.ear_r_full == 0) { //powerçš„æœ€é«˜bitä¸ºæ ‡å¿—ä½
+    if (ear_info.online[EAR_R]) { //ÔÚÏß
+        if ((ear_info.power[EAR_R] & 0x7f) == CHG_EAR_FULL_DET_LEVEL && sys_info.ear_r_full == 0) { //powerµÄ×î¸ßbitÎª±êÖ¾Î»
             ear_info.full_cnt[EAR_R]++;
             if (ear_info.full_cnt[EAR_R] >= CHG_EAR_FULL_DET_CNT) {
-                sys_info.ear_r_full = 1;       //å……æ»¡æ ‡å¿—ç½®ä½
+                sys_info.ear_r_full = 1;       //³äÂú±êÖ¾ÖÃÎ»
             }
         } else {
             ear_info.full_cnt[EAR_R] = 0;
         }
     } else {
-        ear_info.full_cnt[EAR_R] = 0;  //å³è®¡æ•°æ¸…0
-        sys_info.ear_r_full = 0;       //å³å……æ»¡æ ‡å¿—æ¸…0
+        ear_info.full_cnt[EAR_R] = 0;  //ÓÒ¼ÆÊıÇå0
+        sys_info.ear_r_full = 0;       //ÓÒ³äÂú±êÖ¾Çå0
     }
 
     if (sys_info.earfull == 0) {
-        //åŒæ—¶åœ¨çº¿ä¸¤ä¸ªåœ¨çº¿éƒ½æ»¡äº†ã€å•ä¸ªåœ¨çº¿ç”µæ»¡äº†
+        //Í¬Ê±ÔÚÏßÁ½¸öÔÚÏß¶¼ÂúÁË¡¢µ¥¸öÔÚÏßµçÂúÁË
         if ((sys_info.ear_r_full && sys_info.ear_l_full)
             || (sys_info.ear_l_full && ear_info.online[EAR_R] == 0)
             || (sys_info.ear_r_full && ear_info.online[EAR_L] == 0)) {
-            if (sys_info.force_charge == 0) { //å¼ºåˆ¶å……ç”µå·²è¿‡
+            if (sys_info.force_charge == 0) { //Ç¿ÖÆ³äµçÒÑ¹ı
                 sys_info.earfull  = 1;
                 log_info("ear online full\n");
                 app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);
             }
         }
-    } else { //æ²¡æ»¡ä½†åœ¨çº¿
+    } else { //Ã»Âúµ«ÔÚÏß
         if ((!sys_info.ear_l_full && ear_info.online[EAR_L])
             || (!sys_info.ear_r_full && ear_info.online[EAR_R])) {
-            sys_info.earfull  = 0;//æ€»æ ‡å¿—æ¸…0
+            sys_info.earfull  = 0;//×Ü±êÖ¾Çå0
         }
     }
 
-    ///å·²è¿‡å¼ºåˆ¶å……ç”µæ—¶é—´ï¼Œä½†ä¸¤éƒ½ä¸åœ¨çº¿,èµ°fullï¼Œé‡Œé¢ä¼šåˆ¤æ–­ä»“æ˜¯å¦å……ç”µ
+    ///ÒÑ¹ıÇ¿ÖÆ³äµçÊ±¼ä£¬µ«Á½¶¼²»ÔÚÏß,×ßfull£¬ÀïÃæ»áÅĞ¶Ï²ÖÊÇ·ñ³äµç
     if (ear_info.online[EAR_L] == 0 && ear_info.online[EAR_R] == 0 && sys_info.force_charge == 0) {
         log_info("no ear and force charge end\n");
         sys_info.earfull  = 1;
@@ -419,10 +419,10 @@ void app_chargebox_ear_full_det(void *priv)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–twsç”µé‡
-   @param    æ— 
-   @return   æ— 
-   @note     æ£€æµ‹ç”µé‡ï¼Œå‘é€å‘½ä»¤è·å–twsç”µé‡
+/**@brief    »ñÈ¡twsµçÁ¿
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¼ì²âµçÁ¿£¬·¢ËÍÃüÁî»ñÈ¡twsµçÁ¿
 */
 /*------------------------------------------------------------------------------------*/
 static void charge_app_send_power(void)
@@ -434,22 +434,22 @@ static void charge_app_send_power(void)
     if (ear_power_check_time > 25) { //5s
         ear_power_check_time = 0;
         app_chargebox_send_mag(CHGBOX_MSG_SEND_POWER_CLOSE);
-        //å‘å®Œå‘½ä»¤åè¿˜è¦ç­‰å¯¹æ–¹å›å¤ï¼Œçº¿ç¨‹ä¼šåˆ‡æ¢ï¼Œå®šæ—¶å»æŸ¥è¯¢
+        //·¢ÍêÃüÁîºó»¹ÒªµÈ¶Ô·½»Ø¸´£¬Ïß³Ì»áÇĞ»»£¬¶¨Ê±È¥²éÑ¯
         sys_timeout_add(NULL, app_chargebox_ear_full_det, 200);
     }
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è‡ªåŠ¨å…³æœºæ£€æµ‹
-   @param    æ— 
-   @return   æ— 
-   @note     æ ¹æ®æ¡ä»¶åˆ¤æ–­æ˜¯å¦ä½¿èƒ½è‡ªåŠ¨å…³æœº
+/**@brief    ×Ô¶¯¹Ø»ú¼ì²â
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¸ù¾İÌõ¼şÅĞ¶ÏÊÇ·ñÊ¹ÄÜ×Ô¶¯¹Ø»ú
 */
 /*------------------------------------------------------------------------------------*/
 static void charge_app_check_enable_auto_shutdown(void)
 {
-    //1ã€å……ç”µä¸åœ¨çº¿æ—¶,åˆ¤æ–­è€³æœºæ˜¯å¦å……æ»¡,å……æ»¡åˆ™å…³æœº
-    //2ã€å……æ»¡å…³æœºä½¿èƒ½å,USBåœ¨çº¿æ—¶è€³æœºå’Œå……ç”µèˆ±éƒ½å……æ»¡åˆ™å…³æœº
+    //1¡¢³äµç²»ÔÚÏßÊ±,ÅĞ¶Ï¶ú»úÊÇ·ñ³äÂú,³äÂúÔò¹Ø»ú
+    //2¡¢³äÂú¹Ø»úÊ¹ÄÜºó,USBÔÚÏßÊ±¶ú»úºÍ³äµç²Õ¶¼³äÂúÔò¹Ø»ú
 #if TCFG_WIRELESS_ENABLE
     if ((sys_info.status[USB_DET] == STATUS_OFFLINE) && (sys_info.status[WIRELESS_DET] == STATUS_OFFLINE)) {
 #else
@@ -470,24 +470,24 @@ static void charge_app_check_enable_auto_shutdown(void)
     }
 }
 
-#define LDO_NOT_SUCC_TIMES  20   //æ¬¡æ•°ï¼Œæ³¨æ„æ—¶é—´å°ºåº¦
-static u8 ldo_not_succ_cnt = 0;  //LDOæ— æ³•å‡å‹ è®¡æ•°
+#define LDO_NOT_SUCC_TIMES  20   //´ÎÊı£¬×¢ÒâÊ±¼ä³ß¶È
+static u8 ldo_not_succ_cnt = 0;  //LDOÎŞ·¨ÉıÑ¹ ¼ÆÊı
 /*------------------------------------------------------------------------------------*/
-/**@brief    åˆç›–å……ç”µåŠç§’å¤„ç†
-   @param    æ— 
-   @return   æ— 
-   @note     å……ç”µå‡å‹ä¸æˆåŠŸå¤„ç†ã€å¼ºåˆ¶å……ç”µè¶…æ—¶è®¡æ•°
+/**@brief    ºÏ¸Ç³äµç°ëÃë´¦Àí
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ³äµçÉıÑ¹²»³É¹¦´¦Àí¡¢Ç¿ÖÆ³äµç³¬Ê±¼ÆÊı
 */
 /*------------------------------------------------------------------------------------*/
 static void charge_deal_half_second(void)
 {
-    //æ²¡æœ‰æ¥å……ç”µçº¿ï¼Œå……ç”µICä¸å‡å‹ï¼Œè¶…æ—¶è¿›å…¥ä¼‘çœ 
+    //Ã»ÓĞ½Ó³äµçÏß£¬³äµçIC²»ÉıÑ¹£¬³¬Ê±½øÈëĞİÃß
 #if TCFG_WIRELESS_ENABLE
     if ((sys_info.status[USB_DET] == STATUS_OFFLINE) && (sys_info.status[WIRELESS_DET] == STATUS_OFFLINE)) {
 #else
     if (sys_info.status[USB_DET] == STATUS_OFFLINE) {
 #endif
-        if (sys_info.status[LDO_DET] == STATUS_OFFLINE) { //æ— æ³•å‡å‹
+        if (sys_info.status[LDO_DET] == STATUS_OFFLINE) { //ÎŞ·¨ÉıÑ¹
             if (ldo_not_succ_cnt < LDO_NOT_SUCC_TIMES) {
                 ldo_not_succ_cnt++;
                 if (ldo_not_succ_cnt == LDO_NOT_SUCC_TIMES) {
@@ -495,8 +495,8 @@ static void charge_deal_half_second(void)
                     if (sys_info.force_charge || sys_info.temperature_limit) {
                         sys_info.force_charge = 0;
                         sys_info.earfull  = 1;
-                        //èµ°è¿™ä¸ªåˆ†æ”¯ï¼Œå¦‚æœä»“è¿˜åœ¨å……ç”µå°±ç­‰ä»“æ»¡å†å…³
-                        app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);//è¿›å…¥ä¼‘çœ 
+                        //×ßÕâ¸ö·ÖÖ§£¬Èç¹û²Ö»¹ÔÚ³äµç¾ÍµÈ²ÖÂúÔÙ¹Ø
+                        app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);//½øÈëĞİÃß
                     } else {
                         sys_auto_shutdown_enable();
                     }
@@ -507,7 +507,7 @@ static void charge_deal_half_second(void)
         }
     }
 
-    //å¼ºåˆ¶å……ç”µè¶…æ—¶è®¡æ•°ï¼ˆæœ‰å¯èƒ½æ˜¯è€³æœºä¸åœ¨çº¿ï¼Œæœ‰å¯èƒ½æ˜¯è€³æœºå®Œå…¨æ²¡ç”µ,å…ˆä¿æŒå……ç”µä¸€æ®µæ—¶é—´ï¼‰
+    //Ç¿ÖÆ³äµç³¬Ê±¼ÆÊı£¨ÓĞ¿ÉÄÜÊÇ¶ú»ú²»ÔÚÏß£¬ÓĞ¿ÉÄÜÊÇ¶ú»úÍêÈ«Ã»µç,ÏÈ±£³Ö³äµçÒ»¶ÎÊ±¼ä£©
     if (sys_info.force_charge) {
         sys_info.force_charge--;
     }
@@ -552,8 +552,8 @@ static int charge_chargebox_event_handler(struct chargebox_event *e)
         chgbox_ui_update_status(UI_MODE_CHARGE, CHGBOX_UI_USB_IN);
         sys_auto_shutdown_disable();
         if (sys_info.status[LID_DET] == STATUS_ONLINE) {
-            //å¼€ç›–æ’å…¥USB
-            chargebox_set_newstatus(CHG_STATUS_COMM);     //è®¾ç½®æ–°æ¨¡å¼
+            //¿ª¸Ç²åÈëUSB
+            chargebox_set_newstatus(CHG_STATUS_COMM);     //ÉèÖÃĞÂÄ£Ê½
         }
         break;
     case CHGBOX_EVENT_USB_OUT:
@@ -561,8 +561,8 @@ static int charge_chargebox_event_handler(struct chargebox_event *e)
         chgbox_ui_update_status(UI_MODE_CHARGE, CHGBOX_UI_USB_OUT);
         charge_app_check_enable_auto_shutdown();
         if (sys_info.status[LID_DET] == STATUS_ONLINE) {
-            //å¼€ç›–æ‹”å‡ºUSB
-            chargebox_set_newstatus(CHG_STATUS_COMM);     //è®¾ç½®æ–°æ¨¡å¼
+            //¿ª¸Ç°Î³öUSB
+            chargebox_set_newstatus(CHG_STATUS_COMM);     //ÉèÖÃĞÂÄ£Ê½
         }
         break;
     case CHGBOX_EVENT_OPEN_LID:
@@ -570,11 +570,11 @@ static int charge_chargebox_event_handler(struct chargebox_event *e)
 #if SMART_BOX_EN
         bt_ble_rcsp_adv_enable();
 #endif
-        chargebox_set_newstatus(CHG_STATUS_COMM);     //è®¾ç½®æ–°æ¨¡å¼
+        chargebox_set_newstatus(CHG_STATUS_COMM);     //ÉèÖÃĞÂÄ£Ê½
         break;
     case CHGBOX_EVENT_CLOSE_LID:
         log_info("CLOSE_LID_1\n");
-        //å¼€ç›–è¶…æ—¶è¿›æ¥çš„,å¯ä»¥ä¸åšä»»ä½•æ“ä½œ
+        //¿ª¸Ç³¬Ê±½øÀ´µÄ,¿ÉÒÔ²»×öÈÎºÎ²Ù×÷
 #if SMART_BOX_EN
         bt_ble_rcsp_adv_disable();
 #endif
@@ -597,23 +597,23 @@ static int charge_chargebox_event_handler(struct chargebox_event *e)
         break;
     case CHGBOX_EVENT_ENTER_LOWPOWER:
     case CHGBOX_EVENT_NEED_SHUTDOWN:
-        //å…³é—­å‡å‹,è¿›å…¥ä½ç”µæ¨¡å¼
-        chargebox_set_newstatus(CHG_STATUS_LOWPOWER);     //è®¾ç½®æ–°æ¨¡å¼
+        //¹Ø±ÕÉıÑ¹,½øÈëµÍµçÄ£Ê½
+        chargebox_set_newstatus(CHG_STATUS_LOWPOWER);     //ÉèÖÃĞÂÄ£Ê½
         break;
     case CHGBOX_EVENT_EAR_FULL:
-        //è€³æœºå……æ»¡åå‘é€shutdownæŒ‡ä»¤
+        //¶ú»ú³äÂúºó·¢ËÍshutdownÖ¸Áî
         log_info("EAR_FULL_1\n");
         if (!sys_info.current_limit) {
             chgbox_ui_update_status(UI_MODE_CHARGE, CHGBOX_UI_EAR_FULL);
         }
-        //å……æ»¡ç”µæ—¶,å…ˆå…³é—­è¾“å‡ºå†æ‰“å¼€IO
+        //³äÂúµçÊ±,ÏÈ¹Ø±ÕÊä³öÔÙ´ò¿ªIO
         chargeIc_pwr_ctrl(0);
         chargebox_api_open_port(EAR_L);
         chargebox_api_open_port(EAR_R);
         chargeIc_boost_ctrl(0);
         sys_info.shut_cnt = BIT(7) | TCFG_SEND_SHUT_DOWN_MAX;
         sys_info.lid_cnt = 0;
-        sys_info.charge = 0;//æ­¤æ—¶å……ç”µç»“æŸ
+        sys_info.charge = 0;//´ËÊ±³äµç½áÊø
         charge_app_check_enable_auto_shutdown();
         break;
     case CHGBOX_EVENT_LOCAL_FULL:
@@ -623,18 +623,18 @@ static int charge_chargebox_event_handler(struct chargebox_event *e)
         break;
     case CHGBOX_EVENT_ENTER_CURRENT_PROTECT:
         log_info("CHGBOX_EVENT_OVER_CURRENT");
-        chargeIc_pwr_ctrl(0);//å…³é—­å……ç”µå¼€å…³
-        chargeIc_boost_ctrl(0);//å…³é—­å‡å‹
+        chargeIc_pwr_ctrl(0);//¹Ø±Õ³äµç¿ª¹Ø
+        chargeIc_boost_ctrl(0);//¹Ø±ÕÉıÑ¹
         sys_info.force_charge = 0;
         sys_info.earfull  = 1;
-        app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);//è®©è¿›å…¥ä¼‘çœ 
+        app_chargebox_event_to_user(CHGBOX_EVENT_EAR_FULL);//ÈÃ½øÈëĞİÃß
         chgbox_ui_update_status(UI_MODE_CHARGE, CHGBOX_UI_OVER_CURRENT);
         break;
     case CHGBOX_EVENT_EXIT_CURRENT_PROTECT:
         ear_power_check_time = 0;
         sys_info.shut_cnt = 0;
         sys_info.lid_cnt = BIT(7) | TCFG_SEND_CLOSE_LID_MAX;
-        sys_info.charge = 0;//å…ˆå…³é—­,ç­‰åˆç›–å‘½ä»¤å‘å®Œæ‰æ‰“å¼€å‡å‹
+        sys_info.charge = 0;//ÏÈ¹Ø±Õ,µÈºÏ¸ÇÃüÁî·¢Íê²Å´ò¿ªÉıÑ¹
         sys_info.ear_l_full = 0;
         sys_info.ear_r_full = 0;
         sys_info.earfull = 0;
@@ -652,18 +652,18 @@ static int charge_chargebox_event_handler(struct chargebox_event *e)
 
 
 /******************************************************************************/
-/*************************å¼€ç›–é€šä¿¡æ¨¡å¼ç›¸å…³å¤„ç†**********************************/
+/*************************¿ª¸ÇÍ¨ĞÅÄ£Ê½Ïà¹Ø´¦Àí**********************************/
 /******************************************************************************/
 #define KEY_PAIR_CNT    10
-#define COMM_LIFE_MAX   (60*2)//ä¸€åˆ†é’Ÿè¶…æ—¶
-static u8 goto_pair_cnt;//é…å¯¹åŠŸèƒ½æŒ‰é”®æ—¶é—´è®¡æ•°
-static u8 auto_exit_cnt;//é€€å‡ºå¼€ç›–é€šä¿¡æ¨¡å¼è®¡æ•°
+#define COMM_LIFE_MAX   (60*2)//Ò»·ÖÖÓ³¬Ê±
+static u8 goto_pair_cnt;//Åä¶Ô¹¦ÄÜ°´¼üÊ±¼ä¼ÆÊı
+static u8 auto_exit_cnt;//ÍË³ö¿ª¸ÇÍ¨ĞÅÄ£Ê½¼ÆÊı
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    é…å¯¹çŠ¶æ€æ£€æµ‹å¤„ç†
-   @param    æ— 
-   @return   æ— 
-   @note     å½“ pair_status==2æ—¶ï¼Œåˆ¤æ–­æ˜¯å¦é…å¯¹æˆåŠŸ
+/**@brief    Åä¶Ô×´Ì¬¼ì²â´¦Àí
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     µ± pair_status==2Ê±£¬ÅĞ¶ÏÊÇ·ñÅä¶Ô³É¹¦
 */
 /*------------------------------------------------------------------------------------*/
 static void comm_pair_connecting(void)
@@ -679,10 +679,10 @@ static void comm_pair_connecting(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å¼€ç›–é€šä¿¡æ¨¡å¼è¶…æ—¶
-   @param    æ— 
-   @return   æ— 
-   @note     å¼€ç›–æ—¶é—´è¿‡é•¿ï¼Œåˆ‡æ¢æ¨¡å¼
+/**@brief    ¿ª¸ÇÍ¨ĞÅÄ£Ê½³¬Ê±
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¿ª¸ÇÊ±¼ä¹ı³¤£¬ÇĞ»»Ä£Ê½
 */
 /*------------------------------------------------------------------------------------*/
 static void comm_app_auto_exit(void)
@@ -692,9 +692,9 @@ static void comm_app_auto_exit(void)
         bt_ble_rcsp_adv_disable();
 #endif
         if (sys_info.lowpower_flag) {
-            chargebox_set_newstatus(CHG_STATUS_LOWPOWER);     //è®¾ç½®æ–°æ¨¡å¼
+            chargebox_set_newstatus(CHG_STATUS_LOWPOWER);     //ÉèÖÃĞÂÄ£Ê½
         } else {
-            chargebox_set_newstatus(CHG_STATUS_CHARGE);     //è®¾ç½®æ–°æ¨¡å¼
+            chargebox_set_newstatus(CHG_STATUS_CHARGE);     //ÉèÖÃĞÂÄ£Ê½
         }
     }
 #if TCFG_APP_BT_EN
@@ -743,13 +743,13 @@ static int comm_chargebox_event_handler(struct chargebox_event *e)
         bt_ble_rcsp_adv_disable();
 #endif
         if (sys_info.lowpower_flag) {
-            chargebox_set_newstatus(CHG_STATUS_LOWPOWER);     //è®¾ç½®æ–°æ¨¡å¼
+            chargebox_set_newstatus(CHG_STATUS_LOWPOWER);     //ÉèÖÃĞÂÄ£Ê½
         } else {
-            chargebox_set_newstatus(CHG_STATUS_CHARGE);     //è®¾ç½®æ–°æ¨¡å¼
+            chargebox_set_newstatus(CHG_STATUS_CHARGE);     //ÉèÖÃĞÂÄ£Ê½
         }
         break;
     case CHGBOX_EVENT_NEED_SHUTDOWN:
-        chargebox_set_newstatus(CHG_STATUS_LOWPOWER);     //è®¾ç½®æ–°æ¨¡å¼
+        chargebox_set_newstatus(CHG_STATUS_LOWPOWER);     //ÉèÖÃĞÂÄ£Ê½
         break;
     case CHGBOX_EVENT_EAR_L_ONLINE:
         log_info("EAR_L_IN_2\n");
@@ -787,13 +787,13 @@ static int comm_chargebox_event_handler(struct chargebox_event *e)
 
 
 /******************************************************************************/
-/*************************ä½ç”µæ¨¡å¼å¤„ç†*****************************************/
+/*************************µÍµçÄ£Ê½´¦Àí*****************************************/
 /******************************************************************************/
 /*------------------------------------------------------------------------------------*/
-/**@brief   ä½ç”µä¼‘çœ è®¡æ•°
-   @param    æ— 
-   @return   æ— 
-   @note     å…ˆå‘å…³æœºæŒ‡ä»¤ï¼Œå†ä¼‘çœ 
+/**@brief   µÍµçĞİÃß¼ÆÊı
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÏÈ·¢¹Ø»úÖ¸Áî£¬ÔÙĞİÃß
 */
 /*------------------------------------------------------------------------------------*/
 static void lowpower_shut_down_deal(void)
@@ -803,7 +803,7 @@ static void lowpower_shut_down_deal(void)
             sys_info.shut_cnt--;
             app_chargebox_send_mag(CHGBOX_MSG_SEND_SHUTDOWN);
         } else {
-            //å…³æœºå‘½ä»¤å,ç”µæºçº¿æ–­ç”µ
+            //¹Ø»úÃüÁîºó,µçÔ´Ïß¶Ïµç
             sys_info.charge = 0;
             sys_info.shut_cnt = 0;
             chargebox_api_shutdown_port(EAR_L);
@@ -813,10 +813,10 @@ static void lowpower_shut_down_deal(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    ä½ç”µåˆç›–å‘½ä»¤è®¡æ•°
-   @param    æ— 
-   @return   æ— 
-   @note     lid_cntæ ‡å¿—ç½®ä½åå…ˆå‘åˆç›–å‘½ä»¤ï¼Œå†ç½®ä½shut_cntæ ‡å¿—
+/**@brief    µÍµçºÏ¸ÇÃüÁî¼ÆÊı
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     lid_cnt±êÖ¾ÖÃÎ»ºóÏÈ·¢ºÏ¸ÇÃüÁî£¬ÔÙÖÃÎ»shut_cnt±êÖ¾
 */
 /*------------------------------------------------------------------------------------*/
 static void lowpower_lid_close_deal(void)
@@ -870,7 +870,7 @@ static int lowpower_chargebox_event_handler(struct chargebox_event *e)
 #if SMART_BOX_EN
         bt_ble_rcsp_adv_enable();
 #endif
-        chargebox_set_newstatus(CHG_STATUS_COMM);     //è®¾ç½®æ–°æ¨¡å¼
+        chargebox_set_newstatus(CHG_STATUS_COMM);     //ÉèÖÃĞÂÄ£Ê½
         break;
     case CHGBOX_EVENT_CLOSE_LID:
         log_info("CLOSE_LID_3\n");
@@ -887,9 +887,9 @@ static int lowpower_chargebox_event_handler(struct chargebox_event *e)
     case CHGBOX_EVENT_EXIT_LOWPOWER:
         log_info("exit lower\n");
         if (sys_info.status[LID_DET] == STATUS_ONLINE) {
-            chargebox_set_newstatus(CHG_STATUS_COMM);     //è®¾ç½®æ–°æ¨¡å¼
+            chargebox_set_newstatus(CHG_STATUS_COMM);     //ÉèÖÃĞÂÄ£Ê½
         } else {
-            chargebox_set_newstatus(CHG_STATUS_CHARGE);     //è®¾ç½®æ–°æ¨¡å¼
+            chargebox_set_newstatus(CHG_STATUS_CHARGE);     //ÉèÖÃĞÂÄ£Ê½
         }
         break;
     }
@@ -897,10 +897,10 @@ static int lowpower_chargebox_event_handler(struct chargebox_event *e)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“äº‹ä»¶å¤„ç†
-   @param    event:ä¼ å…¥çš„äº‹ä»¶ç»“æ„ä½“ï¼Œæºå¸¦äº‹ä»¶ä¿¡æ¯
-   @return   æ— 
-   @note     åˆ†æ¨¡å¼å¤„ç†ç›¸å…³å„ç§äº‹ä»¶ï¼ˆç›¸åŒäº‹ä»¶åœ¨ä¸åŒæ¨¡å¼å¯èƒ½ä¼šæœ‰ä¸åŒå¤„ç†ï¼‰
+/**@brief    ³äµç²ÖÊÂ¼ş´¦Àí
+   @param    event:´«ÈëµÄÊÂ¼ş½á¹¹Ìå£¬Ğ¯´øÊÂ¼şĞÅÏ¢
+   @return   ÎŞ
+   @note     ·ÖÄ£Ê½´¦ÀíÏà¹Ø¸÷ÖÖÊÂ¼ş£¨ÏàÍ¬ÊÂ¼şÔÚ²»Í¬Ä£Ê½¿ÉÄÜ»áÓĞ²»Í¬´¦Àí£©
 */
 /*------------------------------------------------------------------------------------*/
 int charge_box_ctrl_event_handler(struct chargebox_event *chg_event)
@@ -917,10 +917,10 @@ int charge_box_ctrl_event_handler(struct chargebox_event *chg_event)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“æŒ‰é”®å¤„ç†
-   @param    event:æŒ‰é”®äº‹ä»¶
-   @return   æ— 
-   @note     åˆ†æ¨¡å¼å¤„ç†ç›¸å…³æŒ‰é”®
+/**@brief    ³äµç²Ö°´¼ü´¦Àí
+   @param    event:°´¼üÊÂ¼ş
+   @return   ÎŞ
+   @note     ·ÖÄ£Ê½´¦ÀíÏà¹Ø°´¼ü
 */
 /*------------------------------------------------------------------------------------*/
 int charge_box_key_event_handler(u16 event)
@@ -931,8 +931,8 @@ int charge_box_key_event_handler(u16 event)
         case KEY_BOX_POWER_CLICK:
             log_info("KEY_POWER_CLICK_chg\n");
             if (sys_info.status[LID_DET] == STATUS_ONLINE) {
-                //å¼€ç›–æ‹”å‡ºUSB
-                chargebox_set_newstatus(CHG_STATUS_COMM);     //è®¾ç½®æ–°æ¨¡å¼
+                //¿ª¸Ç°Î³öUSB
+                chargebox_set_newstatus(CHG_STATUS_COMM);     //ÉèÖÃĞÂÄ£Ê½
             } else {
                 chgbox_ui_update_status(UI_MODE_CHARGE, CHGBOX_UI_KEY_CLICK);
             }
@@ -1011,15 +1011,15 @@ int charge_box_key_event_handler(u16 event)
 
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    å……ç”µä»“æ¨¡å¼è®¾ç½®å‡½æ•°
-   @param    newstatus:æ–°çš„æ¨¡å¼
-   @return   æ— 
-   @note     é€€å‡ºå½“å‰æ¨¡å¼ï¼Œè®¾ç½®æ–°çš„æ¨¡å¼çš„å‚æ•°
+/**@brief    ³äµç²ÖÄ£Ê½ÉèÖÃº¯Êı
+   @param    newstatus:ĞÂµÄÄ£Ê½
+   @return   ÎŞ
+   @note     ÍË³öµ±Ç°Ä£Ê½£¬ÉèÖÃĞÂµÄÄ£Ê½µÄ²ÎÊı
 */
 /*------------------------------------------------------------------------------------*/
 void chargebox_set_newstatus(u8 newstatus)
 {
-    ///å…ˆé€€å‡ºå½“å‰çŠ¶æ€
+    ///ÏÈÍË³öµ±Ç°×´Ì¬
     log_info("chargebbox exit:%d\n", sys_info.chgbox_status);
     if (newstatus == sys_info.chgbox_status) {
         log_info("chargebbox status same\n");
@@ -1035,8 +1035,8 @@ void chargebox_set_newstatus(u8 newstatus)
     } else if (sys_info.chgbox_status == CHG_STATUS_CHARGE) {
         sys_info.lid_cnt = 0;
         sys_info.shut_cnt = 0;
-        sys_info.charge = 0;//ä¸åœ¨å……ç”µçŠ¶æ€
-        //å…³é—­å……ç”µè¾“å‡ºæ—¶,éœ€è¦æŠŠIOæ‰“å¼€
+        sys_info.charge = 0;//²»ÔÚ³äµç×´Ì¬
+        //¹Ø±Õ³äµçÊä³öÊ±,ĞèÒª°ÑIO´ò¿ª
         chargeIc_boost_ctrl(0);
         chargeIc_pwr_ctrl(0);
         chargebox_api_open_port(EAR_L);
@@ -1047,7 +1047,7 @@ void chargebox_set_newstatus(u8 newstatus)
         sys_info.lid_cnt = 0;
     }
 
-    ///è®¾ç½®æ–°çŠ¶æ€
+    ///ÉèÖÃĞÂ×´Ì¬
     sys_info.chgbox_status = newstatus;
     if (newstatus  == CHG_STATUS_COMM) {
         sys_auto_shutdown_disable();
@@ -1064,7 +1064,7 @@ void chargebox_set_newstatus(u8 newstatus)
         ear_power_check_time = 0;
         sys_info.shut_cnt = 0;
         sys_info.lid_cnt = BIT(7) | TCFG_SEND_CLOSE_LID_MAX;
-        sys_info.charge = 0;//å…ˆå…³é—­,ç­‰åˆç›–å‘½ä»¤å‘å®Œæ‰æ‰“å¼€å‡å‹
+        sys_info.charge = 0;//ÏÈ¹Ø±Õ,µÈºÏ¸ÇÃüÁî·¢Íê²Å´ò¿ªÉıÑ¹
         sys_info.ear_l_full = 0;
         sys_info.ear_r_full = 0;
         sys_info.earfull = 0;
@@ -1096,9 +1096,9 @@ void chargebox_set_newstatus(u8 newstatus)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–å¯¹è€³çš„åœ¨çº¿çŠ¶æ€,æ˜¯å¦åŒæ—¶åœ¨çº¿
-   @param    æ— 
-   @return   æ— 
+/**@brief    »ñÈ¡¶Ô¶úµÄÔÚÏß×´Ì¬,ÊÇ·ñÍ¬Ê±ÔÚÏß
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -1108,9 +1108,9 @@ u8 get_tws_ear_status(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–ä»“çš„åˆç›–çŠ¶æ€
-   @param    æ— 
-   @return   æ— 
+/**@brief    »ñÈ¡²ÖµÄºÏ¸Ç×´Ì¬
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*------------------------------------------------------------------------------------*/
@@ -1121,15 +1121,15 @@ u8 get_chgbox_lid_status(void)
 
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    ä»“æ§åˆ¶åˆå§‹åŒ–å‡½æ•°
-   @param    æ— 
-   @return   æ— 
-   @note     æ ¹æ®ä¸Šç”µçŠ¶æ€é€‰æ‹©è¿›å…¥å¼€ç›–é€šä¿¡ã€ä½ç”µé‡æˆ–åˆç›–å……ç”µæ¨¡å¼ï¼Œåˆå§‹åŒ–ä¸€äº›æ§åˆ¶é‡
+/**@brief    ²Ö¿ØÖÆ³õÊ¼»¯º¯Êı
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¸ù¾İÉÏµç×´Ì¬Ñ¡Ôñ½øÈë¿ª¸ÇÍ¨ĞÅ¡¢µÍµçÁ¿»òºÏ¸Ç³äµçÄ£Ê½£¬³õÊ¼»¯Ò»Ğ©¿ØÖÆÁ¿
 */
 /*------------------------------------------------------------------------------------*/
 void charge_box_ctrl_init(void)
 {
-    //å……ç”µICåˆå§‹ä¸æˆåŠŸ,è¿›è¡Œä¼‘çœ (ç”µå‹ä½ç­‰åŸå› ï¼‰
+    //³äµçIC³õÊ¼²»³É¹¦,½øĞĞĞİÃß(µçÑ¹µÍµÈÔ­Òò£©
     if (!sys_info.init_ok) {
         log_error("chargeIc not ok, need softoff!\n");
         chgbox_enter_soft_power_off();
@@ -1140,7 +1140,7 @@ void charge_box_ctrl_init(void)
     sys_info.shut_cnt = 0;
     sys_info.pair_status = 0;
     sys_info.pair_succ = 0;
-    sys_info.charge = 0;//å…ˆå…³é—­,ç­‰åˆç›–å‘½ä»¤å‘å®Œæ‰æ‰“å¼€å‡å‹
+    sys_info.charge = 0;//ÏÈ¹Ø±Õ,µÈºÏ¸ÇÃüÁî·¢Íê²Å´ò¿ªÉıÑ¹
     sys_info.ear_l_full = 0;
     sys_info.ear_r_full = 0;
     sys_info.earfull = 0;
@@ -1148,16 +1148,16 @@ void charge_box_ctrl_init(void)
     goto_pair_cnt = 0;
     auto_exit_cnt = 0;
 
-    ///è¿›å…¥æ¨¡å¼åˆ¤æ–­
+    ///½øÈëÄ£Ê½ÅĞ¶Ï
     if (sys_info.status[LID_DET] == STATUS_ONLINE) {
-        sys_info.chgbox_status = CHG_STATUS_COMM;                   //å¼€ç›–
+        sys_info.chgbox_status = CHG_STATUS_COMM;                   //¿ª¸Ç
         sys_auto_shutdown_disable();
         if (sys_info.wireless_wakeup == 0) {
             chgbox_ui_update_status(UI_MODE_COMM, CHGBOX_UI_OPEN_LID);
         }
     } else {
         if (sys_info.lowpower_flag) {
-            sys_info.chgbox_status = CHG_STATUS_LOWPOWER;           //ä½ç”µé‡
+            sys_info.chgbox_status = CHG_STATUS_LOWPOWER;           //µÍµçÁ¿
             sys_info.lid_cnt = 0;
             if (sys_info.status[USB_DET] == STATUS_ONLINE) {
                 sys_auto_shutdown_disable();
@@ -1169,7 +1169,7 @@ void charge_box_ctrl_init(void)
                 }
             }
         } else {
-            sys_info.chgbox_status = CHG_STATUS_CHARGE;            //åˆç›–å……ç”µ
+            sys_info.chgbox_status = CHG_STATUS_CHARGE;            //ºÏ¸Ç³äµç
             ear_power_check_time = 0;
             sys_info.lid_cnt = BIT(7) | TCFG_SEND_CLOSE_LID_MAX;
             sys_info.force_charge = CHGBOX_FORCE_CHARGE_TIMES;
@@ -1180,7 +1180,7 @@ void charge_box_ctrl_init(void)
         }
     }
 
-    chgbox_ui_set_power_on(1);//uiä¸Šç”µæ ‡å¿—
+    chgbox_ui_set_power_on(1);//uiÉÏµç±êÖ¾
 
     if (sys_info.status[USB_DET] == STATUS_ONLINE) {
         app_chargebox_event_to_user(CHGBOX_EVENT_USB_IN);
@@ -1190,15 +1190,15 @@ void charge_box_ctrl_init(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ™ºèƒ½å……ç”µä»“åˆå§‹åŒ–å‡½æ•°
-   @param    æ— 
-   @return   æ— 
-   @note     å……ç”µicã€éœå°”ä¼ æ„Ÿå™¨ã€æ— çº¿å……ã€lightingæ¡æ‰‹ã€uiã€æµç¨‹æ§åˆ¶çš„åˆå§‹åŒ–
+/**@brief    ÖÇÄÜ³äµç²Ö³õÊ¼»¯º¯Êı
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ³äµçic¡¢»ô¶û´«¸ĞÆ÷¡¢ÎŞÏß³ä¡¢lightingÎÕÊÖ¡¢ui¡¢Á÷³Ì¿ØÖÆµÄ³õÊ¼»¯
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_init_app(void)
 {
-    //æ³¨æ„ï¼šæå‰åˆå§‹åŒ–çš„å†…å®¹æ”¾åœ¨äº† __initcall(chargebox_advanced_init);
+    //×¢Òâ£ºÌáÇ°³õÊ¼»¯µÄÄÚÈİ·ÅÔÚÁË __initcall(chargebox_advanced_init);
     chargeIc_init();
     chargebox_det_init();
 #if (TCFG_WIRELESS_ENABLE)

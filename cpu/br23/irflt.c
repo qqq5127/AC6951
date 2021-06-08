@@ -6,12 +6,12 @@
 
 #define ir_log 		log_d
 
-//çº¢å¤–å®šæ—¶å™¨å®šä¹‰
+//ºìÍâ¶¨Ê±Æ÷¶¨Òå
 #define IR_TIMER                    TIMER3
 #define IR_IRQ_TIME_IDX             IRQ_TIME3_IDX
 #define IR_TIME_REG                 JL_TIMER3
 
-IR_CODE  ir_code;       ///<çº¢å¤–é¥æŽ§ä¿¡æ¯
+IR_CODE  ir_code;       ///<ºìÍâÒ£¿ØÐÅÏ¢
 u16 timer1_pad;
 
 static const u16 timer_div[] = {
@@ -38,7 +38,7 @@ static const u16 timer_div[] = {
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   time1çº¢å¤–ä¸­æ–­æœåŠ¡å‡½æ•°
+/**@brief   time1ºìÍâÖÐ¶Ï·þÎñº¯Êý
    @param   void
    @param   void
    @return  void
@@ -87,7 +87,7 @@ void timer_ir_isr(void)
         ir_code.bState = 0;
     } else if ((cap > 110) && (ir_code.boverflow > 53)) {
         ir_code.bState = 0;
-    } else if ((cap > 20) && (ir_code.boverflow > 53)) { //æº¢å‡ºæƒ…å†µä¸‹ ï¼ˆ12M 48Mï¼‰
+    } else if ((cap > 20) && (ir_code.boverflow > 53)) { //Òç³öÇé¿öÏÂ £¨12M 48M£©
         ir_code.bState = 0;
     } else {
         ir_code.boverflow = 0;
@@ -101,19 +101,19 @@ void timer_ir_isr(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   iræŒ‰é”®åˆå§‹åŒ–
+/**@brief   ir°´¼ü³õÊ¼»¯
    @param   void
    @param   void
    @return  void
    @note    void set_ir_clk(void)
 
-   ((cnt - 1)* åˆ†é¢‘æ•°)/lsb_clk = 1ms
+   ((cnt - 1)* ·ÖÆµÊý)/lsb_clk = 1ms
 */
 /*----------------------------------------------------------------------------*/
-/* #define APP_TIMER_CLK           clk_get("timer")//é€‰oscæ—¶é’Ÿæº */
+/* #define APP_TIMER_CLK           clk_get("timer")//Ñ¡oscÊ±ÖÓÔ´ */
 #define APP_TIMER_CLK           12000000L //pll12m
 #define TIMER_UNIT_MS           1
-#define MAX_TIME_CNT 0x07ff //åˆ†é¢‘å‡†ç¡®èŒƒå›´ï¼Œæ›´å…·å®žé™…æƒ…å†µè°ƒæ•´
+#define MAX_TIME_CNT 0x07ff //·ÖÆµ×¼È··¶Î§£¬¸ü¾ßÊµ¼ÊÇé¿öµ÷Õû
 #define MIN_TIME_CNT 0x0030
 void set_ir_clk(void)
 {
@@ -130,15 +130,15 @@ void set_ir_clk(void)
     }
 
     ir_code.timer_pad = prd_cnt;
-    /* IR_TIME_REG->CON = ((index << 4) | BIT(3) | BIT(1) | BIT(0));//é€‰æ‹©oscæ—¶é’Ÿ */
-    JL_IOMAP->CON1 |= BIT(27);//è¿™é‡Œå·²é€‰äº†timer3,æ—¶é’Ÿæºé€‰ioä¿¡å·é‡Œçš„pll_12m,ä¸æ˜¯æ‰€æœ‰çš„timeréƒ½å¯é€‰pll,ä¿®æ”¹è¯·çœ‹æ–‡æ¡£
+    /* IR_TIME_REG->CON = ((index << 4) | BIT(3) | BIT(1) | BIT(0));//Ñ¡ÔñoscÊ±ÖÓ */
+    JL_IOMAP->CON1 |= BIT(27);//ÕâÀïÒÑÑ¡ÁËtimer3,Ê±ÖÓÔ´Ñ¡ioÐÅºÅÀïµÄpll_12m,²»ÊÇËùÓÐµÄtimer¶¼¿ÉÑ¡pll,ÐÞ¸ÄÇë¿´ÎÄµµ
     IR_TIME_REG->CON = ((index << 4) | BIT(2) | BIT(1) | BIT(0));
 
 }
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   èŽ·å–iræŒ‰é”®å€¼
+/**@brief   »ñÈ¡ir°´¼üÖµ
    @param   void
    @param   void
    @return  void
@@ -168,7 +168,7 @@ u8 get_irflt_value(void)
 
 void ir_input_io_sel(u8 port)
 {
-    //é€‰æ‹©input channel1è¾“å…¥
+    //Ñ¡Ôñinput channel1ÊäÈë
     // IOMC2[13 : 8]
     // 0 ~ 15: 		PA0 ~ PA15
     //16 ~ 31: 		PB0 ~ PB15
@@ -204,7 +204,7 @@ void irflt_config()
     /* JL_IR->RFLT_CON |= BIT(7);		//256 div */
     /* JL_IR->RFLT_CON |= BIT(3);		//osc 24m */
     JL_IR->RFLT_CON |= BIT(7) | BIT(4);		//512 div
-    JL_IR->RFLT_CON |= BIT(3) | BIT(2);		//PLL_48mï¼ˆå…¼å®¹çœæ™¶æŒ¯ï¼‰
+    JL_IR->RFLT_CON |= BIT(3) | BIT(2);		//PLL_48m£¨¼æÈÝÊ¡¾§Õñ£©
     JL_IR->RFLT_CON |= BIT(0);		//irflt enable
 
     set_ir_clk();

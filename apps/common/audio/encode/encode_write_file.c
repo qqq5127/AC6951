@@ -48,7 +48,7 @@ void last_enc_file_codeing_type_save(u32 type)
 	enc_file_coding_type = type;
 }
 
-//è·å–æœ€åå½•éŸ³æ–‡ä»¶çš„åºå·. ç”¨äºå½•éŸ³æ’­æ”¾ï¼Œ -1è¡¨ç¤ºæ— æ•ˆ
+//»ñÈ¡×îºóÂ¼ÒôÎÄ¼şµÄĞòºÅ. ÓÃÓÚÂ¼Òô²¥·Å£¬ -1±íÊ¾ÎŞĞ§
 int last_enc_file_path_get(char path[64])
 {
 #if TCFG_NOR_REC || FLASH_INSIDE_REC_ENABLE
@@ -77,7 +77,7 @@ int last_enc_file_path_get(char path[64])
 #else
 
     char index_str[5] = {0};
-    char *logo = dev_manager_get_phy_logo(dev_manager_find_active(0));//æœ€åæ´»åŠ¨è®¾å¤‡
+    char *logo = dev_manager_get_phy_logo(dev_manager_find_active(0));//×îºó»î¶¯Éè±¸
     printf("enc file idex = %d, dev_path = %s\n", enc_file_index, dev_manager_get_root_path_by_logo(logo));
     if (enc_file_index != (u32) - 1) {
         index_str[0] = enc_file_index / 1000 + '0';
@@ -309,7 +309,7 @@ void *enc_write_file_open(char *logo, const char *folder, const char *filename)
         log_e("file create err ");
         goto _exit;
     }
-    enc_file_index = get_last_num(); //è·å–æœ€åçš„æ•°å­—
+    enc_file_index = get_last_num(); //»ñÈ¡×îºóµÄÊı×Ö
 
     /* r_printf(">>>[test]:enc_file_index = %d\n", enc_file_index); */
     os_sem_create(&wfil->sem_task_run, 0);

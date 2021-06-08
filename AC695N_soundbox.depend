@@ -1,0 +1,4770 @@
+# depslib dependency file v1.0
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\audio_digital_vol.c
+	"audio_digital_vol.h"
+
+1623122184 d:\jl\ac6951c\ac6951c\apps\common\audio\audio_digital_vol.h
+	"generic/typedef.h"
+	"os/os_type.h"
+	"os/os_api.h"
+	"generic/list.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\typedef.h
+	"asm/cpu.h"
+	"generic/errno-base.h"
+	"string.h"
+	"strings.h"
+	"system/malloc.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\cpu.h
+	"br23.h"
+	"csfr.h"
+	"asm/irq.h"
+	"generic/printf.h"
+	"system/generic/log.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\br23.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\csfr.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\irq.h
+	"asm/hwi.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\hwi.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\printf.h
+	<stdarg.h>
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\log.h
+	"system/generic/printf.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\errno-base.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\malloc.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\os_type.h
+	"FreeRTOS/FreeRTOS.h"
+	"FreeRTOS/semphr.h"
+	"FreeRTOS/task.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\freertos.h
+	"FreeRTOSConfig.h"
+	"projdefs.h"
+	"portable.h"
+	<reent.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\freertosconfig.h
+	"pi32v2/portmacro.h"
+	"pi32_lto/portmacro.h"
+	"q32s/portmacro.h"
+	"printf.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\pi32v2\portmacro.h
+	"asm/cpu.h"
+	<stdint.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\pi32_lto\portmacro.h
+	"asm/cpu.h"
+	<stdint.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\q32s\portmacro.h
+	"asm/cpu.h"
+	<stdint.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\projdefs.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\portable.h
+	"deprecated_definitions.h"
+	"portmacro.h"
+	"mpu_wrappers.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\deprecated_definitions.h
+	"..\..\Source\portable\owatcom\16bitdos\pc\portmacro.h"
+	"..\..\Source\portable\owatcom\16bitdos\flsh186\portmacro.h"
+	"../portable/GCC/ATMega323/portmacro.h"
+	"../portable/IAR/ATMega323/portmacro.h"
+	"../../Source/portable/MPLAB/PIC24_dsPIC/portmacro.h"
+	"../../Source/portable/MPLAB/PIC24_dsPIC/portmacro.h"
+	"../../Source/portable/MPLAB/PIC18F/portmacro.h"
+	"../../Source/portable/MPLAB/PIC32MX/portmacro.h"
+	"libFreeRTOS/Include/portmacro.h"
+	"../../Source/portable/SDCC/Cygnal/portmacro.h"
+	"../../Source/portable/GCC/ARM7_LPC2000/portmacro.h"
+	"portmacro.h"
+	"../../Source/portable/GCC/ARM7_LPC23xx/portmacro.h"
+	"..\..\Source\portable\IAR\MSP430\portmacro.h"
+	"../../Source/portable/GCC/MSP430F449/portmacro.h"
+	"../../Source/portable/Rowley/MSP430F449/portmacro.h"
+	"..\..\Source\portable\RVDS\ARM7_LPC21xx\portmacro.h"
+	"../../Source/portable/GCC/ARM7_AT91SAM7S/portmacro.h"
+	"..\..\Source\portable\IAR\AtmelSAM7S64\portmacro.h"
+	"..\..\Source\portable\IAR\AtmelSAM9XE\portmacro.h"
+	"..\..\Source\portable\IAR\LPC2000\portmacro.h"
+	"..\..\Source\portable\IAR\STR71x\portmacro.h"
+	"..\..\Source\portable\IAR\STR75x\portmacro.h"
+	"..\..\Source\portable\GCC\STR75x\portmacro.h"
+	"..\..\Source\portable\IAR\STR91x\portmacro.h"
+	"../../Source/portable/GCC/H8S2329/portmacro.h"
+	"../../Source/portable/GCC/ARM7_AT91FR40008/portmacro.h"
+	"../../Source/portable/RVDS/ARM_CM3/portmacro.h"
+	"../../Source/portable/GCC/ARM_CM3/portmacro.h"
+	"../../Source/portable/GCC/ARM_CM3/portmacro.h"
+	"../../Source/portable/IAR/ARM_CM3/portmacro.h"
+	"../../Source/portable/IAR/ARM_CM3/portmacro.h"
+	"../../Source/portable/CodeWarrior/HCS12/portmacro.h"
+	"../../Source/portable/GCC/MicroBlaze/portmacro.h"
+	"..\..\Source\portable\Paradigm\Tern_EE\small\portmacro.h"
+	"../../Source/portable/GCC/HCS12/portmacro.h"
+	"../../Source/portable/GCC/MCF5235/portmacro.h"
+	"../../../Source/portable/GCC/ColdFire_V2/portmacro.h"
+	"../../Source/portable/CodeWarrior/ColdFire_V2/portmacro.h"
+	"../../Source/portable/GCC/PPC405_Xilinx/portmacro.h"
+	"../../Source/portable/GCC/PPC440_Xilinx/portmacro.h"
+	"..\..\Source\portable\Softune\MB96340\portmacro.h"
+	"frconfig.h"
+	"..\portable\BCC\16BitDOS\PC\prtmacro.h"
+	"frconfig.h"
+	"..\portable\BCC\16BitDOS\flsh186\prtmacro.h"
+	"portmacro.h"
+	"portmacro.h"
+	"portmacro.h"
+	"portmacro.h"
+	"../../Source/portable/IAR/V850ES/portmacro.h"
+	"../../Source/portable/IAR/V850ES/portmacro.h"
+	"../../Source/portable/IAR/V850ES/portmacro.h"
+	"../../Source/portable/IAR/V850ES/portmacro.h"
+	"../../Source/portable/IAR/V850ES/portmacro.h"
+	"../../Source/portable/IAR/78K0R/portmacro.h"
+	"../../Source/portable/IAR/78K0R/portmacro.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\mpu_wrappers.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\semphr.h
+	"queue.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\queue.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\task.h
+	"list.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\freertos\list.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\os_api.h
+	"generic/typedef.h"
+	"os/os_cpu.h"
+	"os/os_error.h"
+	"os/os_type.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\os_cpu.h
+	"asm/cpu.h"
+	"jiffies.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\jiffies.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\os\os_error.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\list.h
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\decode\audio_key_tone.c
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"app_config.h"
+	"audio_config.h"
+	"audio_dec.h"
+	"tone_player.h"
+	"sine_make.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\includes.h
+	"asm/cpu.h"
+	"asm/crc16.h"
+	"asm/clock.h"
+	"asm/uart.h"
+	"asm/uart_dev.h"
+	"asm/gpio.h"
+	"asm/spiflash.h"
+	"asm/csfr.h"
+	"asm/power_interface.h"
+	"asm/efuse.h"
+	"asm/wdt.h"
+	"asm/timer.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\crc16.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\clock.h
+	"typedef.h"
+	"clock_hw.h"
+	"asm/clock_define.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\clock_hw.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\clock_define.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\uart.h
+	"device/uart.h"
+	"device/device.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\uart.h
+	"typedef.h"
+	"device/device.h"
+	"generic/ioctl.h"
+	"system/task.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\device.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"generic/atomic.h"
+	"device/ioctl_cmds.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\atomic.h
+	"cpu.h"
+	"irq.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\cpu.h
+	<asm/cpu.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\irq.h
+	"asm/irq.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\ioctl_cmds.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\ioctl.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\task.h
+	"os/os_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\uart_dev.h
+	"typedef.h"
+	"os/os_api.h"
+	"jiffies.h"
+	"irq.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\gpio.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\spiflash.h
+	"device/device.h"
+	"device/spiflash.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\spiflash.h
+	"typedef.h"
+	"generic/list.h"
+	"generic/ioctl.h"
+	"device/device.h"
+	"system/task.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\power_interface.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\efuse.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\wdt.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\timer.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\includes.h
+	"media/audio_decoder.h"
+	"media/audio_encoder.h"
+	"media/mixer.h"
+	"media/automute.h"
+	"effectrs_sync.h"
+	"audio_resample.h"
+	"asm/cpu_includes.h"
+	"asm/dac.h"
+	"asm/audio_adc.h"
+	"asm/audio_src.h"
+	"asm/audio_spdif.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\audio_decoder.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"media/audio_base.h"
+	"media/audio_stream.h"
+	"os/os_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\audio_base.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\audio_stream.h
+	"generic/includes.h"
+	"media/audio_base.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\includes.h
+	"errno-base.h"
+	"typedef.h"
+	"ascii.h"
+	"atomic.h"
+	"ioctl.h"
+	"cpu.h"
+	"gpio.h"
+	"irq.h"
+	"jiffies.h"
+	"list.h"
+	"printf.h"
+	"rect.h"
+	"version.h"
+	"lbuf.h"
+	"lbuf_lite.h"
+	"circular_buf.h"
+	"index.h"
+	"debug_lite.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\ascii.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\gpio.h
+	"asm/gpio.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\rect.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\version.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\lbuf.h
+	"typedef.h"
+	"list.h"
+	"system/spinlock.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\spinlock.h
+	"typedef.h"
+	"cpu.h"
+	"irq.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\lbuf_lite.h
+	"typedef.h"
+	"list.h"
+	"system/spinlock.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\circular_buf.h
+	"typedef.h"
+	"system/spinlock.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\index.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\generic\debug_lite.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\audio_encoder.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"generic/circular_buf.h"
+	"media/audio_base.h"
+	"os/os_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\mixer.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"media/audio_stream.h"
+	"application/audio_buf_sync.h"
+	"mixer_cyclic.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_buf_sync.h
+	"asm/includes.h"
+	"generic/includes.h"
+	"system/includes.h"
+	"asm/cpu_includes.h"
+	"asm/audio_src.h"
+	"media/audio_decoder.h"
+	"media/audio_encoder.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\includes.h
+	"init.h"
+	"event.h"
+	"malloc.h"
+	"spinlock.h"
+	"task.h"
+	"timer.h"
+	"wait.h"
+	"app_core.h"
+	"app_msg.h"
+	"database.h"
+	"fs/fs.h"
+	"power_manage.h"
+	"syscfg_id.h"
+	"bank_switch.h"
+	"generic/includes.h"
+	"device/includes.h"
+	"asm/includes.h"
+	"device/sdio_host_init.h"
+	"crypto_toolbox/crypto.h"
+	"crypto_toolbox/Crypto_hash.h"
+	"crypto_toolbox/hmac.h"
+	"crypto_toolbox/sha256.h"
+	"crypto_toolbox/bigint.h"
+	"crypto_toolbox/bigint_impl.h"
+	"crypto_toolbox/ecdh.h"
+	"crypto_toolbox/micro-ecc/uECC_new.h"
+	"crypto_toolbox/micro-ecc/uECC.h"
+	"crypto_toolbox/aes_cmac.h"
+	"crypto_toolbox/rijndael.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\init.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\event.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"generic/rect.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\timer.h
+	"typedef.h"
+	"generic/list.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\wait.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\app_core.h
+	"typedef.h"
+	"generic/list.h"
+	"system/event.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\app_msg.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\database.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\fs\fs.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"generic/ioctl.h"
+	"generic/atomic.h"
+	"system/task.h"
+	"system/malloc.h"
+	"system/sys_time.h"
+	"stdarg.h"
+	"fs_file_name.h"
+	"sdfile.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\sys_time.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\fs\fs_file_name.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\fs\sdfile.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\power_manage.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\syscfg_id.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\bank_switch.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\includes.h
+	"device.h"
+	"ioctl_cmds.h"
+	"key_driver.h"
+	"iokey.h"
+	"irkey.h"
+	"adkey.h"
+	"slidekey.h"
+	"touch_key.h"
+	"rdec_key.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\key_driver.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\iokey.h
+	"typedef.h"
+	"device/device.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\irkey.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\adkey.h
+	"typedef.h"
+	"asm/adc_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\adc_api.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\slidekey.h
+	"typedef.h"
+	"device/device.h"
+	"asm/adc_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\touch_key.h
+	"typedef.h"
+	"asm/plcnt.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\plcnt.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\rdec_key.h
+	"typedef.h"
+	"asm/rdec.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\rdec.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\sdio_host_init.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\crypto.h
+	"endian.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\endian.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\crypto_hash.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\hmac.h
+	"crypto.h"
+	"sha256.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\sha256.h
+	"crypto.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\bigint.h
+	"bigint_impl.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\bigint_impl.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\ecdh.h
+	"bigint_impl.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\micro-ecc\uecc_new.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\micro-ecc\uecc.h
+	<stdint.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\aes_cmac.h
+	<stdint.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\crypto_toolbox\rijndael.h
+	<stdint.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\cpu_includes.h
+	"asm/audio_adc.h"
+	"asm/audio_linein.h"
+	"asm/audio_src.h"
+	"dac.h"
+	"asm/hw_eq.h"
+	"audio_sync.h"
+	"audio_iis.h"
+	"pitchshifter/pitchshifter_api.h"
+
+1623140473 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\audio_adc.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"generic/atomic.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\audio_linein.h
+	"generic/typedef.h"
+	"asm/audio_adc.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\audio_src.h
+	"media/audio_stream.h"
+	"audio_resample.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\audio_resample.h
+	"typedef.h"
+	"media/audio_stream.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\dac.h
+	"generic/typedef.h"
+	"generic/atomic.h"
+	"os/os_api.h"
+	"media/audio_stream.h"
+	"media/audio_cfifo.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\audio_cfifo.h
+	"generic/list.h"
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\hw_eq.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"os/os_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\audio_sync.h
+	"media/audio_stream.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\audio_iis.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\pitchshifter\pitchshifter_api.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\mixer_cyclic.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"media/audio_stream.h"
+	"application/audio_buf_sync.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\automute.h
+	"generic/typedef.h"
+	"generic/list.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\effectrs_sync.h
+	"generic/typedef.h"
+	"generic/list.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\audio_spdif.h
+	"generic/typedef.h"
+	"generic/list.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\app_config.h
+	"asm/clock_define.h"
+	"board_config.h"
+	"btcontroller_mode.h"
+	"user_cfg_id.h"
+	"usb_common_def.h"
+
+1623140043 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_config.h
+	"board_ac6954a_demo/board_ac6954a_demo_cfg.h"
+	"board_ac695x_demo/board_ac695x_demo_cfg.h"
+	"board_ac6952e_lighter/board_ac6952e_lighter_cfg.h"
+	"board_ac6955f_headset_mono/board_ac6955f_headset_mono_cfg.h"
+	"board_ac695x_charging_bin/board_ac695x_charging_bin.h"
+	"board_ac695x_btemitter/board_ac695x_btemitter.h"
+	"board_ac695x_tws_box/board_ac695x_tws_box.h"
+	"board_ac695x_tws/board_ac695x_tws.h"
+	"board_ac695x_multimedia_charging_bin/board_ac695x_multimedia_charging_bin.h"
+	"board_ac695x_soundcard/board_ac695x_soundcard.h"
+	"board_ac695x_smartbox/board_ac695x_smartbox.h"
+	"board_ac695x_lcd/board_ac695x_lcd_cfg.h"
+	"board_ac6951g/board_ac6951g_cfg.h"
+	"board_ac6083a/board_ac6083a_cfg.h"
+	"board_ac6083a_iap/board_ac6083a_iap_cfg.h"
+
+1623131754 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6954a_demo\board_ac6954a_demo_cfg.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\usb_std_class_def.h
+
+1623134508 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_demo\board_ac695x_demo_cfg.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6952e_lighter\board_ac6952e_lighter_cfg.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6955f_headset_mono\board_ac6955f_headset_mono_cfg.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_charging_bin\board_ac695x_charging_bin.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_btemitter\board_ac695x_btemitter.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws_box\board_ac695x_tws_box.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws\board_ac695x_tws.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_multimedia_charging_bin\board_ac695x_multimedia_charging_bin.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_soundcard\board_ac695x_soundcard.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_smartbox\board_ac695x_smartbox.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_lcd\board_ac695x_lcd_cfg.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6951g\board_ac6951g_cfg.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a\board_ac6083a_cfg.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a_iap\board_ac6083a_iap_cfg.h
+	"usb_std_class_def.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\btcontroller_mode.h
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\user_cfg_id.h
+
+1623122508 d:\jl\ac6951c\ac6951c\apps\common\usb\usb_common_def.h
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_config.h
+	"generic/typedef.h"
+	"board_config.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec.h
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"asm/audio_src.h"
+	"audio_digital_vol.h"
+	"application/audio_eq_drc_apply.h"
+	"application/audio_vocal_tract_synthesis.h"
+	"application/audio_dig_vol.h"
+	"audio_dec_bt.h"
+	"audio_dec_file.h"
+	"audio_dec_fm.h"
+	"audio_dec_linein.h"
+	"audio_dec_pc.h"
+	"audio_dec_spdif.h"
+	"audio_dec_record.h"
+	"audio_dec_tone.h"
+	"localtws/localtws.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_eq_drc_apply.h
+	"system/includes.h"
+	"media/audio_stream.h"
+	"application/eq_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\eq_config.h
+	"application/audio_eq.h"
+	"application/audio_drc.h"
+	"spinlock.h"
+	"math.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_eq.h
+	"typedef.h"
+	"asm/hw_eq.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_drc.h
+	"typedef.h"
+	"sw_drc.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\sw_drc.h
+	"generic/typedef.h"
+	"generic/list.h"
+	"os/os_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_vocal_tract_synthesis.h
+	"system/includes.h"
+	"media/includes.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_dig_vol.h
+	"application/audio_dig_vol.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_bt.h
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"media/audio_decoder.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_file.h
+	"asm/includes.h"
+	"media/includes.h"
+	"media/file_decoder.h"
+	"system/includes.h"
+	"media/audio_decoder.h"
+	"app_config.h"
+	"music/music_decrypt.h"
+	"music/music_id3.h"
+	"application/audio_vocal_tract_synthesis.h"
+	"application/audio_pitchspeed.h"
+	"application/audio_surround.h"
+	"application/audio_vbass.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\file_decoder.h
+	"media/includes.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\music\music_decrypt.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\music\music_id3.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_pitchspeed.h
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"asm/ps_cal_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\ps_cal_api.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_surround.h
+	"system/includes.h"
+	"media/includes.h"
+	"surround/effect_sur_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\surround\effect_sur_api.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_vbass.h
+	"system/includes.h"
+	"media/audio_stream.h"
+	"vbass/vbass_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\vbass\vbass_api.h
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_fm.h
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"media/audio_decoder.h"
+	"mic_effect.h"
+
+1623122140 d:\jl\ac6951c\ac6951c\cpu\br23\audio_mic\mic_effect.h
+	"system/includes.h"
+	"audio_mic/effect_reg.h"
+	"audio_mic/effect_cfg.h"
+	"app_config.h"
+	"application/audio_pemafrow.h"
+
+1623122140 d:\jl\ac6951c\ac6951c\cpu\br23\audio_mic\effect_reg.h
+	"system/includes.h"
+	"audio_mic/mic_stream.h"
+	"effect_cfg.h"
+	"application/audio_eq.h"
+	"effect_reg_echo.h"
+	"effect_reg_reverb.h"
+	"application/audio_howling.h"
+	"application/audio_pitch.h"
+	"application/audio_noisegate.h"
+	"application/audio_echo_reverb.h"
+	"application/audio_dig_vol.h"
+	"application/audio_energy_detect.h"
+
+1623122140 d:\jl\ac6951c\ac6951c\cpu\br23\audio_mic\mic_stream.h
+	"system/includes.h"
+	"media/includes.h"
+
+1623122140 d:\jl\ac6951c\ac6951c\cpu\br23\audio_mic\effect_cfg.h
+	"generic/typedef.h"
+	"system/includes.h"
+	"audio_mic/mic_stream.h"
+	"application/audio_noisegate.h"
+	"application/audio_eq.h"
+	"application/audio_howling.h"
+	"application/audio_pitch.h"
+	"application/audio_echo_reverb.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_noisegate.h
+	"media/audio_stream.h"
+	"asm/noisegate_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\noisegate_api.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_howling.h
+	"asm/howling_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\howling_api.h
+	"asm/howling_pitchshifter_api.h"
+	"media/audio_stream.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\howling_pitchshifter_api.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_pitch.h
+	"pitchshifter/pitchshifter_api.h"
+	"mono2stereo/reverb_mono2stero_api.h"
+	"media/audio_stream.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\mono2stereo\reverb_mono2stero_api.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_echo_reverb.h
+	"application/reverb_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\reverb_api.h
+	"media/audio_stream.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\cpu\br23\audio_mic\effect_reg_echo.h
+	"effect_cfg.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\cpu\br23\audio_mic\effect_reg_reverb.h
+	"effect_cfg.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_energy_detect.h
+	"typedef.h"
+	"application/audio_energy_detect.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_pemafrow.h
+	"asm/pemafrow_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\asm\pemafrow_api.h
+	"media/audio_stream.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_linein.h
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"media/audio_decoder.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_pc.h
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"media/audio_decoder.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_spdif.h
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"media/audio_decoder.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_record.h
+	"asm/includes.h"
+	"media/includes.h"
+	"system/includes.h"
+	"media/audio_decoder.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_tone.h
+	"asm/includes.h"
+	"media/includes.h"
+	"media/file_decoder.h"
+	"system/includes.h"
+	"media/audio_decoder.h"
+	"application/audio_dec_app.h"
+	"tone_player.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_dec_app.h
+	"asm/includes.h"
+	"media/includes.h"
+	"media/audio_stream.h"
+	"system/includes.h"
+	"channel_switch.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\channel_switch.h
+	"media/audio_stream.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\tone_player.h
+	"app_config.h"
+	"audio_config.h"
+	"sine_make.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\audio\sine_make.h
+	"generic/typedef.h"
+
+1623122140 d:\jl\ac6951c\ac6951c\cpu\br23\localtws\localtws.h
+	"application/audio_localtws.h"
+	"media/localtws_decoder.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\application\audio_localtws.h
+	"asm/includes.h"
+	"system/includes.h"
+	"media/mixer.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\localtws_decoder.h
+	"media/includes.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\decode\decode.c
+	"application/audio_dec_app.h"
+	"app_config.h"
+	"audio_config.h"
+	"app_main.h"
+	"tone_player.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\app_main.h
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\encode\encode_write_file.c
+	"encode_write.h"
+	"file_operate/file_bs_deal.h"
+	"audio_enc.h"
+	"media/audio_base.h"
+	"dev_manager.h"
+	"app_config.h"
+	"spi/nor_fs.h"
+	"rec_nor/nor_interface.h"
+
+1623122184 d:\jl\ac6951c\ac6951c\apps\common\audio\encode\encode_write.h
+	"app_config.h"
+	"system/includes.h"
+	"system/os/os_cpu.h"
+	"system/fs/fs.h"
+	"dev_manager.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\dev_manager\dev_manager.h
+	"system/includes.h"
+	"typedef.h"
+	"system/fs/fs.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\file_operate\file_bs_deal.h
+	"fs/fs.h"
+	"storage_dev/storage_dev.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\storage_dev\storage_dev.h
+	"typedef.h"
+
+1623122140 d:\jl\ac6951c\ac6951c\cpu\br23\audio_enc\audio_enc.h
+	"generic/typedef.h"
+	"media/includes.h"
+	"mic_effect.h"
+	"loud_speaker.h"
+	"audio_enc_file.h"
+	"audio_enc_recoder.h"
+	"audio_recorder_mix.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\cpu\br23\audio_mic\loud_speaker.h
+
+1623122140 d:\jl\ac6951c\ac6951c\cpu\br23\audio_enc\audio_enc_file.h
+	"media/audio_encoder.h"
+	"dev_manager.h"
+
+1623122140 d:\jl\ac6951c\ac6951c\cpu\br23\audio_enc\audio_enc_recoder.h
+	"media/audio_encoder.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\cpu\br23\audio_enc\audio_recorder_mix.h
+	"system/includes.h"
+	"media/includes.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\spi\nor_fs.h
+	"typedef.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\rec_nor\nor_interface.h
+	"typedef.h"
+	"system/includes.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\sine_make.c
+	"system/includes.h"
+	"sine_make.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\stream\stream_entry.c
+	"stream_entry.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\audio\stream\stream_entry.h
+	"system/includes.h"
+	"media/includes.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\stream\stream_src.c
+	"stream_src.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\audio\stream\stream_src.h
+	"system/includes.h"
+	"media/includes.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\stream\stream_sync.c
+	"stream_sync.h"
+
+1623122184 d:\jl\ac6951c\ac6951c\apps\common\audio\stream\stream_sync.h
+	"system/includes.h"
+	"media/includes.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\audio\uartpcmsender.c
+	"app_config.h"
+	"system/includes.h"
+	"asm/uart_dev.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\bt_common\bt_test_api.c
+	"typedef.h"
+	"app_config.h"
+	"task.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\debug.h
+	"asm/cpu.h"
+	"generic/typedef.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chargeic_manage.c
+	"chargeIc_manage.h"
+	"device/device.h"
+	"app_config.h"
+	"app_main.h"
+	"user_cfg.h"
+	"chgbox_det.h"
+	"chgbox_ctrl.h"
+	"chgbox_wireless.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\charge_box\chargeic_manage.h
+	"printf.h"
+	"cpu.h"
+	"timer.h"
+	"app_config.h"
+	"event.h"
+	"system/includes.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\user_cfg.h
+	"typedef.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_det.h
+	"typedef.h"
+
+1623122184 d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_ctrl.h
+	"event.h"
+
+1623122185 d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_wireless.h
+	"device/wireless_charge.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\wireless_charge.h
+	"asm/includes.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_box.c
+	"app_config.h"
+	"system/includes.h"
+	"chgbox_box.h"
+	"user_cfg.h"
+	"device/vm.h"
+	"app_task.h"
+	"app_main.h"
+	"chargeIc_manage.h"
+	"chgbox_ctrl.h"
+	"device/chargebox.h"
+	"asm/power/p33.h"
+	"chgbox_det.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_box.h
+	"typedef.h"
+	"system/event.h"
+	"device/chargebox.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\chargebox.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\vm.h
+	"ioctl.h"
+	"device/device.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\app_task.h
+	"system/task.h"
+	"app_msg.h"
+	"system/event.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\power\p33.h
+	"typedef.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_ctrl.c
+	"system/includes.h"
+	"app_config.h"
+	"app_task.h"
+	"chargeIc_manage.h"
+	"chgbox_ctrl.h"
+	"chgbox_box.h"
+	"chgbox_det.h"
+	"chgbox_wireless.h"
+	"key_event_deal.h"
+	"device/chargebox.h"
+	"chgbox_ui.h"
+	"chgbox_handshake.h"
+	"asm/pwm_led.h"
+	"le_smartbox_module.h"
+	"debug.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\key_event_deal.h
+	"typedef.h"
+	"system/event.h"
+
+1623122185 d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_ui.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_handshake.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\pwm_led.h
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\bt_manage\bt_trans_data\le_smartbox_module.h
+	<stdint.h>
+	"bt_common.h"
+	"ble_user.h"
+	"btstack/btstack_typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\include\bt_common.h
+	<stdint.h>
+	"app_config.h"
+	"lib_profile_cfg.h"
+	"bt_profile_cfg.h"
+
+1623122185 d:\jl\ac6951c\ac6951c\apps\common\config\include\bt_profile_cfg.h
+	"app_config.h"
+	"btcontroller_modules.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\btcontroller_modules.h
+	"hci_transport.h"
+	"btcontroller_mode.h"
+	"ble/hci_ll.h"
+	"classic/hci_lmp.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\hci_transport.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\ble\hci_ll.h
+	<stdint.h>
+	<stdlib.h>
+	<stdarg.h>
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\classic\hci_lmp.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\common\ble_user.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\btstack_typedef.h
+	"typedef.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_det.c
+	"gpio.h"
+	"asm/adc_api.h"
+	"asm/charge.h"
+	"asm/efuse.h"
+	"asm/power/p33.h"
+	"system/event.h"
+	"app_config.h"
+	"chgbox_det.h"
+	"chgbox_box.h"
+	"chgbox_ctrl.h"
+	"system/timer.h"
+	"chargeIc_manage.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\charge.h
+	"typedef.h"
+
+1623122184 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_handshake.c
+	"gpio.h"
+	"app_config.h"
+	"system/includes.h"
+	"chgbox_ctrl.h"
+	"asm/adc_api.h"
+	"chgbox_box.h"
+	"device/chargebox.h"
+	"chgbox_handshake.h"
+	"debug.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_ui.c
+	"typedef.h"
+	"asm/pwm_led.h"
+	"system/includes.h"
+	"chgbox_ctrl.h"
+	"chargeIc_manage.h"
+	"chgbox_ui.h"
+	"app_config.h"
+	"debug.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_ui_drv_pwmled.c
+	"typedef.h"
+	"asm/pwm_led.h"
+	"system/includes.h"
+	"chgbox_ctrl.h"
+	"chargeIc_manage.h"
+	"chgbox_ui.h"
+	"app_config.h"
+	"debug.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_ui_drv_timer.c
+	"typedef.h"
+	"asm/pwm_led.h"
+	"system/includes.h"
+	"chgbox_ctrl.h"
+	"chargeIc_manage.h"
+	"chgbox_ui.h"
+	"app_config.h"
+	"debug.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\charge_box\chgbox_wireless.c
+	"gpio.h"
+	"app_config.h"
+	"system/includes.h"
+	"device/wireless_charge.h"
+	"chgbox_ctrl.h"
+	"asm/adc_api.h"
+	"chgbox_box.h"
+	"device/chargebox.h"
+	"chgbox_wireless.h"
+	"debug.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\config\app_config.c
+	"system/includes.h"
+	"app_config.h"
+	"config/config_interface.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\config\config_interface.h
+	"config/config_transport.h"
+	"config/config_target.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\config\config_transport.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\config\config_target.h
+	"typedef.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\config\bt_profile_config.c
+	"system/includes.h"
+	"app_config.h"
+	"btcontroller_config.h"
+	"btstack/bt_profile_config.h"
+	"bt_common.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\port\br23\btcontroller_config.h
+	"btcontroller_modules.h"
+	"ble/ll_config.h"
+	"classic/lmp_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\ble\ll_config.h
+	<stdint.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\classic\lmp_config.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\bt_profile_config.h
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\config\ci_transport_uart.c
+	"system/includes.h"
+	"config/config_interface.h"
+	"system/event.h"
+	"app_online_cfg.h"
+	"asm/uart_dev.h"
+	"app_config.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\app_online_cfg.h
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\debug\debug.c
+	"app_config.h"
+	"typedef.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\debug\debug_lite.c
+	"app_config.h"
+	"typedef.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\dev_manager\dev_manager.c
+	"dev_manager.h"
+	"dev_reg.h"
+	"app_config.h"
+	"dev_multiplex_api.h"
+	"spi/nor_fs.h"
+	"dev_update.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\dev_manager\dev_reg.h
+	"system/includes.h"
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\user_api\dev_multiplex_api.h
+	"generic/typedef.h"
+	"app_config.h"
+	"usb/host/usb_host.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\host\usb_host.h
+	"system/task.h"
+	"device/device.h"
+	"asm/usb.h"
+	"usb/ch9.h"
+	"usb/usb_phy.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\usb.h
+	"typedef.h"
+	"generic/ioctl.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\ch9.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\usb_phy.h
+	"typedef.h"
+	"asm/usb.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\dev_manager\dev_update.h
+	"typedef.h"
+	"system/includes.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\dev_manager\dev_reg.c
+	"dev_reg.h"
+	"app_config.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\dev_manager\dev_update.c
+	"dev_update.h"
+	"dev_manager.h"
+	"update/update.h"
+	"update/update_loader_download.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\update\update.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\update\update_loader_download.h
+	"typedef.h"
+	"system/task.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\detection.c
+	"system/includes.h"
+	"app_config.h"
+	"app_action.h"
+	"gpio.h"
+	"app_main.h"
+	"update.h"
+	"user_cfg.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\app_action.h
+	"app_config.h"
+	"system/app_core.h"
+	"system/task.h"
+	"common/user_msg.h"
+	"bt_tws.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\common\user_msg.h
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\bt\bt_tws.h
+	"classic/tws_api.h"
+	"classic/tws_event.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\classic\tws_api.h
+	"typedef.h"
+	"classic/tws_event.h"
+	"classic/tws_local_media_sync.h"
+	"classic/tws_data_trans.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\classic\tws_event.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\classic\tws_local_media_sync.h
+	"generic/list.h"
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\classic\tws_data_trans.h
+	"generic/typedef.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm\bk1080\bk1080.c
+	"app_config.h"
+	"system/includes.h"
+	"fm/fm_manage.h"
+	"BK1080.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\fm\fm_manage.h
+	"printf.h"
+	"cpu.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"timer.h"
+	"app_config.h"
+	"event.h"
+	"system/includes.h"
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\iic_hw.h
+	"system/generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\iic_soft.h
+	"generic/typedef.h"
+
+1623122185 d:\jl\ac6951c\ac6951c\apps\common\device\fm\bk1080\bk1080.h
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm\fm_inside\fm_inside.c
+	"app_config.h"
+	"system/includes.h"
+	"fm/fm_manage.h"
+	"asm/fm_inside_api.h"
+	"asm/dac.h"
+	"audio_config.h"
+	"media/audio_base.h"
+	"overlay_code.h"
+	"clock_cfg.h"
+	"fm_inside.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\fm_inside_api.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\cpu\br23\overlay_code.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\cpu\br23\clock_cfg.h
+	"typedef.h"
+
+1623122185 d:\jl\ac6951c\ac6951c\apps\common\device\fm\fm_inside\fm_inside.h
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm\fm_manage.c
+	"app_config.h"
+	"system/includes.h"
+	"fm/fm_manage.h"
+	"rda5807/RDA5807.h"
+	"bk1080/BK1080.h"
+	"qn8035/QN8035.h"
+	"fm_inside/fm_inside.h"
+	"asm/audio_linein.h"
+	"audio_config.h"
+	"audio_dec/audio_dec_fm.h"
+	"debug.h"
+
+1623122185 d:\jl\ac6951c\ac6951c\apps\common\device\fm\rda5807\rda5807.h
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\device\fm\qn8035\qn8035.h
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm\qn8035\qn8035.c
+	"app_config.h"
+	"system/includes.h"
+	"fm/fm_manage.h"
+	"QN8035.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm\rda5807\rda5807.c
+	"app_config.h"
+	"system/includes.h"
+	"fm/fm_manage.h"
+	"RDA5807.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\ac3433\ac3433.c
+	"app_config.h"
+	"system/includes.h"
+	"fm_emitter/fm_emitter_manage.h"
+	"ac3433.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\fm_emitter\fm_emitter_manage.h
+	"printf.h"
+	"cpu.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"timer.h"
+	"app_config.h"
+	"event.h"
+	"system/includes.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\ac3433\ac3433.h
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\fm_emitter_manage.c
+	"app_config.h"
+	"circular_buf.h"
+	"system/includes.h"
+	"fm_emitter/fm_emitter_manage.h"
+	"ac3433/ac3433.h"
+	"qn8007/qn8007.h"
+	"qn8027/qn8027.h"
+	"fm_inside/fm_emitter_inside.h"
+	"audio_config.h"
+	"system/includes.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\qn8007\qn8007.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\qn8027\qn8027.h
+
+1623122185 d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\fm_inside\fm_emitter_inside.h
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\fm_inside\fm_emitter_inside.c
+	"app_config.h"
+	"system/includes.h"
+	"fm_emitter/fm_emitter_manage.h"
+	"fm_emitter_inside.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\qn8007\qn8007.c
+	"app_config.h"
+	"system/includes.h"
+	"fm_emitter/fm_emitter_manage.h"
+	"qn8007.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\fm_emitter\qn8027\qn8027.c
+	"app_config.h"
+	"system/includes.h"
+	"fm_emitter/fm_emitter_manage.h"
+	"qn8027.h"
+
+1623122185 source:d:\jl\ac6951c\ac6951c\apps\common\device\gsensor\da230.c
+	"gSensor/EPMotion.h"
+	"gSensor/da230.h"
+	"gSensor/gSensor_manage.h"
+	"app_config.h"
+	"debug.h"
+
+1623122506 d:\jl\ac6951c\ac6951c\apps\common\device\gsensor\epmotion.h
+	"mira_std.h"
+
+1623122506 d:\jl\ac6951c\ac6951c\apps\common\device\gsensor\mira_std.h
+
+1623122185 d:\jl\ac6951c\ac6951c\apps\common\device\gsensor\da230.h
+	"typedef.h"
+	"mira_std.h"
+
+1623122506 d:\jl\ac6951c\ac6951c\apps\common\device\gsensor\gsensor_manage.h
+	"printf.h"
+	"cpu.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"timer.h"
+	"app_config.h"
+	"event.h"
+	"system/includes.h"
+
+1623122506 source:d:\jl\ac6951c\ac6951c\apps\common\device\gsensor\gsensor_manage.c
+	"gSensor/gSensor_manage.h"
+	"device/device.h"
+	"app_config.h"
+	"debug.h"
+	"key_event_deal.h"
+	"btstack/avctp_user.h"
+	"app_main.h"
+	"tone_player.h"
+	"user_cfg.h"
+	"bt_tws.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\avctp_user.h
+	"typedef.h"
+	"btstack_typedef.h"
+
+1623122506 source:d:\jl\ac6951c\ac6951c\apps\common\device\gsensor\sc7a20.c
+	"gSensor/SC7A20.h"
+	"gSensor/gSensor_manage.h"
+	"app_config.h"
+	"gSensor/SC7A20.h"
+	"math.h"
+
+1623122506 d:\jl\ac6951c\ac6951c\apps\common\device\gsensor\sc7a20.h
+
+1623122506 source:d:\jl\ac6951c\ac6951c\apps\common\device\nandflash\nandflash.c
+	"nandflash.h"
+	"timer.h"
+	"app_config.h"
+	"asm/clock.h"
+	"debug.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\include\nandflash.h
+	"device/device.h"
+	"ioctl_cmds.h"
+	"asm/spi.h"
+	"printf.h"
+	"gpio.h"
+	"device_drive.h"
+	"malloc.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\spi.h
+	"typedef.h"
+	"generic/ioctl.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\device\device_drive.h
+	"typedef.h"
+	"errno-base.h"
+	"ioctl.h"
+	"os/os_api.h"
+	<pthread.h>
+
+1623122506 source:d:\jl\ac6951c\ac6951c\apps\common\device\norflash\norflash.c
+	"norflash.h"
+	"app_config.h"
+	"asm/clock.h"
+	"system/timer.h"
+	"debug.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\include\norflash.h
+	"device/device.h"
+	"ioctl_cmds.h"
+	"asm/spi.h"
+	"printf.h"
+	"gpio.h"
+	"device_drive.h"
+	"malloc.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\fat_nor\nor_fs.c
+	"spi/nor_fs.h"
+	"os/os_api.h"
+	"asm/crc16.h"
+	"stdlib.h"
+	"fs/fs.h"
+	"system/includes.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\fat_nor\phone_rec_fs.c
+	"spi/nor_fs.h"
+	"os/os_api.h"
+	"asm/crc16.h"
+	"stdlib.h"
+	"fs/fs.h"
+	"system/includes.h"
+	"fs/sdfile.h"
+	"boot.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\boot.h
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\fat_nor\virfat_flash.c
+	"system/includes.h"
+	"app_config.h"
+	"fs/virfat_flash.h"
+	"res/resfile.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\fs\virfat_flash.h
+	"system/includes.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\res\resfile.h
+	"typedef.h"
+	"fs/fs.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\file_operate\file_api.c
+	"app_config.h"
+	"system/includes.h"
+	"system/os/os_cpu.h"
+	"file_operate/file_bs_deal.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\file_operate\file_bs_deal.c
+	"file_bs_deal.h"
+	"uart.h"
+	"dev_manager.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\file_operate\file_manager.c
+	"file_manager.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\file_operate\file_manager.h
+	"system/includes.h"
+	"typedef.h"
+	"system/fs/fs.h"
+	"dev_manager.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\iap\iap_des.c
+	"apple_dock/iAP.h"
+	"apple_dock/iAP2.h"
+	"apple_dock/iAP_device.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\apple_dock\iap.h
+	"generic/typedef.h"
+	"uart.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\apple_dock\iap2.h
+	"generic/typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\apple_dock\iap_device.h
+	"generic/typedef.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\iap\iap_device.c
+	"apple_dock/iAP.h"
+	"apple_dock/iAP2.h"
+	"apple_dock/iAP_device.h"
+	"apple_dock/iAP_iic.h"
+	"app_config.h"
+	"init.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\apple_dock\iap_iic.h
+	"generic/typedef.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\iap\iap_iic.c
+	"apple_dock/iAP_iic.h"
+	"apple_dock/iAP.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"app_config.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\adkey.c
+	"key_driver.h"
+	"adkey.h"
+	"gpio.h"
+	"system/event.h"
+	"app_config.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\adkey_rtcvdd.c
+	"includes.h"
+	"key_driver.h"
+	"adkey.h"
+	"gpio.h"
+	"system/event.h"
+	"app_config.h"
+	"asm/power/p33.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\ctmu_touch_key.c
+	"key_driver.h"
+	"app_config.h"
+	"asm/ctmu.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\ctmu.h
+	"typedef.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\iokey.c
+	"key_driver.h"
+	"iokey.h"
+	"gpio.h"
+	"system/event.h"
+	"app_config.h"
+	"asm/clock.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\irkey.c
+	"key_driver.h"
+	"irkey.h"
+	"gpio.h"
+	"asm/irflt.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\irflt.h
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\key_driver.c
+	"device/key_driver.h"
+	"system/event.h"
+	"system/init.h"
+	"iokey.h"
+	"adkey.h"
+	"slidekey.h"
+	"irkey.h"
+	"touch_key.h"
+	"system/timer.h"
+	"asm/power_interface.h"
+	"app_config.h"
+	"rdec_key.h"
+	"tone_player.h"
+	"irSensor/ir_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\rdec_key.c
+	"key_driver.h"
+	"gpio.h"
+	"system/event.h"
+	"app_config.h"
+	"audio_config.h"
+	"rdec_key.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\slidekey.c
+	"key_driver.h"
+	"slidekey.h"
+	"gpio.h"
+	"system/event.h"
+	"system/includes.h"
+	"app_config.h"
+	"asm/clock.h"
+	"app_action.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\key\touch_key.c
+	"touch_key.h"
+	"key_driver.h"
+	"app_config.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\music\breakpoint.c
+	"breakpoint.h"
+	"app_config.h"
+	"vm.h"
+	"system/syscfg_id.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\music\breakpoint.h
+	"system/includes.h"
+	"media/audio_decoder.h"
+	"music/music_player.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\music\music_player.h
+	"system/app_core.h"
+	"system/includes.h"
+	"server/server_core.h"
+	"media/audio_decoder.h"
+	"dev_manager/dev_manager.h"
+	"file_operate/file_manager.h"
+	"audio_dec/audio_dec_file.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\server\server_core.h
+	"generic/typedef.h"
+	"system/task.h"
+	"spinlock.h"
+	"list.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\music\general_player.c
+	"app_config.h"
+	"key_event_deal.h"
+	"audio_enc.h"
+	"general_player.h"
+	"dev_manager.h"
+	"bt/bt.h"
+	"common/dev_status.h"
+	"app_task.h"
+	"app_msg.h"
+	"media/audio_decoder.h"
+	"file_operate/file_manager.h"
+	"audio_dec/audio_dec_file.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\music\general_player.h
+	"system/app_core.h"
+	"system/includes.h"
+	"system/event.h"
+	"dev_manager.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\bt\bt.h
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\common\dev_status.h
+	"typedef.h"
+	"system/includes.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\music\music_decrypt.c
+	"system/app_core.h"
+	"system/includes.h"
+	"app_config.h"
+	"music/music_decrypt.h"
+	"system/fs/fs.h"
+	"debug.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\music\music_id3.c
+	"system/app_core.h"
+	"system/includes.h"
+	"app_config.h"
+	"music/music_id3.h"
+	"system/fs/fs.h"
+	"debug.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\music\music_player.c
+	"music/music_player.h"
+	"key_event_deal.h"
+	"app_config.h"
+	"audio_enc.h"
+	"app_main.h"
+	"vm.h"
+	"debug.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\rec_nor\nor_interface.c
+	"nor_interface.h"
+	"nor_rec_fs.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\rec_nor\nor_rec_fs.h
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\rec_nor\nor_rec_fs.c
+	"os/os_api.h"
+	"asm/crc16.h"
+	"stdlib.h"
+	"fs/fs.h"
+	"system/includes.h"
+	"nor_interface.h"
+	"nor_rec_fs.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\common\3th_profile_api.c
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"typedef.h"
+	"3th_profile_api.h"
+	"bt_tws.h"
+	"key_event_deal.h"
+	"system/timer.h"
+	"btstack/frame_queque.h"
+	"bt_common.h"
+	"btstack/third_party/baidu/dueros_dma.h"
+	"btstack/avctp_user.h"
+	"os/os_api.h"
+	"dma_deal.h"
+	"gma.h"
+	"rcsp_adv_tws_ota.h"
+	"smartbox_update_tws.h"
+	"update_tws.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\common\3th_profile_api.h
+	<string.h>
+	<stdint.h>
+	"le_common.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\le_common.h
+	"typedef.h"
+	<stdint.h>
+	"btstack/bluetooth.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\bluetooth.h
+	"typedef.h"
+	"le/ble_data_types.h"
+	"le/ble_api.h"
+	"le/le_user.h"
+	"le/att.h"
+	"le/gatt.h"
+	"le/sm.h"
+	"third_party/baidu/dma_protobuf.h"
+	"third_party/baidu/dueros_dma.h"
+	"third_party/baidu/dueros_dma_pb.h"
+	"third_party/baidu/dueros_platform.h"
+	"btstack_event.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\le\ble_data_types.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\le\ble_api.h
+	"typedef.h"
+	"btstack/btstack_typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\le\le_user.h
+	"typedef.h"
+	"btstack/btstack_typedef.h"
+	"ble_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\le\att.h
+	"typedef.h"
+	"btstack/btstack_typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\le\gatt.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\le\sm.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\baidu\dma_protobuf.h
+	<string.h>
+	<stdint.h>
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\baidu\dueros_dma.h
+	<string.h>
+	<stdint.h>
+	"btstack/third_party/baidu/dueros_dma_pb.h"
+	"btstack/third_party/baidu/dueros_platform.h"
+	"typedef.h"
+	"btstack/frame_queque.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\baidu\dueros_dma_pb.h
+	<string.h>
+	<stdint.h>
+	"dma_protobuf.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\baidu\dueros_platform.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\frame_queque.h
+	<string.h>
+	<stdint.h>
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\btstack_event.h
+	"btstack/btstack_typedef.h"
+	<stdint.h>
+	"le/gatt.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\dma_deal\dma_deal.h
+	<string.h>
+	<stdint.h>
+	"btstack/third_party/baidu/dueros_dma_pb.h"
+	"btstack/third_party/baidu/dueros_platform.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\tm_gma_protocol\gma.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\smartbox_update\smartbox_update_tws.h
+	"app_config.h"
+	"system/event.h"
+	"update_loader_download.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\include\update_tws.h
+	"app_config.h"
+	"system/event.h"
+	"update_loader_download.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\common\custom_cfg.c
+	"board_config.h"
+	"custom_cfg.h"
+	"app_config.h"
+	"rcsp_user_update.h"
+	"rcsp_bluetooth.h"
+	"rcsp_adv_user_update.h"
+	"rcsp_adv_bluetooth.h"
+	"smartbox_adv_bluetooth.h"
+	"app_config.h"
+	"fs.h"
+	"uart.h"
+	<string.h>
+	"flash_api.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\common\custom_cfg.h
+	"typedef.h"
+	<string.h>
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\rcsp_updata\rcsp_user_update.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\rcsp_bluetooth.h
+	"typedef.h"
+	"le_common.h"
+	"spp_user.h"
+	"system/event.h"
+	"rcsp_msg.h"
+	"ble_user.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\common\spp_user.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\rcsp_msg.h
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\rcsp_updata\rcsp_adv_user_update.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_rcsp_protocol\rcsp_adv_bluetooth.h
+	"app_config.h"
+	"typedef.h"
+	"system/event.h"
+	"le_common.h"
+	"ble_user.h"
+	"spp_user.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\smartbox_setting_opt\smartbox_adv_bluetooth.h
+	"typedef.h"
+	"system/event.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\common\mic_rec.c
+	"system/includes.h"
+	"media/includes.h"
+	"app_config.h"
+	"audio_config.h"
+	"classic/tws_local_media_sync.h"
+	"3th_profile_api.h"
+	"classic/tws_api.h"
+	"btstack/avctp_user.h"
+	"bt_tws.h"
+	"btstack/third_party/baidu/dueros_dma.h"
+	"debug.h"
+	"key_event_deal.h"
+	"gma.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\dma_deal\dma_deal.c
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	"typedef.h"
+	"btstack/third_party/baidu/dueros_dma.h"
+	"btstack/third_party/baidu/dueros_dma_pb.h"
+	"btstack/third_party/baidu/dueros_platform.h"
+	"system/task.h"
+	"os/os_api.h"
+	"app_config.h"
+	"app_action.h"
+	"generic/lbuf.h"
+	"user_cfg.h"
+	"btstack/avctp_user.h"
+	"tone_player.h"
+	"key_event_deal.h"
+	"event.h"
+	"key_event_deal.h"
+	"dma_deal.h"
+	"classic/tws_local_media_sync.h"
+	"bt_tws.h"
+	"bt_common.h"
+	"3th_profile_api.h"
+	"system/timer.h"
+	"spp_user.h"
+	"btstack/frame_queque.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\dma_deal\dueros_spp_user.c
+	"app_config.h"
+	"app_action.h"
+	"btstack/avctp_user.h"
+	"system/includes.h"
+	"spp_user.h"
+	"string.h"
+	"circular_buf.h"
+	"dma_deal.h"
+	"key_event_deal.h"
+	"classic/tws_api.h"
+	"dueros_dma.h"
+	"bt_common.h"
+	"3th_profile_api.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\dma_deal\le_dueros_dma.c
+	"system/app_core.h"
+	"system/includes.h"
+	"app_config.h"
+	"app_action.h"
+	"btstack/btstack_task.h"
+	"btstack/bluetooth.h"
+	"user_cfg.h"
+	"vm.h"
+	"app_power_manage.h"
+	"btcontroller_modules.h"
+	"dma_deal.h"
+	"key_event_deal.h"
+	"bt_tws.h"
+	"bt_common.h"
+	"3th_profile_api.h"
+	"le_common.h"
+	"le_dueros_dma.h"
+	"dueros_dma.h"
+	"custom_cfg.h"
+	"ble_user.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\btstack_task.h
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\app_power_manage.h
+	"typedef.h"
+	"system/event.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\dma_deal\le_dueros_dma.h
+	<stdint.h>
+	"bt_common.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\hid_user.c
+	"app_config.h"
+	"app_action.h"
+	"system/includes.h"
+	"spp_user.h"
+	"string.h"
+	"circular_buf.h"
+	"spp_trans_data.h"
+	"bt_common.h"
+	"btstack/avctp_user.h"
+	"circular_buf.h"
+	"hid_user.h"
+	"standard_hid.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\trans_data_demo\spp_trans_data.h
+	"typedef.h"
+	"bt_common.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\hid_user.h
+	"typedef.h"
+	"bt_common.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\include\standard_hid.h
+	"typedef.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_bt_name_setting.c
+	"app_config.h"
+	"user_cfg.h"
+	"syscfg_id.h"
+	"user_cfg_id.h"
+	"le_rcsp_adv_module.h"
+	"adv_bt_name_setting.h"
+	"adv_setting_common.h"
+	"rcsp_adv_tws_sync.h"
+	"rcsp_adv_opt.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\bt_trans_data\le_rcsp_adv_module.h
+	<stdint.h>
+	"bt_common.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_bt_name_setting.h
+	"le_rcsp_adv_module.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_setting_common.h
+	"typedef.h"
+	"event.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_rcsp_protocol\rcsp_adv_tws_sync.h
+	"classic/tws_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_rcsp_protocol\rcsp_adv_opt.h
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_key_setting.c
+	"app_config.h"
+	"syscfg_id.h"
+	"user_cfg_id.h"
+	"key_event_deal.h"
+	"le_rcsp_adv_module.h"
+	"adv_key_setting.h"
+	"adv_setting_common.h"
+	"rcsp_adv_tws_sync.h"
+	"rcsp_adv_opt.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_key_setting.h
+	"le_rcsp_adv_module.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_led_setting.c
+	"app_config.h"
+	"syscfg_id.h"
+	"user_cfg_id.h"
+	"asm/pwm_led.h"
+	"user_cfg.h"
+	"ui_manage.h"
+	"le_rcsp_adv_module.h"
+	"adv_led_setting.h"
+	"adv_setting_common.h"
+	"rcsp_adv_tws_sync.h"
+	"rcsp_adv_opt.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui_manage.h
+	"typedef.h"
+	"asm/pwm_led.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_led_setting.h
+	"le_rcsp_adv_module.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_mic_setting.c
+	"app_config.h"
+	"syscfg_id.h"
+	"user_cfg_id.h"
+	"le_rcsp_adv_module.h"
+	"adv_mic_setting.h"
+	"adv_setting_common.h"
+	"rcsp_adv_tws_sync.h"
+	"rcsp_adv_opt.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_mic_setting.h
+	"le_rcsp_adv_module.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_time_stamp_setting.c
+	"app_config.h"
+	"syscfg_id.h"
+	"user_cfg_id.h"
+	"rcsp_adv_bluetooth.h"
+	"JL_rcsp_protocol.h"
+	"le_rcsp_adv_module.h"
+	"adv_time_stamp_setting.h"
+	"adv_setting_common.h"
+	"rcsp_adv_tws_sync.h"
+	"rcsp_adv_opt.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\rcsp\jl_rcsp_protocol.h
+	"typedef.h"
+	"JL_rcsp_packet.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\rcsp\jl_rcsp_packet.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_time_stamp_setting.h
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_work_setting.c
+	"app_config.h"
+	"syscfg_id.h"
+	"user_cfg_id.h"
+	"le_rcsp_adv_module.h"
+	"adv_work_setting.h"
+	"adv_setting_common.h"
+	"rcsp_adv_tws_sync.h"
+	"rcsp_adv_opt.h"
+	"os/os_api.h"
+	"btstack/avctp_user.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_work_setting.h
+	"le_rcsp_adv_module.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_rcsp_protocol\rcsp_adv_opt.c
+	"app_config.h"
+	"syscfg_id.h"
+	"user_cfg_id.h"
+	"le_rcsp_adv_module.h"
+	"rcsp_adv_bluetooth.h"
+	"rcsp_adv_opt.h"
+	"adv_setting_common.h"
+	"rcsp_adv_tws_sync.h"
+	"adv_time_stamp_setting.h"
+	"adv_bt_name_setting.h"
+	"adv_key_setting.h"
+	"adv_led_setting.h"
+	"adv_mic_setting.h"
+	"adv_work_setting.h"
+	"adv_eq_setting.h"
+	"adv_high_low_vol.h"
+	"bt_tws.h"
+	"btstack/avctp_user.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_eq_setting.h
+	"le_rcsp_adv_module.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_app_setting\adv_high_low_vol.h
+	"le_rcsp_adv_module.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\adv_rcsp_protocol\rcsp_adv_tws_sync.c
+	"app_config.h"
+	"rcsp_adv_tws_sync.h"
+	"adv_setting_common.h"
+	"rcsp_adv_opt.h"
+	"adv_time_stamp_setting.h"
+	"rcsp_adv_bluetooth.h"
+	"bt_tws.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\rcsp_updata\rcsp_adv_user_update.c
+	"app_config.h"
+	"rcsp_adv_user_update.h"
+	"uart.h"
+	"system/timer.h"
+	"update.h"
+	"custom_cfg.h"
+	"btstack/avctp_user.h"
+	"JL_rcsp_packet.h"
+	"JL_rcsp_protocol.h"
+	"rcsp_adv_bluetooth.h"
+	"le_rcsp_adv_module.h"
+	"update_loader_download.h"
+	"classic/tws_api.h"
+	"syscfg_id.h"
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\le_client_demo.c
+	"system/app_core.h"
+	"system/includes.h"
+	"app_config.h"
+	"app_action.h"
+	"btstack/btstack_task.h"
+	"btstack/bluetooth.h"
+	"user_cfg.h"
+	"vm.h"
+	"btcontroller_modules.h"
+	"bt_common.h"
+	"le_client_demo.h"
+	"le_common.h"
+	"ble_user.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\le_client_demo.h
+	<stdint.h>
+
+1623122507 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\online_db\online_db_deal.c
+	"app_config.h"
+	"app_action.h"
+	"system/includes.h"
+	"string.h"
+	"online_db_deal.h"
+	"circular_buf.h"
+	"bt_common.h"
+	"debug.h"
+
+1623122507 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\online_db\online_db_deal.h
+	"typedef.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\online_db\spp_online_db.c
+	"app_config.h"
+	"app_action.h"
+	"system/includes.h"
+	"spp_user.h"
+	"string.h"
+	"circular_buf.h"
+	"bt_common.h"
+	"online_db_deal.h"
+	"spp_online_db.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\online_db\spp_online_db.h
+	"typedef.h"
+	"bt_common.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\trans_data_demo\le_trans_data.c
+	"system/app_core.h"
+	"system/includes.h"
+	"app_config.h"
+	"app_action.h"
+	"btstack/btstack_task.h"
+	"btstack/bluetooth.h"
+	"user_cfg.h"
+	"vm.h"
+	"btcontroller_modules.h"
+	"bt_common.h"
+	"3th_profile_api.h"
+	"le_trans_data.h"
+	"le_common.h"
+	"rcsp_bluetooth.h"
+	"JL_rcsp_api.h"
+	"custom_cfg.h"
+	"btstack/btstack_event.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\trans_data_demo\le_trans_data.h
+	<stdint.h>
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\rcsp\jl_rcsp_api.h
+	"typedef.h"
+	"uart.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\trans_data_demo\spp_trans_data.c
+	"app_config.h"
+	"app_action.h"
+	"system/includes.h"
+	"spp_user.h"
+	"string.h"
+	"circular_buf.h"
+	"spp_trans_data.h"
+	"bt_common.h"
+	"btstack/avctp_user.h"
+	"spp_trans_data.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\tm_gma_protocol\gma_license.c
+	<stdint.h>
+	<string.h>
+	"app_config.h"
+	"gma.h"
+	"generic/lbuf.h"
+	"init.h"
+	"gma_license.h"
+	"syscfg_id.h"
+	"vm.h"
+	"typedef.h"
+	"bt_tws.h"
+	"key_event_deal.h"
+	"system/includes.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\tm_gma_protocol\gma_license.h
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\tm_gma_protocol\gma_spp_user.c
+	"app_config.h"
+	"app_action.h"
+	"system/includes.h"
+	"spp_user.h"
+	"string.h"
+	"circular_buf.h"
+	"bt_common.h"
+	"gma.h"
+	"bt_tws.h"
+	"3th_profile_api.h"
+	"app_config.h"
+	"gma_spp_user.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\tm_gma_protocol\gma_spp_user.h
+	"typedef.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\tm_gma_protocol\le_gma.c
+	"system/app_core.h"
+	"system/includes.h"
+	"app_config.h"
+	"app_action.h"
+	"btstack/avctp_user.h"
+	"btstack/btstack_task.h"
+	"btstack/bluetooth.h"
+	"user_cfg.h"
+	"vm.h"
+	"btcontroller_modules.h"
+	"bt_common.h"
+	"le_common.h"
+	"le_gma.h"
+	"gma.h"
+	"bt_tws.h"
+	"ble_user.h"
+	"3th_profile_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\tm_gma_protocol\le_gma.h
+	<stdint.h>
+	"bt_common.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\tm_gma_protocol\tm_gma_deal.c
+	"btstack/avctp_user.h"
+	"app_config.h"
+	"gma.h"
+	"key_event_deal.h"
+	"app_config.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\ui\lcd\lcd_ui_api.c
+	"app_config.h"
+	"includes.h"
+	"ui/ui_api.h"
+	"ui/ui.h"
+	"typedef.h"
+	"ui/ui_sys_param.h"
+	"ui/res_config.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\ui_api.h
+	"app_config.h"
+	"ui/lcd_spi/lcd_drive.h"
+	"ui/ui.h"
+	"ui/ui_style.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\lcd_spi\lcd_drive.h
+	"asm/spi.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui.h
+	"window.h"
+	"ui_button.h"
+	"ui_grid.h"
+	"ui_time.h"
+	"ui_camera.h"
+	"ui_pic.h"
+	"ui_text.h"
+	"ui_battery.h"
+	"ui_browser.h"
+	"ui_slider.h"
+	"ui_slider_vert.h"
+	"ui_number.h"
+	"ui_watch.h"
+	"ui_progress.h"
+	"ui_progress_multi.h"
+	"ui_rotate.h"
+	<stdarg.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\window.h
+	"ui/layer.h"
+	"ui/ui_core.h"
+	"ui/control.h"
+	"list.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\layer.h
+	"ui/layout.h"
+	"ui/control.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\layout.h
+	"ui/ui_core.h"
+	"ui/control.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_core.h
+	"typedef.h"
+	"rect.h"
+	"system/event.h"
+	"fs/fs.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\control.h
+	"ui/ui_core.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_button.h
+	"ui/control.h"
+	"ui/ui_core.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_grid.h
+	"ui/ui_core.h"
+	"ui/control.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_time.h
+	"ui/control.h"
+	"ui/ui_core.h"
+	"ui/p.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\p.h
+	"ui/ui_core.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_camera.h
+	"ui/control.h"
+	"ui/ui_core.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_pic.h
+	"ui/ui_core.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_text.h
+	"ui/ui_core.h"
+	"ui/control.h"
+	"font/font_all.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\font\font_all.h
+	"generic/typedef.h"
+	"font/font_sdfs.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\font\font_sdfs.h
+	"generic/typedef.h"
+	"fs/fs.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_battery.h
+	"ui/control.h"
+	"list.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_browser.h
+	"ui/ui_core.h"
+	"ui/control.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_slider.h
+	"ui/ui_core.h"
+	"ui/control.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_slider_vert.h
+	"ui/ui_core.h"
+	"ui/control.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_number.h
+	"ui/control.h"
+	"ui/ui_core.h"
+	"ui/p.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_watch.h
+	"ui/control.h"
+	"ui/ui_core.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_progress.h
+	"ui/control.h"
+	"ui/ui_core.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_progress_multi.h
+	"ui/control.h"
+	"ui/ui_core.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui\ui_rotate.h
+	"rect.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\ui_style.h
+	"ui/style_led7.h"
+	"ui/style_jl01.h"
+	"ui/style_jl02.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\style_led7.h
+	"ui/ui_common.h"
+	"ui/led7/led7_driver.h"
+	"ui/lcd_seg/lcd_seg3x9_driver.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\ui_common.h
+	"typedef.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\led7\led7_driver.h
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\lcd_seg\lcd_seg3x9_driver.h
+
+1615425098 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\style_jl02.h
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\ui_sys_param.h
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\res_config.h
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\ui\lcd_simple\lcd_simple_api.c
+	"app_config.h"
+	"includes.h"
+	"ui/ui_api.h"
+	"ui/ui.h"
+	"typedef.h"
+	"ui/ui_simple/ui_res.h"
+	"font/font_textout.h"
+	"ui/lcd_simple/ui_mainmenu.h"
+	"key_event_deal.h"
+	"app_task.h"
+	"font/language_list.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\ui_simple\ui_res.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\font\font_textout.h
+	"generic/typedef.h"
+	"font/font_all.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\lcd_simple\ui_mainmenu.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\system\ui\font\language_list.h
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\ui\lcd_simple\ui.c
+	"app_config.h"
+	"includes.h"
+	"system/includes.h"
+	"fs/fs.h"
+	"ui/ui_simple/ui_res.h"
+	"ui/lcd_simple/ui.h"
+	"key_event_deal.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\lcd_simple\ui.h
+	"menu.h"
+	"font/language_list.h"
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\ui\lcd_simple\menu.h
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\ui\lcd_simple\ui_mainmenu.c
+	"app_config.h"
+	"includes.h"
+	"system/includes.h"
+	"fs/fs.h"
+	"ui/ui_simple/ui_res.h"
+	"ui/lcd_simple/ui_mainmenu.h"
+	"ui/lcd_simple/ui.h"
+	"key_event_deal.h"
+	"app_task.h"
+	"app_msg.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\ui\led7\led7_ui_api.c
+	"app_config.h"
+	"includes.h"
+	"ui/ui_api.h"
+	"clock_cfg.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\update\norflash_ufw_update.c
+	"app_config.h"
+	"typedef.h"
+	"fs.h"
+	"norflash.h"
+	"spi/nor_fs.h"
+	"rec_nor/nor_interface.h"
+	"update_loader_download.h"
+	"update.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\update\norflash_update.c
+	"app_config.h"
+	"typedef.h"
+	"fs.h"
+	"norflash.h"
+	"spi/nor_fs.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\update\testbox_update.c
+	"update_loader_download.h"
+	"update.h"
+	"btctrler_task.h"
+	"app_config.h"
+	"lib_profile_cfg.h"
+	"bt_profile_cfg.h"
+	"smartbox/smartbox_task.h"
+	"system/debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btctrler\btctrler_task.h
+	"typedef.h"
+	"system/task.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\smartbox_task.h
+	"typedef.h"
+	"app_config.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\update\uart_update.c
+	"app_config.h"
+	"typedef.h"
+	"update_loader_download.h"
+	"os/os_api.h"
+	"system/task.h"
+	"update.h"
+	"gpio.h"
+	"uart_update.h"
+	"asm/uart_dev.h"
+	"asm/clock.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\update\uart_update.h
+	"typedef.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\update\uart_update_master.c
+	"app_config.h"
+	"typedef.h"
+	"update_loader_download.h"
+	"os/os_api.h"
+	"system/task.h"
+	"update.h"
+	"gpio.h"
+	"uart_update.h"
+	"asm/uart_dev.h"
+	"asm/clock.h"
+	"timer.h"
+	"system/fs/fs.h"
+	"debug.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\update\update.c
+	"update.h"
+	"update_loader_download.h"
+	"asm/crc16.h"
+	"asm/wdt.h"
+	"os/os_api.h"
+	"app_config.h"
+	"cpu.h"
+	"syscfg_id.h"
+	"vm.h"
+	"btcontroller_modules.h"
+	"system/includes.h"
+	"uart_update.h"
+	"dual_bank_updata_api.h"
+	"smartbox_extra_flash_opt.h"
+	"ui/ui_api.h"
+	"rcsp_user_update.h"
+	"rcsp_adv_user_update.h"
+	"custom_cfg.h"
+	"update_tws.h"
+	"system/debug.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/pwm_led.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\update\dual_bank_updata_api.h
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\cdc.c
+	"usb/device/usb_stack.h"
+	"usb/usb_config.h"
+	"usb/device/cdc.h"
+	"app_config.h"
+	"os/os_api.h"
+	"cdc_defs.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\device\usb_stack.h
+	"typedef.h"
+	"asm/usb.h"
+	"usb/ch9.h"
+	"usb/usb_phy.h"
+	"usb/otg.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\otg.h
+	"asm/usb.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\usb_config.h
+	"typedef.h"
+	"asm/usb.h"
+	"usb/device/usb_stack.h"
+	"usb/host/usb_host.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\device\cdc.h
+	"usb/device/usb_stack.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\device\cdc_defs.h
+	"typedef.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\descriptor.c
+	"usb/device/usb_stack.h"
+	"usb/device/descriptor.h"
+	"usb/device/uac_audio.h"
+	"app_config.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\device\descriptor.h
+	"asm/usb.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\device\uac_audio.h
+	"asm/usb.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\hid.c
+	"os/os_api.h"
+	"usb/device/usb_stack.h"
+	"usb/device/hid.h"
+	"usb_config.h"
+	"app_config.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\device\hid.h
+	"typedef.h"
+	"asm/usb.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\msd.c
+	"system/includes.h"
+	"usb/device/usb_stack.h"
+	"usb/device/msd.h"
+	"usb/scsi.h"
+	"usb_config.h"
+	"device/device.h"
+	"app_config.h"
+	"dev_manager.h"
+	"apple_dock/iAP.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\device\msd.h
+	"asm/usb.h"
+	"usb_stack.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\usb\scsi.h
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\msd_upgrade.c
+	"system/includes.h"
+	"usb/device/msd.h"
+	"usb/scsi.h"
+	"usb_config.h"
+	"app_config.h"
+	"cpu.h"
+	"asm/debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\debug.h
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\task_pc.c
+	"system/app_core.h"
+	"system/includes.h"
+	"server/server_core.h"
+	"app_config.h"
+	"app_action.h"
+	"os/os_api.h"
+	"device/sdmmc.h"
+	"app_charge.h"
+	"asm/charge.h"
+	"app_task.h"
+	"usb/usb_config.h"
+	"usb/device/usb_stack.h"
+	"usb/device/hid.h"
+	"usb/device/msd.h"
+	"usb/device/cdc.h"
+	"dev_multiplex_api.h"
+	"apple_dock/iAP.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\device\sdmmc.h
+	"generic/typedef.h"
+	"generic/ioctl.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\app_charge.h
+	"typedef.h"
+	"system/event.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\uac1.c
+	"system/includes.h"
+	"usb_config.h"
+	"usb/device/usb_stack.h"
+	"usb/device/uac_audio.h"
+	"app_config.h"
+	"debug.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\uac_stream.c
+	"app_config.h"
+	"system/includes.h"
+	"printf.h"
+	"usb/usb_config.h"
+	"usb/device/usb_stack.h"
+	"usb/device/uac_audio.h"
+	"uac_stream.h"
+	"audio_config.h"
+	"audio_track.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\device\uac_stream.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\audio_track.h
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\usb_device.c
+	"usb/device/usb_stack.h"
+	"usb_config.h"
+	"usb/device/msd.h"
+	"usb/scsi.h"
+	"usb/device/hid.h"
+	"usb/device/uac_audio.h"
+	"usb/device/cdc.h"
+	"irq.h"
+	"init.h"
+	"gpio.h"
+	"app_config.h"
+	"debug.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\usb\device\user_setup.c
+	"usb/device/usb_stack.h"
+	"usb_config.h"
+	"usb/device/msd.h"
+	"usb/scsi.h"
+	"usb/device/hid.h"
+	"usb/device/uac_audio.h"
+	"irq.h"
+	"init.h"
+	"gpio.h"
+	"app_config.h"
+	"apple_dock/iAP.h"
+	"debug.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\adb.c
+	"includes.h"
+	"asm/includes.h"
+	"system/timer.h"
+	"device/ioctl_cmds.h"
+	"usb/host/usb_host.h"
+	"usb_ctrl_transfer.h"
+	"usb_bulk_transfer.h"
+	"device_drive.h"
+	"adb.h"
+	"usb_config.h"
+	"app_config.h"
+	"debug.h"
+	"adb_rsa_key.c"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\host\usb_ctrl_transfer.h
+	"usb/ch9.h"
+	"usb/usb_phy.h"
+	"device/device.h"
+	"usb_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\host\usb_bulk_transfer.h
+	"typedef.h"
+	"device/device.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\host\adb.h
+	"system/task.h"
+	"device/device.h"
+	"usb/scsi.h"
+	"usb_bulk_transfer.h"
+	"usb/host/usb_host.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\host\adb_rsa_key.c
+	"typedef.h"
+	"app_config.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\aoa.c
+	"includes.h"
+	"app_config.h"
+	"usb_config.h"
+	"usb/host/usb_host.h"
+	"usb/usb_phy.h"
+	"device_drive.h"
+	"usb_ctrl_transfer.h"
+	"usb_bulk_transfer.h"
+	"usb_storage.h"
+	"adb.h"
+	"aoa.h"
+	"usb_hid_keys.h"
+	"gamebox.h"
+	"debug.h"
+
+1623122508 d:\jl\ac6951c\ac6951c\apps\common\usb\host\usb_storage.h
+	"system/task.h"
+	"device/device.h"
+	"usb/scsi.h"
+	"usb_bulk_transfer.h"
+	"usb/host/usb_host.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\host\aoa.h
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\host\usb_hid_keys.h
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\apple_mfi.c
+	"includes.h"
+	"app_config.h"
+	"device_drive.h"
+	"usb_config.h"
+	"usb/host/usb_host.h"
+	"usb/usb_phy.h"
+	"usb_ctrl_transfer.h"
+	"usb_storage.h"
+	"usb/host/usb_host.h"
+	"usb/usb_phy.h"
+	"device_drive.h"
+	"usb_ctrl_transfer.h"
+	"usb_bulk_transfer.h"
+	"usb_storage.h"
+	"usb_hid_keys.h"
+	"debug.h"
+	"apple_dock/iAP.h"
+	"apple_mfi.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\host\apple_mfi.h
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\audio.c
+	"includes.h"
+	"asm/includes.h"
+	"app_config.h"
+	"system/timer.h"
+	"device/ioctl_cmds.h"
+	"device_drive.h"
+	"usb/host/usb_host.h"
+	"usb_ctrl_transfer.h"
+	"usb_bulk_transfer.h"
+	"audio.h"
+	"usb_config.h"
+	"debug.h"
+
+1623122508 d:\jl\ac6951c\ac6951c\apps\common\usb\host\audio.h
+	"system/task.h"
+	"device/device.h"
+	"usb_bulk_transfer.h"
+	"usb/host/usb_host.h"
+	"usb/device/uac_audio.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\audio_demo.c
+	"includes.h"
+	"asm/includes.h"
+	"app_config.h"
+	"system/timer.h"
+	"device/ioctl_cmds.h"
+	"device_drive.h"
+	"usb/host/usb_host.h"
+	"usb_ctrl_transfer.h"
+	"usb_bulk_transfer.h"
+	"audio.h"
+	"usb_config.h"
+	"debug.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\hid.c
+	"includes.h"
+	"asm/includes.h"
+	"app_config.h"
+	"system/timer.h"
+	"device/ioctl_cmds.h"
+	"device_drive.h"
+	"usb/host/usb_host.h"
+	"usb_ctrl_transfer.h"
+	"usb_bulk_transfer.h"
+	"hid.h"
+	"usb_config.h"
+	"usb_hid_keys.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\usb\host\hid.h
+	"system/task.h"
+	"device/device.h"
+	"usb/scsi.h"
+	"usb_bulk_transfer.h"
+	"usb/host/usb_host.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\usb_bulk_transfer.c
+	<string.h>
+	"jiffies.h"
+	"usb_config.h"
+	"usb_bulk_transfer.h"
+	"usb_ctrl_transfer.h"
+	"usb_storage.h"
+	"usb/host/usb_host.h"
+	"usb/usb_phy.h"
+	"app_config.h"
+	"device_drive.h"
+	"debug.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\usb_ctrl_transfer.c
+	"usb/host/usb_host.h"
+	"usb_ctrl_transfer.h"
+	"app_config.h"
+	"device_drive.h"
+	"gpio.h"
+	"usb/scsi.h"
+	"debug.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\usb_host.c
+	"includes.h"
+	"app_config.h"
+	"device_drive.h"
+	"usb_config.h"
+	"usb/host/usb_host.h"
+	"usb/usb_phy.h"
+	"usb_ctrl_transfer.h"
+	"usb_storage.h"
+	"adb.h"
+	"aoa.h"
+	"hid.h"
+	"audio.h"
+	"apple_dock/iAP.h"
+	"apple_mfi.h"
+	"debug.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\common\usb\host\usb_storage.c
+	"asm/includes.h"
+	"system/timer.h"
+	"device/ioctl_cmds.h"
+	"usb/host/usb_host.h"
+	"usb_ctrl_transfer.h"
+	"usb_bulk_transfer.h"
+	"device_drive.h"
+	"usb_storage.h"
+	"usb_config.h"
+	"app_config.h"
+	"debug.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\usb\usb_config.c
+	"usb_config.h"
+	"usb/scsi.h"
+	"irq.h"
+	"init.h"
+	"gpio.h"
+	"app_config.h"
+	"debug.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\common\usb\usb_host_config.c
+	"usb_config.h"
+	"usb/scsi.h"
+	"irq.h"
+	"init.h"
+	"gpio.h"
+	"app_config.h"
+	"debug.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\soundbox\aec\br23\audio_aec.c
+	"system/includes.h"
+	"app_config.h"
+	"audio_config.h"
+	"aec_user.h"
+	"media/includes.h"
+	"application/audio_eq_drc_apply.h"
+	"circular_buf.h"
+	"clock_cfg.h"
+	"debug.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\aec_user.h
+	"generic/typedef.h"
+	"user_cfg.h"
+	"commproc.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\media\media_develop\media\cpu\br23\commproc.h
+	"generic/typedef.h"
+
+1623122508 source:d:\jl\ac6951c\ac6951c\apps\soundbox\app_main.c
+	"system/includes.h"
+	"app_config.h"
+	"asm/pwm_led.h"
+	"tone_player.h"
+	"ui_manage.h"
+	"app_main.h"
+	"app_task.h"
+	"asm/charge.h"
+	"app_power_manage.h"
+	"app_charge.h"
+	"user_cfg.h"
+	"power_on.h"
+	"bt.h"
+	"soundcard/peripheral.h"
+	"audio.h"
+	"vm.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\power_on.h
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\soundcard\peripheral.h
+	"generic/typedef.h"
+	"app_config.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a\board_ac6083a.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"user_api/app_status_api.h"
+	"app_main.h"
+	"app_task.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\sdmmc.h
+	"device/sdmmc.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\chargestore.h
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\driver\cpu\br23\asm\rtc.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\linein\linein_dev.h
+	"typedef.h"
+	"device/device.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\user_api\app_status_api.h
+	"btstack/avctp_user.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a_iap\board_ac6083a_iap.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a_iap\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a_iap\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a_iap\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a_iap\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6083a_iap\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6951g\board_ac6951g.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6951g\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6951g\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6951g\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6951g\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6951g\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6952e_lighter\board_ac6952e_lighter.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6952e_lighter\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6952e_lighter\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6952e_lighter\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6952e_lighter\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6952e_lighter\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6954a_demo\board_ac6954a_demo.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6954a_demo\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6954a_demo\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6954a_demo\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6954a_demo\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6954a_demo\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6955f_headset_mono\board_ac6955f_headset_mono.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"asm/power/p33.h"
+	"ui_manage.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6955f_headset_mono\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6955f_headset_mono\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6955f_headset_mono\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6955f_headset_mono\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac6955f_headset_mono\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_btemitter\board_ac695x_btemitter.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_btemitter\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_btemitter\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_btemitter\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_btemitter\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_btemitter\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_charging_bin\board_ac695x_charging_bin.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"asm/spi.h"
+	"norflash.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"asm/ctmu.h"
+	"asm/power/p33.h"
+	"ui_manage.h"
+	"chargeIc_manage.h"
+	"chgbox_det.h"
+	"ic_self.h"
+	"chgbox_ctrl.h"
+	"chgbox_wireless.h"
+	"chgbox_handshake.h"
+	"app_power_manage.h"
+	"debug.h"
+	"uart_update.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_charging_bin\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_charging_bin\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_charging_bin\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_charging_bin\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_charging_bin\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_demo\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_demo\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_demo\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_demo\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_demo\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_lcd\board_ac695x_lcd.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"fm_emitter/fm_emitter_manage.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_lcd\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_lcd\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_lcd\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_lcd\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_lcd\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_multimedia_charging_bin\board_ac695x_multimedia_charging_bin.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"asm/spi.h"
+	"norflash.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"asm/ctmu.h"
+	"asm/power/p33.h"
+	"ui_manage.h"
+	"app_power_manage.h"
+	"debug.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_multimedia_charging_bin\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_multimedia_charging_bin\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_multimedia_charging_bin\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_multimedia_charging_bin\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_multimedia_charging_bin\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_smartbox\board_ac695x_smartbox.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_smartbox\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_smartbox\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_smartbox\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_smartbox\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_smartbox\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_soundcard\board_ac695x_soundcard.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"asm/spi.h"
+	"norflash.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"asm/ctmu.h"
+	"asm/power/p33.h"
+	"common/user_msg.h"
+	"soundcard/peripheral.h"
+	"audio_dec_board_cfg.h"
+	"ui_manage.h"
+	"soundcard/soundcard.h"
+	"app_power_manage.h"
+	"debug.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_dec\audio_dec_board_cfg.h
+	"system/includes.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\soundcard\soundcard.h
+	"generic/typedef.h"
+	"app_config.h"
+	"system/includes.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_soundcard\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_soundcard\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_soundcard\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_soundcard\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_soundcard\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws\board_ac695x_tws.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws_box\board_ac695x_tws_box.c
+	"app_config.h"
+	"system/includes.h"
+	"media/includes.h"
+	"asm/sdmmc.h"
+	"asm/chargestore.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/rtc.h"
+	"tone_player.h"
+	"audio_config.h"
+	"asm/iic_hw.h"
+	"asm/iic_soft.h"
+	"gSensor/gSensor_manage.h"
+	"key_event_deal.h"
+	"user_cfg.h"
+	"linein/linein_dev.h"
+	"usb/otg.h"
+	"ui/ui_api.h"
+	"dev_manager.h"
+	"fm/fm_manage.h"
+	"asm/power/p33.h"
+	"norflash.h"
+	"asm/spi.h"
+	"ui_manage.h"
+	"spi/nor_fs.h"
+	"audio_link.h"
+	"app_power_manage.h"
+	"debug.h"
+	"asm/ctmu.h"
+	"uart_update.h"
+
+1623122139 d:\jl\ac6951c\ac6951c\cpu\br23\audio_common\audio_link.h
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws_box\key_table\adkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws_box\key_table\iokey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws_box\key_table\irkey_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws_box\key_table\rdec_key_table.c
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"board_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\board_ac695x_tws_box\key_table\touch_key_table.c
+	"board_config.h"
+	"key_event_deal.h"
+	"key_driver.h"
+	"app_config.h"
+	"app_task.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\board\br23\irq_config.c
+	"system/includes.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\common\dev_status.c
+	"common/dev_status.h"
+	"dev_manager.h"
+	"dev_update.h"
+	"app_config.h"
+	"dev_multiplex_api.h"
+	"app_task.h"
+	"smartbox/smartbox.h"
+	"music/music.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\smartbox.h
+	"typedef.h"
+	"app_config.h"
+	"smartbox/config.h"
+	"smartbox/function.h"
+	"browser/browser.h"
+	"smartbox/cmd_user.h"
+	"smartbox/smartbox_task.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\config.h
+	"typedef.h"
+	"app_config.h"
+	"le_common.h"
+	"spp_user.h"
+	"ble_user.h"
+	"btstack_3th_protocol_user.h"
+	"app_task.h"
+	"smartbox_bt_manage.h"
+	"soundbox.h"
+	"ui/ui_api.h"
+	"music/music.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\common\btstack_3th_protocol_user.h
+	"spp_config.h"
+	"ble_config.h"
+	"JL_rcsp_api.h"
+	"JL_rcsp_protocol.h"
+	"JL_rcsp_packet.h"
+	"attr.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\common\spp_config.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\common\ble_config.h
+	"typedef.h"
+	"ble_user.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\include_lib\btstack\third_party\rcsp\attr.h
+	"typedef.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\bt_manage\smartbox_bt_manage.h
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\soundbox.h
+	"app_config.h"
+	"system/includes.h"
+	"gma_app_main.h"
+	"dma_app_main.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\third_party_profile\gma\gma_app_main.h
+	"generic/typedef.h"
+	"app_config.h"
+	"system/includes.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\third_party_profile\dma\dma_app_main.h
+	"generic/typedef.h"
+	"app_config.h"
+	"system/includes.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\music\music.h
+	"system/app_core.h"
+	"system/includes.h"
+	"server/server_core.h"
+	"media/audio_decoder.h"
+	"music_player.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\function.h
+	"typedef.h"
+	"app_config.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\browser\browser.h
+	"typedef.h"
+	"app_config.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\cmd_user.h
+	"typedef.h"
+	"JL_rcsp_protocol.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\common\init.c
+	"app_config.h"
+	"system/includes.h"
+	"asm/charge.h"
+	"app_power_manage.h"
+	"update.h"
+	"app_main.h"
+	"app_charge.h"
+	"chgbox_ctrl.h"
+	"update_loader_download.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\common\task_table.c
+	"system/includes.h"
+	"app_config.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\common\tone_table.c
+	"app_config.h"
+	"audio_config.h"
+	"tone_player.h"
+
+1623131020 source:d:\jl\ac6951c\ac6951c\apps\soundbox\common\user_cfg.c
+	"app_config.h"
+	"user_cfg.h"
+	"fs.h"
+	"string.h"
+	"system/includes.h"
+	"vm.h"
+	"btcontroller_config.h"
+	"app_main.h"
+	"media/includes.h"
+	"audio_config.h"
+	"asm/pwm_led.h"
+	"aec_user.h"
+	"app_power_manage.h"
+	"debug.h"
+	"fm_emitter/fm_emitter_manage.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\font\fontinit.c
+	"font/font_all.h"
+	"font/language_list.h"
+	"app_config.h"
+	"ui/res_config.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\log_config\app_config.c
+	"system/includes.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\log_config\lib_btctrler_config.c
+	"app_config.h"
+	"system/includes.h"
+	"btcontroller_config.h"
+	"bt_common.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\log_config\lib_btstack_config.c
+	"app_config.h"
+	"system/includes.h"
+	"btcontroller_config.h"
+	"bt_common.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\log_config\lib_driver_config.c
+	"app_config.h"
+	"system/includes.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\log_config\lib_media_config.c
+	"app_config.h"
+	"system/includes.h"
+	"audio_config.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\log_config\lib_system_config.c
+	"app_config.h"
+	"system/includes.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\log_config\lib_update_config.c
+	"app_config.h"
+	"system/includes.h"
+	"update_loader_download.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\power_manage\app_charge.c
+	"app_config.h"
+	"asm/charge.h"
+	"asm/pwm_led.h"
+	"asm/power_interface.h"
+	"ui_manage.h"
+	"system/event.h"
+	"system/app_core.h"
+	"system/includes.h"
+	"app_action.h"
+	"asm/wdt.h"
+	"app_power_manage.h"
+	"app_chargestore.h"
+	"btstack/avctp_user.h"
+	"app_action.h"
+	"app_main.h"
+	"bt_tws.h"
+	"usb/otg.h"
+	"bt_common.h"
+	"app_task.h"
+	"debug.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\app_chargestore.h
+	"typedef.h"
+	"system/event.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\power_manage\app_chargestore.c
+	"init.h"
+	"app_config.h"
+	"system/includes.h"
+	"asm/charge.h"
+	"asm/chargestore.h"
+	"user_cfg.h"
+	"app_chargestore.h"
+	"device/vm.h"
+	"btstack/avctp_user.h"
+	"app_power_manage.h"
+	"app_action.h"
+	"app_main.h"
+	"app_charge.h"
+	"classic/tws_api.h"
+	"update.h"
+	"bt_ble.h"
+	"bt_tws.h"
+	"app_action.h"
+	"bt_common.h"
+	"le_rcsp_adv_module.h"
+	"app_task.h"
+	"update_loader_download.h"
+	"debug.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\bt\bt_ble.h
+	"typedef.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\power_manage\app_power_manage.c
+	"system/includes.h"
+	"app_power_manage.h"
+	"app_main.h"
+	"app_config.h"
+	"app_action.h"
+	"asm/charge.h"
+	"ui_manage.h"
+	"tone_player.h"
+	"asm/adc_api.h"
+	"btstack/avctp_user.h"
+	"user_cfg.h"
+	"bt.h"
+	"asm/charge.h"
+	"bt_tws.h"
+	"debug.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\browser\browser.c
+	"browser/browser.h"
+	"smartbox/smartbox.h"
+	"dev_manager.h"
+	"music_player.h"
+	"music/music.h"
+	"file_operate/file_bs_deal.h"
+	"smartbox/event.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\event.h
+	"typedef.h"
+	"app_config.h"
+	"common/user_msg.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\bt_manage\bt_trans_data\le_smartbox_adv.c
+	"system/app_core.h"
+	"system/includes.h"
+	"smartbox/config.h"
+	"app_action.h"
+	"btstack/btstack_task.h"
+	"btstack/bluetooth.h"
+	"user_cfg.h"
+	"vm.h"
+	"app_power_manage.h"
+	"btcontroller_modules.h"
+	"bt_common.h"
+	"3th_profile_api.h"
+	"btstack/avctp_user.h"
+	"app_chargestore.h"
+	"btcrypt.h"
+	"custom_cfg.h"
+	"smartbox_music_info_setting.h"
+	"classic/tws_api.h"
+	"le_smartbox_module.h"
+	"smartbox_rcsp_manage.h"
+	"bt/bt_tws.h"
+	"asm/charge.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\common\third_party_profile\jieli\jl_rcsp\btcrypt.h
+	<string.h>
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\smartbox_setting\smartbox_music_info_setting.h
+	"le_smartbox_module.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\smartbox_rcsp_manage.h
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\bt_manage\bt_trans_data\le_smartbox_module.c
+	"system/app_core.h"
+	"system/includes.h"
+	"smartbox/config.h"
+	"app_action.h"
+	"btstack/btstack_task.h"
+	"btstack/bluetooth.h"
+	"user_cfg.h"
+	"vm.h"
+	"app_power_manage.h"
+	"btcontroller_modules.h"
+	"bt_common.h"
+	"3th_profile_api.h"
+	"btstack/avctp_user.h"
+	"app_chargestore.h"
+	"btcrypt.h"
+	"custom_cfg.h"
+	"smartbox_music_info_setting.h"
+	"le_smartbox_adv.h"
+	"le_smartbox_module.h"
+	"classic/tws_api.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\bt_manage\bt_trans_data\le_smartbox_adv.h
+	<stdint.h>
+	"bt_common.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\bt_manage\smartbox_bt_manage.c
+	"smartbox/config.h"
+	"smartbox/smartbox.h"
+	"smartbox_update.h"
+	"smartbox/function.h"
+	"smartbox_setting_sync.h"
+	"app_main.h"
+	"adv_mic_setting.h"
+	"smartbox_update_tws.h"
+	"3th_profile_api.h"
+	"adv_time_stamp_setting.h"
+	"btstack/avctp_user.h"
+	"btstack/btstack_task.h"
+	"bt_tws.h"
+	"le_smartbox_adv.h"
+	"le_smartbox_module.h"
+	"debug.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\smartbox_update\smartbox_update.h
+	"typedef.h"
+
+1623122512 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\smartbox_setting_opt\smartbox_setting_sync.h
+	"classic/tws_api.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\cmd_data_deal\cmd_recieve.c
+	"smartbox/config.h"
+	"smartbox/smartbox.h"
+	"smartbox/function.h"
+	"smartbox/feature.h"
+	"smartbox/switch_device.h"
+	"file_transfer.h"
+	"file_delete.h"
+	"dev_format.h"
+	"smartbox/event.h"
+	"btstack/avctp_user.h"
+	"app_action.h"
+	"smartbox_adv_bluetooth.h"
+	"smartbox_update.h"
+	"le_smartbox_module.h"
+	"fs.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\feature.h
+	"typedef.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\switch_device.h
+	"typedef.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\file_transfer\file_transfer.h
+	"typedef.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\file_transfer\file_delete.h
+	"typedef.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\file_transfer\dev_format.h
+	"typedef.h"
+	"app_config.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\cmd_data_deal\cmd_recieve_no_respone.c
+	"smartbox/config.h"
+	"smartbox/event.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\cmd_data_deal\cmd_respone.c
+	"smartbox/config.h"
+	"smartbox/event.h"
+	"smartbox_update.h"
+	"file_transfer.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\cmd_data_deal\cmd_user.c
+	"smartbox/cmd_user.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\cmd_data_deal\command.c
+	"smartbox/config.h"
+	"smartbox/command.h"
+	"btstack/avctp_user.h"
+	"smartbox/event.h"
+	"system/timer.h"
+	"le_smartbox_module.h"
+	"smartbox_rcsp_manage.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\command.h
+	"typedef.h"
+	"app_config.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\cmd_data_deal\data_recieve.c
+	"smartbox/config.h"
+	"smartbox/event.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\cmd_data_deal\data_recieve_no_respone.c
+	"smartbox/config.h"
+	"smartbox/event.h"
+	"file_transfer.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\cmd_data_deal\data_respone.c
+	"smartbox/config.h"
+	"smartbox/event.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\config.c
+	"smartbox/config.h"
+	"le_common.h"
+	"smartbox/event.h"
+	"le_smartbox_adv.h"
+	"le_smartbox_module.h"
+	"custom_cfg.h"
+	"smartbox_adv_bluetooth.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\event.c
+	"smartbox/config.h"
+	"smartbox/event.h"
+	"smartbox/smartbox.h"
+	"btstack/btstack_task.h"
+	"btstack/avctp_user.h"
+	"smartbox/function.h"
+	"fm_emitter/fm_emitter_manage.h"
+	"app_action.h"
+	"key_event_deal.h"
+	"audio_config.h"
+	"smartbox_setting_opt.h"
+	"le_smartbox_module.h"
+
+1623122512 d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\smartbox_setting_opt\smartbox_setting_opt.h
+	"system/includes.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\feature.c
+	"smartbox/config.h"
+	"smartbox/feature.h"
+	"btstack/avctp_user.h"
+	"smartbox/event.h"
+	"custom_cfg.h"
+	"JL_rcsp_packet.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\file_transfer\dev_format.c
+	"dev_format.h"
+	"smartbox/smartbox.h"
+	"system/fs/fs.h"
+	"dev_manager.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\file_transfer\file_delete.c
+	"file_delete.h"
+	"smartbox/smartbox.h"
+	"system/includes.h"
+	"system/fs/fs.h"
+	"btstack_3th_protocol_user.h"
+	"dev_manager.h"
+	"key_event_deal.h"
+	"app_task.h"
+	"common/dev_status.h"
+	"bt/bt.h"
+	"common/dev_status.h"
+	"app_task.h"
+	"app_msg.h"
+	"clock_cfg.h"
+	"file_operate/file_manager.h"
+
+1623122511 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\file_transfer\file_transfer.c
+	"file_transfer.h"
+	"system/includes.h"
+	"system/fs/fs.h"
+	"btstack_3th_protocol_user.h"
+	"dev_manager.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\func_cmd\bt_func.c
+	"smartbox/func_cmd/bt_func.h"
+	"smartbox/func_cmd_common.h"
+	"smartbox/function.h"
+	"smartbox/config.h"
+	"smartbox/event.h"
+	"app_action.h"
+	"le_smartbox_module.h"
+	"smartbox_music_info_setting.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\func_cmd\bt_func.h
+	"typedef.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\func_cmd_common.h
+
+1623122512 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\func_cmd\fm_func.c
+	"smartbox/func_cmd/fm_func.h"
+	"smartbox/func_cmd_common.h"
+	"smartbox/function.h"
+	"smartbox/config.h"
+	"smartbox/event.h"
+	"app_action.h"
+	"key_event_deal.h"
+	"fm/fm_api.h"
+	"fm/fm_rw.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\func_cmd\fm_func.h
+	"typedef.h"
+	"app_config.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\fm\fm_api.h
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\fm\fm_rw.h
+	"fm/fm_manage.h"
+
+1619088183 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\func_cmd\linein_func.c
+	"smartbox/func_cmd/linein_func.h"
+	"smartbox/func_cmd_common.h"
+	"smartbox/function.h"
+	"smartbox/config.h"
+	"smartbox/event.h"
+	"app_action.h"
+	"app_msg.h"
+	"key_event_deal.h"
+	"linein/linein.h"
+	"tone_player.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\func_cmd\linein_func.h
+	"typedef.h"
+	"app_config.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\linein\linein.h
+	"system/event.h"
+
+1623122512 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\func_cmd\music_func.c
+	"smartbox/func_cmd/music_func.h"
+	"smartbox/func_cmd_common.h"
+	"smartbox/smartbox.h"
+	"smartbox/function.h"
+	"smartbox/config.h"
+	"key_event_deal.h"
+	"music/music_player.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\func_cmd\music_func.h
+	"typedef.h"
+	"app_config.h"
+
+1623122512 source:d:\jl\ac6951c\ac6951c\apps\soundbox\smartbox\func_cmd\rtc_func.c
+	"smartbox/func_cmd/rtc_func.h"
+	"smartbox/func_cmd_common.h"
+	"smartbox/function.h"
+	"smartbox/config.h"
+	"smartbox/event.h"
+	"app_action.h"
+	"smartbox_music_info_setting.h"
+	"btstack/avctp_user.h"
+	"JL_rcsp_packet.h"
+	"key_event_deal.h"
+	"app_msg.h"
+	"smartbox_rcsp_manage.h"
+	"rtc/alarm.h"
+	"tone_player.h"
+	"linein/linein.h"
+	"music_player.h"
+	"general_player.h"
+	"browser/browser.h"
+	"clock_cfg.h"
+
+1619088183 d:\jl\ac6951c\ac6951c\apps\soundbox\include\smartbox\func_cmd\rtc_func.h
+	"typedef.h"
+	"app_config.h"
+
+1623122511 d:\jl\ac6951c\ac6951c\apps\soundbox\include\task_manager\rtc\alarm.h
+	"typedef.h"
+	"system/includes.h"
+

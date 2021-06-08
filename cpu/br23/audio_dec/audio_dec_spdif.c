@@ -25,7 +25,7 @@
 struct s_spdif_decode {
     struct pcm_decoder pcm_dec;
     struct file_decoder file_dec;
-    struct audio_stream *audio_stream;		// éŸ³é¢‘æµ
+    struct audio_stream *audio_stream;		// ÒôÆµÁ÷
     struct audio_res_wait wait;
     struct audio_mixer_ch mix_ch;
     u32 coding_type;
@@ -36,11 +36,11 @@ struct s_spdif_decode {
     u8 status;
     struct audio_eq_drc *eq_drc;
 #if TCFG_EQ_DIVIDE_ENABLE
-    struct audio_eq_drc *eq_drc_rl_rr;//eq drcå¥æŸ„
-    struct audio_vocal_tract vocal_tract;//å£°é“åˆå¹¶ç›®æ ‡å¥æŸ„
-    struct audio_vocal_tract_ch synthesis_ch_fl_fr;//å£°é“åˆå¹¶å¥æŸ„
-    struct audio_vocal_tract_ch synthesis_ch_rl_rr;//å£°é“åˆå¹¶å¥æŸ„
-    struct channel_switch *ch_switch;//å£°é“å˜æ¢
+    struct audio_eq_drc *eq_drc_rl_rr;//eq drc¾ä±ú
+    struct audio_vocal_tract vocal_tract;//ÉùµÀºÏ²¢Ä¿±ê¾ä±ú
+    struct audio_vocal_tract_ch synthesis_ch_fl_fr;//ÉùµÀºÏ²¢¾ä±ú
+    struct audio_vocal_tract_ch synthesis_ch_rl_rr;//ÉùµÀºÏ²¢¾ä±ú
+    struct channel_switch *ch_switch;//ÉùµÀ±ä»»
 #endif
 
 };
@@ -79,7 +79,7 @@ int spdif_non_linear_packet(u16 *pkt, u16 pkt_len)
             data_cp_len = spdif_slave_hdl.length_code;
             spdif_slave_hdl.length_code = 0;
         }
-        //å†™å…¥è§£ç cbuf
+        //Ğ´Èë½âÂëcbuf
         /* int spdif_dec_write_data(s16 *data, int len) */
         spdif_dec_write_data(&data[data_cp_begin_idx], data_cp_len * 2);
         if (spdif_slave_hdl.length_code != 0) {
@@ -144,7 +144,7 @@ void reset_data_buf(void)
 }
 
 #define SAMPLE_RATE_TABLE_SIZE 14
-static u8 old_samplerate_index = 6;   /*ä½ç½®è®°å¾—è¦è·Ÿé»˜è®¤é‡‡æ ·ç‡å¯¹åº”*/
+static u8 old_samplerate_index = 6;   /*Î»ÖÃ¼ÇµÃÒª¸úÄ¬ÈÏ²ÉÑùÂÊ¶ÔÓ¦*/
 u16 spdif_sample_rate_table[SAMPLE_RATE_TABLE_SIZE] = {
     80,
     110,
@@ -206,12 +206,12 @@ static void spdif_isr_handler()
     }
 
     if (ERROR_VALUE) { // some error flag
-        if (ERROR_VALUE & (BIT(8) | BIT(9))) {//å—/å¸§é”™è¯¯
+        if (ERROR_VALUE & (BIT(8) | BIT(9))) {//¿é/Ö¡´íÎó
             memset(&spdif_slave_hdl.p_spdif_data_buf[0], 0x0, SPDIF_DATA_DAM_LEN * SPDIF_CHANNEL_NUMBER);
             memset(&spdif_slave_hdl.p_spdif_data_buf[1], 0x0, SPDIF_DATA_DAM_LEN * SPDIF_CHANNEL_NUMBER);
         }
-        if (JL_SS->CON & BIT(11)) {//ç”µå¹³é•¿åº¦æ¥æ”¶é”™è¯¯
-            //æ¨¡å—å¤ä½
+        if (JL_SS->CON & BIT(11)) {//µçÆ½³¤¶È½ÓÊÕ´íÎó
+            //Ä£¿é¸´Î»
             putchar('E');
             audio_spdif_slave_close(&spdif_slave_hdl);
             spdif_slave_hdl.error_flag = 1;
@@ -246,7 +246,7 @@ static void spdif_isr_handler()
 
             } else if (spdif_dec_hdl->fmt.coding_type != AUDIO_CODING_DTS) {
                 putchar('d');
-                //æ¨¡å—å¤ä½
+                //Ä£¿é¸´Î»
                 audio_spdif_slave_close(&spdif_slave_hdl);
                 spdif_slave_hdl.error_flag = 2;
                 return;
@@ -301,7 +301,7 @@ static void spdif_isr_handler()
 
 }
 
-// å†™å…¥spdifæ•°æ®
+// Ğ´ÈëspdifÊı¾İ
 /* int spdif_dec_write_data(s16 *data, int len) */
 int spdif_dec_write_data(void *data, int len)
 {
@@ -335,12 +335,12 @@ static void file_dec_event_handler(struct audio_decoder *decoder, int argc, int 
     }
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    æ–‡ä»¶æŒ‡é’ˆå®šä½
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @param    offset: å®šä½åç§»
-   @param    seek_mode: å®šä½ç±»å‹
-   @return   0ï¼šæˆåŠŸ
-   @return   é0ï¼šé”™è¯¯
+/**@brief    ÎÄ¼şÖ¸Õë¶¨Î»
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @param    offset: ¶¨Î»Æ«ÒÆ
+   @param    seek_mode: ¶¨Î»ÀàĞÍ
+   @return   0£º³É¹¦
+   @return   ·Ç0£º´íÎó
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -350,12 +350,12 @@ static int spdif_file_seek(struct audio_decoder *decoder, u32 offset, int seek_m
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è¯»å–æ–‡ä»¶æ•°æ®
-   @param    *decoder: è§£ç å™¨å¥æŸ„
-   @param    *buf: æ•°æ®
-   @param    len: æ•°æ®é•¿åº¦
-   @return   >=0ï¼šè¯»åˆ°çš„æ•°æ®é•¿åº¦
-   @return   <0ï¼šé”™è¯¯
+/**@brief    ¶ÁÈ¡ÎÄ¼şÊı¾İ
+   @param    *decoder: ½âÂëÆ÷¾ä±ú
+   @param    *buf: Êı¾İ
+   @param    len: Êı¾İ³¤¶È
+   @return   >=0£º¶Áµ½µÄÊı¾İ³¤¶È
+   @return   <0£º´íÎó
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -407,12 +407,12 @@ static u32 get_pcm_sample_rate(void)
     return spdif_dec_hdl->pcm_sr;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    pcmè§£ç æ•°æ®è¾“å‡º
-   @param    *entry: éŸ³é¢‘æµå¥æŸ„
-   @param    *in: è¾“å…¥ä¿¡æ¯
-   @param    *out: è¾“å‡ºä¿¡æ¯
-   @return   è¾“å‡ºé•¿åº¦
-   @note     *outæœªä½¿ç”¨
+/**@brief    pcm½âÂëÊı¾İÊä³ö
+   @param    *entry: ÒôÆµÁ÷¾ä±ú
+   @param    *in: ÊäÈëĞÅÏ¢
+   @param    *out: Êä³öĞÅÏ¢
+   @return   Êä³ö³¤¶È
+   @note     *outÎ´Ê¹ÓÃ
 */
 /*----------------------------------------------------------------------------*/
 static int pcm_dec_data_handler(struct audio_stream_entry *entry,
@@ -431,8 +431,8 @@ static void pcm_dec_event_handler(struct audio_decoder *decoder, int argc, int *
 {
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    pcmè§£ç æ•°æ®æµæ¿€æ´»
-   @param    *p: ç§æœ‰å¥æŸ„
+/**@brief    pcm½âÂëÊı¾İÁ÷¼¤»î
+   @param    *p: Ë½ÓĞ¾ä±ú
    @return
    @note
 */
@@ -454,7 +454,7 @@ int spdif_dec_start(void)
         return -EINVAL;
     }
     if (spdif_dec_hdl->fmt.coding_type == AUDIO_CODING_DTS) {
-        puts("dts \n");//DTSæœªæµ‹è¯•
+        puts("dts \n");//DTSÎ´²âÊÔ
         return -EINVAL;
         err = file_decoder_open(&spdif_dec_hdl->file_dec, &file_input, &decode_task, NULL, 0);
         if (err) {
@@ -477,7 +477,7 @@ int spdif_dec_start(void)
     audio_mode_main_dec_open(AUDIO_MODE_MAIN_STATE_DEC_SPDIF);
 
     audio_mixer_ch_open_head(&spdif_dec_hdl->mix_ch, &mixer);
-    audio_mixer_ch_set_no_wait(&spdif_dec_hdl->mix_ch, 1, 10); // è¶…æ—¶è‡ªåŠ¨ä¸¢æ•°
+    audio_mixer_ch_set_no_wait(&spdif_dec_hdl->mix_ch, 1, 10); // ³¬Ê±×Ô¶¯¶ªÊı
     /* audio_mixer_ch_set_src(&spdif_dec_hdl->mix_ch, 1, 0); */
 #if 1
     struct audio_mixer_ch_sync_info info = {0};
@@ -519,7 +519,7 @@ int spdif_dec_start(void)
 
 
 
-    // æ•°æ®æµä¸²è”
+    // Êı¾İÁ÷´®Áª
     struct audio_stream_entry *entries[8] = {NULL};
     u8 entry_cnt = 0;
     if (spdif_dec_hdl->fmt.coding_type == AUDIO_CODING_DTS) {
@@ -537,7 +537,7 @@ int spdif_dec_start(void)
 #endif
 #if TCFG_EQ_DIVIDE_ENABLE
     if (spdif_dec_hdl->eq_drc_rl_rr) {
-        entries[entry_cnt++] = &spdif_dec_hdl->synthesis_ch_fl_fr.entry;//å››å£°é“eqç‹¬ç«‹æ—¶ï¼Œè¯¥èŠ‚ç‚¹åä¸æ¥èŠ‚ç‚¹
+        entries[entry_cnt++] = &spdif_dec_hdl->synthesis_ch_fl_fr.entry;//ËÄÉùµÀeq¶ÀÁ¢Ê±£¬¸Ã½Úµãºó²»½Ó½Úµã
     } else {
         if (spdif_dec_hdl->ch_switch) {
             entries[entry_cnt++] = &spdif_dec_hdl->ch_switch->entry;
@@ -551,7 +551,7 @@ int spdif_dec_start(void)
     spdif_dec_hdl->audio_stream = audio_stream_open(spdif_dec_hdl, dec_out_stream_resume);
     audio_stream_add_list(spdif_dec_hdl->audio_stream, entries, entry_cnt);
 #if TCFG_EQ_DIVIDE_ENABLE
-    if (spdif_dec_hdl->eq_drc_rl_rr) { //æ¥åœ¨eq_drcçš„ä¸Šä¸€ä¸ªèŠ‚ç‚¹
+    if (spdif_dec_hdl->eq_drc_rl_rr) { //½ÓÔÚeq_drcµÄÉÏÒ»¸ö½Úµã
         audio_stream_add_entry(entries[0], &spdif_dec_hdl->eq_drc_rl_rr->entry);
         audio_stream_add_entry(&spdif_dec_hdl->eq_drc_rl_rr->entry, &spdif_dec_hdl->synthesis_ch_rl_rr.entry);
     }
@@ -663,9 +663,9 @@ static void spdif_status_check(void *priv)
     }
 }
 ///*----------------------------------------------------------------------------*/
-/**@brief    spdif ç¡¬ä»¶è®¾ç½®
-   @param    æ— 
-   @return   æ— 
+/**@brief    spdif Ó²¼şÉèÖÃ
+   @param    ÎŞ
+   @return   ÎŞ
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -739,7 +739,7 @@ int spdif_dec_open(struct audio_fmt fmt)
     }
     spdif_dec_hdl->wait.priority = 4;
     spdif_dec_hdl->wait.preemption = 0;
-    spdif_dec_hdl->wait.protect = 1;//1 å åŠ æ¨¡å¼
+    spdif_dec_hdl->wait.protect = 1;//1 µş¼ÓÄ£Ê½
     spdif_dec_hdl->wait.snatch_same_prio = 1;
     spdif_dec_hdl->wait.handler = spdif_wait_res_handler;
     spdif_dec_hdl->status = SPDIF_STATE_OPEN;
@@ -768,10 +768,10 @@ bool spdif_dec_check(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    spdiæ¨¡å¼ eq drc æ‰“å¼€
-   @param    sample_rate:é‡‡æ ·ç‡
-   @param    ch_num:é€šé“ä¸ªæ•°
-   @return   å¥æŸ„
+/**@brief    spdiÄ£Ê½ eq drc ´ò¿ª
+   @param    sample_rate:²ÉÑùÂÊ
+   @param    ch_num:Í¨µÀ¸öÊı
+   @return   ¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -824,8 +824,8 @@ void *spdif_eq_drc_open(u16 sample_rate, u8 ch_num)
     return NULL;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    spdifå¼ eq drc å…³é—­
-   @param    å¥æŸ„
+/**@brief    spdifÊ½ eq drc ¹Ø±Õ
+   @param    ¾ä±ú
    @return
    @note
 */
@@ -898,8 +898,8 @@ void *spdif_rl_rr_eq_drc_open(u16 sample_rate, u8 ch_num)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    spdifæ¨¡å¼ RL RR é€šé“eq drc å…³é—­
-   @param    å¥æŸ„
+/**@brief    spdifÄ£Ê½ RL RR Í¨µÀeq drc ¹Ø±Õ
+   @param    ¾ä±ú
    @return
    @note
 */

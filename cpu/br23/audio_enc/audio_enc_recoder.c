@@ -158,8 +158,8 @@ void audio_adc_linein_demo(void)
 #if 0
 /*
  **************************************************************
- * Audio ADC å¤šé€šé“ä½¿ç”¨demo
- * æ•°æ®ç»“æ„ï¼šLINL LINR MIC LINL LINR MIC ...
+ * Audio ADC ¶àÍ¨µÀÊ¹ÓÃdemo
+ * Êı¾İ½á¹¹£ºLINL LINR MIC LINL LINR MIC ...
  *
  **************************************************************
  */
@@ -173,7 +173,7 @@ void audio_adc_linein_demo(void)
 #define LADC_BUFS_SIZE      (LADC_CH_NUM * LADC_BUF_NUM * LADC_IRQ_POINTS)
 #define  LADC_2_DAC_ENABLE	0
 
-/*è°ƒè¯•ä½¿ç”¨ï¼Œæ¨micæ•°æ®/lineinæ•°æ®/mic&lineæ··åˆæ•°æ®åˆ°dac*/
+/*µ÷ÊÔÊ¹ÓÃ£¬ÍÆmicÊı¾İ/lineinÊı¾İ/mic&line»ìºÏÊı¾İµ½dac*/
 #define LADC_MIC_2_DAC		BIT(0)
 #define LADC_LIN_2_DAC		BIT(1)
 #define LADC_2_DAC			(LADC_MIC_2_DAC | LADC_LIN_2_DAC)
@@ -749,7 +749,7 @@ void fm_sample_close(void *hdl, u8 source)
 }
 
 
-////>>>>>>>>>>>>>>record_player apiå½•éŸ³æ¥å£<<<<<<<<<<<<<<<<<<<<<///
+////>>>>>>>>>>>>>>record_player apiÂ¼Òô½Ó¿Ú<<<<<<<<<<<<<<<<<<<<<///
 #if 1
 
 /* #define RECORD_PLAYER_DEFULT_SAMPLERATE	(44100L) */
@@ -928,7 +928,7 @@ u32 recorder_get_encoding_time()
 //    return time_sec;
 }
 
-///æ£€æŸ¥å½•éŸ³æ˜¯å¦æ­£åœ¨è¿›è¡Œ
+///¼ì²éÂ¼ÒôÊÇ·ñÕıÔÚ½øĞĞ
 int recorder_is_encoding(void)
 {
     if (rec_hdl) {
@@ -1023,7 +1023,7 @@ int recorder_encode_start(struct record_file_fmt *f)
 #if 0
         audio_adc_mic_open(&rec->mic_ch, AUDIO_ADC_MIC_CH, &adc_hdl);
         audio_adc_mic_set_sample_rate(&rec->mic_ch, fmt.sample_rate);
-        audio_adc_mic_set_gain(&rec->mic_ch, fmt.gain);///è°ƒèŠ‚å½•éŸ³micçš„å¢ç›Š
+        audio_adc_mic_set_gain(&rec->mic_ch, fmt.gain);///µ÷½ÚÂ¼ÒômicµÄÔöÒæ
         audio_adc_mic_set_buffs(&rec->mic_ch, rec->adc_buf, LADC_MIC_IRQ_POINTS * 2, LADC_MIC_BUF_NUM);
 
         rec->adc_output.handler = adc_output_to_enc;
@@ -1084,7 +1084,7 @@ void recorder_device_offline_check(char *logo)
 {
     if (rec_hdl) {
         if (!strcmp(dev_manager_get_logo(rec_hdl->dev), logo)) {
-            ///å½“å‰å½•éŸ³æ­£åœ¨ä½¿ç”¨çš„è®¾å¤‡æ‰çº¿ï¼Œ åº”è¯¥åœæ‰å½•éŸ³
+            ///µ±Ç°Â¼ÒôÕıÔÚÊ¹ÓÃµÄÉè±¸µôÏß£¬ Ó¦¸ÃÍ£µôÂ¼Òô
             printf("is the recording dev = %s\n", logo);
             recorder_encode_stop();
         }

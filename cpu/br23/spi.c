@@ -44,9 +44,9 @@
 #define spi_w_reg_dma_cnt(reg, cnt)         ((reg)->CNT = (cnt))
 
 
-#define SPI0_ENABLE   1   //æ˜¯å¦ä½¿èƒ½SPI0ï¼Œä½¿èƒ½åéœ€å®šä¹‰spi0_p_data
-#define SPI1_ENABLE   1   //æ˜¯å¦ä½¿èƒ½SPI1ï¼Œä½¿èƒ½åéœ€å®šä¹‰spi1_p_data
-#define SPI2_ENABLE   1   //æ˜¯å¦ä½¿èƒ½SPI2ï¼Œä½¿èƒ½åéœ€å®šä¹‰spi2_p_data
+#define SPI0_ENABLE   1   //ÊÇ·ñÊ¹ÄÜSPI0£¬Ê¹ÄÜºóĞè¶¨Òåspi0_p_data
+#define SPI1_ENABLE   1   //ÊÇ·ñÊ¹ÄÜSPI1£¬Ê¹ÄÜºóĞè¶¨Òåspi1_p_data
+#define SPI2_ENABLE   1   //ÊÇ·ñÊ¹ÄÜSPI2£¬Ê¹ÄÜºóĞè¶¨Òåspi2_p_data
 
 
 static const struct spi_io_mapping spi_io_map[SPI_MAX_HW_NUM] = {
@@ -321,10 +321,10 @@ static void spi_io_port_uninit(u8 port)
 }
 
 /*
- * @brief è®¾ç½®æ³¢ç‰¹ç‡
- * @parm spi  spiå¥æŸ„
- * @parm baud  æ³¢ç‰¹ç‡
- * @return 0 æˆåŠŸï¼Œ< 0 å¤±è´¥
+ * @brief ÉèÖÃ²¨ÌØÂÊ
+ * @parm spi  spi¾ä±ú
+ * @parm baud  ²¨ÌØÂÊ
+ * @return 0 ³É¹¦£¬< 0 Ê§°Ü
  */
 int spi_set_baud(spi_dev spi, u32 baud)
 {
@@ -344,9 +344,9 @@ int spi_set_baud(spi_dev spi, u32 baud)
 }
 
 /*
- * @brief è·å–æ³¢ç‰¹ç‡
- * @parm spi  spiå¥æŸ„
- * @return  æ³¢ç‰¹ç‡
+ * @brief »ñÈ¡²¨ÌØÂÊ
+ * @parm spi  spi¾ä±ú
+ * @return  ²¨ÌØÂÊ
  */
 u32 spi_get_baud(spi_dev spi)
 {
@@ -373,10 +373,10 @@ static int __spi_wait_ok(spi_dev spi, u32 n)
 }
 
 /*
- * @brief å‘é€1ä¸ªå­—èŠ‚
- * @parm spi  spiå¥æŸ„
- * @parm byte å‘é€çš„å­—èŠ‚
- * @return 0 æˆåŠŸï¼Œ< 0 å¤±è´¥
+ * @brief ·¢ËÍ1¸ö×Ö½Ú
+ * @parm spi  spi¾ä±ú
+ * @parm byte ·¢ËÍµÄ×Ö½Ú
+ * @return 0 ³É¹¦£¬< 0 Ê§°Ü
  */
 int spi_send_byte(spi_dev spi, u8 byte)
 {
@@ -388,9 +388,9 @@ int spi_send_byte(spi_dev spi, u8 byte)
 }
 
 /*
- * @brief å‘é€1ä¸ªå­—èŠ‚ï¼Œä¸ç­‰å¾…pndï¼Œç”¨äºä¸­æ–­
- * @parm spi  spiå¥æŸ„
- * @parm byte å‘é€çš„å­—èŠ‚
+ * @brief ·¢ËÍ1¸ö×Ö½Ú£¬²»µÈ´ıpnd£¬ÓÃÓÚÖĞ¶Ï
+ * @parm spi  spi¾ä±ú
+ * @parm byte ·¢ËÍµÄ×Ö½Ú
  * @return null
  */
 void spi_send_byte_for_isr(spi_dev spi, u8 byte)
@@ -402,10 +402,10 @@ void spi_send_byte_for_isr(spi_dev spi, u8 byte)
 }
 
 /*
- * @brief æ¥æ”¶1ä¸ªå­—èŠ‚
- * @parm spi  spiå¥æŸ„
- * @parm err  è¿”å›é”™è¯¯ä¿¡æ¯ï¼Œè‹¥errä¸ºéç©ºæŒ‡é’ˆï¼Œ0 æˆåŠŸï¼Œ< 0 å¤±è´¥ï¼Œè‹¥ä¸ºç©ºæŒ‡é’ˆï¼Œå¿½ç•¥
- * @return æ¥æ”¶çš„å­—èŠ‚
+ * @brief ½ÓÊÕ1¸ö×Ö½Ú
+ * @parm spi  spi¾ä±ú
+ * @parm err  ·µ»Ø´íÎóĞÅÏ¢£¬ÈôerrÎª·Ç¿ÕÖ¸Õë£¬0 ³É¹¦£¬< 0 Ê§°Ü£¬ÈôÎª¿ÕÖ¸Õë£¬ºöÂÔ
+ * @return ½ÓÊÕµÄ×Ö½Ú
  */
 u8 spi_recv_byte(spi_dev spi, int *err)
 {
@@ -425,9 +425,9 @@ u8 spi_recv_byte(spi_dev spi, int *err)
 
 
 /*
- * @brief æ¥æ”¶1ä¸ªå­—èŠ‚ï¼Œä¸ç­‰å¾…pndï¼Œç”¨äºä¸­æ–­
- * @parm spi  spiå¥æŸ„
- * @return æ¥æ”¶çš„å­—èŠ‚
+ * @brief ½ÓÊÕ1¸ö×Ö½Ú£¬²»µÈ´ıpnd£¬ÓÃÓÚÖĞ¶Ï
+ * @parm spi  spi¾ä±ú
+ * @return ½ÓÊÕµÄ×Ö½Ú
  */
 u8 spi_recv_byte_for_isr(spi_dev spi)
 {
@@ -438,11 +438,11 @@ u8 spi_recv_byte_for_isr(spi_dev spi)
 }
 
 /*
- * @brief å‘é€å¹¶æ¥æ”¶1ä¸ªå­—èŠ‚ï¼Œåœ¨8ä¸ªæ—¶é’Ÿå†…å®Œæˆï¼Œä»…ä½¿ç”¨äºSPI_MODE_BIDIR_1BIT
- * @parm spi  spiå¥æŸ„
- * @parm byte  å‘é€çš„å­—èŠ‚
- * @parm err  è¿”å›é”™è¯¯ä¿¡æ¯ï¼Œè‹¥errä¸ºéç©ºæŒ‡é’ˆï¼Œ0 æˆåŠŸï¼Œ< 0 å¤±è´¥ï¼Œè‹¥ä¸ºç©ºæŒ‡é’ˆï¼Œå¿½ç•¥
- * @return æ¥æ”¶çš„å­—èŠ‚
+ * @brief ·¢ËÍ²¢½ÓÊÕ1¸ö×Ö½Ú£¬ÔÚ8¸öÊ±ÖÓÄÚÍê³É£¬½öÊ¹ÓÃÓÚSPI_MODE_BIDIR_1BIT
+ * @parm spi  spi¾ä±ú
+ * @parm byte  ·¢ËÍµÄ×Ö½Ú
+ * @parm err  ·µ»Ø´íÎóĞÅÏ¢£¬ÈôerrÎª·Ç¿ÕÖ¸Õë£¬0 ³É¹¦£¬< 0 Ê§°Ü£¬ÈôÎª¿ÕÖ¸Õë£¬ºöÂÔ
+ * @return ½ÓÊÕµÄ×Ö½Ú
  */
 u8 spi_send_recv_byte(spi_dev spi, u8 byte, int *err)
 {
@@ -460,9 +460,9 @@ u8 spi_send_recv_byte(spi_dev spi, u8 byte, int *err)
 }
 
 /*
- * @brief è®¾ç½®spi[å•å‘/åŒå‘ï¼Œä½æ•°]æ¨¡å¼
- * @parm spi  spiå¥æŸ„
- * @parm mode  æ¨¡å¼
+ * @brief ÉèÖÃspi[µ¥Ïò/Ë«Ïò£¬Î»Êı]Ä£Ê½
+ * @parm spi  spi¾ä±ú
+ * @parm mode  Ä£Ê½
  * @return null
  */
 void spi_set_bit_mode(spi_dev spi, int mode)
@@ -517,9 +517,9 @@ void spi_set_bit_mode(spi_dev spi, int mode)
 }
 
 /*
- * @brief æ‰“å¼€spi
- * @parm spi  spiå¥æŸ„
- * @return 0 æˆåŠŸï¼Œ< 0 å¤±è´¥
+ * @brief ´ò¿ªspi
+ * @parm spi  spi¾ä±ú
+ * @return 0 ³É¹¦£¬< 0 Ê§°Ü
  */
 int spi_open(spi_dev spi)
 {
@@ -548,7 +548,7 @@ int spi_open(spi_dev spi)
         log_error("invalid spi baudrate");
         /* return 0; */
     }
-    spi_w_reg_buf(spi_regs[id], 0);//è®¾å®šspiåˆå§‹åŒ–åDOå£é»˜è®¤ç”µå¹³ä¸ºä½
+    spi_w_reg_buf(spi_regs[id], 0);//Éè¶¨spi³õÊ¼»¯ºóDO¿ÚÄ¬ÈÏµçÆ½ÎªµÍ
     spi_enable(spi_regs[id]);
 
 #if 0
@@ -568,11 +568,11 @@ int spi_open(spi_dev spi)
 }
 
 /*
- * @brief spi dmaæ¥æ”¶
- * @parm spi  spiå¥æŸ„
- * @parm buf  æ¥æ”¶ç¼“å†²åŒºåŸºåœ°å€
- * @parm len  æœŸæœ›æ¥æ”¶é•¿åº¦
- * @return å®é™…æ¥æ”¶é•¿åº¦ï¼Œ< 0è¡¨ç¤ºå¤±è´¥
+ * @brief spi dma½ÓÊÕ
+ * @parm spi  spi¾ä±ú
+ * @parm buf  ½ÓÊÕ»º³åÇø»ùµØÖ·
+ * @parm len  ÆÚÍû½ÓÊÕ³¤¶È
+ * @return Êµ¼Ê½ÓÊÕ³¤¶È£¬< 0±íÊ¾Ê§°Ü
  */
 int spi_dma_recv(spi_dev spi, void *buf, u32 len)
 {
@@ -590,11 +590,11 @@ int spi_dma_recv(spi_dev spi, void *buf, u32 len)
 }
 
 /*
- * @brief spi dmaå‘é€
- * @parm spi  spiå¥æŸ„
- * @parm buf  å‘é€ç¼“å†²åŒºåŸºåœ°å€
- * @parm len  æœŸæœ›å‘é€é•¿åº¦
- * @return å®é™…å‘é€é•¿åº¦ï¼Œ< 0è¡¨ç¤ºå¤±è´¥
+ * @brief spi dma·¢ËÍ
+ * @parm spi  spi¾ä±ú
+ * @parm buf  ·¢ËÍ»º³åÇø»ùµØÖ·
+ * @parm len  ÆÚÍû·¢ËÍ³¤¶È
+ * @return Êµ¼Ê·¢ËÍ³¤¶È£¬< 0±íÊ¾Ê§°Ü
  */
 int spi_dma_send(spi_dev spi, const void *buf, u32 len)
 {
@@ -612,11 +612,11 @@ int spi_dma_send(spi_dev spi, const void *buf, u32 len)
 }
 
 /*
- * @brief spi é…ç½®dmaï¼Œä¸ç­‰å¾…pndï¼Œç”¨äºä¸­æ–­
- * @parm spi  spiå¥æŸ„
- * @parm buf  ç¼“å†²åŒºåŸºåœ°å€
- * @parm len  æœŸæœ›é•¿åº¦
- * @parm rw  1 æ¥æ”¶ / 0 å‘é€
+ * @brief spi ÅäÖÃdma£¬²»µÈ´ıpnd£¬ÓÃÓÚÖĞ¶Ï
+ * @parm spi  spi¾ä±ú
+ * @parm buf  »º³åÇø»ùµØÖ·
+ * @parm len  ÆÚÍû³¤¶È
+ * @parm rw  1 ½ÓÊÕ / 0 ·¢ËÍ
  * @return null
  */
 void spi_dma_set_addr_for_isr(spi_dev spi, void *buf, u32 len, u8 rw)
@@ -630,9 +630,9 @@ void spi_dma_set_addr_for_isr(spi_dev spi, void *buf, u32 len, u8 rw)
 }
 
 /*
- * @brief ä¸­æ–­ä½¿èƒ½
- * @parm spi  spiå¥æŸ„
- * @parm en  1 ä½¿èƒ½ï¼Œ0 å¤±èƒ½
+ * @brief ÖĞ¶ÏÊ¹ÄÜ
+ * @parm spi  spi¾ä±ú
+ * @parm en  1 Ê¹ÄÜ£¬0 Ê§ÄÜ
  * @return null
  */
 void spi_set_ie(spi_dev spi, u8 en)
@@ -642,8 +642,8 @@ void spi_set_ie(spi_dev spi, u8 en)
 }
 
 /*
- * @brief åˆ¤æ–­ä¸­æ–­æ ‡å¿—
- * @parm spi  spiå¥æŸ„
+ * @brief ÅĞ¶ÏÖĞ¶Ï±êÖ¾
+ * @parm spi  spi¾ä±ú
  * @return 0 / 1
  */
 u8 spi_get_pending(spi_dev spi)
@@ -653,8 +653,8 @@ u8 spi_get_pending(spi_dev spi)
 }
 
 /*
- * @brief æ¸…é™¤ä¸­æ–­æ ‡å¿—
- * @parm spi  spiå¥æŸ„
+ * @brief Çå³ıÖĞ¶Ï±êÖ¾
+ * @parm spi  spi¾ä±ú
  * @return null
  */
 void spi_clear_pending(spi_dev spi)
@@ -664,8 +664,8 @@ void spi_clear_pending(spi_dev spi)
 }
 
 /*
- * @brief å…³é—­spi
- * @parm spi  spiå¥æŸ„
+ * @brief ¹Ø±Õspi
+ * @parm spi  spi¾ä±ú
  * @return null
  */
 void spi_close(spi_dev spi)

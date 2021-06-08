@@ -25,7 +25,7 @@ static struct __mic_stream *mic = NULL;
 /* extern struct audio_mixer mixer; */
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å”¤é†’micæ•°æ®å¤„ç†ä»»åŠ¡
+/**@brief    »½ĞÑmicÊı¾İ´¦ÀíÈÎÎñ
   @param
   @return
   @note
@@ -40,7 +40,7 @@ void mic_stream_adc_resume(void *priv)
     }
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    micæ•°æ®å¤„ç†å‡½æ•°
+/**@brief    micÊı¾İ´¦Àíº¯Êı
    @param
    @return
    @note
@@ -63,7 +63,7 @@ static int mic_stream_effects_run(struct __mic_stream *stream)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    micæ•°æ®å¤„ç†ä»»åŠ¡
+/**@brief    micÊı¾İ´¦ÀíÈÎÎñ
    @param
    @return
    @note
@@ -77,7 +77,7 @@ static void mic_stream_task_deal(void *p)
     while (1) {
         res = mic_stream_effects_run(stream);
         if (res) {
-            ///ç­‰å¾…åˆ é™¤çº¿ç¨‹
+            ///µÈ´ıÉ¾³ıÏß³Ì
             stream->busy = 0;
             while (1) {
                 os_time_dly(10000);
@@ -86,7 +86,7 @@ static void mic_stream_task_deal(void *p)
     }
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    åˆ›å»ºmicæ•°æ®æµ
+/**@brief    ´´½¨micÊı¾İÁ÷
    @param
    @return
    @note
@@ -132,7 +132,7 @@ struct __mic_stream *mic_stream_creat(struct __mic_stream_parm *parm)
     return stream;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®micå¤„ç†å‡½æ•°çš„å›è°ƒå¤„ç†
+/**@brief    ÉèÖÃmic´¦Àíº¯ÊıµÄ»Øµ÷´¦Àí
    @param
    @return
    @note
@@ -147,7 +147,7 @@ void mic_stream_set_output(struct __mic_stream  *stream, void *priv, u32(*func)(
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    micä¸­æ–­æ•°æ®è¾“å‡ºå›è°ƒå‡½æ•°
+/**@brief    micÖĞ¶ÏÊı¾İÊä³ö»Øµ÷º¯Êı
    @param
    @return
    @note
@@ -166,7 +166,7 @@ static void adc_output_to_buf(void *priv, s16 *data, int len)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€mic
+/**@brief    ´ò¿ªmic
    @param
    @return
    @note
@@ -188,7 +188,7 @@ bool mic_stream_start(struct __mic_stream  *stream)
     return false;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­micæ•°æ®æµ
+/**@brief    ¹Ø±ÕmicÊı¾İÁ÷
    @param
    @return
    @note

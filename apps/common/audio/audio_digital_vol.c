@@ -7,9 +7,9 @@
 #define BG_DVOL_MAX			14
 #define BG_DVOL_MID			10
 #define BG_DVOL_MIN		    6
-#define BG_DVOL_MAX_FADE	5	/*>= BG_DVOL_MAX:è‡ªåŠ¨æ·¡å‡ºBG_DVOL_MAX_FADE*/
-#define BG_DVOL_MID_FADE	3	/*>= BG_DVOL_MID:è‡ªåŠ¨æ·¡å‡ºBG_DVOL_MID_FADE*/
-#define BG_DVOL_MIN_FADE	1	/*>= BG_DVOL_MIN:è‡ªåŠ¨æ·¡å‡ºBG_DVOL_MIN_FADE*/
+#define BG_DVOL_MAX_FADE	5	/*>= BG_DVOL_MAX:×Ô¶¯µ­³öBG_DVOL_MAX_FADE*/
+#define BG_DVOL_MID_FADE	3	/*>= BG_DVOL_MID:×Ô¶¯µ­³öBG_DVOL_MID_FADE*/
+#define BG_DVOL_MIN_FADE	1	/*>= BG_DVOL_MIN:×Ô¶¯µ­³öBG_DVOL_MIN_FADE*/
 
 #define ASM_ENABLE			1
 #define  L_sat(b,a)       __asm__ volatile("%0=sat16(%1)(s)":"=&r"(b) : "r"(a));
@@ -23,8 +23,8 @@ static dvol_t dvol_attr;
 
 //static struct digital_volume d_volume;
 /*
- *æ•°å­—éŸ³é‡çº§æ•° DIGITAL_VOL_MAX
- *æ•°ç»„é•¿åº¦ DIGITAL_VOL_MAX + 1
+ *Êý×ÖÒôÁ¿¼¶Êý DIGITAL_VOL_MAX
+ *Êý×é³¤¶È DIGITAL_VOL_MAX + 1
  */
 #define DIGITAL_VOL_MAX		31
 const u16 dig_vol_table[DIGITAL_VOL_MAX + 1] = {
@@ -68,7 +68,7 @@ int audio_digital_vol_init(void)
     return 0;
 }
 
-/*èƒŒæ™¯éŸ³ä¹æ·¡å‡ºä½¿èƒ½*/
+/*±³¾°ÒôÀÖµ­³öÊ¹ÄÜ*/
 void audio_digital_vol_bg_fade(u8 fade_out)
 {
     printf("audio_digital_vol_bg_fade:%d", fade_out);
@@ -76,9 +76,9 @@ void audio_digital_vol_bg_fade(u8 fade_out)
 }
 
 /*
- *fade_stepä¸€èˆ¬ä¸è¶…è¿‡ä¸¤çº§æ•°å­—éŸ³é‡çš„æœ€å°å·®å€¼
- *(1)é€šè¯å¦‚æžœç”¨æ•°å­—éŸ³é‡ï¼Œä¸€èˆ¬æ­¥è¿›å°ä¸€ç‚¹ï¼ŒéŸ³é‡è°ƒèŠ‚çš„æ—¶å€™ä¸ä¼šæœ‰æ‚éŸ³
- *(2)æ·¡å‡ºçš„æ—¶å€™å¯ä»¥å¿«ä¸€ç‚¹ï¼Œå°½å¿«æ·¡å‡ºåˆ°0
+ *fade_stepÒ»°ã²»³¬¹ýÁ½¼¶Êý×ÖÒôÁ¿µÄ×îÐ¡²îÖµ
+ *(1)Í¨»°Èç¹ûÓÃÊý×ÖÒôÁ¿£¬Ò»°ã²½½øÐ¡Ò»µã£¬ÒôÁ¿µ÷½ÚµÄÊ±ºò²»»áÓÐÔÓÒô
+ *(2)µ­³öµÄÊ±ºò¿ÉÒÔ¿ìÒ»µã£¬¾¡¿ìµ­³öµ½0
  */
 dvol_handle *audio_digital_vol_open(u8 vol, u8 vol_max, u16 fade_step)
 {
@@ -250,14 +250,14 @@ int audio_digital_vol_run(dvol_handle *dvol, void *data, u32 len)
 }
 
 
-/*************************æ”¯æŒé‡å…¥çš„æ•°å­—éŸ³é‡è°ƒèŠ‚****************************/
+/*************************Ö§³ÖÖØÈëµÄÊý×ÖÒôÁ¿µ÷½Ú****************************/
 
 
 
 /*
- *fade_stepä¸€èˆ¬ä¸è¶…è¿‡ä¸¤çº§æ•°å­—éŸ³é‡çš„æœ€å°å·®å€¼
- *(1)é€šè¯å¦‚æžœç”¨æ•°å­—éŸ³é‡ï¼Œä¸€èˆ¬æ­¥è¿›å°ä¸€ç‚¹ï¼ŒéŸ³é‡è°ƒèŠ‚çš„æ—¶å€™ä¸ä¼šæœ‰æ‚éŸ³
- *(2)æ·¡å‡ºçš„æ—¶å€™å¯ä»¥å¿«ä¸€ç‚¹ï¼Œå°½å¿«æ·¡å‡ºåˆ°0
+ *fade_stepÒ»°ã²»³¬¹ýÁ½¼¶Êý×ÖÒôÁ¿µÄ×îÐ¡²îÖµ
+ *(1)Í¨»°Èç¹ûÓÃÊý×ÖÒôÁ¿£¬Ò»°ã²½½øÐ¡Ò»µã£¬ÒôÁ¿µ÷½ÚµÄÊ±ºò²»»áÓÐÔÓÒô
+ *(2)µ­³öµÄÊ±ºò¿ÉÒÔ¿ìÒ»µã£¬¾¡¿ìµ­³öµ½0
  */
 void *user_audio_digital_volume_open(u8 vol, u8 vol_max, u16 fade_step)
 {
@@ -272,11 +272,11 @@ void *user_audio_digital_volume_open(u8 vol, u8 vol_max, u16 fade_step)
     d_volume->vol_max 	= vol_max;
     vol_level 			= vol * DIGITAL_VOL_MAX / vol_max;
     d_volume->vol_target = dig_vol_table[vol_level];
-    //d_volume->vol_fade 	= 0;//d_volume->vol_target;//æ‰“å¼€æ—¶ï¼Œä»Ž0å¼€å§‹æ·¡å…¥
+    //d_volume->vol_fade 	= 0;//d_volume->vol_target;//´ò¿ªÊ±£¬´Ó0¿ªÊ¼µ­Èë
     d_volume->vol_fade 	= d_volume->vol_target;
     d_volume->fade_step 	= fade_step;
     d_volume->toggle 	= 1;
-    d_volume->ch_num    = 2;//é»˜è®¤åŒå£°é“
+    d_volume->ch_num    = 2;//Ä¬ÈÏË«ÉùµÀ
     d_volume->user_vol_tab = NULL;
     d_volume->user_vol_max = 0;
 
@@ -382,7 +382,7 @@ int user_audio_digital_volume_reset_fade(void *_d_volume)
 	}                              \
 	else if (ch_num == 3)         \
 	{                                \
-		len = (len*5462)>>14;             /*ç­‰æ•ˆé™¤3ï¼Œå› ä¸º5462å‘ä¸Šå–æ•´å¾—åˆ°çš„*/\
+		len = (len*5462)>>14;             /*µÈÐ§³ý3£¬ÒòÎª5462ÏòÉÏÈ¡ÕûµÃµ½µÄ*/\
 	}      \
 	else if(ch_num == 4)               \
 	{                \
@@ -482,7 +482,7 @@ int user_audio_digital_volume_reset_fade(void *_d_volume)
 	}                              \
 	else if (ch_num == 3)         \
 	{                                \
-		len = (len*5462)>>14;             /*ç­‰æ•ˆé™¤3ï¼Œå› ä¸º5462å‘ä¸Šå–æ•´å¾—åˆ°çš„*/\
+		len = (len*5462)>>14;             /*µÈÐ§³ý3£¬ÒòÎª5462ÏòÉÏÈ¡ÕûµÃµ½µÄ*/\
 	}      \
 	else if(ch_num == 4)               \
 	{                \
@@ -603,7 +603,7 @@ int user_audio_digital_volume_run(void *_d_volume, void *data, u32 len, u8 ch_nu
         }
         buf[i] = (s16)valuetemp;
 
-        if (d_volume->ch_num > 1) { //åŒå£°é“
+        if (d_volume->ch_num > 1) { //Ë«ÉùµÀ
             ///FR channel
             valuetemp = buf[i + 1];
             if (valuetemp < 0) {
@@ -621,7 +621,7 @@ int user_audio_digital_volume_run(void *_d_volume, void *data, u32 len, u8 ch_nu
             }
             buf[i + 1] = (s16)valuetemp;
 
-            if (d_volume->ch_num > 2) { //ä¸‰å£°é“
+            if (d_volume->ch_num > 2) { //ÈýÉùµÀ
                 //RL channel
                 valuetemp = buf[i + 2];
                 if (valuetemp < 0) {
@@ -639,7 +639,7 @@ int user_audio_digital_volume_run(void *_d_volume, void *data, u32 len, u8 ch_nu
                 buf[i + 2] = (s16)valuetemp;
 
 
-                if (d_volume->ch_num > 3) { //å››å£°é“
+                if (d_volume->ch_num > 3) { //ËÄÉùµÀ
                     ///RR channel
                     valuetemp = buf[i + 3];
                     if (valuetemp < 0) {
@@ -667,8 +667,8 @@ int user_audio_digital_volume_run(void *_d_volume, void *data, u32 len, u8 ch_nu
 
 
 /*
- *user_vol_max:éŸ³é‡çº§æ•°
- *user_vol_tab:è‡ªå®šä¹‰éŸ³é‡è¡¨,è‡ªå®šä¹‰è¡¨é•¿user_vol_max+1
+ *user_vol_max:ÒôÁ¿¼¶Êý
+ *user_vol_tab:×Ô¶¨ÒåÒôÁ¿±í,×Ô¶¨Òå±í³¤user_vol_max+1
  */
 void user_audio_digital_set_volume_tab(void *_d_volume, u16 *user_vol_tab, u8 user_vol_max)
 {
@@ -689,8 +689,8 @@ void user_audio_digital_set_volume_tab(void *_d_volume, u16 *user_vol_tab, u8 us
 
 
 /*
- *priv:ç”¨æˆ·è‡ªå®šä¹‰æŒ‡é’ˆ
- *void (*handler)(void *priv, void *data, int len, u8 ch_num):ç”¨æˆ·è‡ªå®šä¹‰å›žè°ƒ
+ *priv:ÓÃ»§×Ô¶¨ÒåÖ¸Õë
+ *void (*handler)(void *priv, void *data, int len, u8 ch_num):ÓÃ»§×Ô¶¨Òå»Øµ÷
  * */
 void *user_audio_process_open(void *parm, void *priv, void (*handler)(void *priv, void *data, int len, u8 ch_num))
 {

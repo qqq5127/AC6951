@@ -11,7 +11,7 @@ struct dec_board_param
 	u16 d_vol_fade_step;
 	u8	(*d_vol_max)(void);		
 	u8	(*d_vol_cur)(void);		
-	u8  voice_cut_en;//浜哄０娑堥櫎 浣胯兘
+	u8  voice_cut_en;//人声消除 使能
 	///other dec param...
 };
 

@@ -209,22 +209,22 @@ static int esco_enc_pcm_get(struct audio_encoder *encoder, s16 **frame, u16 fram
 #endif // TCFG_IIS_INPUT_EN
 
         if (rlen == frame_len) {
-            /*escoç¼–ç è¯»å–æ•°æ®æ­£å¸¸*/
+            /*esco±àÂë¶ÁÈ¡Êı¾İÕı³£*/
 #if (RECORDER_MIX_EN)
             recorder_mix_sco_data_write(enc->pcm_frame, frame_len);
 #endif/*RECORDER_MIX_EN*/
             break;
         } else if (rlen == 0) {
-            /*escoç¼–ç è¯»ä¸åˆ°æ•°,è¿”å›0*/
+            /*esco±àÂë¶Á²»µ½Êı,·µ»Ø0*/
             return 0;
-            /*escoç¼–ç è¯»ä¸åˆ°æ•°ï¼Œpendä½*/
+            /*esco±àÂë¶Á²»µ½Êı£¬pend×¡*/
             /* int ret = os_sem_pend(&enc->pcm_frame_sem, 100);
             if (ret == OS_TIMEOUT) {
                 r_printf("esco_enc pend timeout\n");
                 break;
             } */
         } else {
-            /*é€šè¯ç»“æŸï¼Œaecå·²ç»é‡Šæ”¾*/
+            /*Í¨»°½áÊø£¬aecÒÑ¾­ÊÍ·Å*/
             printf("audio_enc end:%d\n", rlen);
             rlen = 0;
             break;
@@ -340,7 +340,7 @@ int esco_enc_open(u32 coding_type, u8 frame_len)
 #endif
 #else
 #if	TCFG_MIC_EFFECT_ENABLE
-    if (fmt.sample_rate != MIC_EFFECT_SAMPLERATE) {//8Kæ—¶éœ€æŠŠmicæ•°æ®é‡‡æ ·ç‡é™ä½
+    if (fmt.sample_rate != MIC_EFFECT_SAMPLERATE) {//8KÊ±Ğè°ÑmicÊı¾İ²ÉÑùÂÊ½µµÍ
         esco_enc->adc_output.handler = adc_mic_output_handler_downsr;
     } else {
         esco_enc->adc_output.handler = adc_mic_output_handler;
@@ -471,7 +471,7 @@ int audio_enc_init()
 }
 
 
-/**************************mic linein æ¥å£***************************************************/
+/**************************mic linein ½Ó¿Ú***************************************************/
 #define LADC_BUF_NUM        2
 #define LADC_CH_NUM         3
 #if TCFG_MIC_EFFECT_ENABLE
@@ -512,7 +512,7 @@ typedef struct  {
     int linein_gain;
     u8 mic_en: 2;
     u8 ladc_en: 2;
-    u8 ladc_ch_mark: 3;// adc ç»„åˆBIT(2):MIC BIT(1):LIN1 BIT(0):LIN0
+    u8 ladc_ch_mark: 3;// adc ×éºÏBIT(2):MIC BIT(1):LIN1 BIT(0):LIN0
     u8 ladc_ch_num: 3;// 1 2 3
     //s16 temp_buf[LADC_IRQ_POINTS];
     s16 *temp_buf;
@@ -529,13 +529,13 @@ static void audio_adc_output_demo(void *priv, s16 *data, int len)
     struct audio_adc_output_hdl *p;
     /* struct audio_adc_hdl *hdl = priv; */
     if (ladc_var.ladc_ch_num == 1) {
-        if (ladc_var.ladc_ch_mark & LADC_MIC_CH_MASK) { //å•mic
+        if (ladc_var.ladc_ch_mark & LADC_MIC_CH_MASK) { //µ¥mic
             if (!list_empty(&ladc_var.mic_head)) {
                 list_for_each_entry(p, &ladc_var.mic_head, entry) {
                     p->handler(p->priv, data, len);
                 }
             }
-        } else { //å•linein
+        } else { //µ¥linein
             if (!list_empty(&ladc_var.linein_head)) {
                 list_for_each_entry(p, &ladc_var.linein_head, entry) {
                     p->handler(p->priv, data, len);
@@ -543,7 +543,7 @@ static void audio_adc_output_demo(void *priv, s16 *data, int len)
             }
         }
     } else if (ladc_var.ladc_ch_num == 2) {
-        if (ladc_var.ladc_ch_mark & LADC_MIC_CH_MASK) { //æ•°æ®ç»“æ„ï¼šLIN0 MIC0 LIN1 MIC1 LIN2 MIC2
+        if (ladc_var.ladc_ch_mark & LADC_MIC_CH_MASK) { //Êı¾İ½á¹¹£ºLIN0 MIC0 LIN1 MIC1 LIN2 MIC2
             if (!list_empty(&ladc_var.mic_head)) {
                 if (ladc_var.ladc_ch_mark & LADC_LINE_R_MASK) {
                     for (i = 0; i < len / 2; i++) {
@@ -573,7 +573,7 @@ static void audio_adc_output_demo(void *priv, s16 *data, int len)
                     p->handler(p->priv, data, len);
                 }
             }
-        } else { //ä¸¤è·¯linein  LINL0 LINR0 LINL1 LINR1
+        } else { //Á½Â·linein  LINL0 LINR0 LINL1 LINR1
             if (!list_empty(&ladc_var.linein_head)) {
                 list_for_each_entry(p, &ladc_var.linein_head, entry) {
                     p->handler(p->priv, data, len);
@@ -581,7 +581,7 @@ static void audio_adc_output_demo(void *priv, s16 *data, int len)
             }
         }
 
-    } else if (ladc_var.ladc_ch_num == 3) {//æ•°æ®ç»“æ„ï¼šLINL0 LINR0 MIC0
+    } else if (ladc_var.ladc_ch_num == 3) {//Êı¾İ½á¹¹£ºLINL0 LINR0 MIC0
         if (!list_empty(&ladc_var.mic_head)) {
             for (i = 0; i < len / 2; i++) {
                 ladc_var.temp_buf[i] = data[i * 3 + 2];
@@ -639,13 +639,13 @@ int audio_mic_open(struct adc_mic_ch *mic, u16 sample_rate, u8 gain)
         ladc_var.ladc_ch_mark = 0;
         ladc_var.ladc_ch_mark |= LADC_MIC_CH_MASK;
         ladc_var.ladc_ch_num = 1;
-#if TCFG_MIC_EFFECT_ENABLE //å¼€æ··å“æ—¶å¯ç”¨å¤šè·¯AD
+#if TCFG_MIC_EFFECT_ENABLE //¿ª»ìÏìÊ±ÆôÓÃ¶àÂ·AD
 #if (TCFG_LINEIN_ENABLE&&(LINEIN_INPUT_WAY == LINEIN_INPUT_WAY_ADC))
-        if (TCFG_LINEIN_LR_CH & (AUDIO_LIN0L_CH | AUDIO_LIN1L_CH | AUDIO_LIN2L_CH)) { //åˆ¤æ–­Line0L Line1L Line2L æ˜¯å¦æœ‰æ‰“å¼€
+        if (TCFG_LINEIN_LR_CH & (AUDIO_LIN0L_CH | AUDIO_LIN1L_CH | AUDIO_LIN2L_CH)) { //ÅĞ¶ÏLine0L Line1L Line2L ÊÇ·ñÓĞ´ò¿ª
             ladc_var.ladc_ch_mark |= LADC_LINE_L_MASK;
             ladc_var.ladc_ch_num++;
         }
-        if (TCFG_LINEIN_LR_CH & (AUDIO_LIN0R_CH | AUDIO_LIN1R_CH | AUDIO_LIN2R_CH)) { //åˆ¤æ–­Line0R Line1R Line2R æ˜¯å¦æœ‰æ‰“å¼€
+        if (TCFG_LINEIN_LR_CH & (AUDIO_LIN0R_CH | AUDIO_LIN1R_CH | AUDIO_LIN2R_CH)) { //ÅĞ¶ÏLine0R Line1R Line2R ÊÇ·ñÓĞ´ò¿ª
             ladc_var.ladc_ch_mark |= LADC_LINE_R_MASK;
             ladc_var.ladc_ch_num++;
         }
@@ -674,7 +674,7 @@ int audio_mic_open(struct adc_mic_ch *mic, u16 sample_rate, u8 gain)
             audio_adc_mic_set_buffs(&ladc_var.mic_ch, ladc_var.adc_buf,  ladc_var.ladc_ch_num * irq_point_unit * 2, LADC_BUF_NUM);
         } else {
             audio_adc_set_buffs(&ladc_var.linein_ch, ladc_var.adc_buf,  ladc_var.ladc_ch_num * irq_point_unit * 2, LADC_BUF_NUM);
-            JL_ANA->ADA_CON1 |= BIT(17); //é»˜è®¤å…ˆå…³é—­lineiné€šè·¯
+            JL_ANA->ADA_CON1 |= BIT(17); //Ä¬ÈÏÏÈ¹Ø±ÕlineinÍ¨Â·
             JL_ANA->ADA_CON2 |= BIT(13);
 
         }
@@ -810,7 +810,7 @@ int audio_linein_open(struct audio_adc_ch *linein, u16 sample_rate, int gain)
     if (!ladc_var.adc_buf) {
         log_i("\n ladc malloc \n\n\n\n");
         ladc_var.ladc_ch_mark = 0;
-#if	(TCFG_AUDIO_ADC_ENABLE&&TCFG_MIC_EFFECT_ENABLE)//å¼€æ··å“æ—¶å¯ç”¨å¤šè·¯AD
+#if	(TCFG_AUDIO_ADC_ENABLE&&TCFG_MIC_EFFECT_ENABLE)//¿ª»ìÏìÊ±ÆôÓÃ¶àÂ·AD
         ladc_var.ladc_ch_mark |= LADC_MIC_CH_MASK;
         ladc_var.ladc_ch_num = 1;
 #else
@@ -818,23 +818,23 @@ int audio_linein_open(struct audio_adc_ch *linein, u16 sample_rate, int gain)
         ladc_var.ladc_ch_num = 0;
 #endif
         /* if (TCFG_LINEIN_LR_CH & (0x15)) { */
-        if (TCFG_LINEIN_LR_CH & (AUDIO_LIN0L_CH | AUDIO_LIN1L_CH | AUDIO_LIN2L_CH)) { //åˆ¤æ–­Line0L Line1L Line2L æ˜¯å¦æœ‰æ‰“å¼€
+        if (TCFG_LINEIN_LR_CH & (AUDIO_LIN0L_CH | AUDIO_LIN1L_CH | AUDIO_LIN2L_CH)) { //ÅĞ¶ÏLine0L Line1L Line2L ÊÇ·ñÓĞ´ò¿ª
             ladc_var.ladc_ch_mark |= LADC_LINE_L_MASK;
             ladc_var.ladc_ch_num++;
         }
-        if (TCFG_LINEIN_LR_CH & (AUDIO_LIN0R_CH | AUDIO_LIN1R_CH | AUDIO_LIN2R_CH)) { //åˆ¤æ–­Line0R Line1R Line2R æ˜¯å¦æœ‰æ‰“å¼€
+        if (TCFG_LINEIN_LR_CH & (AUDIO_LIN0R_CH | AUDIO_LIN1R_CH | AUDIO_LIN2R_CH)) { //ÅĞ¶ÏLine0R Line1R Line2R ÊÇ·ñÓĞ´ò¿ª
             ladc_var.ladc_ch_mark |= LADC_LINE_R_MASK;
             ladc_var.ladc_ch_num++;
         }
         ladc_var.adc_buf = (s16 *)zalloc(ladc_var.ladc_ch_num * irq_point_unit * 2 * LADC_BUF_NUM);
-        if (ladc_var.ladc_ch_mark & LADC_MIC_CH_MASK) { //micé€šè·¯æœ‰æ‰“å¼€
+        if (ladc_var.ladc_ch_mark & LADC_MIC_CH_MASK) { //micÍ¨Â·ÓĞ´ò¿ª
             ladc_var.temp_buf = (s16 *)zalloc(irq_point_unit * 2);
         }
         printf("ladc_ch_num[%d],[%x]", ladc_var.ladc_ch_num, ladc_var.ladc_ch_mark);
     }
     if (ladc_var.states == 0) {
         atomic_inc_return(&ladc_var.used);
-#if	(TCFG_AUDIO_ADC_ENABLE&&TCFG_MIC_EFFECT_ENABLE)//å¼€æ··å“æ—¶å¯ç”¨å¤šè·¯AD
+#if	(TCFG_AUDIO_ADC_ENABLE&&TCFG_MIC_EFFECT_ENABLE)//¿ª»ìÏìÊ±ÆôÓÃ¶àÂ·AD
         audio_adc_mic_open(&ladc_var.mic_ch, AUDIO_ADC_MIC_CH, &adc_hdl);
         audio_adc_mic_set_sample_rate(&ladc_var.mic_ch, sample_rate);
         audio_adc_mic_set_gain(&ladc_var.mic_ch, 0);

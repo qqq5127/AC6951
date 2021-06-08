@@ -6,20 +6,20 @@
 #include "os/os_api.h"
 #include "generic/list.h"
 
-#define BG_DVOL_FADE_ENABLE		1	/*å¤šè·¯å£°éŸ³å åŠ ï¼ŒèƒŒæ™¯å£°éŸ³è‡ªåŠ¨æ·¡å‡ºå°å£°*/
+#define BG_DVOL_FADE_ENABLE		1	/*¶àÂ·ÉùÒôµş¼Ó£¬±³¾°ÉùÒô×Ô¶¯µ­³öĞ¡Éù*/
 
 typedef struct {
-    u8 toggle;					/*æ•°å­—éŸ³é‡å¼€å…³*/
-    u8 fade;					/*æ·¡å…¥æ·¡å‡ºæ ‡å¿—*/
-    u8 vol;						/*æ·¡å…¥æ·¡å‡ºå½“å‰éŸ³é‡(level)*/
-    u8 vol_max;					/*æ·¡å…¥æ·¡å‡ºæœ€å¤§éŸ³é‡(level)*/
-    s16 vol_fade;				/*æ·¡å…¥æ·¡å‡ºå¯¹åº”çš„èµ·å§‹éŸ³é‡*/
+    u8 toggle;					/*Êı×ÖÒôÁ¿¿ª¹Ø*/
+    u8 fade;					/*µ­Èëµ­³ö±êÖ¾*/
+    u8 vol;						/*µ­Èëµ­³öµ±Ç°ÒôÁ¿(level)*/
+    u8 vol_max;					/*µ­Èëµ­³ö×î´óÒôÁ¿(level)*/
+    s16 vol_fade;				/*µ­Èëµ­³ö¶ÔÓ¦µÄÆğÊ¼ÒôÁ¿*/
 #if BG_DVOL_FADE_ENABLE
-    s16 vol_bk;					/*åå°è‡ªåŠ¨æ·¡å‡ºå‰éŸ³é‡å€¼*/
+    s16 vol_bk;					/*ºóÌ¨×Ô¶¯µ­³öÇ°ÒôÁ¿Öµ*/
     struct list_head entry;
 #endif
-    volatile s16 vol_target;	/*æ·¡å…¥æ·¡å‡ºå¯¹åº”çš„ç›®æ ‡éŸ³é‡*/
-    volatile u16 fade_step;		/*æ·¡å…¥æ·¡å‡ºçš„æ­¥è¿›*/
+    volatile s16 vol_target;	/*µ­Èëµ­³ö¶ÔÓ¦µÄÄ¿±êÒôÁ¿*/
+    volatile u16 fade_step;		/*µ­Èëµ­³öµÄ²½½ø*/
 } dvol_handle;
 
 
@@ -32,7 +32,7 @@ u8 audio_digital_vol_get(void);
 int audio_digital_vol_run(dvol_handle *dvol, void *data, u32 len);
 void audio_digital_vol_reset_fade(dvol_handle *dvol);
 
-/*************************è‡ªå®šä¹‰æ”¯æŒé‡å…¥çš„æ•°å­—éŸ³é‡è°ƒèŠ‚****************************/
+/*************************×Ô¶¨ÒåÖ§³ÖÖØÈëµÄÊı×ÖÒôÁ¿µ÷½Ú****************************/
 void *user_audio_digital_volume_open(u8 vol, u8 vol_max, u16 fade_step);
 int user_audio_digital_volume_close(void *_d_volume);
 u8 user_audio_digital_volume_get(void *_d_volume);
@@ -54,25 +54,25 @@ struct user_audio_digital_parm {
 };
 
 struct digital_volume {
-    u8 toggle;					/*æ•°å­—éŸ³é‡å¼€å…³*/
-    u8 fade;					/*æ·¡å…¥æ·¡å‡ºæ ‡å¿—*/
-    u8 vol;						/*æ·¡å…¥æ·¡å‡ºå½“å‰éŸ³é‡*/
-    u8 vol_max;					/*æ·¡å…¥æ·¡å‡ºæœ€å¤§éŸ³é‡*/
-    s16 vol_fade;				/*æ·¡å…¥æ·¡å‡ºå¯¹åº”çš„èµ·å§‹éŸ³é‡*/
-    volatile s16 vol_target;	/*æ·¡å…¥æ·¡å‡ºå¯¹åº”çš„ç›®æ ‡éŸ³é‡*/
-    volatile u16 fade_step;				/*æ·¡å…¥æ·¡å‡ºçš„æ­¥è¿›*/
+    u8 toggle;					/*Êı×ÖÒôÁ¿¿ª¹Ø*/
+    u8 fade;					/*µ­Èëµ­³ö±êÖ¾*/
+    u8 vol;						/*µ­Èëµ­³öµ±Ç°ÒôÁ¿*/
+    u8 vol_max;					/*µ­Èëµ­³ö×î´óÒôÁ¿*/
+    s16 vol_fade;				/*µ­Èëµ­³ö¶ÔÓ¦µÄÆğÊ¼ÒôÁ¿*/
+    volatile s16 vol_target;	/*µ­Èëµ­³ö¶ÔÓ¦µÄÄ¿±êÒôÁ¿*/
+    volatile u16 fade_step;				/*µ­Èëµ­³öµÄ²½½ø*/
 
     OS_MUTEX mutex;
     u8 ch_num;
     void *priv;
-    u8 user_vol_max;                                 /*è‡ªå®šä¹‰éŸ³é‡è¡¨çº§æ•°*/
-    volatile s16 *user_vol_tab;	                     /*è‡ªå®šä¹‰éŸ³é‡è¡¨*/
+    u8 user_vol_max;                                 /*×Ô¶¨ÒåÒôÁ¿±í¼¶Êı*/
+    volatile s16 *user_vol_tab;	                     /*×Ô¶¨ÒåÒôÁ¿±í*/
 
 };
 
 struct user_audio_parm {
     void *priv;
-    void (*handler)(void *priv, void *data, int len, u8 ch_num);/*ç”¨æˆ·è‡ªå®šä¹‰å›è°ƒå¤„ç†*/
+    void (*handler)(void *priv, void *data, int len, u8 ch_num);/*ÓÃ»§×Ô¶¨Òå»Øµ÷´¦Àí*/
     struct digital_volume *dvol_hdl;
 };
 

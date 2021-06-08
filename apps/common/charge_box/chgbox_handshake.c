@@ -19,21 +19,21 @@
 #include "debug.h"
 
 void chgbox_timer_delay_us(u8 us);
-static u8  hs_cur_sys_clk = 0;   //å½“å‰æ—¶é’ŸåŒ¹é…å€¼
-static u32 hs_small_clk = 0;     //å°äº48mçš„ç³»ç»Ÿæ—¶é’Ÿ,è®°å½•ï¼Œç”¨æ¥æ¢å¤
-static u8 chgbox_hs_repeat_times = 0;  //é‡å¤æ¬¡æ•°
+static u8  hs_cur_sys_clk = 0;   //µ±Ç°Ê±ÖÓÆ¥ÅäÖµ
+static u32 hs_small_clk = 0;     //Ğ¡ÓÚ48mµÄÏµÍ³Ê±ÖÓ,¼ÇÂ¼£¬ÓÃÀ´»Ö¸´
+static u8 chgbox_hs_repeat_times = 0;  //ÖØ¸´´ÎÊı
 static int hs_timer;
 
 static struct _hs_hdl hs_ctrl = {
-    .port = TCFG_HANDSHAKE_IO,                //åˆå§‹åŒ–IO
-    .send_delay_us = chgbox_timer_delay_us,   //æ³¨å†Œå»¶æ—¶å‡½æ•°
+    .port = TCFG_HANDSHAKE_IO,                //³õÊ¼»¯IO
+    .send_delay_us = chgbox_timer_delay_us,   //×¢²áÑÓÊ±º¯Êı
 };
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    lightingæ¡æ‰‹åˆå§‹åŒ–
-   @param    æ— 
-   @return   æ— 
-   @note     åˆå§‹åŒ–ioåŠæ³¨å†Œå»¶æ—¶
+/**@brief    lightingÎÕÊÖ³õÊ¼»¯
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ³õÊ¼»¯io¼°×¢²áÑÓÊ±
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_handshake_init(void)
@@ -53,10 +53,10 @@ static u16 delay_tap[HS_DELAY_240M + 1][HS_DELAY_16US + 1] = {
 };
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    è·å–å½“å‰çš„æ—¶é’Ÿ,è®¾ç½®å¯¹åº”çš„è¡¨å€¼
-   @param    æ— 
-   @return   æ— 
-   @note     è¯¥å€¼åŒ¹é…delay_tap
+/**@brief    »ñÈ¡µ±Ç°µÄÊ±ÖÓ,ÉèÖÃ¶ÔÓ¦µÄ±íÖµ
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ¸ÃÖµÆ¥Åädelay_tap
 */
 /*------------------------------------------------------------------------------------*/
 static void set_hs_cur_sys_clk(void)
@@ -64,7 +64,7 @@ static void set_hs_cur_sys_clk(void)
     u32 cur_clock = 0;
     cur_clock = clk_get("sys");
 #if (TCFG_CLOCK_SYS_SRC == SYS_CLOCK_INPUT_PLL_RCL)
-    if (cur_clock != 48000000) { //è½¬æˆ48mï¼Œç»“æŸåæ¢å¤åŸæ¥çš„æ—¶é’Ÿ
+    if (cur_clock != 48000000) { //×ª³É48m£¬½áÊøºó»Ö¸´Ô­À´µÄÊ±ÖÓ
         hs_small_clk = cur_clock;
         clk_set("sys", 48 * 1000000L);
         hs_cur_sys_clk = HS_DELAY_48M;
@@ -74,7 +74,7 @@ static void set_hs_cur_sys_clk(void)
         }
     }
 #else
-    if (cur_clock < 48000000) { //å°äº48mæ—¶ï¼Œè½¬æˆ48mï¼Œç»“æŸåæ¢å¤åŸæ¥çš„æ—¶é’Ÿ
+    if (cur_clock < 48000000) { //Ğ¡ÓÚ48mÊ±£¬×ª³É48m£¬½áÊøºó»Ö¸´Ô­À´µÄÊ±ÖÓ
         hs_small_clk = cur_clock;
         clk_set("sys", 48 * 1000000L);
         hs_cur_sys_clk = HS_DELAY_48M;
@@ -111,10 +111,10 @@ static void set_hs_cur_sys_clk(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    æ¡æ‰‹åé‡è®¾ç½®æ—¶é’Ÿ
-   @param    æ— 
-   @return   æ— 
-   @note     æœ‰æ”¹è¿‡æ—¶é’Ÿæ‰é‡è®¾ç½®
+/**@brief    ÎÕÊÖºóÖØÉèÖÃÊ±ÖÓ
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ÓĞ¸Ä¹ıÊ±ÖÓ²ÅÖØÉèÖÃ
 */
 /*------------------------------------------------------------------------------------*/
 static void after_handshake_resume_small_clk(void)
@@ -122,62 +122,62 @@ static void after_handshake_resume_small_clk(void)
     u32 cur_clock = 0;
     if (hs_small_clk) {
         clk_set("sys", hs_small_clk);
-        hs_small_clk = 0;//æ¸…0
+        hs_small_clk = 0;//Çå0
         cur_clock = clk_get("sys");
         printf("after handshake app :%d\n", cur_clock);
     }
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    lightingæ¡æ‰‹å»¶æ—¶
-   @param    æ— 
-   @return   æ— 
-   @note     æä¾›ä¸åŒçš„msçº§å»¶æ—¶
+/**@brief    lightingÎÕÊÖÑÓÊ±
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     Ìá¹©²»Í¬µÄms¼¶ÑÓÊ±
 */
 /*------------------------------------------------------------------------------------*/
 static void chgbox_timer_delay_ms(u8 ms)
 {
-    //delay å€¼è¦æ ¹æ®ä¸åŒçš„é¢‘ç‡å»è°ƒæ•´ï¼Œå°äº48mçš„è¦å…ˆè®¾ç½®48mï¼Œæ–¹ä¾¿å»¶æ—¶
+    //delay ÖµÒª¸ù¾İ²»Í¬µÄÆµÂÊÈ¥µ÷Õû£¬Ğ¡ÓÚ48mµÄÒªÏÈÉèÖÃ48m£¬·½±ãÑÓÊ±
     JL_TIMER2->CNT = 0;
 #if (TCFG_CLOCK_SYS_SRC == SYS_CLOCK_INPUT_PLL_RCL)
     JL_TIMER2->PRD = ms * clk_get("lsb") / (2 * 1000);
-    JL_TIMER2->CON = BIT(0) | BIT(6) | BIT(14); //ç³»ç»Ÿæ—¶é’Ÿ,lsb, div 2
+    JL_TIMER2->CON = BIT(0) | BIT(6) | BIT(14); //ÏµÍ³Ê±ÖÓ,lsb, div 2
 #else
     JL_TIMER2->PRD = ms * clk_get("timer") / 1000;
-    JL_TIMER2->CON = BIT(0) | BIT(3) | BIT(14); //1åˆ†é¢‘,oscæ—¶é’Ÿ,24mï¼Œ24æ¬¡å°±1us
+    JL_TIMER2->CON = BIT(0) | BIT(3) | BIT(14); //1·ÖÆµ,oscÊ±ÖÓ,24m£¬24´Î¾Í1us
 #endif
-    while (!(JL_TIMER2->CON & BIT(15))); //ç­‰pending
+    while (!(JL_TIMER2->CON & BIT(15))); //µÈpending
     JL_TIMER2->CON = 0;
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    lightingæ¡æ‰‹å»¶æ—¶
-   @param    æ— 
-   @return   æ— 
-   @note     æä¾›ä¸åŒçš„usçº§å»¶æ—¶
+/**@brief    lightingÎÕÊÖÑÓÊ±
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     Ìá¹©²»Í¬µÄus¼¶ÑÓÊ±
 */
 /*------------------------------------------------------------------------------------*/
 SEC(.chargebox_code)
 void chgbox_timer_delay_us(u8 us)
 {
-    //delay å€¼è¦æ ¹æ®ä¸åŒçš„é¢‘ç‡å»è°ƒæ•´ï¼Œå°äº48mçš„è¦å…ˆè®¾ç½®48mï¼Œæ–¹ä¾¿å»¶æ—¶
+    //delay ÖµÒª¸ù¾İ²»Í¬µÄÆµÂÊÈ¥µ÷Õû£¬Ğ¡ÓÚ48mµÄÒªÏÈÉèÖÃ48m£¬·½±ãÑÓÊ±
     JL_TIMER2->CNT = 0;
 #if (TCFG_CLOCK_SYS_SRC == SYS_CLOCK_INPUT_PLL_RCL)
-    JL_TIMER2->PRD = delay_tap[hs_cur_sys_clk][us];//è¿™é‡Œä¸å…è®¸åšä¹˜é™¤æ³•
-    JL_TIMER2->CON = BIT(0) | BIT(6) | BIT(14); //ç³»ç»Ÿæ—¶é’Ÿ,lsb, div 2, å¿…é¡»ä¸º24M
+    JL_TIMER2->PRD = delay_tap[hs_cur_sys_clk][us];//ÕâÀï²»ÔÊĞí×ö³Ë³ı·¨
+    JL_TIMER2->CON = BIT(0) | BIT(6) | BIT(14); //ÏµÍ³Ê±ÖÓ,lsb, div 2, ±ØĞëÎª24M
 #else
     JL_TIMER2->PRD = delay_tap[hs_cur_sys_clk][us];
-    JL_TIMER2->CON = BIT(0) | BIT(3) | BIT(14); //1åˆ†é¢‘,oscæ—¶é’Ÿ,24mï¼Œ24æ¬¡å°±1us
+    JL_TIMER2->CON = BIT(0) | BIT(3) | BIT(14); //1·ÖÆµ,oscÊ±ÖÓ,24m£¬24´Î¾Í1us
 #endif
-    while (!(JL_TIMER2->CON & BIT(15))); //ç­‰pending
+    while (!(JL_TIMER2->CON & BIT(15))); //µÈpending
     JL_TIMER2->CON = 0;
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    lightingæ¡æ‰‹
-   @param    æ— 
-   @return   æ— 
-   @note     æ³¨æ„ï¼šä¸ºäº†ç²¾ç¡®çš„æ—¶é—´ï¼Œä¼šå…³é—­å…¶ä»–ä¸­æ–­
+/**@brief    lightingÎÕÊÖ
+   @param    ÎŞ
+   @return   ÎŞ
+   @note     ×¢Òâ£ºÎªÁË¾«È·µÄÊ±¼ä£¬»á¹Ø±ÕÆäËûÖĞ¶Ï
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_handshake_run_app(void)
@@ -199,10 +199,10 @@ void chgbox_handshake_run_app(void)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    lightingé‡å¤æ¡æ‰‹
+/**@brief    lightingÖØ¸´ÎÕÊÖ
    @param    null
-   @return   æ— 
-   @note     ç”¨å®šæ—¶å™¨å®ç°é‡å¤æ¡æ‰‹å¢åŠ æ¡æ‰‹æˆåŠŸå‡ ç‡
+   @return   ÎŞ
+   @note     ÓÃ¶¨Ê±Æ÷ÊµÏÖÖØ¸´ÎÕÊÖÔö¼ÓÎÕÊÖ³É¹¦¼¸ÂÊ
 */
 /*------------------------------------------------------------------------------------*/
 static void chgbox_handshake_deal(void *priv)
@@ -217,10 +217,10 @@ static void chgbox_handshake_deal(void *priv)
 }
 
 /*------------------------------------------------------------------------------------*/
-/**@brief    lightingé‡å¤æ¡æ‰‹åˆå§‹åŒ–
-   @param    times:é‡å¤æ¬¡æ•°
-   @return   æ— 
-   @note     åˆå§‹åŒ–å¤šæ¬¡æ¡æ‰‹çš„æ¬¡æ•°
+/**@brief    lightingÖØ¸´ÎÕÊÖ³õÊ¼»¯
+   @param    times:ÖØ¸´´ÎÊı
+   @return   ÎŞ
+   @note     ³õÊ¼»¯¶à´ÎÎÕÊÖµÄ´ÎÊı
 */
 /*------------------------------------------------------------------------------------*/
 void chgbox_handshake_set_repeat(u8 times)

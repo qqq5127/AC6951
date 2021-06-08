@@ -3,7 +3,7 @@
 
 #if AUDIO_SPECTRUM_CONFIG
 /*----------------------------------------------------------------------------*/
-/**@brief   é¢‘å“è¾“å‡ºä¾‹å­
+/**@brief   ÆµÏìÊä³öÀı×Ó
    @return
    @note
 */
@@ -12,22 +12,22 @@ void spectrum_get_demo(void *p)
 {
     spectrum_fft_hdl *hdl = p;
     if (hdl) {
-        u8 db_num = audio_spectrum_fft_get_num(hdl);//è·å–é¢‘è°±ä¸ªæ•°
-        short *db_data = audio_spectrum_fft_get_val(hdl);//è·å–å­˜å‚¨é¢‘è°±å€¼å¾—åœ°å€
+        u8 db_num = audio_spectrum_fft_get_num(hdl);//»ñÈ¡ÆµÆ×¸öÊı
+        short *db_data = audio_spectrum_fft_get_val(hdl);//»ñÈ¡´æ´¢ÆµÆ×ÖµµÃµØÖ·
         if (!db_data) {
             return;
         }
         for (int i = 0; i < db_num; i++) {
-            //è¾“å‡ºdb_numä¸ª dbå€¼
+            //Êä³ödb_num¸ö dbÖµ
             printf("db_data db[%d] %d\n", i, db_data[i]);
         }
     }
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   æ‰“å¼€é¢‘å“ç»Ÿè®¡
-   @param   sr:é‡‡æ ·ç‡
-   @return  hdl:å¥æŸ„
+/**@brief   ´ò¿ªÆµÏìÍ³¼Æ
+   @param   sr:²ÉÑùÂÊ
+   @return  hdl:¾ä±ú
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -41,14 +41,14 @@ spectrum_fft_hdl *spectrum_open_demo(u32 sr, u8 channel)
     parm.releaseFactor = 0.9;
     parm.mode = 2;
     hdl = audio_spectrum_fft_open(&parm);
-    /* int ret = sys_timer_add(hdl, spectrum_get_demo, 500);//é¢‘è°±å€¼è·å–æµ‹è¯• */
+    /* int ret = sys_timer_add(hdl, spectrum_get_demo, 500);//ÆµÆ×Öµ»ñÈ¡²âÊÔ */
     clock_add(SPECTRUM_CLK);
     return hdl;
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   å…³é—­é¢‘å“ç»Ÿè®¡
-   @param  hdl:å¥æŸ„
+/**@brief   ¹Ø±ÕÆµÏìÍ³¼Æ
+   @param  hdl:¾ä±ú
    @return
    @note
 */
@@ -62,8 +62,8 @@ void spectrum_close_demo(spectrum_fft_hdl *hdl)
 
 spectrum_fft_hdl *spec_hdl;
 /*----------------------------------------------------------------------------*/
-/**@brief  åˆ‡æ¢é¢‘å“è®¡ç®—
-   @param  en:0 ä¸åšé¢‘å“è®¡ç®—ï¼Œ 1 ä½¿èƒ½é¢‘å“è®¡ç®—ï¼ˆé€šè¯æ¨¡å¼ï¼Œéœ€å…³é—­é¢‘å“è®¡ç®—ï¼‰
+/**@brief  ÇĞ»»ÆµÏì¼ÆËã
+   @param  en:0 ²»×öÆµÏì¼ÆËã£¬ 1 Ê¹ÄÜÆµÏì¼ÆËã£¨Í¨»°Ä£Ê½£¬Ğè¹Ø±ÕÆµÏì¼ÆËã£©
    @return
    @note
 */

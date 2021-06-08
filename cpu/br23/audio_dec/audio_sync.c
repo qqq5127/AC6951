@@ -41,7 +41,7 @@ struct audio_wireless_sync *a2dp_output_sync_open(int sample_rate, int output_sa
 
     sample_sync = audio_sample_sync_open(0);
 
-    /*閫夋嫨SYNC妯″潡鎺ュ叆鍒癉AC鍐呴儴*/
+    /*选择SYNC模块接入到DAC内部*/
     /*audio_dac_add_sample_sync(&dac_hdl, sample_sync, 1);*/
 
 #if (AUDIO_OUTPUT_WAY == AUDIO_OUTPUT_WAY_IIS)
@@ -99,7 +99,7 @@ struct audio_wireless_sync *esco_output_sync_open(int sample_rate, int output_sa
 
     sample_sync = audio_sample_sync_open(0);
 
-    /*閫夋嫨SYNC妯″潡鎺ュ叆鍒癉AC鍐呴儴*/
+    /*选择SYNC模块接入到DAC内部*/
     /*audio_dac_add_sample_sync(&dac_hdl, sample_sync, 1);*/
 
 #if (AUDIO_OUTPUT_WAY == AUDIO_OUTPUT_WAY_IIS)
@@ -198,7 +198,7 @@ struct audio_wireless_sync *audio_localtws_sync_open(int sample_rate, int output
     }
 
     sample_sync = audio_sample_sync_open(0);
-    /*閫夋嫨SYNC妯″潡鎺ュ叆鍒癉AC鍐呴儴*/
+    /*选择SYNC模块接入到DAC内部*/
     /*audio_dac_add_sample_sync(&dac_hdl, sample_sync, 1);*/
 
 #if (AUDIO_OUTPUT_WAY == AUDIO_OUTPUT_WAY_IIS)

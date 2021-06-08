@@ -164,8 +164,8 @@ int audio_mic_enc_open(int (*mic_output)(void *priv, void *buf, int len), u32 co
     switch (code_type) {
     case AUDIO_CODING_OPUS:
         //1. quality:bitrate     0:16kbps    1:32kbps    2:64kbps
-        //   quality: MSB_2:(bit7_bit6)     format_mode    //0:ç™¾åº¦_æ— å¤´.                   1:é…·ç‹—_eng+range.
-        //   quality:LMSB_2:(bit5_bit4)     low_complexity //0:é«˜å¤æ‚åº¦,é«˜è´¨é‡.å…¼å®¹ä¹‹å‰åº“.  1:ä½å¤æ‚åº¦,ä½è´¨é‡.
+        //   quality: MSB_2:(bit7_bit6)     format_mode    //0:°Ù¶È_ÎŞÍ·.                   1:¿á¹·_eng+range.
+        //   quality:LMSB_2:(bit5_bit4)     low_complexity //0:¸ß¸´ÔÓ¶È,¸ßÖÊÁ¿.¼æÈİÖ®Ç°¿â.  1:µÍ¸´ÔÓ¶È,µÍÖÊÁ¿.
         //2. sample_rate         sample_rate=16k         ignore
         fmt.quality = 0 /*| LOW_COMPLEX*/;
         fmt.sample_rate = 16000;

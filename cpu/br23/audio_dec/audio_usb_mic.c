@@ -7,9 +7,9 @@
 #include "audio_splicing.h"
 #include "application/audio_echo_reverb.h"
 
-/*usb micçš„æ•°æ®æ˜¯å¦ç»è¿‡AEC,åŒ…æ‹¬é‡Œé¢çš„ANSæ¨¡å—*/
+/*usb micµÄÊý¾ÝÊÇ·ñ¾­¹ýAEC,°üÀ¨ÀïÃæµÄANSÄ£¿é*/
 #define USB_MIC_AEC_EN		0
-/*AECæ¨¡å—åªèƒ½å¤„ç†16kæ•°æ®ï¼Œå¦‚æžœç»è¿‡aecï¼Œå°±éœ€è¦å¯¹è¾“å‡ºæ•°æ®åšå˜é‡‡æ ·*/
+/*AECÄ£¿éÖ»ÄÜ´¦Àí16kÊý¾Ý£¬Èç¹û¾­¹ýaec£¬¾ÍÐèÒª¶ÔÊä³öÊý¾Ý×ö±ä²ÉÑù*/
 #define USB_MIC_SRC_ENABLE	1
 
 #if USB_MIC_AEC_EN
@@ -36,7 +36,7 @@ struct _usb_mic_hdl {
     struct audio_adc_output_hdl adc_output;
     struct adc_mic_ch    mic_ch;
     struct audio_adc_ch linein_ch;
-#if SOUNDCARD_ENABLE //4å–1
+#if SOUNDCARD_ENABLE //4È¡1
     s16 *temp_buf;
     u32 temp_buf_len;
 #endif
@@ -45,7 +45,7 @@ struct _usb_mic_hdl {
     cbuffer_t output_cbuf;
     u8 *output_buf;//[PCM_ENC2USB_OUTBUF_LEN];
     u8 rec_tx_channels;
-    u8 mic_data_ok;/*micæ•°æ®ç­‰åˆ°ä¸€å®šé•¿åº¦å†å¼€å§‹å‘é€*/
+    u8 mic_data_ok;/*micÊý¾ÝµÈµ½Ò»¶¨³¤¶ÈÔÙ¿ªÊ¼·¢ËÍ*/
     u8 status;
     u8 mic_busy;
 #if	TCFG_USB_MIC_ECHO_ENABLE
@@ -56,16 +56,16 @@ struct _usb_mic_hdl {
 static struct _usb_mic_hdl *usb_mic_hdl = NULL;
 #if TCFG_USB_MIC_ECHO_ENABLE
 ECHO_PARM_SET usbmic_echo_parm_default = {
-    .delay = 200,				//å›žå£°çš„å»¶æ—¶æ—¶é—´ 0-300ms
+    .delay = 200,				//»ØÉùµÄÑÓÊ±Ê±¼ä 0-300ms
     .decayval = 50,				// 0-70%
-    .direct_sound_enable = 1,	//ç›´è¾¾å£°ä½¿èƒ½  0/1
-    .filt_enable = 1,			//å‘æ•£æ»¤æ³¢å™¨ä½¿èƒ½
+    .direct_sound_enable = 1,	//Ö±´ïÉùÊ¹ÄÜ  0/1
+    .filt_enable = 1,			//·¢É¢ÂË²¨Æ÷Ê¹ÄÜ
 };
 EF_REVERB_FIX_PARM usbmic_echo_fix_parm_default = {
-    .wetgain = 2048,			////æ¹¿å£°å¢žç›Šï¼š[0:4096]
-    .drygain = 4096,				////å¹²å£°å¢žç›Š: [0:4096]
-    .sr = MIC_EFFECT_SAMPLERATE,		////é‡‡æ ·çŽ‡
-    .max_ms = 200,				////æ‰€éœ€è¦çš„æœ€å¤§å»¶æ—¶ï¼Œå½±å“ need_buf å¤§å°
+    .wetgain = 2048,			////ÊªÉùÔöÒæ£º[0:4096]
+    .drygain = 4096,				////¸ÉÉùÔöÒæ: [0:4096]
+    .sr = MIC_EFFECT_SAMPLERATE,		////²ÉÑùÂÊ
+    .max_ms = 200,				////ËùÐèÒªµÄ×î´óÑÓÊ±£¬Ó°Ïì need_buf ´óÐ¡
 };
 #endif
 static int usb_audio_mic_sync(u32 data_size)
@@ -161,7 +161,7 @@ int usb_audio_mic_write_do(void *data, u16 len)
     if (usb_mic_hdl && usb_mic_hdl->status == USB_MIC_START) {
         usb_mic_hdl->mic_busy = 1;
 
-#if SOUNDCARD_ENABLE //4å–1
+#if SOUNDCARD_ENABLE //4È¡1
         if (usb_mic_hdl->temp_buf) {
             if (usb_mic_hdl->temp_buf_len < len / 4) {
                 free(usb_mic_hdl->temp_buf);
@@ -175,7 +175,7 @@ int usb_audio_mic_write_do(void *data, u16 len)
         }
         s16 *temp_pcm = (s16 *)data;
         for (int cnt = 0; cnt < len / 8; cnt++) {
-            usb_mic_hdl->temp_buf[cnt] = temp_pcm[cnt * 4 + 2];//å–RLé€šé“
+            usb_mic_hdl->temp_buf[cnt] = temp_pcm[cnt * 4 + 2];//È¡RLÍ¨µÀ
         }
         len = len / 4;
         wlen = cbuf_write(&usb_mic_hdl->output_cbuf, usb_mic_hdl->temp_buf, len);
@@ -385,7 +385,7 @@ int usb_audio_mic_open(void *_info)
 
     cbuf_init(&hdl->output_cbuf, hdl->output_buf, PCM_ENC2USB_OUTBUF_LEN);
 #if (SOUNDCARD_ENABLE)
-    ///ä»Žmix outputå“ªé‡ŒèŽ·å–usb micä¸Šè¡Œæ•°æ®
+    ///´Ómix outputÄÄÀï»ñÈ¡usb micÉÏÐÐÊý¾Ý
 #if(TCFG_USB_MIC_DATA_FROM_DAC)
     mic_effect_to_usbmic_onoff(1);
 #endif//TCFG_USB_MIC_DATA_FROM_DAC
@@ -505,7 +505,7 @@ int usb_audio_mic_close(void *arg)
         sw_src_exit();
 #endif/*USB_MIC_SRC_ENABLE*/
 #if (SOUNDCARD_ENABLE)
-        //ä»Žå£°å¡è¾“å‡ºç«¯èŽ·å–ï¼Œ æ²¡æœ‰æ‰“å¼€micï¼Œ æ‰€ä»¥è¿™é‡Œä¸éœ€è¦å…³
+        //´ÓÉù¿¨Êä³ö¶Ë»ñÈ¡£¬ Ã»ÓÐ´ò¿ªmic£¬ ËùÒÔÕâÀï²»ÐèÒª¹Ø
 #if (TCFG_USB_MIC_DATA_FROM_DAC)
         mic_effect_to_usbmic_onoff(0);
 #endif//TCFG_USB_MIC_DATA_FROM_DAC
@@ -535,7 +535,7 @@ int usb_audio_mic_close(void *arg)
 
             local_irq_disable();
 
-#if SOUNDCARD_ENABLE //4å–1
+#if SOUNDCARD_ENABLE //4È¡1
             if (usb_mic_hdl->temp_buf) {
                 free(usb_mic_hdl->temp_buf);
                 usb_mic_hdl->temp_buf = NULL;

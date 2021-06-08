@@ -16,17 +16,17 @@
 /* #define LOG_DEBUG_ENABLE */
 #include "debug.h"
 /*
-æ³¨æ„
+×¢Òâ
 
-timer1 ç°åœ¨å®šä¹‰ä¼˜å…ˆçº§ä¸º6 ï¼Œå…³æ€»ä¸­æ–­ä¸å…³é—­è¯¥ä¼˜å…ˆçº§ï¼Œ
-è¯¥ä¸­æ–­é‡Œé¢ä½¿ç”¨å‡½æ•° const å˜é‡éƒ½å¿…é¡»å®šä¹‰åœ¨ramï¼Œå¦åˆ™ä¼šè·‘é£
+timer1 ÏÖÔÚ¶¨ÒåÓÅÏÈ¼¶Îª6 £¬¹Ø×ÜÖĞ¶Ï²»¹Ø±Õ¸ÃÓÅÏÈ¼¶£¬
+¸ÃÖĞ¶ÏÀïÃæÊ¹ÓÃº¯Êı const ±äÁ¿¶¼±ØĞë¶¨ÒåÔÚram£¬·ñÔò»áÅÜ·É
 
 
 
  *
  */
 
-//æ³¨æ„ï¼šæ”¹å®šæ—¶å™¨ä¼šè¢«ä½åŠŸè€—ä½¿ç”¨åˆ°ï¼Œä½¿ç”¨æ—¶éœ€è¦å…³é—­ä½åŠŸè€—
+//×¢Òâ£º¸Ä¶¨Ê±Æ÷»á±»µÍ¹¦ºÄÊ¹ÓÃµ½£¬Ê¹ÓÃÊ±ĞèÒª¹Ø±ÕµÍ¹¦ºÄ
 
 #if (TCFG_UI_LED1888_ENABLE ||  TCFG_UI_LED7_ENABLE)
 #define TCFG_USER_TIMER_ENABLE
@@ -73,7 +73,7 @@ static const u32 timer_div[] = {
 #define TIMER_PRD               JL_TIMER2->PRD
 #define TIMER_VETOR             IRQ_TIME2_IDX
 
-#define TIMER_UNIT_MS           2 //1msèµ·ä¸€æ¬¡ä¸­æ–­
+#define TIMER_UNIT_MS           2 //1msÆğÒ»´ÎÖĞ¶Ï
 #define MAX_TIMER_PERIOD_MS     (1000/TIMER_UNIT_MS)
 
 /*-----------------------------------------------------------*/
@@ -90,7 +90,7 @@ void app_timer_led_scan(void (*led_scan)(void *))
     timer_led_scan = led_scan;
 }
 
-/////ä¸‹é¢å‡½æ•°è°ƒç”¨çš„ä½¿ç”¨å‡½æ•°éƒ½å¿…é¡»æ”¾åœ¨ram
+/////ÏÂÃæº¯Êıµ÷ÓÃµÄÊ¹ÓÃº¯Êı¶¼±ØĞë·ÅÔÚram
 ___interrupt
 AT_VOLATILE_RAM_CODE
 static void timer2_isr()

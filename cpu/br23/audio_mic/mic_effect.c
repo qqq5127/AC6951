@@ -49,7 +49,7 @@ typedef struct _BFILT_API_STRUCT_ {
     SHOUT_WHEAT_PARM_SET 	shout_wheat;
     LOW_SOUND_PARM_SET 		low_sound;
     HIGH_SOUND_PARM_SET 	high_sound;
-    audio_bfilt_hdl             *hdl;     //ç³»æ•°è®¡ç®—å¥æŸ„
+    audio_bfilt_hdl             *hdl;     //ÏµÊý¼ÆËã¾ä±ú
 } BFILT_API_STRUCT;
 
 struct __fade {
@@ -67,13 +67,13 @@ struct __mic_effect {
     /* PITCH_SHIFT_PARM        		*p_set; */
     /* NOISEGATE_API_STRUCT    		*n_api; */
     BFILT_API_STRUCT 				*filt;
-    struct audio_eq_drc             *eq_drc;    //eq drcå¥æŸ„
+    struct audio_eq_drc             *eq_drc;    //eq drc¾ä±ú
 
-    struct audio_stream *stream;		// éŸ³é¢‘æµ
-    struct audio_stream_entry entry;	// effect éŸ³é¢‘å…¥å£
+    struct audio_stream *stream;		// ÒôÆµÁ÷
+    struct audio_stream_entry entry;	// effect ÒôÆµÈë¿Ú
     int out_len;
     int process_len;
-    u8 input_ch_num;                      //micè¾“å…¥ç»™æ··å“æ•°æ®æµçš„æºå£°é“æ•°
+    u8 input_ch_num;                      //micÊäÈë¸ø»ìÏìÊý¾ÝÁ÷µÄÔ´ÉùµÀÊý
 
     struct audio_mixer_ch mix_ch;//for test
 
@@ -93,8 +93,8 @@ struct __mic_effect {
     struct __stream_entry 	*usbmic_hdl;
     u8    usbmic_start;
 #endif
-    void *energy_hdl;     //èƒ½é‡æ£€æµ‹çš„hdl
-    u8 dodge_en;          //èƒ½é‡æ£€æµ‹è¿è¡Œè¿‡ç¨‹é—ªé¿æ˜¯å¦ä½¿èƒ½
+    void *energy_hdl;     //ÄÜÁ¿¼ì²âµÄhdl
+    u8 dodge_en;          //ÄÜÁ¿¼ì²âÔËÐÐ¹ý³ÌÉÁ±ÜÊÇ·ñÊ¹ÄÜ
 
     struct __effect_linein *linein;
 
@@ -118,7 +118,7 @@ void *mic_energy_detect_open(u32 sr, u8 ch_num);
 void mic_energy_detect_close(void *hdl);
 
 /*----------------------------------------------------------------------------*/
-/**@brief    micæ•°æ®æµéŸ³æ•ˆå¤„ç†å‚æ•°æ›´æ–°
+/**@brief    micÊý¾ÝÁ÷ÒôÐ§´¦Àí²ÎÊý¸üÐÂ
    @param
    @return
    @note
@@ -157,7 +157,7 @@ static void mic_effect_parm_update(struct __mic_effect *effect)
     }
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    micæ··å“å‚æ•°æ·¡å…¥æ·¡å‡ºå¤„ç†
+/**@brief    mic»ìÏì²ÎÊýµ­Èëµ­³ö´¦Àí
    @param
    @return
    @note
@@ -210,7 +210,7 @@ static void mic_effect_fade_run(struct __mic_effect *effect)
 #endif
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    micæ•°æ®æµä¸²æŽ¥å…¥å£
+/**@brief    micÊý¾ÝÁ÷´®½ÓÈë¿Ú
    @param
    @return
    @note
@@ -235,7 +235,7 @@ static u32 mic_effect_effect_run(void *priv, void *in, void *out, u32 inlen, u32
         memset(in, 0, inlen);
         /* return outlen; */
     }
-    mic_effect_fade_run(effect);//reverb æˆ–è€…echo å‚æ•°æ·¡å…¥æ·¡å‡º
+    mic_effect_fade_run(effect);//reverb »òÕßecho ²ÎÊýµ­Èëµ­³ö
     while (1) {
         audio_stream_run(&effect->entry, &frame);
         if (effect->out_len >= effect->process_len) {
@@ -248,7 +248,7 @@ static u32 mic_effect_effect_run(void *priv, void *in, void *out, u32 inlen, u32
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   é‡Šæ”¾micæ•°æ®æµèµ„æº
+/**@brief   ÊÍ·ÅmicÊý¾ÝÁ÷×ÊÔ´
    @param
    @return
    @note
@@ -352,10 +352,10 @@ static void mic_effect_destroy(struct __mic_effect **hdl)
     clock_remove_set(REVERB_CLK);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    ä¸²æµå”¤é†’
+/**@brief    ´®Á÷»½ÐÑ
    @param
    @return
-   @note æš‚æœªä½¿ç”¨
+   @note ÔÝÎ´Ê¹ÓÃ
 */
 /*----------------------------------------------------------------------------*/
 static void mic_stream_resume(void *p)
@@ -365,7 +365,7 @@ static void mic_stream_resume(void *p)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    ä¸²æµæ•°æ®å¤„ç†é•¿åº¦å›žè°ƒ
+/**@brief    ´®Á÷Êý¾Ý´¦Àí³¤¶È»Øµ÷
    @param
    @return
    @note
@@ -423,17 +423,17 @@ static void  inline rl_rr_mix_to_rl_rr(short *data, int len)
     s32 tmp32_1;
     s32 tmp32_2;
     s16 *inbuf = data;
-    inbuf = inbuf + 2;  //å®šä½åˆ°ç¬¬ä¸‰é€šé“
+    inbuf = inbuf + 2;  //¶¨Î»µ½µÚÈýÍ¨µÀ
     len >>= 3;
     __asm__ volatile(
         "1:                      \n\t"
         "rep %0 {                \n\t"
-        "  %2 = h[%1 ++= 2](s)     \n\t"  //å–ç¬¬ä¸‰é€šé“å€¼ï¼Œå¹¶åœ°å€åç§»ä¸¤ä¸ªå­—èŠ‚æŒ‡å‘ç¬¬å››é€šé“æ•°æ®
-        " %3 = h[%1 ++= -2](s)   \n\t"   //å–ç¬¬å››é€šé“å€¼ï¼Œå¹¶åœ°å€åç§»ä¸¤ä¸ªå­—èŠ‚æŒ‡å‘ç¬¬ä¸‰é€šé“æ•°æ®
+        "  %2 = h[%1 ++= 2](s)     \n\t"  //È¡µÚÈýÍ¨µÀÖµ£¬²¢µØÖ·Æ«ÒÆÁ½¸ö×Ö½ÚÖ¸ÏòµÚËÄÍ¨µÀÊý¾Ý
+        " %3 = h[%1 ++= -2](s)   \n\t"   //È¡µÚËÄÍ¨µÀÖµ£¬²¢µØÖ·Æ«ÒÆÁ½¸ö×Ö½ÚÖ¸ÏòµÚÈýÍ¨µÀÊý¾Ý
         " %2 = %2 + %3           \n\t"
-        " %2 = sat16(%2)(s)      \n\t"  //é¥±å’Œå¤„ç†
-        " h[%1 ++= 2] = %2      \n\t"  //å­˜å–ç¬¬ä¸‰é€šé“æ•°æ®ï¼Œå¹¶åœ°å€åç§»ä¸¤ä¸ªå­—èŠ‚æŒ‡å‘ç¬¬å››é€šé“æ•°æ®
-        " h[%1 ++= 6] = %2      \n\t"  //å­˜å–ç¬¬å››é€šé“æ•°æ®ï¼Œå¹¶åœ°å€åç§»å…­ä¸ªå­—èŠ‚æŒ‡å‘ç¬¬ä¸‰é€šé“ç›¸é‚»çš„æ•°æ®
+        " %2 = sat16(%2)(s)      \n\t"  //±¥ºÍ´¦Àí
+        " h[%1 ++= 2] = %2      \n\t"  //´æÈ¡µÚÈýÍ¨µÀÊý¾Ý£¬²¢µØÖ·Æ«ÒÆÁ½¸ö×Ö½ÚÖ¸ÏòµÚËÄÍ¨µÀÊý¾Ý
+        " h[%1 ++= 6] = %2      \n\t"  //´æÈ¡µÚËÄÍ¨µÀÊý¾Ý£¬²¢µØÖ·Æ«ÒÆÁù¸ö×Ö½ÚÖ¸ÏòµÚÈýÍ¨µÀÏàÁÚµÄÊý¾Ý
         "}                      \n\t"
         "if(%0 != 0) goto 1b    \n\t"
         :
@@ -456,7 +456,7 @@ static int effect_to_dac_data_pro_handle(struct audio_stream_entry *entry,  stru
         return 0;
     }
 #if 1
-    rl_rr_mix_to_rl_rr(in->data, in->data_len);//æ±‡ç¼–åŠ é€Ÿ
+    rl_rr_mix_to_rl_rr(in->data, in->data_len);//»ã±à¼ÓËÙ
 #else
     s16 *outbuf = in->data;
     s16 *inbuf = in->data;
@@ -508,7 +508,7 @@ static int prob_handler_to_record(struct audio_stream_entry *entry,  struct audi
 #define DAC_OUTPUT_CHANNELS     3
 #endif
 /*----------------------------------------------------------------------------*/
-/**@brief    (micæ•°æ®æµ)æ··å“æ‰“å¼€æŽ¥å£
+/**@brief    (micÊý¾ÝÁ÷)»ìÏì´ò¿ª½Ó¿Ú
    @param
    @return
    @note
@@ -545,21 +545,21 @@ bool mic_effect_start(void)
 #if TCFG_MIC_DODGE_EN
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_ENERGY_DETECT))	{
         effect->energy_hdl = mic_energy_detect_open(effect->parm.sample_rate, ch_num);
-        effect->dodge_en = 0;//é»˜è®¤å…³é—­ï¼Œ éœ€è¦é€šè¿‡æŒ‰é”®è§¦å‘æ‰“å¼€
+        effect->dodge_en = 0;//Ä¬ÈÏ¹Ø±Õ£¬ ÐèÒªÍ¨¹ý°´¼ü´¥·¢´ò¿ª
     }
 #endif
 
-    ///å£°éŸ³é—¨é™åˆå§‹åŒ–
+    ///ÉùÒôÃÅÏÞ³õÊ¼»¯
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_NOISEGATE)) {
         effect->p_noisegate_hdl = open_noisegate((NOISEGATE_PARM *)&effect_noisegate_parm_default, 0, 0);
     }
-    ///å•¸å«æŠ‘åˆ¶åˆå§‹åŒ–
+    ///Ð¥½ÐÒÖÖÆ³õÊ¼»¯
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_HOWLING)) {
         log_i("open_howling\n\n\n");
         effect->p_howling_hdl = open_howling(NULL, effect->parm.sample_rate, 0, 1);
     }
-    ///æ»¤æ³¢å™¨åˆå§‹åŒ–
-    ///eqåˆå§‹åŒ–
+    ///ÂË²¨Æ÷³õÊ¼»¯
+    ///eq³õÊ¼»¯
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_EQ)) {
         log_i("effect->parm.sample_rate %d\n", effect->parm.sample_rate);
         effect->filt = mic_high_bass_coeff_cal_init(effect->parm.sample_rate);
@@ -568,20 +568,20 @@ bool mic_effect_start(void)
         }
         effect->eq_drc = mic_eq_drc_open(effect->parm.sample_rate, ch_num);
     }
-    ///pitch åˆå§‹åŒ–
+    ///pitch ³õÊ¼»¯
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_PITCH)) {
         log_i("open_pitch\n\n\n");
         effect->p_pitch_hdl = open_pitch((PITCH_SHIFT_PARM *)&effect_pitch_parm_default);
         pause_pitch(effect->p_pitch_hdl, 1);
     }
-    ///reverb åˆå§‹åŒ–
+    ///reverb ³õÊ¼»¯
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_REVERB)) {
         ch_num = 2;
         effect->fade.wet = effect_reverb_parm_default.wet;
         effect->p_reverb_hdl = open_reverb((REVERBN_PARM_SET *)&effect_reverb_parm_default, effect->parm.sample_rate);
         pause_reverb(effect->p_reverb_hdl, 1);
     }
-    ///echo åˆå§‹åŒ–
+    ///echo ³õÊ¼»¯
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_ECHO)) {
         effect->fade.decayval = effect_echo_parm_default.decayval;
         effect->fade.delay = effect_echo_parm_default.delay;
@@ -589,7 +589,7 @@ bool mic_effect_start(void)
         effect->p_echo_hdl = open_echo((ECHO_PARM_SET *)&effect_echo_parm_default, (EF_REVERB_FIX_PARM *)&effect_echo_fix_parm_default);
     }
 
-    ///åˆå§‹åŒ–æ•°å­—éŸ³é‡
+    ///³õÊ¼»¯Êý×ÖÒôÁ¿
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_DVOL)) {
         effect_dvol_default_parm.ch_total = ch_num;
         struct audio_stream_entry *dvol_entry;
@@ -602,7 +602,7 @@ bool mic_effect_start(void)
 #endif /*SYS_DIGVOL_GROUP_EN*/
     }
 
-    //æ‰“å¼€æ··å“å˜é‡‡æ ·
+    //´ò¿ª»ìÏì±ä²ÉÑù
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_SOFT_SRC)) {
         u32 out_sr = audio_output_nor_rate();
         effect->p_echo_src_hdl = open_echo_src(effect->parm.sample_rate, out_sr, ch_num);
@@ -611,7 +611,7 @@ bool mic_effect_start(void)
 #endif//TCFG_APP_RECORD_EN
     }
 
-    //æ··å“é€šè·¯æ··åˆlinein
+    //»ìÏìÍ¨Â·»ìºÏlinein
     if (effect->parm.effect_config & BIT(MIC_EFFECT_CONFIG_LINEIN)) {
         effect->linein = effect_linein_open();
     }
@@ -638,14 +638,14 @@ bool mic_effect_start(void)
     effect->entry.data_process_len = mic_effect_data_process_len;
 
 #if (RECORDER_MIX_EN)
-    ///é€å½•éŸ³æ•°æ®æµ
+    ///ËÍÂ¼ÒôÊý¾ÝÁ÷
     effect->rec_hdl = stream_entry_open(effect, mic_effect_record_stream_callback, 1);
 #endif
 #if (TCFG_USB_MIC_DATA_FROM_MICEFFECT||TCFG_USB_MIC_DATA_FROM_DAC)
     effect->usbmic_hdl = stream_entry_open(effect, mic_effect_otherout_stream_callback, 1);
 #endif
 
-// æ•°æ®æµä¸²è”
+// Êý¾ÝÁ÷´®Áª
     struct audio_stream_entry *entries[15] = {NULL};
     u8 entry_cnt = 0;
     entries[entry_cnt++] = &effect->entry;
@@ -704,20 +704,20 @@ bool mic_effect_start(void)
     audio_stream_add_list(effect->stream, entries, entry_cnt);
 
 #if (RECORDER_MIX_EN)
-    ///æ•°æ®æµåˆ†æ”¯ç»™å½•éŸ³ç”¨
+    ///Êý¾ÝÁ÷·ÖÖ§¸øÂ¼ÒôÓÃ
     if (effect->rec_hdl) {
-        //ä»Žå˜é‡‡æ ·å‰ä¸€èŠ‚ç‚¹åˆ†æµ
+        //´Ó±ä²ÉÑùÇ°Ò»½Úµã·ÖÁ÷
         audio_stream_add_entry(entries[record_entry_cnt], &effect->rec_hdl->entry);
     }
 #endif
 #if (TCFG_USB_MIC_DATA_FROM_MICEFFECT)
-    ///æ•°æ®æµåˆ†æ”¯ç»™usbmicç”¨
+    ///Êý¾ÝÁ÷·ÖÖ§¸øusbmicÓÃ
     if (effect->usbmic_hdl) {
-        //ä»Žå˜é‡‡æ ·å‰ä¸€èŠ‚ç‚¹åˆ†æµ
+        //´Ó±ä²ÉÑùÇ°Ò»½Úµã·ÖÁ÷
         audio_stream_add_entry(entries[entry_cnt - 4], &effect->usbmic_hdl->entry);
     }
 #endif
-    ///mic æ•°æ®æµåˆå§‹åŒ–
+    ///mic Êý¾ÝÁ÷³õÊ¼»¯
     effect->mic = mic_stream_creat(mic_parm);
     if (effect->mic == NULL) {
         mic_effect_destroy(&effect);
@@ -743,7 +743,7 @@ bool mic_effect_start(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    (micæ•°æ®æµ)æ··å“å…³é—­æŽ¥å£
+/**@brief    (micÊý¾ÝÁ÷)»ìÏì¹Ø±Õ½Ó¿Ú
    @param
    @return
    @note
@@ -757,7 +757,7 @@ void mic_effect_stop(void)
 #endif
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    (micæ•°æ®æµ)æ··å“æš‚åœæŽ¥å£(æ•´ä¸ªæ•°æ®æµä¸è¿è¡Œ)
+/**@brief    (micÊý¾ÝÁ÷)»ìÏìÔÝÍ£½Ó¿Ú(Õû¸öÊý¾ÝÁ÷²»ÔËÐÐ)
    @param
    @return
    @note
@@ -770,7 +770,7 @@ void mic_effect_pause(u8 mark)
     }
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    (micæ•°æ®æµ)æ··å“æš‚åœè¾“å‡ºåˆ°DAC(æ•°æ®æµåŽçº§ä¸å†™å…¥DAC)
+/**@brief    (micÊý¾ÝÁ÷)»ìÏìÔÝÍ£Êä³öµ½DAC(Êý¾ÝÁ÷ºó¼¶²»Ð´ÈëDAC)
    @param
    @return
    @note
@@ -784,7 +784,7 @@ void mic_effect_dac_pause(u8 mark)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    (micæ•°æ®æµ)æ··å“çŠ¶æ€èŽ·å–æŽ¥å£
+/**@brief    (micÊý¾ÝÁ÷)»ìÏì×´Ì¬»ñÈ¡½Ó¿Ú
    @param
    @return
    @note
@@ -796,7 +796,7 @@ u8 mic_effect_get_status(void)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    æ•°å­—éŸ³é‡è°ƒèŠ‚æŽ¥å£
+/**@brief    Êý×ÖÒôÁ¿µ÷½Ú½Ó¿Ú
    @param
    @return
    @note
@@ -817,7 +817,7 @@ u8 mic_effect_get_dvol(void)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    èŽ·å–micå¢žç›ŠæŽ¥å£
+/**@brief    »ñÈ¡micÔöÒæ½Ó¿Ú
    @param
    @return
    @note
@@ -827,13 +827,13 @@ u8 mic_effect_get_micgain(void)
 {
     /* if (__this) { */
     /* } */
-    //åŠ¨æ€è°ƒçš„éœ€å®žæ—¶è®°å½•
+    //¶¯Ì¬µ÷µÄÐèÊµÊ±¼ÇÂ¼
     return effect_mic_stream_parm_default.mic_gain;
 }
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    reverb æ•ˆæžœå£°å¢žç›Šè°ƒèŠ‚æŽ¥å£
+/**@brief    reverb Ð§¹ûÉùÔöÒæµ÷½Ú½Ó¿Ú
    @param
    @return
    @note
@@ -857,7 +857,7 @@ int mic_effect_get_reverb_wet(void)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    echo å›žå£°å»¶æ—¶è°ƒèŠ‚æŽ¥å£
+/**@brief    echo »ØÉùÑÓÊ±µ÷½Ú½Ó¿Ú
    @param
    @return
    @note
@@ -880,7 +880,7 @@ u32 mic_effect_get_echo_delay(void)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    echo å›žå£°è¡°å‡ç³»æ•°è°ƒèŠ‚æŽ¥å£
+/**@brief    echo »ØÉùË¥¼õÏµÊýµ÷½Ú½Ó¿Ú
    @param
    @return
    @note
@@ -910,10 +910,10 @@ void mic_effect_set_mic_parm(struct __mic_stream_parm *parm)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    è®¾ç½®å„ç±»éŸ³æ•ˆè¿è¡Œæ ‡è®°
+/**@brief    ÉèÖÃ¸÷ÀàÒôÐ§ÔËÐÐ±ê¼Ç
    @param
    @return
-   @note æš‚ä¸ä½¿ç”¨
+   @note ÔÝ²»Ê¹ÓÃ
 */
 /*----------------------------------------------------------------------------*/
 void mic_effect_set_function_mask(u32 mask)
@@ -926,10 +926,10 @@ void mic_effect_set_function_mask(u32 mask)
     os_mutex_post(&__this->mutex);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    èŽ·å–å„ç±»éŸ³æ•ˆè¿è¡Œæ ‡è®°
+/**@brief    »ñÈ¡¸÷ÀàÒôÐ§ÔËÐÐ±ê¼Ç
    @param
    @return
-   @note æš‚ä¸ä½¿ç”¨
+   @note ÔÝ²»Ê¹ÓÃ
 */
 /*----------------------------------------------------------------------------*/
 u32 mic_effect_get_function_mask(void)
@@ -940,7 +940,7 @@ u32 mic_effect_get_function_mask(void)
     return 0;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    å–Šmicæ•ˆæžœç³»æ•°è®¡ç®—
+/**@brief    º°micÐ§¹ûÏµÊý¼ÆËã
    @param
    @return
    @note
@@ -974,11 +974,11 @@ static void mic_effect_shout_wheat_cal_coef(int sw)
         u_parm.gain = 0;
         log_i("shout_wheat_cal_coef off\n");
     }
-    audio_bfilt_cal_coeff(filt->hdl, &u_parm);//å–Šéº¦æ»¤æ³¢å™¨
+    audio_bfilt_cal_coeff(filt->hdl, &u_parm);//º°ÂóÂË²¨Æ÷
     os_mutex_post(&__this->mutex);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    ä½ŽéŸ³ç³»æ•°è®¡ç®—
+/**@brief    µÍÒôÏµÊý¼ÆËã
    @param
    @return
    @note
@@ -1012,12 +1012,12 @@ static void mic_effect_low_sound_cal_coef(int gainN)
 
     if ((gainN >= filt->low_sound.lowest_gain) && (gainN <= filt->low_sound.highest_gain)) {
         u_parm.gain = gainN;
-        audio_bfilt_cal_coeff(filt->hdl, &u_parm);//ä½ŽéŸ³æ»¤æ³¢å™¨
+        audio_bfilt_cal_coeff(filt->hdl, &u_parm);//µÍÒôÂË²¨Æ÷
     }
     os_mutex_post(&__this->mutex);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    é«˜éŸ³ç³»æ•°è®¡ç®—
+/**@brief    ¸ßÒôÏµÊý¼ÆËã
    @param
    @return
    @note
@@ -1047,19 +1047,19 @@ static void mic_effect_high_sound_cal_coef(int gainN)
     log_i("highest_gain %d\n", filt->high_sound.highest_gain);
     if ((gainN >= filt->high_sound.lowest_gain) && (gainN <= filt->high_sound.highest_gain)) {
         u_parm.gain = gainN;
-        audio_bfilt_cal_coeff(filt->hdl, &u_parm);//é«˜éŸ³æ»¤æ³¢å™¨
+        audio_bfilt_cal_coeff(filt->hdl, &u_parm);//¸ßÒôÂË²¨Æ÷
     }
     os_mutex_post(&__this->mutex);
 }
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    mic_effect_cal_coef æ··å“å–Šéº¦ã€é«˜ä½ŽéŸ³ è°ƒèŠ‚æŽ¥å£
-   @param    filtN:MIC_EQ_MODE_SHOUT_WHEAT å–Šéº¦æ¨¡å¼ï¼ŒgainNï¼šå–Šéº¦å¼€å…³ï¼Œ0:å…³å–Šéº¦ï¼Œ 1ï¼šå¼€å–Šéº¦
-   @param    filtN:MIC_EQ_MODE_LOW_SOUND   ä½ŽéŸ³è°ƒèŠ‚  gainNï¼šè°ƒèŠ‚çš„å¢žç›Šï¼ŒèŒƒå›´0~10
-   @param    filtN:MIC_EQ_MODE_HIGH_SOUND  é«˜éŸ³è°ƒèŠ‚  gainNï¼šè°ƒèŠ‚çš„å¢žç›Šï¼ŒèŒƒå›´0~10
+/**@brief    mic_effect_cal_coef »ìÏìº°Âó¡¢¸ßµÍÒô µ÷½Ú½Ó¿Ú
+   @param    filtN:MIC_EQ_MODE_SHOUT_WHEAT º°ÂóÄ£Ê½£¬gainN£ºº°Âó¿ª¹Ø£¬0:¹Øº°Âó£¬ 1£º¿ªº°Âó
+   @param    filtN:MIC_EQ_MODE_LOW_SOUND   µÍÒôµ÷½Ú  gainN£ºµ÷½ÚµÄÔöÒæ£¬·¶Î§0~10
+   @param    filtN:MIC_EQ_MODE_HIGH_SOUND  ¸ßÒôµ÷½Ú  gainN£ºµ÷½ÚµÄÔöÒæ£¬·¶Î§0~10
    @return
-   @note     æ··å“å–Šéº¦ã€é«˜ä½ŽéŸ³è°ƒèŠ‚
+   @note     »ìÏìº°Âó¡¢¸ßµÍÒôµ÷½Ú
 */
 /*----------------------------------------------------------------------------*/
 void mic_effect_cal_coef(u8 type, u32 gainN)
@@ -1078,10 +1078,10 @@ void mic_effect_cal_coef(u8 type, u32 gainN)
 
 
 #if !MIC_EFFECT_EQ_EN
-static int outval[3][5]; //å¼€3ä¸ª2é˜¶æ»¤æ³¢å™¨çš„ç©ºé—´ï¼Œç»™ç¡¬ä»¶eqå­˜ç³»æ•°çš„
+static int outval[3][5]; //¿ª3¸ö2½×ÂË²¨Æ÷µÄ¿Õ¼ä£¬¸øÓ²¼þeq´æÏµÊýµÄ
 __attribute__((weak))int *get_outval_addr(u8 mode)
 {
-    //é«˜ä½ŽéŸ³ç³»æ•°è¡¨åœ°å€
+    //¸ßµÍÒôÏµÊý±íµØÖ·
     return outval[mode];
 }
 #endif
@@ -1095,7 +1095,7 @@ u8 mic_effect_eq_section_num(void)
 #endif
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    reverb æ··å“å‚æ•°æ›´æ–°
+/**@brief    reverb »ìÏì²ÎÊý¸üÐÂ
    @param
    @return
    @note
@@ -1117,12 +1117,12 @@ void mic_effect_reverb_parm_fill(REVERBN_PARM_SET *parm, u8 fade, u8 online)
     os_mutex_pend(&__this->mutex, 0);
     memcpy(&tmp, parm, sizeof(REVERBN_PARM_SET));
     if (fade) {
-        //é’ˆå¯¹éœ€è¦fadeçš„å‚æ•°ï¼Œè¯»å–æ—§å€¼ï¼Œé€šè¿‡fadeæ¥æ›´æ–°å¯¹åº”çš„å‚æ•°
-        tmp.wet = __this->p_reverb_hdl->parm.wet;///è¯»å–æ—§å€¼,æš‚æ—¶ä¸æ›´æ–°
+        //Õë¶ÔÐèÒªfadeµÄ²ÎÊý£¬¶ÁÈ¡¾ÉÖµ£¬Í¨¹ýfadeÀ´¸üÐÂ¶ÔÓ¦µÄ²ÎÊý
+        tmp.wet = __this->p_reverb_hdl->parm.wet;///¶ÁÈ¡¾ÉÖµ,ÔÝÊ±²»¸üÐÂ
         if (online) {
-            __this->fade.wet = parm->wet;///è®¾ç½®wet fade ç›®æ ‡å€¼, é€šè¿‡fadeæ›´æ–°
+            __this->fade.wet = parm->wet;///ÉèÖÃwet fade Ä¿±êÖµ, Í¨¹ýfade¸üÐÂ
         } else {
-            __this->fade.wet = __this->p_reverb_hdl->parm.wet;//å€¼ä¸æ›´æ–°, é€šè¿‡å¤–éƒ¨æŒ‰é”®æ›´æ–°ï¼Œ å¦‚æ—‹é’®
+            __this->fade.wet = __this->p_reverb_hdl->parm.wet;//Öµ²»¸üÐÂ, Í¨¹ýÍâ²¿°´¼ü¸üÐÂ£¬ ÈçÐýÅ¥
         }
     }
     __this->update_mask |= BIT(MASK_REVERB);
@@ -1133,7 +1133,7 @@ void mic_effect_reverb_parm_fill(REVERBN_PARM_SET *parm, u8 fade, u8 online)
     os_mutex_post(&__this->mutex);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    echo æ··å“å‚æ•°æ›´æ–°
+/**@brief    echo »ìÏì²ÎÊý¸üÐÂ
    @param
    @return
    @note
@@ -1154,15 +1154,15 @@ void mic_effect_echo_parm_fill(ECHO_PARM_SET *parm, u8 fade, u8 online)
     os_mutex_pend(&__this->mutex, 0);
     memcpy(&tmp, parm, sizeof(ECHO_PARM_SET));
     if (fade) {
-        //é’ˆå¯¹éœ€è¦fadeçš„å‚æ•°ï¼Œè¯»å–æ—§å€¼ï¼Œé€šè¿‡fadeæ¥æ›´æ–°å¯¹åº”çš„å‚æ•°
+        //Õë¶ÔÐèÒªfadeµÄ²ÎÊý£¬¶ÁÈ¡¾ÉÖµ£¬Í¨¹ýfadeÀ´¸üÐÂ¶ÔÓ¦µÄ²ÎÊý
         tmp.delay = __this->p_echo_hdl->echo_parm_obj.delay;
         tmp.decayval = __this->p_echo_hdl->echo_parm_obj.decayval;
         if (online) {
-            __this->fade.delay = parm->delay;///è®¾ç½®wet fade ç›®æ ‡å€¼, é€šè¿‡fadeæ›´æ–°
-            __this->fade.decayval = parm->decayval;///è®¾ç½®wet fade ç›®æ ‡å€¼, é€šè¿‡fadeæ›´æ–°
+            __this->fade.delay = parm->delay;///ÉèÖÃwet fade Ä¿±êÖµ, Í¨¹ýfade¸üÐÂ
+            __this->fade.decayval = parm->decayval;///ÉèÖÃwet fade Ä¿±êÖµ, Í¨¹ýfade¸üÐÂ
         } else {
-            __this->fade.delay = __this->p_echo_hdl->echo_parm_obj.delay;///å€¼ä¸æ›´æ–°, é€šè¿‡å¤–éƒ¨æŒ‰é”®æ›´æ–°ï¼Œ å¦‚æ—‹é’®
-            __this->fade.decayval = __this->p_echo_hdl->echo_parm_obj.decayval;///å€¼ä¸æ›´æ–°, é€šè¿‡å¤–éƒ¨æŒ‰é”®æ›´æ–°ï¼Œ å¦‚æ—‹é’®
+            __this->fade.delay = __this->p_echo_hdl->echo_parm_obj.delay;///Öµ²»¸üÐÂ, Í¨¹ýÍâ²¿°´¼ü¸üÐÂ£¬ ÈçÐýÅ¥
+            __this->fade.decayval = __this->p_echo_hdl->echo_parm_obj.decayval;///Öµ²»¸üÐÂ, Í¨¹ýÍâ²¿°´¼ü¸üÐÂ£¬ ÈçÐýÅ¥
         }
     }
     __this->update_mask |= BIT(MASK_ECHO);
@@ -1172,7 +1172,7 @@ void mic_effect_echo_parm_fill(ECHO_PARM_SET *parm, u8 fade, u8 online)
     os_mutex_post(&__this->mutex);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    å˜å£°å‚æ•°ç›´æŽ¥æ›´æ–°
+/**@brief    ±äÉù²ÎÊýÖ±½Ó¸üÐÂ
    @param
    @return
    @note
@@ -1196,17 +1196,17 @@ void set_pitch_para(u32 shiftv, u32 sr, u8 effect, u32 formant_shift)
 }
 
 PITCH_SHIFT_PARM picth_mode_table[] = {
-    {16000, 56, EFFECT_PITCH_SHIFT, 0}, //å“‡å“‡éŸ³
-    {16000, 136, EFFECT_PITCH_SHIFT, 0}, //å¥³å˜ç”·
-    {16000, 56, EFFECT_VOICECHANGE_KIN0, 150}, //ç”·å˜å¥³1
-    // {16000,56,EFFECT_VOICECHANGE_KIN1,150},	//ç”·å˜å¥³2
-    // {16000,56,EFFECT_VOICECHANGE_KIN2,150},	//ç”·å˜å¥³3
-    {16000, 196, EFFECT_PITCH_SHIFT, 100}, //é­”éŸ³ã€æ€ªå…½éŸ³
-    {16000, 100, EFFECT_AUTOTUNE, D_MAJOR} //ç”µéŸ³
+    {16000, 56, EFFECT_PITCH_SHIFT, 0}, //ÍÛÍÛÒô
+    {16000, 136, EFFECT_PITCH_SHIFT, 0}, //Å®±äÄÐ
+    {16000, 56, EFFECT_VOICECHANGE_KIN0, 150}, //ÄÐ±äÅ®1
+    // {16000,56,EFFECT_VOICECHANGE_KIN1,150},	//ÄÐ±äÅ®2
+    // {16000,56,EFFECT_VOICECHANGE_KIN2,150},	//ÄÐ±äÅ®3
+    {16000, 196, EFFECT_PITCH_SHIFT, 100}, //Ä§Òô¡¢¹ÖÊÞÒô
+    {16000, 100, EFFECT_AUTOTUNE, D_MAJOR} //µçÒô
 };
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å˜å£°å‚æ•°æ›´æ–°
+/**@brief    ±äÉù²ÎÊý¸üÐÂ
    @param
    @return
    @note
@@ -1240,7 +1240,7 @@ void mic_effect_pitch_parm_fill(PITCH_PARM_SET2 *parm, u8 fade, u8 online)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    å™ªå£°æŠ‘åˆ¶å‚æ•°æ›´æ–°
+/**@brief    ÔëÉùÒÖÖÆ²ÎÊý¸üÐÂ
    @param
    @return
    @note
@@ -1276,7 +1276,7 @@ void mic_effect_noisegate_parm_fill(NOISE_PARM_SET *parm, u8 fade, u8 online)
     os_mutex_post(&__this->mutex);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    å–Šmicå‚æ•°æ›´æ–°
+/**@brief    º°mic²ÎÊý¸üÐÂ
    @param
    @return
    @note
@@ -1294,7 +1294,7 @@ void mic_effect_shout_wheat_parm_fill(SHOUT_WHEAT_PARM_SET *parm, u8 fade, u8 on
     os_mutex_pend(&__this->mutex, 0);
     memcpy(&tmp, parm, sizeof(SHOUT_WHEAT_PARM_SET));
     if (fade) {
-        //é’ˆå¯¹éœ€è¦fadeçš„å‚æ•°ï¼Œè¯»å–æ—§å€¼ï¼Œé€šè¿‡fadeæ¥æ›´æ–°å¯¹åº”çš„å‚æ•°
+        //Õë¶ÔÐèÒªfadeµÄ²ÎÊý£¬¶ÁÈ¡¾ÉÖµ£¬Í¨¹ýfadeÀ´¸üÐÂ¶ÔÓ¦µÄ²ÎÊý
     }
     memcpy(&__this->filt->shout_wheat, &tmp, sizeof(SHOUT_WHEAT_PARM_SET));
     __this->update_mask |= BIT(MASK_SHOUT_WHEAT);
@@ -1312,7 +1312,7 @@ void mic_effect_low_sound_parm_fill(LOW_SOUND_PARM_SET *parm, u8 fade, u8 online
     os_mutex_pend(&__this->mutex, 0);
     memcpy(&tmp, parm, sizeof(LOW_SOUND_PARM_SET));
     if (fade) {
-        //é’ˆå¯¹éœ€è¦fadeçš„å‚æ•°ï¼Œè¯»å–æ—§å€¼ï¼Œé€šè¿‡fadeæ¥æ›´æ–°å¯¹åº”çš„å‚æ•°
+        //Õë¶ÔÐèÒªfadeµÄ²ÎÊý£¬¶ÁÈ¡¾ÉÖµ£¬Í¨¹ýfadeÀ´¸üÐÂ¶ÔÓ¦µÄ²ÎÊý
     }
     memcpy(&__this->filt->low_sound, &tmp, sizeof(LOW_SOUND_PARM_SET));
     __this->update_mask |= BIT(MASK_LOW_SOUND);
@@ -1329,7 +1329,7 @@ void mic_effect_high_sound_parm_fill(HIGH_SOUND_PARM_SET *parm, u8 fade, u8 onli
     os_mutex_pend(&__this->mutex, 0);
     memcpy(&tmp, parm, sizeof(HIGH_SOUND_PARM_SET));
     if (fade) {
-        //é’ˆå¯¹éœ€è¦fadeçš„å‚æ•°ï¼Œè¯»å–æ—§å€¼ï¼Œé€šè¿‡fadeæ¥æ›´æ–°å¯¹åº”çš„å‚æ•°
+        //Õë¶ÔÐèÒªfadeµÄ²ÎÊý£¬¶ÁÈ¡¾ÉÖµ£¬Í¨¹ýfadeÀ´¸üÐÂ¶ÔÓ¦µÄ²ÎÊý
     }
     memcpy(&__this->filt->high_sound, &tmp, sizeof(HIGH_SOUND_PARM_SET));
     __this->update_mask |= BIT(MASK_HIGH_SOUND);
@@ -1337,7 +1337,7 @@ void mic_effect_high_sound_parm_fill(HIGH_SOUND_PARM_SET *parm, u8 fade, u8 onli
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    micå¢žç›Šè°ƒèŠ‚
+/**@brief    micÔöÒæµ÷½Ú
    @param
    @return
    @note
@@ -1351,10 +1351,10 @@ void mic_effect_mic_gain_parm_fill(EFFECTS_MIC_GAIN_PARM *parm, u8 fade, u8 onli
     audio_mic_set_gain(parm->gain);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    micæ•ˆæžœæ¨¡å¼åˆ‡æ¢ï¼ˆæ•°æ®æµéŸ³æ•ˆç»„åˆåˆ‡æ¢ï¼‰
+/**@brief    micÐ§¹ûÄ£Ê½ÇÐ»»£¨Êý¾ÝÁ÷ÒôÐ§×éºÏÇÐ»»£©
    @param
    @return
-   @note ä½¿ç”¨æ•ˆæžœé…ç½®æ–‡ä»¶æ—¶ç”Ÿæ•ˆ
+   @note Ê¹ÓÃÐ§¹ûÅäÖÃÎÄ¼þÊ±ÉúÐ§
 */
 /*----------------------------------------------------------------------------*/
 void mic_effect_change_mode(u16 mode)
@@ -1362,10 +1362,10 @@ void mic_effect_change_mode(u16 mode)
     effect_cfg_change_mode(mode);
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    èŽ·å–micæ•ˆæžœæ¨¡å¼ï¼ˆæ•°æ®æµéŸ³æ•ˆç»„åˆï¼‰
+/**@brief    »ñÈ¡micÐ§¹ûÄ£Ê½£¨Êý¾ÝÁ÷ÒôÐ§×éºÏ£©
    @param
    @return
-   @note ä½¿ç”¨æ•ˆæžœé…ç½®æ–‡ä»¶æ—¶ç”Ÿæ•ˆ
+   @note Ê¹ÓÃÐ§¹ûÅäÖÃÎÄ¼þÊ±ÉúÐ§
 */
 /*----------------------------------------------------------------------------*/
 u16 mic_effect_get_cur_mode(void)
@@ -1377,7 +1377,7 @@ u16 mic_effect_get_cur_mode(void)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    eqæŽ¥å£
+/**@brief    eq½Ó¿Ú
    @param
    @return
    @note
@@ -1414,7 +1414,7 @@ BFILT_API_STRUCT *mic_high_bass_coeff_cal_init(u32 sample_rate)
     u_parm.filt_num = 0;
     u_parm.filt_tar_tab  = get_outval_addr(u_parm.filt_num);
     u_parm.gain = 0;
-    audio_bfilt_cal_coeff(filt->hdl, &u_parm);//å–Šéº¦æ»¤æ³¢å™¨
+    audio_bfilt_cal_coeff(filt->hdl, &u_parm);//º°ÂóÂË²¨Æ÷
 
     u_parm.freq = filt->low_sound.cutoff_frequency;
     u_parm.bandwidth = 1024;
@@ -1422,7 +1422,7 @@ BFILT_API_STRUCT *mic_high_bass_coeff_cal_init(u32 sample_rate)
     u_parm.filt_num = 1;
     u_parm.filt_tar_tab  = get_outval_addr(u_parm.filt_num);
     u_parm.gain = 0;
-    audio_bfilt_cal_coeff(filt->hdl, &u_parm);//ä½ŽéŸ³æ»¤æ³¢å™¨
+    audio_bfilt_cal_coeff(filt->hdl, &u_parm);//µÍÒôÂË²¨Æ÷
 
     u_parm.freq = filt->high_sound.cutoff_frequency;
     u_parm.bandwidth = 1024;
@@ -1430,7 +1430,7 @@ BFILT_API_STRUCT *mic_high_bass_coeff_cal_init(u32 sample_rate)
     u_parm.filt_num = 2;
     u_parm.filt_tar_tab  = get_outval_addr(u_parm.filt_num);
     u_parm.gain = 0;
-    audio_bfilt_cal_coeff(filt->hdl, &u_parm);//é«˜éŸ³æ»¤æ³¢å™¨
+    audio_bfilt_cal_coeff(filt->hdl, &u_parm);//¸ßÒôÂË²¨Æ÷
     return filt;
 }
 void mic_high_bass_coeff_cal_uninit(BFILT_API_STRUCT *filt)
@@ -1519,9 +1519,9 @@ void mic_e_det_handler(u8 event, u8 ch)
     if (ch == effect_dvol_default_parm.ch_total) {
         if (effect->dodge_en) {
             if (effect && effect->d_vol) {
-                if (event) { //æŽ¨å‡ºé—ªé¿
+                if (event) { //ÍÆ³öÉÁ±Ü
                     audio_dig_vol_group_dodge(sys_digvol_group, "mic_mic", 100, 100);
-                } else { //å¯åŠ¨é—ªé¿
+                } else { //Æô¶¯ÉÁ±Ü
                     audio_dig_vol_group_dodge(sys_digvol_group, "mic_mic", 100, 0);
                 }
             }
@@ -1530,7 +1530,7 @@ void mic_e_det_handler(u8 event, u8 ch)
 #endif
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    æ‰“å¼€mic èƒ½é‡æ£€æµ‹
+/**@brief    ´ò¿ªmic ÄÜÁ¿¼ì²â
    @param
    @return
    @note
@@ -1539,8 +1539,8 @@ void mic_e_det_handler(u8 event, u8 ch)
 void *mic_energy_detect_open(u32 sr, u8 ch_num)
 {
     audio_energy_detect_param e_det_param = {0};
-    e_det_param.mute_energy = dodge_parm.dodge_out_thread;//äººå£°èƒ½é‡å°äºŽmute_energy é€€å‡ºé—ªé¿
-    e_det_param.unmute_energy = dodge_parm.dodge_in_thread;//äººå£°èƒ½é‡å¤§äºŽ 100è§¦å‘é—ªé¿
+    e_det_param.mute_energy = dodge_parm.dodge_out_thread;//ÈËÉùÄÜÁ¿Ð¡ÓÚmute_energy ÍË³öÉÁ±Ü
+    e_det_param.unmute_energy = dodge_parm.dodge_in_thread;//ÈËÉùÄÜÁ¿´óÓÚ 100´¥·¢ÉÁ±Ü
     e_det_param.mute_time_ms = dodge_parm.dodge_out_time_ms;
     e_det_param.unmute_time_ms = dodge_parm.dodge_in_time_ms;
     e_det_param.count_cycle_ms = 2;
@@ -1552,7 +1552,7 @@ void *mic_energy_detect_open(u32 sr, u8 ch_num)
     return audio_e_det_hdl;
 }
 /*----------------------------------------------------------------------------*/
-/**@brief    å…³é—­mic èƒ½é‡æ£€æµ‹
+/**@brief    ¹Ø±Õmic ÄÜÁ¿¼ì²â
    @param
    @return
    @note
@@ -1574,7 +1574,7 @@ void mic_energy_detect_close(void *hdl)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief    èƒ½é‡æ£€æµ‹è¿è¡Œè¿‡ç¨‹ï¼Œæ˜¯å¦è§¦å‘é—ªé¿
+/**@brief    ÄÜÁ¿¼ì²âÔËÐÐ¹ý³Ì£¬ÊÇ·ñ´¥·¢ÉÁ±Ü
    @param
    @return
    @note
@@ -1598,19 +1598,19 @@ u8 mic_dodge_get_status(void)
 #endif
 
 
-//*********************éŸ³æ•ˆåˆ‡æ¢ä¾‹ç¨‹**********************************//
-//å‚è€ƒ éŸ³æ•ˆåªä¿ç•™ echoæ··å“å’Œå˜å£°
+//*********************ÒôÐ§ÇÐ»»Àý³Ì**********************************//
+//²Î¿¼ ÒôÐ§Ö»±£Áô echo»ìÏìºÍ±äÉù
 enum {
-    KARAOKE_MIC_OST,//åŽŸå£°,å½•éŸ³æ£š
+    KARAOKE_MIC_OST,//Ô­Éù,Â¼ÒôÅï
     KARAOKE_MIC_KTV,//KTV
-    KARAOKE_MIC_SHUSHU,//å¤§å”
-    KARAOKE_MIC_GODDESS,//å¥³ç¥ž
-    KARAOKE_MIC_BABY,//å¨ƒå¨ƒéŸ³
+    KARAOKE_MIC_SHUSHU,//´óÊå
+    KARAOKE_MIC_GODDESS,//Å®Éñ
+    KARAOKE_MIC_BABY,//ÍÞÍÞÒô
     KARAOKE_MIC_MAX,
-    /* KARAOKE_ONLY_MIC,//åœ¨ä¸æ˜¯micæ¨¡å¼ä¸‹åˆå§‹åŒ–mic */
+    /* KARAOKE_ONLY_MIC,//ÔÚ²»ÊÇmicÄ£Ê½ÏÂ³õÊ¼»¯mic */
 };
 
-//Kæ­Œè€³æœºæ¨¡å¼åˆ‡æ¢æŽ¥å£
+//K¸è¶ú»úÄ£Ê½ÇÐ»»½Ó¿Ú
 void mic_mode_switch(u8 eff_mode)
 {
 #if TCFG_KARAOKE_EARPHONE
@@ -1621,10 +1621,10 @@ void mic_mode_switch(u8 eff_mode)
     }
     u32 sample_rate = 0;
     switch (eff_mode) {
-    case KARAOKE_MIC_OST://åŽŸå£°,å½•éŸ³æ£š
+    case KARAOKE_MIC_OST://Ô­Éù,Â¼ÒôÅï
         /* tone_play_index(IDEX_TONE_MIC_OST, 1); */
         puts("OST\n");
-        // éŸ³æ•ˆç›´é€š
+        // ÒôÐ§Ö±Í¨
         pause_echo(__this->p_echo_hdl, 1);
         pause_pitch(__this->p_pitch_hdl, 1);
         if (__this->p_howling_hdl) {
@@ -1633,25 +1633,25 @@ void mic_mode_switch(u8 eff_mode)
         break;
     case KARAOKE_MIC_KTV://KTV
         puts("KTV\n");
-        //å˜å£°ç›´é€š
+        //±äÉùÖ±Í¨
         pause_echo(__this->p_echo_hdl, 0);
         pause_pitch(__this->p_pitch_hdl, 1);
         break;
-    case KARAOKE_MIC_SHUSHU://å¤§å”
+    case KARAOKE_MIC_SHUSHU://´óÊå
         /* tone_play_index(IDEX_TONE_UNCLE, 1); */
         puts("UNCLE\n");
         pause_pitch(__this->p_pitch_hdl, 1);
         set_pitch_para(136, sample_rate, EFFECT_PITCH_SHIFT, 0);
         pause_pitch(__this->p_pitch_hdl, 0);
         break;
-    case KARAOKE_MIC_GODDESS://å¥³ç¥ž
+    case KARAOKE_MIC_GODDESS://Å®Éñ
         /* tone_play_index(IDEX_TONE_GODNESS, 1); */
         puts("GODDESS\n");
         pause_pitch(__this->p_pitch_hdl, 1);
         set_pitch_para(66, sample_rate, EFFECT_VOICECHANGE_KIN0, 150);
         pause_pitch(__this->p_pitch_hdl, 0);
         break;
-    case KARAOKE_MIC_BABY://å¨ƒå¨ƒéŸ³
+    case KARAOKE_MIC_BABY://ÍÞÍÞÒô
         /* tone_play_index(IDEX_TONE_BABY, 1); */
         puts("WAWA\n");
         pause_pitch(__this->p_pitch_hdl, 1);

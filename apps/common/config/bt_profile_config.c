@@ -134,7 +134,7 @@ SDP_RECORD_HANDLER_REGISTER(pbap_sdp_record_item) = {
     .service_record_handle = 0x00010007,
 };
 #endif
-/*æ³¨æ„hid_conn_depend_on_dev_companyç½®1ä¹‹åï¼Œå®‰å“æ‰‹æœºä¼šé»˜è®¤æ–­å¼€HIDè¿æ¥ */
+/*×¢Òâhid_conn_depend_on_dev_companyÖÃ1Ö®ºó£¬°²×¿ÊÖ»ú»áÄ¬ÈÏ¶Ï¿ªHIDÁ¬½Ó */
 const u8 hid_conn_depend_on_dev_company = 1;
 const u8 sdp_get_remote_pnp_info = 0;
 
@@ -161,12 +161,12 @@ const u8 more_avctp_cmd_support = 0;
 #endif
 #if TCFG_USER_EMITTER_ENABLE
 const u8 hci_inquiry_support = 1;
-const u8 btstack_emitter_support  = 1;  /*å®šä¹‰ç”¨äºä¼˜åŒ–ä»£ç ç¼–è¯‘*/
+const u8 btstack_emitter_support  = 1;  /*¶¨ÒåÓÃÓÚÓÅ»¯´úÂë±àÒë*/
 
 #if USER_SUPPORT_PROFILE_A2DP
-const u8 emitter_hfp_hf_support = 0;    /*ç½®1æ—¶åšå‘å°„å™¨è¿æ¥æ‰‹æœºæ—¶åªæ”¯æŒhfp*/
+const u8 emitter_hfp_hf_support = 0;    /*ÖÃ1Ê±×ö·¢ÉäÆ÷Á¬½ÓÊÖ»úÊ±Ö»Ö§³Öhfp*/
 #else
-const u8 emitter_hfp_hf_support = 1;    /*ç½®1æ—¶åšå‘å°„å™¨è¿æ¥æ‰‹æœºæ—¶åªæ”¯æŒhfp*/
+const u8 emitter_hfp_hf_support = 1;    /*ÖÃ1Ê±×ö·¢ÉäÆ÷Á¬½ÓÊÖ»úÊ±Ö»Ö§³Öhfp*/
 #endif
 
 extern const u8 sdp_a2dp_source_service_data[];
@@ -189,7 +189,7 @@ SDP_RECORD_HANDLER_REGISTER(hfp_ag_sdp_record_item) = {
 #endif
 #else
 const u8 hci_inquiry_support = 0;
-const u8 btstack_emitter_support  = 0;  /*å®šä¹‰ç”¨äºä¼˜åŒ–ä»£ç ç¼–è¯‘*/
+const u8 btstack_emitter_support  = 0;  /*¶¨ÒåÓÃÓÚÓÅ»¯´úÂë±àÒë*/
 #endif
 /*u8 l2cap_debug_enable = 0xf0;
 u8 rfcomm_debug_enable = 0xf;
@@ -198,7 +198,7 @@ u8 ble_debug_enable    = 0xff;
 u8 btstack_tws_debug_enable = 0xf;*/
 
 #else
-const u8 btstack_emitter_support  = 1;  /*å®šä¹‰ç”¨äºä¼˜åŒ–ä»£ç ç¼–è¯‘*/
+const u8 btstack_emitter_support  = 1;  /*¶¨ÒåÓÃÓÚÓÅ»¯´úÂë±àÒë*/
 const u8 a2dp_mutual_support = 1;
 const u8 adt_profile_support = 0;
 #endif

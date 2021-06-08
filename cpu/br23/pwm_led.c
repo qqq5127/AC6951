@@ -5,11 +5,11 @@
 #include "system/timer.h"
 
 /*******************************************************************
-*	æ¨ç¯æ³¨æ„äº‹é¡¹:
-*		1)PWM_CON1çš„BIT(4), OUT_LOGICä½ä¸€å®šè¦è®¾ç½®ä¸º1;
-*		2)PWM_CON1çš„BIT(0), PWM0_INVä½ä¸€å®šè¦è®¾ç½®ä¸º0;
-*		3)åœ¨éå‘¼å¸ç¯æ•ˆæœä¸‹, å•IOåŒLEDæ¨¡å¼, PWM_PRD_DIVå¯„å­˜å™¨å’ŒPWM_BRI_PRDè®¾ç½®æˆç›¸åŒå€¼;
-*		4)åœ¨é—ªç¯æ¨¡å¼ä¸‹, PWM_BRI_PRD(äº®åº¦å€¼)å›ºå®šä¸‹æ¥å, PWM0çš„BRI_DUTY0å’ŒBRI_DUTY1ä¸€å®šä¸èƒ½è¶…è¿‡PWM_BRI_PRD;
+*	ÍÆµÆ×¢ÒâÊÂÏî:
+*		1)PWM_CON1µÄBIT(4), OUT_LOGICÎ»Ò»¶¨ÒªÉèÖÃÎª1;
+*		2)PWM_CON1µÄBIT(0), PWM0_INVÎ»Ò»¶¨ÒªÉèÖÃÎª0;
+*		3)ÔÚ·ÇºôÎüµÆĞ§¹ûÏÂ, µ¥IOË«LEDÄ£Ê½, PWM_PRD_DIV¼Ä´æÆ÷ºÍPWM_BRI_PRDÉèÖÃ³ÉÏàÍ¬Öµ;
+*		4)ÔÚÉÁµÆÄ£Ê½ÏÂ, PWM_BRI_PRD(ÁÁ¶ÈÖµ)¹Ì¶¨ÏÂÀ´ºó, PWM0µÄBRI_DUTY0ºÍBRI_DUTY1Ò»¶¨²»ÄÜ³¬¹ıPWM_BRI_PRD;
 *********************************************************************/
 /* #ifdef SUPPORT_MS_EXTENSIONS */
 /* #pragma bss_seg(	".pwm_led_bss") */
@@ -18,7 +18,7 @@
 /* #pragma code_seg(	".pwm_led_code") */
 /* #endif */
 
-//#define PWM_LED_TEST_MODE 		//LEDæ¨¡å—æµ‹è¯•å‡½æ•°
+//#define PWM_LED_TEST_MODE 		//LEDÄ£¿é²âÊÔº¯Êı
 
 //#define PWM_LED_DEBUG_ENABLE
 
@@ -33,7 +33,7 @@
 //////////////////////////////////////////////////////////////
 #define PWM_LED_SFR 	SFR
 
-//========================= 0.æ¨¡å—å¼€å…³ç›¸å…³å¯„å­˜å™¨
+//========================= 0.Ä£¿é¿ª¹ØÏà¹Ø¼Ä´æÆ÷
 #define LED_PWM_ENABLE 					(JL_PLED->CON0 |= BIT(0))
 #define LED_PWM_DISABLE 				(JL_PLED->CON0 &= ~BIT(0))
 #define IS_PWM_LED_ON    				(JL_PLED->CON0 & BIT(0))
@@ -43,7 +43,7 @@
 #define RESET_PWM_CON2 					(JL_PLED->CON2 = 0)
 #define RESET_PWM_CON3 					(JL_PLED->CON3 = 0)
 
-//========================= 1.æ—¶é’Ÿè®¾ç½®ç›¸å…³å¯„å­˜å™¨
+//========================= 1.Ê±ÖÓÉèÖÃÏà¹Ø¼Ä´æÆ÷
 //PWM0 CLK DIV
 #define	CLK_DIV_1 			0
 #define CLK_DIV_4           1
@@ -66,35 +66,35 @@
 //PWM_CON3[3:0] -- PWM_PRD_DIVL[7:0]  //12bit
 #define LED_PWM1_CLK_DIV(x)	   	    	{do {JL_PLED->PRD_DIVL = ((x-1) & 0xFF); JL_PLED->CON3 &= ~(0xF); JL_PLED->CON3 |= (((x-1) >> 8) & 0xF);} while(0);}
 
-//========================= 2.äº®åº¦è®¾ç½®ç›¸å…³å¯„å­˜å™¨
-//æœ€é«˜äº®åº¦çº§æ•°è®¾ç½®
+//========================= 2.ÁÁ¶ÈÉèÖÃÏà¹Ø¼Ä´æÆ÷
+//×î¸ßÁÁ¶È¼¶ÊıÉèÖÃ
 //PWM_BRI_PRDH[1:0] -- PWM_BRI_PRDL[7:0]  //10bit
 #define LED_BRI_DUTY_CYCLE(x)			{do {JL_PLED->BRI_PRDL = (x & 0xFF); JL_PLED->BRI_PRDH = ((x >> 8) & 0x3);} while(0);}
-//é«˜ç”µå¹³äº®ç¯äº®åº¦è®¾ç½®
+//¸ßµçÆ½ÁÁµÆÁÁ¶ÈÉèÖÃ
 #define LED_BRI_DUTY1_SET(x)			{do {JL_PLED->BRI_DUTY0L = (x & 0xFF); JL_PLED->BRI_DUTY0H = ((x >> 8) & 0x3);} while(0);}
-//ä½ç”µå¹³äº®ç¯äº®åº¦è®¾ç½®
+//µÍµçÆ½ÁÁµÆÁÁ¶ÈÉèÖÃ
 #define LED_BRI_DUTY0_SET(x)			{do {JL_PLED->BRI_DUTY1L = (x & 0xFF); JL_PLED->BRI_DUTY1H = ((x >> 8) & 0x3);} while(0);}
-//åŒæ­¥LED0 <-- LED1äº®åº¦
+//Í¬²½LED0 <-- LED1ÁÁ¶È
 #define LED_BRI_DUTY0_SYNC1() 			{do {JL_PLED->BRI_DUTY0L = JL_PLED->BRI_DUTY1L; JL_PLED->BRI_DUTY0H = JL_PLED->BRI_DUTY1H;} while(0);}
-//åŒæ­¥LED1 <-- LED0äº®åº¦
+//Í¬²½LED1 <-- LED0ÁÁ¶È
 #define LED_BRI_DUTY1_SYNC0() 			{do {JL_PLED->BRI_DUTY1L = JL_PLED->BRI_DUTY0L; JL_PLED->BRI_DUTY1H = JL_PLED->BRI_DUTY0H;} while(0);}
 
 
-//========================= 3.äº®ç­è®¾ç½®ç›¸å…³å¯„å­˜å™¨
-//duty_cycle å›ºå®šä¸º255æˆ–è€…è®¾ç½®PWM_DUTY3, 8bit
+//========================= 3.ÁÁÃğÉèÖÃÏà¹Ø¼Ä´æÆ÷
+//duty_cycle ¹Ì¶¨Îª255»òÕßÉèÖÃPWM_DUTY3, 8bit
 //   	 	  _duty1_	 	  _duty3_
 //		      |     |         |     |
 //		      |     |         |     |
 //0__ __ duty0|     | __ duty2|     |__ __255/PWM_DUTY3
 
-//PWM1 duty_cycle é€‰æ‹©
-#define LED_PWM1_DUTY_FIX_SET 			(JL_PLED->CON1 &= ~BIT(3))  //å›ºå®šPWM1å‘¨æœŸä¸º0xFF
+//PWM1 duty_cycle Ñ¡Ôñ
+#define LED_PWM1_DUTY_FIX_SET 			(JL_PLED->CON1 &= ~BIT(3))  //¹Ì¶¨PWM1ÖÜÆÚÎª0xFF
 #define LED_PWM1_DUTY_VARY_SET(x) 		{do {JL_PLED->CON1 |= BIT(3); JL_PLED->DUTY3 = x;} while(0);}
 
 #define LED_PWM1_DUTY0_SET(x)			(JL_PLED->DUTY0 = x)
 #define LED_PWM1_DUTY1_SET(x)			(JL_PLED->DUTY1 = x)
 #define LED_PWM1_DUTY2_SET(x)			(JL_PLED->DUTY2 = x)
-#define LED_PWM1_DUTY3_SET(x)			(JL_PLED->DUTY3 = x) 	//å¯ä»¥è®¾ç½®ä¸ºPWM1_DUTY_CYCLE
+#define LED_PWM1_DUTY3_SET(x)			(JL_PLED->DUTY3 = x) 	//¿ÉÒÔÉèÖÃÎªPWM1_DUTY_CYCLE
 #define LED_PWM1_PRD_SEL_DIS			(JL_PLED->CON1 &= ~BIT(3))
 
 #define LED_PWM1_PRD_SEL_EN				(JL_PLED->CON1 |= BIT(3))
@@ -109,35 +109,35 @@
 #define LED_PWM1_DUTY2_DIS				(JL_PLED->CON1 &= ~BIT(6))
 #define LED_PWM1_DUTY3_DIS				(JL_PLED->CON1 &= ~BIT(7))
 
-//========================= 5.è¾“å‡ºå–åç›¸å…³å¯„å­˜å™¨
-//ä»¥ä¸‹å‡ ä¸ªéœ€è¦è®¾ç½®ä¸ºå›ºå®šå€¼
+//========================= 5.Êä³öÈ¡·´Ïà¹Ø¼Ä´æÆ÷
+//ÒÔÏÂ¼¸¸öĞèÒªÉèÖÃÎª¹Ì¶¨Öµ
 #define LED_PWM0_INV_DISABLE 			(JL_PLED->CON1 &= ~BIT(0))
-#define LED_PWM1_INV_DISABLE 			(JL_PLED->CON1 &= ~BIT(1)) //å‘¨æœŸä»ç­ç¯å¼€å§‹
-#define LED_PWM1_INV_ENABLE 			(JL_PLED->CON1 |= BIT(1))  //å‘¨æœŸä»äº®ç¯å¼€å§‹
+#define LED_PWM1_INV_DISABLE 			(JL_PLED->CON1 &= ~BIT(1)) //ÖÜÆÚ´ÓÃğµÆ¿ªÊ¼
+#define LED_PWM1_INV_ENABLE 			(JL_PLED->CON1 |= BIT(1))  //ÖÜÆÚ´ÓÁÁµÆ¿ªÊ¼
 #define LED_PWM_OUT_LOGIC_SET 			(JL_PLED->CON3 |= BIT(4))
-//ä»¥ä¸‹å‡ ä¸ªå¯ä»¥çµæ´»è®¾ç½®
+//ÒÔÏÂ¼¸¸ö¿ÉÒÔÁé»îÉèÖÃ
 #define LED_PWM_OUTPUT_INV_ENABLE 		(JL_PLED->CON1 |= BIT(2))
 #define LED_PWM_OUTPUT_INV_DISABLE 		(JL_PLED->CON1 &= ~BIT(2))
 
-//========================= 6.ä¸å‘¨æœŸå˜è‰²ç›¸å…³å¯„å­˜å™¨
+//========================= 6.ÓëÖÜÆÚ±äÉ«Ïà¹Ø¼Ä´æÆ÷
 #define LED_PWM_SHIFT_DUTY_SET(x) 		PWM_LED_SFR(JL_PLED->CON2, 4, 4, x)
 
-//========================= 7.ä¸é©±åŠ¨å¼ºåº¦ç›¸å…³å¯„å­˜å™¨
+//========================= 7.ÓëÇı¶¯Ç¿¶ÈÏà¹Ø¼Ä´æÆ÷
 #define LED_PWM_IO_MAX_DRIVE(x) 		PWM_LED_SFR(JL_PLED->CON2, 0, 2, x)
 
-//========================= 8.ä¸ä¸­æ–­ç›¸å…³å¯„å­˜å™¨
+//========================= 8.ÓëÖĞ¶ÏÏà¹Ø¼Ä´æÆ÷
 #define LED_PWM_INT_EN 					(JL_PLED->CON3 |= BIT(5))
 #define LED_PWM_INT_DIS 				(JL_PLED->CON3 &= ~BIT(5))
 #define LED_PWM_CLR_PENDING 			(JL_PLED->CON3 |= BIT(6))
 
-//========================= 9.ä¸å‘¼å¸æ¨¡å¼ç›¸å…³å¯„å­˜å™¨
+//========================= 9.ÓëºôÎüÄ£Ê½Ïà¹Ø¼Ä´æÆ÷
 #define LED_PWM_BREATHE_ENABLE 			(JL_PLED->CON0 |= BIT(1))
 #define LED_PWM_BREATHE_DISABLE 		(JL_PLED->CON0 &= ~BIT(1))
-//LEDå‘¼å¸ç­ç¯å»¶æ—¶è®¾ç½®, 16bit
+//LEDºôÎüÃğµÆÑÓÊ±ÉèÖÃ, 16bit
 #define LED_PWM_BREATHE_BLANK_TIME_SET(x) 	{do {LED_PWM1_DUTY2_EN; LED_PWM1_DUTY3_EN; LED_PWM1_DUTY2_SET((x & 0xFF)); LED_PWM1_DUTY3_SET((x >> 8) & 0xFF)} while(0)}
-//LEDå‘¼å¸ç¯(ä½ç”µå¹³ç¯)æœ€é«˜äº®åº¦å»¶æ—¶è®¾ç½®, 8bit
+//LEDºôÎüµÆ(µÍµçÆ½µÆ)×î¸ßÁÁ¶ÈÑÓÊ±ÉèÖÃ, 8bit
 #define LED0_PWM_BREATHE_LIGHT_TIME_SET(x) 	{do {LED_PWM1_DUTY0_EN; LED_PWM1_DUTY0_SET(x)} while(0)}
-//LEDå‘¼å¸ç¯(é«˜ç”µå¹³ç¯)æœ€é«˜äº®åº¦å»¶æ—¶è®¾ç½®, 8bit
+//LEDºôÎüµÆ(¸ßµçÆ½µÆ)×î¸ßÁÁ¶ÈÑÓÊ±ÉèÖÃ, 8bit
 #define LED1_PWM_BREATHE_LIGHT_TIME_SET(x) 	{do {LED_PWM1_DUTY1_EN; LED_PWM1_DUTY1_SET(x)} while(0)}
 
 struct pwm_led {
@@ -146,7 +146,7 @@ struct pwm_led {
     u8 clock;
     u8 last_mode;
     const struct led_platform_data *user_data;
-    //ä¸­æ–­ç›¸å…³
+    //ÖĞ¶ÏÏà¹Ø
     void (*pwm_led_extern_isr)(void);
     void (*pwm_led_local_isr)(void);
 #ifdef PWM_LED_TWO_IO_SUPPORT
@@ -209,10 +209,10 @@ static void pwm_clock_set(u8 _clock)
 
 
 /*
- * IOä½¿èƒ½æ³¨æ„, å¦åˆ™æœ‰å¯èƒ½ä¼šå‡ºç°åœ¨æ˜¾ç¤ºæ•ˆæœå‰ä¼šå‡ºç°é—ªçƒ
- * 1)è®¾ç½®PU, PDä¸º1;
- * 2)è®¾ç½®DIR, OUTä¸º1;
- * 3)æœ€åè®¾ç½®ä¸ºæ–¹å‘ä¸ºè¾“å‡º;
+ * IOÊ¹ÄÜ×¢Òâ, ·ñÔòÓĞ¿ÉÄÜ»á³öÏÖÔÚÏÔÊ¾Ğ§¹ûÇ°»á³öÏÖÉÁË¸
+ * 1)ÉèÖÃPU, PDÎª1;
+ * 2)ÉèÖÃDIR, OUTÎª1;
+ * 3)×îºóÉèÖÃÎª·½ÏòÎªÊä³ö;
  */
 static void led_pin_set_enable(u8 gpio)
 {
@@ -224,7 +224,7 @@ static void led_pin_set_enable(u8 gpio)
     gpio_set_direction(gpio, 0);
 }
 
-//æŠŠIOè®¾ç½®ä¸ºé«˜é˜»
+//°ÑIOÉèÖÃÎª¸ß×è
 static void led_pin_set_disable(u8 disable_pin)
 {
     gpio_set_pull_down(disable_pin, 0);
@@ -246,8 +246,8 @@ static void pwm_led_isr_func(void)
     }
 }
 
-//index = 0: å†…éƒ¨åˆ‡IOä¸­æ–­;
-//index = 1: å¤–éƒ¨æ³¨å†Œä¸­æ–­;
+//index = 0: ÄÚ²¿ÇĞIOÖĞ¶Ï;
+//index = 1: Íâ²¿×¢²áÖĞ¶Ï;
 static void _pwm_led_register_irq(void (*func)(void), u8 index)
 {
     LED_PWM_INT_DIS;
@@ -279,7 +279,7 @@ void pwm_led_init(const struct led_platform_data *user_data)
     memset(__this, 0, sizeof(struct pwm_led));
 
     LED_PWM_DISABLE;
-    LED_PWM_BREATHE_DISABLE;  //å‘¼å¸ç¯ä½¿èƒ½ä½
+    LED_PWM_BREATHE_DISABLE;  //ºôÎüµÆÊ¹ÄÜÎ»
 
     RESET_PWM_CON0;
     RESET_PWM_CON1;
@@ -297,7 +297,7 @@ void pwm_led_init(const struct led_platform_data *user_data)
 
     if (user_data->io_mode == LED_ONE_IO_MODE) {
         __this->led_pin = user_data->io_cfg.one_io.pin;
-        led_pin_set_enable(user_data->io_cfg.one_io.pin);  //ä¸€ä¸ªIOæ¨ä¸¤ä¸ªç¯
+        led_pin_set_enable(user_data->io_cfg.one_io.pin);  //Ò»¸öIOÍÆÁ½¸öµÆ
     }
 
     __this->user_data = user_data;
@@ -306,12 +306,12 @@ void pwm_led_init(const struct led_platform_data *user_data)
     __this->init = 1;
 }
 
-//prd: äº®åº¦æ€»çº§æ•°
-//duty: è®¾ç½®äº®åº¦çº§æ•°
-//å®é™…è¾“å‡ºé¢‘ç‡ = Flrc / prd
-//è¾“å‡ºå ç©ºæ¯”: duty /prd
-//gpio: è®¾ç½®è¾“å‡ºçš„IO
-//æ³¨æ„ï¼šdutyä¸èƒ½å¤§äºprdï¼Œå¹¶ä¸”prdå’Œdutyæ˜¯éæ ‡å‡†éçº¿æ€§çš„ï¼Œå»ºè®®ç”¨ç¤ºæ³¢å™¨çœ‹ç€æ¥è°ƒ
+//prd: ÁÁ¶È×Ü¼¶Êı
+//duty: ÉèÖÃÁÁ¶È¼¶Êı
+//Êµ¼ÊÊä³öÆµÂÊ = Flrc / prd
+//Êä³öÕ¼¿Õ±È: duty /prd
+//gpio: ÉèÖÃÊä³öµÄIO
+//×¢Òâ£ºduty²»ÄÜ´óÓÚprd£¬²¢ÇÒprdºÍdutyÊÇ·Ç±ê×¼·ÇÏßĞÔµÄ£¬½¨ÒéÓÃÊ¾²¨Æ÷¿´×ÅÀ´µ÷
 int pwm_led_output_clk(u8 gpio, u8 prd, u8 duty)
 {
     RESET_PWM_CON0;
@@ -376,10 +376,10 @@ void log_pwm_led_info()
 
 
 /**
- * @brief: pwm0 æ—¶é’Ÿè®¾ç½®
- * é»˜è®¤RC = 32K,
- * å‘¼å¸BT24M = 93750Hz
- * æ™®é€šBT24M = 46875Hz/23437Hz
+ * @brief: pwm0 Ê±ÖÓÉèÖÃ
+ * Ä¬ÈÏRC = 32K,
+ * ºôÎüBT24M = 93750Hz
+ * ÆÕÍ¨BT24M = 46875Hz/23437Hz
  *
  * @param: clk0
  * @return int
@@ -498,15 +498,15 @@ static void pwm_led_two_io_mode_display(u8 display)
         break;
 /////////////
 
-//åŒç¯äº’é—ª
-    case PWM_LED0_LED1_FAST_FLASH: //ä½¿ç”¨ä¸­æ–­åˆ‡ç¯
+//Ë«µÆ»¥ÉÁ
+    case PWM_LED0_LED1_FAST_FLASH: //Ê¹ÓÃÖĞ¶ÏÇĞµÆ
         isr_mode = PWM_LED1_FAST_FLASH;
         break;
     case PWM_LED0_LED1_SLOW_FLASH:
         isr_mode = PWM_LED1_SLOW_FLASH;
         break;
-//å‘¼å¸æ¨¡å¼
-    case PWM_LED0_LED1_BREATHE: //ä½¿ç”¨ä¸­æ–­åˆ‡ç¯
+//ºôÎüÄ£Ê½
+    case PWM_LED0_LED1_BREATHE: //Ê¹ÓÃÖĞ¶ÏÇĞµÆ
         isr_mode = PWM_LED1_BREATHE;
         break;
 
@@ -522,7 +522,7 @@ static void pwm_led_two_io_mode_display(u8 display)
     }
     if (isr_mode) {
         _pwm_led_display_mode(isr_mode);
-        _led_pwm1_duty_set(0xFF, 2, 0, 0, 0); //å æ»¡æ•´ä¸ªå‘¨æœŸ
+        _led_pwm1_duty_set(0xFF, 2, 0, 0, 0); //Õ¼ÂúÕû¸öÖÜÆÚ
         _pwm_led_register_irq(_change_io_display, 0);
         led_pin_set_enable(__this->user_data->io_cfg.two_io.pin0);
         __this->display_index = 0;
@@ -540,7 +540,7 @@ static void _pwm_led_two_io_user_define_mode(u8 led_index)
     } else if (led_index == 1) {
         led_pin_set_enable(__this->user_data->io_cfg.two_io.pin1);
     } else if (led_index == 2) {
-        //åŒç¯äº’é—ªåˆ‡æ¢
+        //Ë«µÆ»¥ÉÁÇĞ»»
         __this->display_index = 0;
         led_pin_set_enable(__this->user_data->io_cfg.two_io.pin0);
         _pwm_led_register_irq(_change_io_display, 0);
@@ -562,10 +562,10 @@ static void pwm_led_one_io_mode_display(u8 display)
 
 /////////////////////////////
 /**
- * @brief: è®¾ç½®ledç¯äº®åº¦
- * @param: bri_max, æœ€å¤§äº®åº¦, 10bit, 0 ~ 1023
- * @param: bri_duty0, LED0äº®åº¦, 10bit, 0 ~ 1023
- * @param: bri_duty1, LED1äº®åº¦, 10bit, 0 ~ 1023
+ * @brief: ÉèÖÃledµÆÁÁ¶È
+ * @param: bri_max, ×î´óÁÁ¶È, 10bit, 0 ~ 1023
+ * @param: bri_duty0, LED0ÁÁ¶È, 10bit, 0 ~ 1023
+ * @param: bri_duty1, LED1ÁÁ¶È, 10bit, 0 ~ 1023
  *
  * @return void
  */
@@ -585,12 +585,12 @@ static void _led_pwm_bright_set(u16 bri_max, u16 bri_duty0, u16 bri_duty1)
 
 
 /**
- * @brief: è®¾ç½®PWMè¾“å‡ºé€»è¾‘,
- * @param: pwm_inv_en, æœ€åpwmæ³¢å½¢è¾“å‡ºé€»è¾‘(é»˜è®¤æ˜¯é«˜ç”µå¹³ç¯äº®),
-			0: ä¸å–å, é«˜ç”µå¹³ç¯äº®; 1: å–å, ä½ç”µå¹³ç¯äº®;
+ * @brief: ÉèÖÃPWMÊä³öÂß¼­,
+ * @param: pwm_inv_en, ×îºópwm²¨ĞÎÊä³öÂß¼­(Ä¬ÈÏÊÇ¸ßµçÆ½µÆÁÁ),
+			0: ²»È¡·´, ¸ßµçÆ½µÆÁÁ; 1: È¡·´, µÍµçÆ½µÆÁÁ;
  * @param: shift_num
- 	æ˜¯å¦éœ€è¦äº’é—ª,
-			0: å•é—ª; 1 ~ : äº’é—ª;
+ 	ÊÇ·ñĞèÒª»¥ÉÁ,
+			0: µ¥ÉÁ; 1 ~ : »¥ÉÁ;
  *
  * @return void
  */
@@ -606,13 +606,13 @@ static void _led_pwm_output_logic_set(u8 pwm_inv_en, u8 shift_num)
 }
 
 /**
- * @brief: è®¾ç½®PWM1äº®ç­è®¾ç½®, å¯ä»¥å®ç°ä¸€ä¸ªå‘¨æœŸäº®ç­1æ¬¡å’Œ2æ¬¡,
- * @param: pwm_inv_en, æœ€åpwmæ³¢å½¢è¾“å‡ºé€»è¾‘(é»˜è®¤æ˜¯é«˜ç”µå¹³ç¯äº®),
-			0: ä¸å–å, é«˜ç”µå¹³ç¯äº®; 1: å–å, ä½ç”µå¹³ç¯äº®;
+ * @brief: ÉèÖÃPWM1ÁÁÃğÉèÖÃ, ¿ÉÒÔÊµÏÖÒ»¸öÖÜÆÚÁÁÃğ1´ÎºÍ2´Î,
+ * @param: pwm_inv_en, ×îºópwm²¨ĞÎÊä³öÂß¼­(Ä¬ÈÏÊÇ¸ßµçÆ½µÆÁÁ),
+			0: ²»È¡·´, ¸ßµçÆ½µÆÁÁ; 1: È¡·´, µÍµçÆ½µÆÁÁ;
  * @param: shift_num
- 	æ˜¯å¦éœ€è¦äº’é—ª,
-			0: å•é—ª; 1 ~ : äº’é—ª;
- *duty_cycle å›ºå®šä¸º255æˆ–è€…è®¾ç½®PWM_DUTY3, 8bit
+ 	ÊÇ·ñĞèÒª»¥ÉÁ,
+			0: µ¥ÉÁ; 1 ~ : »¥ÉÁ;
+ *duty_cycle ¹Ì¶¨Îª255»òÕßÉèÖÃPWM_DUTY3, 8bit
  *   	 	  _duty1_	 	  _duty3_
  *		      |     |         |     |
  *		      |     |         |     |
@@ -629,7 +629,7 @@ static void _led_pwm1_duty_set(u8 duty_prd, u8 duty0, u8 duty1, u8 duty2, u8 bre
             LED_PWM1_PRD_SEL_EN;
             LED_PWM1_DUTY3_DIS;
         } else {
-            LED_PWM1_PRD_SEL_DIS; //å‘¼å¸æ¨¡å¼, duty0/1æ˜¯äº®ç¯å»¶æ—¶, {duty3,duty2}æ˜¯ç­ç¯å»¶æ—¶
+            LED_PWM1_PRD_SEL_DIS; //ºôÎüÄ£Ê½, duty0/1ÊÇÁÁµÆÑÓÊ±, {duty3,duty2}ÊÇÃğµÆÑÓÊ±
             LED_PWM1_DUTY3_EN;
         }
 
@@ -661,10 +661,10 @@ static void _led_pwm1_duty_set(u8 duty_prd, u8 duty0, u8 duty1, u8 duty2, u8 bre
 
 /**
  * @brief:
- * @param: module_en = 0, breathe_en = 0, å…³LEDæ¨¡å—
- * @param: module_en = 0, breathe_en = 1, å…³LEDæ¨¡å—
- * @param: module_en = 1, breathe_en = 0, å¼€LEDæ™®é€šé—ªçƒæ¨¡å¼
- * @param: module_en = 1, breathe_en = 1, å¼€LEDå‘¼å¸æ¨¡å¼
+ * @param: module_en = 0, breathe_en = 0, ¹ØLEDÄ£¿é
+ * @param: module_en = 0, breathe_en = 1, ¹ØLEDÄ£¿é
+ * @param: module_en = 1, breathe_en = 0, ¿ªLEDÆÕÍ¨ÉÁË¸Ä£Ê½
+ * @param: module_en = 1, breathe_en = 1, ¿ªLEDºôÎüÄ£Ê½
  * @return void
  */
 static void _led_pwm_module_enable(u8 module_en, u8 breathe_en)
@@ -683,7 +683,7 @@ static void _led_pwm_module_enable(u8 module_en, u8 breathe_en)
 }
 
 /**
- * @brief: è®¾ç½®pwm0æ—¶é’Ÿåˆ†é¢‘
+ * @brief: ÉèÖÃpwm0Ê±ÖÓ·ÖÆµ
  *          clk0_div
  * pwm0_clk --------> pwm1_clk
  * @param: clk0_div, 12bit, 0 ~ 4095
@@ -697,7 +697,7 @@ static void _led_pwm1_clk_set(u16 clk0_div)
 }
 
 /**
- * @brief: å…³ led é…ç½®, äº®åº¦ä¹Ÿè®¾ç½®ä¸º0
+ * @brief: ¹Ø led ÅäÖÃ, ÁÁ¶ÈÒ²ÉèÖÃÎª0
  *
  * @param led_index: 0: led0, 1:led1, 3:led0 & led1
  * @param led0_bright: 0 ~ 100
@@ -715,10 +715,10 @@ static void _pwm_led_off_display(void)
 
 
 /**
- * @brief: led å¸¸äº®æ˜¾ç¤ºè®¾ç½®
+ * @brief: led ³£ÁÁÏÔÊ¾ÉèÖÃ
  * @param led_index: 0: led0, 1:led1, 3:led0 & led1
- * @param led0_bright, LED0äº®åº¦: 0 ~ 500
- * @param led1_bright, LED1äº®åº¦: 0 ~ 500
+ * @param led0_bright, LED0ÁÁ¶È: 0 ~ 500
+ * @param led1_bright, LED1ÁÁ¶È: 0 ~ 500
  *
  * @return void
  */
@@ -760,15 +760,15 @@ static void _pwm_led_on_display(u8 led_index, u16 led0_bright, u16 led1_bright)
     }
 
     led0_bri_duty = (led0_bri_duty * led_bri_prd) / 500;
-    led1_bri_duty = (led1_bri_duty * led_bri_prd) / 500; //è°ƒè¯•æ•°æ®
+    led1_bri_duty = (led1_bri_duty * led_bri_prd) / 500; //µ÷ÊÔÊı¾İ
 
-    //step3: brightäº®åº¦
+    //step3: brightÁÁ¶È
     _led_pwm_bright_set(led_bri_prd, led0_bri_duty, led1_bri_duty);
 
-    //step4: 1.è¾“å‡ºå–å, 2.å˜è‰²(äº’é—ª);
+    //step4: 1.Êä³öÈ¡·´, 2.±äÉ«(»¥ÉÁ);
     _led_pwm_output_logic_set(out_inv, shift_num);
 
-    //step5: å‘¨æœŸäº®ç­é…ç½®
+    //step5: ÖÜÆÚÁÁÃğÅäÖÃ
     //pwm1 duty0, duty1, duty2
     _led_pwm1_duty_set(40, 2, 0, 0, 0);
 
@@ -827,21 +827,21 @@ static void __pwm_led_flash_common_handle(u8 led_index, u16 led0_bright, u16 led
         break;
     }
 
-    //step3: brightäº®åº¦
+    //step3: brightÁÁ¶È
     _led_pwm_bright_set(pwm0_prd, led0_bri_duty, led1_bri_duty);
 
-    //step4: 1.è¾“å‡ºå–å, 2.å˜è‰²(äº’é—ª);
+    //step4: 1.Êä³öÈ¡·´, 2.±äÉ«(»¥ÉÁ);
     _led_pwm_output_logic_set(out_inv, shift_num);
 }
 
 /**
- * @brief: led å‘¨æœŸé—ªä¸€æ¬¡æ˜¾ç¤ºè®¾ç½®
- * @param  led_index: 0: led0, 1:led1, 3:led0 & led1(äº’é—ª)
-		  	led0_bright: led0äº®åº¦(0 ~ 500),
-		  	led1_bright: led1äº®åº¦(0 ~ 500),
-		  	period: é—ªç¯å‘¨æœŸ(ms), å¤šå°‘msé—ªä¸€ä¸‹(100 ~ 20000), 100ms - 20S,
-			start_light_time: åœ¨å‘¨æœŸä¸­å¼€å§‹äº®ç¯çš„æ—¶é—´, -1: å‘¨æœŸæœ€åäº®ç¯, é»˜è®¤å¡«-1å³å¯,
-			light_time: ç¯äº®æŒç»­æ—¶é—´,
+ * @brief: led ÖÜÆÚÉÁÒ»´ÎÏÔÊ¾ÉèÖÃ
+ * @param  led_index: 0: led0, 1:led1, 3:led0 & led1(»¥ÉÁ)
+		  	led0_bright: led0ÁÁ¶È(0 ~ 500),
+		  	led1_bright: led1ÁÁ¶È(0 ~ 500),
+		  	period: ÉÁµÆÖÜÆÚ(ms), ¶àÉÙmsÉÁÒ»ÏÂ(100 ~ 20000), 100ms - 20S,
+			start_light_time: ÔÚÖÜÆÚÖĞ¿ªÊ¼ÁÁµÆµÄÊ±¼ä, -1: ÖÜÆÚ×îºóÁÁµÆ, Ä¬ÈÏÌî-1¼´¿É,
+			light_time: µÆÁÁ³ÖĞøÊ±¼ä,
  *
  * @return void
  */
@@ -849,7 +849,7 @@ static void _pwm_led_one_flash_display(u8 led_index, u16 led0_bright, u16 led1_b
                                        u32 period, u32 start_light_time, u32 light_time)
 {
     __pwm_led_flash_common_handle(led_index, led0_bright, led1_bright, period);
-    //step5: å‘¨æœŸäº®ç­é…ç½®
+    //step5: ÖÜÆÚÁÁÃğÅäÖÃ
     //pwm1 duty0, duty1, duty2
     u8 pwm1_duty0 = 0;
     u8 pwm1_duty1 = 0;
@@ -859,11 +859,11 @@ static void _pwm_led_one_flash_display(u8 led_index, u16 led0_bright, u16 led1_b
             _pwm_led_off_display(); //led off
             return;
         }
-        //æŒ‡å®šä»å“ªä¸ªæ—¶é—´äº®,
+        //Ö¸¶¨´ÓÄÄ¸öÊ±¼äÁÁ,
         pwm1_duty0 = (256 * start_light_time) / period;
         pwm1_duty0 = (pwm1_duty0) ? pwm1_duty0 : 2;
         if ((start_light_time + light_time) > period) {
-            pwm1_duty1 = 0; //åªå¼€duty0
+            pwm1_duty1 = 0; //Ö»¿ªduty0
         } else {
             pwm1_duty1 = (256 * light_time) / period;
             pwm1_duty1 = (pwm1_duty1) ? pwm1_duty1 : 2;
@@ -879,7 +879,7 @@ static void _pwm_led_one_flash_display(u8 led_index, u16 led0_bright, u16 led1_b
         pwm1_duty0 = 256 - pwm1_duty0;
     }
 
-    if ((led_index == 2) && (light_time == -1)) { //äº’é—ª, å æ»¡æ•´ä¸ªå‘¨æœŸ
+    if ((led_index == 2) && (light_time == -1)) { //»¥ÉÁ, Õ¼ÂúÕû¸öÖÜÆÚ
         pwm1_duty0 = 2;
         pwm1_duty1 = 0;
     }
@@ -891,16 +891,16 @@ static void _pwm_led_one_flash_display(u8 led_index, u16 led0_bright, u16 led1_b
 
 
 /**
- * @brief: led å‘¨æœŸé—ªä¸€æ¬¡æ˜¾ç¤ºè®¾ç½®
- * @param  led_index: 0: led0, 1:led1, 3:led0 & led1(äº’é—ª)
-		  	led0_bright: led0äº®åº¦,
-		  	led1_bright: led1äº®åº¦,
-		  	period: é—ªç¯å‘¨æœŸ(ms), å¤šå°‘msé—ªä¸€ä¸‹
-			first_light_time: ç¬¬ä¸€æ¬¡äº®ç¯æŒç»­æ—¶é—´,
-			second_light_time: ç¬¬äºŒæ¬¡äº®ç¯æŒç»­æ—¶é—´,
-			gap_time: ä¸¤æ¬¡äº®ç¯æ—¶é—´é—´éš”,
- * @param led0_bright, LED0äº®åº¦: 0 ~ 500
- * @param led1_bright, LED1äº®åº¦: 0 ~ 500
+ * @brief: led ÖÜÆÚÉÁÒ»´ÎÏÔÊ¾ÉèÖÃ
+ * @param  led_index: 0: led0, 1:led1, 3:led0 & led1(»¥ÉÁ)
+		  	led0_bright: led0ÁÁ¶È,
+		  	led1_bright: led1ÁÁ¶È,
+		  	period: ÉÁµÆÖÜÆÚ(ms), ¶àÉÙmsÉÁÒ»ÏÂ
+			first_light_time: µÚÒ»´ÎÁÁµÆ³ÖĞøÊ±¼ä,
+			second_light_time: µÚ¶ş´ÎÁÁµÆ³ÖĞøÊ±¼ä,
+			gap_time: Á½´ÎÁÁµÆÊ±¼ä¼ä¸ô,
+ * @param led0_bright, LED0ÁÁ¶È: 0 ~ 500
+ * @param led1_bright, LED1ÁÁ¶È: 0 ~ 500
  *
  * @return void
  */
@@ -909,7 +909,7 @@ static void _pwm_led_double_flash_display(u8 led_index, u16 led0_bright, u16 led
 {
     __pwm_led_flash_common_handle(led_index, led0_bright, led1_bright, period);
 
-    //step5: å‘¨æœŸäº®ç­é…ç½®
+    //step5: ÖÜÆÚÁÁÃğÅäÖÃ
     //pwm1 duty0, duty1, duty2
     u8 pwm1_duty0 = 0;
     u8 pwm1_duty1 = 0;
@@ -931,14 +931,14 @@ static void _pwm_led_double_flash_display(u8 led_index, u16 led0_bright, u16 led
 }
 
 /**
- * @brief: led å‘¨æœŸå‘¼å¸æ˜¾ç¤º,
- * @param  led_index: 0: led0, 1:led1, 2:led0 & led1(äº¤äº’å‘¼å¸)
-			breathe_time: å‘¼å¸å‘¨æœŸ(ç­->æœ€äº®->ç­), è®¾ç½®èŒƒå›´: 500msä»¥ä¸Š;
-		   led0_bright: led0å‘¼å¸åˆ°æœ€äº®çš„äº®åº¦(0 ~ 500);
-		   led1_bright: led1å‘¼å¸åˆ°æœ€äº®çš„äº®åº¦(0 ~ 500);
-		   led0_light_delay_time: led0æœ€é«˜äº®åº¦å»¶æ—¶(0 ~ 100ms);
-		   led1_light_delay_time: led1æœ€é«˜äº®åº¦å»¶æ—¶(0 ~ 100ms);
-		   led_blink_delay_time: led0å’Œled1ç­ç¯å»¶æ—¶(0 ~ 20000ms), 0 ~ 20S;
+ * @brief: led ÖÜÆÚºôÎüÏÔÊ¾,
+ * @param  led_index: 0: led0, 1:led1, 2:led0 & led1(½»»¥ºôÎü)
+			breathe_time: ºôÎüÖÜÆÚ(Ãğ->×îÁÁ->Ãğ), ÉèÖÃ·¶Î§: 500msÒÔÉÏ;
+		   led0_bright: led0ºôÎüµ½×îÁÁµÄÁÁ¶È(0 ~ 500);
+		   led1_bright: led1ºôÎüµ½×îÁÁµÄÁÁ¶È(0 ~ 500);
+		   led0_light_delay_time: led0×î¸ßÁÁ¶ÈÑÓÊ±(0 ~ 100ms);
+		   led1_light_delay_time: led1×î¸ßÁÁ¶ÈÑÓÊ±(0 ~ 100ms);
+		   led_blink_delay_time: led0ºÍled1ÃğµÆÑÓÊ±(0 ~ 20000ms), 0 ~ 20S;
  *
  * @return void
  */
@@ -951,7 +951,7 @@ static void _pwm_led_breathe_display(u8 led_index, u16 breathe_time, u16 led0_br
     u16 Tpwm1 = 0;
     pwm1_div = led0_bri_duty > led1_bri_duty ? led0_bri_duty : led1_bri_duty;
 
-    breathe_time = breathe_time / 2; //å‘¼å¸æ€»æ—¶é—´, å•ä¸ªç­åˆ°æœ€äº®çš„æ—¶é—´
+    breathe_time = breathe_time / 2; //ºôÎü×ÜÊ±¼ä, µ¥¸öÃğµ½×îÁÁµÄÊ±¼ä
     //step1: pwm0 clock
     if (__this->clock == PWM_LED_CLK_RC32K) {
         _led_pwm0_clk_set(PWM0_CLK_32K);
@@ -986,13 +986,13 @@ static void _pwm_led_breathe_display(u8 led_index, u16 breathe_time, u16 led0_br
         return;
     }
 
-    //step3: brightäº®åº¦
+    //step3: brightÁÁ¶È
     _led_pwm_bright_set(500, led0_bri_duty, led1_bri_duty);
 
-    //step4: 1.è¾“å‡ºå–å, 2.å˜è‰²(äº’é—ª);
+    //step4: 1.Êä³öÈ¡·´, 2.±äÉ«(»¥ÉÁ);
     _led_pwm_output_logic_set(out_inv, shift_num);
 
-    //step5: å‘¨æœŸäº®ç­é…ç½®
+    //step5: ÖÜÆÚÁÁÃğÅäÖÃ
     //pwm1 duty0, duty1, duty2
     u8 pwm1_duty0 = 0;
     u8 pwm1_duty1 = 0;
@@ -1006,10 +1006,10 @@ static void _pwm_led_breathe_display(u8 led_index, u16 breathe_time, u16 led0_br
         Tpwm1 = 1;
     }
 
-    //æœ€é«˜äº®åº¦å»¶æ—¶
+    //×î¸ßÁÁ¶ÈÑÓÊ±
     pwm1_duty0 = led0_light_delay_time / Tpwm1;
     pwm1_duty1 = led1_light_delay_time / Tpwm1;
-    //ç­ç¯å»¶æ—¶,{duty3, duty2}, 16bit
+    //ÃğµÆÑÓÊ±,{duty3, duty2}, 16bit
     pwm1_duty2 = (led_blink_delay_time / Tpwm1) & 0xFF;
     pwm1_duty3 = ((led_blink_delay_time / Tpwm1) >> 8) & 0xFF;
 
@@ -1031,7 +1031,7 @@ static void _pwm_led_display_mode(u8 display)
     case PWM_LED1_OFF:
         _pwm_led_off_display();
         break;
-//ç¯å¸¸äº®
+//µÆ³£ÁÁ
     case PWM_LED0_ON:
         printf("led0 on:%d %d \n", led_para.on.led0_bright, led_para.on.led1_bright);
         _pwm_led_on_display(0, led_para.on.led0_bright, led_para.on.led1_bright);
@@ -1045,7 +1045,7 @@ static void _pwm_led_display_mode(u8 display)
         _pwm_led_on_display(2, led_para.on.led0_bright, led_para.on.led1_bright);
         break;
 
-//å•ç¯å•é—ª
+//µ¥µÆµ¥ÉÁ
     case PWM_LED0_SLOW_FLASH:
         printf("led0 slow:%d %d %d %d %d \n", led_para.one_flash.led0_bright, led_para.one_flash.led1_bright, \
                led_para.one_flash.period, led_para.one_flash.start_light_time, \
@@ -1103,7 +1103,7 @@ static void _pwm_led_display_mode(u8 display)
                                    led_para.one_flash.period, led_para.one_flash.start_light_time, \
                                    led_para.one_flash.light_time);
         break;
-//åŒç¯äº’é—ª
+//Ë«µÆ»¥ÉÁ
     case PWM_LED0_LED1_FAST_FLASH:
         printf("led0_led1 fast flash:%d %d %d %d %d \n", led_para.one_flash.led0_bright, led_para.one_flash.led1_bright, \
                led_para.one_flash.period, led_para.one_flash.start_light_time, \
@@ -1123,7 +1123,7 @@ static void _pwm_led_display_mode(u8 display)
                                    led_para.one_flash.light_time);
         break;
 
-//å•ç¯åŒé—ª
+//µ¥µÆË«ÉÁ
     case PWM_LED0_DOUBLE_FLASH_5S:
         printf("led0 double 5s:%d %d %d %d %d %d \n", led_para.double_flash.led0_bright, led_para.double_flash.led1_bright, \
                led_para.double_flash.period, led_para.double_flash.first_light_time, \
@@ -1143,7 +1143,7 @@ static void _pwm_led_display_mode(u8 display)
                                       led_para.double_flash.gap_time, led_para.double_flash.second_light_time);
         break;
 
-//å‘¼å¸æ¨¡å¼
+//ºôÎüÄ£Ê½
     case PWM_LED0_BREATHE:
         printf("led0 breathe:%d %d %d %d %d %d \n", led_para.breathe.breathe_time, led_para.breathe.led0_bright, \
                led_para.breathe.led1_bright, led_para.breathe.led0_light_delay_time, \
@@ -1178,7 +1178,7 @@ static void _pwm_led_display_mode(u8 display)
     case PWM_LED1_OFF:
         _pwm_led_off_display();
         break;
-//ç¯å¸¸äº®
+//µÆ³£ÁÁ
     case PWM_LED0_ON:
         _pwm_led_on_display(0, CFG_LED0_LIGHT, CFG_LED1_LIGHT);
         break;
@@ -1189,7 +1189,7 @@ static void _pwm_led_display_mode(u8 display)
     case PWM_LED_ALL_ON:
         _pwm_led_on_display(2, CFG_LED0_LIGHT, CFG_LED1_LIGHT);
         break;
-//å•ç¯å•é—ª
+//µ¥µÆµ¥ÉÁ
     case PWM_LED0_SLOW_FLASH:
         _pwm_led_one_flash_display(0, CFG_LED0_LIGHT, CFG_LED1_LIGHT, CFG_SINGLE_SLOW_FLASH_FREQ, -1, CFG_SINGLE_SLOW_LIGHT_TIME);
         break;
@@ -1208,7 +1208,7 @@ static void _pwm_led_display_mode(u8 display)
     case PWM_LED1_ONE_FLASH_5S:
         _pwm_led_one_flash_display(1, CFG_LED0_LIGHT, CFG_LED1_LIGHT, 5000, 10, CFG_LED_5S_FLASH_LIGHT_TIME);
         break;
-//å•ç¯åŒé—ª
+//µ¥µÆË«ÉÁ
     case PWM_LED0_DOUBLE_FLASH_5S:
         _pwm_led_double_flash_display(0, CFG_LED0_LIGHT, CFG_LED1_LIGHT, 5000, 100, 200, 100);
         break;
@@ -1216,7 +1216,7 @@ static void _pwm_led_display_mode(u8 display)
         _pwm_led_double_flash_display(1, CFG_LED0_LIGHT, CFG_LED1_LIGHT, 5000, 100, 200, 100);
         break;
 
-//åŒç¯äº’é—ª
+//Ë«µÆ»¥ÉÁ
     case PWM_LED0_LED1_FAST_FLASH:
         _pwm_led_one_flash_display(2, CFG_LED0_LIGHT, CFG_LED1_LIGHT, CFG_DOUBLE_FAST_FLASH_FREQ, -1, -1);
         break;
@@ -1224,7 +1224,7 @@ static void _pwm_led_display_mode(u8 display)
         _pwm_led_one_flash_display(2, CFG_LED0_LIGHT, CFG_LED1_LIGHT, CFG_DOUBLE_SLOW_FLASH_FREQ, -1, -1);
         break;
 
-//å‘¼å¸æ¨¡å¼
+//ºôÎüÄ£Ê½
     case PWM_LED0_BREATHE:
         _pwm_led_breathe_display(0, CFG_LED_BREATH_TIME, CFG_LED0_BREATH_BRIGHT, CFG_LED1_BREATH_BRIGHT, 0, 0, CFG_LED_BREATH_BLINK_TIME);
         break;
@@ -1244,13 +1244,13 @@ static void _pwm_led_user_define_mode_handle(u8 dis_mode)
 }
 
 //=================================================================================//
-//                        		ä»¥ä¸‹ä¸º LED API                    				   //
+//                        		ÒÔÏÂÎª LED API                    				   //
 //=================================================================================//
 
 
 //=================================================================================//
-//@brief: LEDæ¨¡å¼æ˜¾ç¤ºæ¨¡å¼è®¾ç½®
-//@input: display, æ˜¾ç¤ºæ¨¡å¼
+//@brief: LEDÄ£Ê½ÏÔÊ¾Ä£Ê½ÉèÖÃ
+//@input: display, ÏÔÊ¾Ä£Ê½
 //@return: void
 //@note:
 //=================================================================================//
@@ -1268,7 +1268,7 @@ void pwm_led_mode_set(u8 display)
     }
 
     if (((display >= PWM_LED_USER_DEFINE_BEGIN) && (display <= PWM_LED_USER_DEFINE_END))) {
-        //ç”¨æˆ·è‡ªå®šä¹‰æ¨¡å¼
+        //ÓÃ»§×Ô¶¨ÒåÄ£Ê½
         if (display != __this->last_mode) {
             _pwm_led_user_define_mode_handle(display);
         }
@@ -1280,7 +1280,7 @@ void pwm_led_mode_set(u8 display)
     }
 
     if ((display == PWM_LED_ALL_OFF) || (display == PWM_LED0_OFF) || (display == PWM_LED1_OFF)) {
-        led_pwm_pre_set(); 	//å…³LED
+        led_pwm_pre_set(); 	//¹ØLED
         __this->last_mode = display;
         return;
     }
@@ -1297,8 +1297,8 @@ void pwm_led_mode_set(u8 display)
 }
 
 //=================================================================================//
-//@brief: LEDæ¨¡å—æ—¶é’Ÿæºé€‰æ‹©
-//@input: src, æ—¶é’ŸæºBT24M/RC32K
+//@brief: LEDÄ£¿éÊ±ÖÓÔ´Ñ¡Ôñ
+//@input: src, Ê±ÖÓÔ´BT24M/RC32K
 //@return: void
 //@note:
 //=================================================================================//
@@ -1321,7 +1321,7 @@ void pwm_led_clk_set(enum pwm_led_clk_source src)
 }
 
 //=================================================================================//
-//@brief: LEDæ˜¾ç¤ºå‘¨æœŸå¤ä½, é‡æ–°å¼€å§‹ä¸€ä¸ªå‘¨æœŸ, å¯ç”¨äºåŒæ­¥ç­‰æ“ä½œ
+//@brief: LEDÏÔÊ¾ÖÜÆÚ¸´Î», ÖØĞÂ¿ªÊ¼Ò»¸öÖÜÆÚ, ¿ÉÓÃÓÚÍ¬²½µÈ²Ù×÷
 //@input: void
 //@return: void
 //@note:
@@ -1337,9 +1337,9 @@ void pwm_led_display_mode_reset(void)
 }
 
 //=================================================================================//
-//@brief: è·å–LEDå½“å‰æ˜¾ç¤ºæ¨¡å¼
+//@brief: »ñÈ¡LEDµ±Ç°ÏÔÊ¾Ä£Ê½
 //@input: void
-//@return: å½“å‰LEDæ˜¾ç¤ºæ¨¡å¼
+//@return: µ±Ç°LEDÏÔÊ¾Ä£Ê½
 //@note:
 //=================================================================================//
 enum pwm_led_mode pwm_led_display_mode_get(void)
@@ -1348,14 +1348,14 @@ enum pwm_led_mode pwm_led_display_mode_get(void)
 }
 
 //=================================================================================//
-//@brief: ä¿®æ”¹LEDç¯IOå£é©±åŠ¨èƒ½åŠ›,
+//@brief: ĞŞ¸ÄLEDµÆIO¿ÚÇı¶¯ÄÜÁ¦,
 //@input: void
-//@return: å½“å‰LEDæ˜¾ç¤ºæ¨¡å¼
+//@return: µ±Ç°LEDÏÔÊ¾Ä£Ê½
 //@note:
-//æŒ¡ä½: 0 ~ 3
-//	0: 2.4mA(8mA mos + 120Î©res)
+//µ²Î»: 0 ~ 3
+//	0: 2.4mA(8mA mos + 120¦¸res)
 //	1: 8mA(8mA mos)
-// 	2: 18.4mA(24mA mos + 120Î©res)
+// 	2: 18.4mA(24mA mos + 120¦¸res)
 // 	3: 24mA(24mA mos)
 //=================================================================================//
 void pwm_led_io_max_drive_set(u8 strength)
@@ -1364,9 +1364,9 @@ void pwm_led_io_max_drive_set(u8 strength)
 }
 
 //=================================================================================//
-//@brief: è·å–LEDæ¨¡å—æ˜¯å¦å¼€å¯, å¯ç”¨äºsniffç¯åŒæ­¥
+//@brief: »ñÈ¡LEDÄ£¿éÊÇ·ñ¿ªÆô, ¿ÉÓÃÓÚsniffµÆÍ¬²½
 //@input: void
-//@return: 0: æ¨¡å—å¼€å¯; 1: æ¨¡å—å…³é—­
+//@return: 0: Ä£¿é¿ªÆô; 1: Ä£¿é¹Ø±Õ
 //@note:
 //=================================================================================//
 u8 is_pwm_led_on(void)
@@ -1375,7 +1375,7 @@ u8 is_pwm_led_on(void)
 }
 
 //=================================================================================//
-//@brief: è·å–LEDæ¨¡å—å¼€å¯, å¯ç”¨äºsniffç¯åŒæ­¥
+//@brief: »ñÈ¡LEDÄ£¿é¿ªÆô, ¿ÉÓÃÓÚsniffµÆÍ¬²½
 //@input: void
 //@return: void
 //@note:
@@ -1386,7 +1386,7 @@ void pwm_led_set_on(void)
 }
 
 //=================================================================================//
-//@brief: è·å–LEDæ¨¡å—å…³é—­, å¯ç”¨äºsniffç¯åŒæ­¥
+//@brief: »ñÈ¡LEDÄ£¿é¹Ø±Õ, ¿ÉÓÃÓÚsniffµÆÍ¬²½
 //@input: void
 //@return: void
 //@note:
@@ -1397,14 +1397,14 @@ void pwm_led_set_off(void)
 }
 
 //=================================================================================//
-//@brief: è‡ªå®šä¹‰è®¾ç½®å•ç¯é—ªçŠ¶æ€
+//@brief: ×Ô¶¨ÒåÉèÖÃµ¥µÆÉÁ×´Ì¬
 //@input: void
-//		led_index: 0: led0, 1:led1, 2:led0 & led1(äº’é—ª)
-// 		led0_bright: led0äº®åº¦(0 ~ 500),
-// 		led1_bright: led1äº®åº¦(0 ~ 500),
-// 		period: é—ªç¯å‘¨æœŸ(ms), å¤šå°‘msé—ªä¸€ä¸‹,
-// 		start_light_time: åœ¨å‘¨æœŸä¸­å¼€å§‹äº®ç¯çš„æ—¶é—´, -1: å‘¨æœŸæœ€åäº®ç¯, é»˜è®¤å¡«-1å³å¯,
-// 		light_time: ç¯äº®æŒç»­æ—¶é—´(ms),
+//		led_index: 0: led0, 1:led1, 2:led0 & led1(»¥ÉÁ)
+// 		led0_bright: led0ÁÁ¶È(0 ~ 500),
+// 		led1_bright: led1ÁÁ¶È(0 ~ 500),
+// 		period: ÉÁµÆÖÜÆÚ(ms), ¶àÉÙmsÉÁÒ»ÏÂ,
+// 		start_light_time: ÔÚÖÜÆÚÖĞ¿ªÊ¼ÁÁµÆµÄÊ±¼ä, -1: ÖÜÆÚ×îºóÁÁµÆ, Ä¬ÈÏÌî-1¼´¿É,
+// 		light_time: µÆÁÁ³ÖĞøÊ±¼ä(ms),
 //@return: void
 //@note:
 //=================================================================================//
@@ -1412,7 +1412,7 @@ void pwm_led_one_flash_display(u8 led_index, u16 led0_bright, u16 led1_bright,
                                u32 period, u32 start_light_time, u32 light_time)
 {
     _pwm_led_close_irq();
-    //ä¸¤ä¸ªIOç‰¹æ®Šå¤„ç†
+    //Á½¸öIOÌØÊâ´¦Àí
     if (__this->user_data->io_mode == LED_TWO_IO_MODE) {
 #ifdef PWM_LED_TWO_IO_SUPPORT
         _pwm_led_two_io_user_define_mode(led_index);
@@ -1429,17 +1429,17 @@ void pwm_led_one_flash_display(u8 led_index, u16 led0_bright, u16 led1_bright,
 
 
 //=================================================================================//
-//@brief: è‡ªå®šä¹‰è®¾ç½®å•ç¯åŒé—ªçŠ¶æ€
+//@brief: ×Ô¶¨ÒåÉèÖÃµ¥µÆË«ÉÁ×´Ì¬
 //@input:
-// 		led_index: 0: led0, 1:led1, 3:led0 & led1(äº’é—ª)
-// 		led0_bright: led0äº®åº¦,
-// 		led1_bright: led1äº®åº¦,
-// 		period: é—ªç¯å‘¨æœŸ(ms), å¤šå°‘msé—ªä¸€ä¸‹
-//  	first_light_time: ç¬¬ä¸€æ¬¡äº®ç¯æŒç»­æ—¶é—´,
-// 		second_light_time: ç¬¬äºŒæ¬¡äº®ç¯æŒç»­æ—¶é—´,
-// 		gap_time: ä¸¤æ¬¡äº®ç¯æ—¶é—´é—´éš”,
-//		led0_bright, LED0äº®åº¦: 0 ~ 500
-// 		led1_bright, LED1äº®åº¦: 0 ~ 500
+// 		led_index: 0: led0, 1:led1, 3:led0 & led1(»¥ÉÁ)
+// 		led0_bright: led0ÁÁ¶È,
+// 		led1_bright: led1ÁÁ¶È,
+// 		period: ÉÁµÆÖÜÆÚ(ms), ¶àÉÙmsÉÁÒ»ÏÂ
+//  	first_light_time: µÚÒ»´ÎÁÁµÆ³ÖĞøÊ±¼ä,
+// 		second_light_time: µÚ¶ş´ÎÁÁµÆ³ÖĞøÊ±¼ä,
+// 		gap_time: Á½´ÎÁÁµÆÊ±¼ä¼ä¸ô,
+//		led0_bright, LED0ÁÁ¶È: 0 ~ 500
+// 		led1_bright, LED1ÁÁ¶È: 0 ~ 500
 //@return: void
 //@note:
 //=================================================================================//
@@ -1447,7 +1447,7 @@ void pwm_led_double_flash_display(u8 led_index, u16 led0_bright, u16 led1_bright
                                   u32 period, u32 first_light_time, u32 gap_time, u32 second_light_time)
 {
     _pwm_led_close_irq();
-    //ä¸¤ä¸ªIOç‰¹æ®Šå¤„ç†
+    //Á½¸öIOÌØÊâ´¦Àí
     if (__this->user_data->io_mode == LED_TWO_IO_MODE) {
 #ifdef PWM_LED_TWO_IO_SUPPORT
         _pwm_led_two_io_user_define_mode(led_index);
@@ -1468,16 +1468,16 @@ void pwm_led_double_flash_display(u8 led_index, u16 led0_bright, u16 led1_bright
 
 
 //=================================================================================//
-//@brief: è‡ªå®šä¹‰è®¾ç½®å‘¼å¸æ¨¡å¼
+//@brief: ×Ô¶¨ÒåÉèÖÃºôÎüÄ£Ê½
 //@input:
-//		led_index: 0: led0, 1:led1, 2:led0 & led1(äº’é—ª)
-// 		led0_bright: led0äº®åº¦,
-// 		led1_bright: led1äº®åº¦,
-// 		period: é—ªç¯å‘¨æœŸ(ms), å¤šå°‘msé—ªä¸€ä¸‹,
-// 		start_light_time: åœ¨å‘¨æœŸä¸­å¼€å§‹äº®ç¯çš„æ—¶é—´, -1: å‘¨æœŸæœ€åäº®ç¯
-// 		light_time: ç¯äº®æŒç»­æ—¶é—´,
-//		led0_bright, LED0äº®åº¦: 0 ~ 500
-// 		led1_bright, LED1äº®åº¦: 0 ~ 500
+//		led_index: 0: led0, 1:led1, 2:led0 & led1(»¥ÉÁ)
+// 		led0_bright: led0ÁÁ¶È,
+// 		led1_bright: led1ÁÁ¶È,
+// 		period: ÉÁµÆÖÜÆÚ(ms), ¶àÉÙmsÉÁÒ»ÏÂ,
+// 		start_light_time: ÔÚÖÜÆÚÖĞ¿ªÊ¼ÁÁµÆµÄÊ±¼ä, -1: ÖÜÆÚ×îºóÁÁµÆ
+// 		light_time: µÆÁÁ³ÖĞøÊ±¼ä,
+//		led0_bright, LED0ÁÁ¶È: 0 ~ 500
+// 		led1_bright, LED1ÁÁ¶È: 0 ~ 500
 //@return: void
 //@note:
 //=================================================================================//
@@ -1503,7 +1503,7 @@ void pwm_led_breathe_display(u8 led_index, u16 breathe_time, u16 led0_bright, u1
 
 
 //=================================================================================//
-//@brief: æ³¨å†ŒLEDå‘¨æœŸä¸­æ–­å‡½æ•°, æ¯ä¸ªLEDå‘¨æœŸç»“æŸåä¼šè°ƒç”¨ä¸€æ¬¡, å¯ä»¥ç»Ÿè®¡æŒ‡å®šçŠ¶æ€é—ªçƒå¤šå°‘æ¬¡
+//@brief: ×¢²áLEDÖÜÆÚÖĞ¶Ïº¯Êı, Ã¿¸öLEDÖÜÆÚ½áÊøºó»áµ÷ÓÃÒ»´Î, ¿ÉÒÔÍ³¼ÆÖ¸¶¨×´Ì¬ÉÁË¸¶àÉÙ´Î
 //@input:
 //@return: void
 //@note:
@@ -1514,9 +1514,9 @@ void pwm_led_register_irq(void (*func)(void))
 }
 
 //=================================================================================//
-//@brief: LEDæ¨¡å¼æ˜¾ç¤ºå‚æ•°è®¾ç½®
-//@input: display, æ˜¾ç¤ºæ¨¡å¼
-//	   	  para æ˜¾ç¤ºçš„å‚æ•°
+//@brief: LEDÄ£Ê½ÏÔÊ¾²ÎÊıÉèÖÃ
+//@input: display, ÏÔÊ¾Ä£Ê½
+//	   	  para ÏÔÊ¾µÄ²ÎÊı
 //@return: void
 //@note:
 //=================================================================================//
@@ -1529,33 +1529,33 @@ static void pwm_led_para_set(u8 display, pwm_led_para para)
     case PWM_LED1_OFF:
         break;
 
-//ç¯å¸¸äº®
+//µÆ³£ÁÁ
     case PWM_LED0_ON:
     case PWM_LED1_ON:
     case PWM_LED_ALL_ON:
         led_para.on = para.on;
         break;
 
-//å•ç¯å•é—ª
+//µ¥µÆµ¥ÉÁ
     case PWM_LED0_SLOW_FLASH:
     case PWM_LED1_SLOW_FLASH:
     case PWM_LED0_FAST_FLASH:
     case PWM_LED1_FAST_FLASH:
     case PWM_LED0_ONE_FLASH_5S:
     case PWM_LED1_ONE_FLASH_5S:
-//åŒç¯äº’é—ª
+//Ë«µÆ»¥ÉÁ
     case PWM_LED0_LED1_FAST_FLASH:
     case PWM_LED0_LED1_SLOW_FLASH:
         led_para.one_flash = para.one_flash;
         break;
 
-//å•ç¯åŒé—ª
+//µ¥µÆË«ÉÁ
     case PWM_LED0_DOUBLE_FLASH_5S:
     case PWM_LED1_DOUBLE_FLASH_5S:
         led_para.double_flash = para.double_flash;
         break;
 
-//å‘¼å¸æ¨¡å¼
+//ºôÎüÄ£Ê½
     case PWM_LED0_BREATHE:
     case PWM_LED1_BREATHE:
     case PWM_LED0_LED1_BREATHE:
@@ -1568,8 +1568,8 @@ static void pwm_led_para_set(u8 display, pwm_led_para para)
     }
 }
 //=================================================================================//
-//@brief: LEDæ¨¡å¼æ˜¾ç¤ºæ¨¡å¼è®¾ç½®
-//@input: display, æ˜¾ç¤ºæ¨¡å¼
+//@brief: LEDÄ£Ê½ÏÔÊ¾Ä£Ê½ÉèÖÃ
+//@input: display, ÏÔÊ¾Ä£Ê½
 //@return: void
 //@note:
 //=================================================================================//

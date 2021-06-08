@@ -24,10 +24,10 @@
 
 #define PCM2FILE_ENC_BUF_COUNT				1
 
-//wavå½•éŸ³å¤´éƒ¨ä¿¡æ¯å®šæ—¶æ›´æ–°æ—¶é—´è®¾ç½®ï¼Œ å•ä½ms
+//wavÂ¼ÒôÍ·²¿ĞÅÏ¢¶¨Ê±¸üĞÂÊ±¼äÉèÖÃ£¬ µ¥Î»ms
 #define UPDATA_WAV_HEAD_TIME                (5000)
 
-//æ˜¯å¦ä½¿ç”¨overlay ä½¿èƒ½ï¼Œ 695æš‚æ—¶ä¸æ”¯æŒoverlay
+//ÊÇ·ñÊ¹ÓÃoverlay Ê¹ÄÜ£¬ 695ÔİÊ±²»Ö§³Öoverlay
 #define PCM_ENC2FILE_USE_OVERLAY_EN			0
 
 
@@ -92,7 +92,7 @@ static void pcm2file_wfile_resume(struct pcm2file_enc_hdl *enc)
     enc_write_file_resume(enc->whdl);
 }
 
-// å†™pcmæ•°æ®
+// Ğ´pcmÊı¾İ
 int pcm2file_enc_write_pcm(void *priv, s16 *data, int len)
 {
     struct pcm2file_enc_hdl *enc = (struct pcm2file_enc_hdl *)priv;
@@ -116,14 +116,14 @@ int pcm2file_enc_write_pcm(void *priv, s16 *data, int len)
         }
 #endif
         /* printf("wl:%d ", wlen); */
-        // æ¿€æ´»å½•éŸ³ç¼–ç å™¨
+        // ¼¤»îÂ¼Òô±àÂëÆ÷
         pcm2file_enc_resume(enc);
     }
     os_mutex_post(&enc->mutex);
     return wlen;
 }
 
-// ç¼–ç å™¨è·å–æ•°æ®
+// ±àÂëÆ÷»ñÈ¡Êı¾İ
 static int pcm2file_enc_pcm_get(struct audio_encoder *encoder, s16 **frame, u16 frame_len)
 {
     int rlen = 0;
@@ -176,7 +176,7 @@ static int pcm2file_enc_probe_handler(struct audio_encoder *encoder)
 {
     return 0;
 }
-// ç¼–ç å™¨è¾“å‡º
+// ±àÂëÆ÷Êä³ö
 static int pcm2file_enc_output_handler(struct audio_encoder *encoder, u8 *frame, int len)
 {
     struct pcm2file_enc_hdl *enc = container_of(encoder, struct pcm2file_enc_hdl, encoder);
@@ -220,8 +220,8 @@ static void pcm2file_enc_get_head_info(struct audio_encoder *encoder)
 
 static int pcm2file_enc_close_handler(struct audio_encoder *encoder)
 {
-    //åšä¸€äº›ç¼–ç å…³é—­å‰çš„æ“ä½œï¼Œ ä¾‹å¦‚ï¼šadpcmå†™å¤´æ“ä½œ
-    pcm2file_enc_get_head_info(encoder);//å†™ç¼–ç å¤´éƒ¨ä¿¡æ¯
+    //×öÒ»Ğ©±àÂë¹Ø±ÕÇ°µÄ²Ù×÷£¬ ÀıÈç£ºadpcmĞ´Í·²Ù×÷
+    pcm2file_enc_get_head_info(encoder);//Ğ´±àÂëÍ·²¿ĞÅÏ¢
     return 0;
 }
 
@@ -291,7 +291,7 @@ static int pcm2file_enc_w_get(void *hdl, s16 **frame, u16 frame_len)
         rlen = cbuf_read(&enc->out_file_cbuf, enc->out_file_frame, frame_len);
         if (rlen == frame_len) {
 //            if (cbuf_get_data_len(&enc->out_file_cbuf) <= (PCM_ENC2FILE_FILE_LEN / 2)) {
-//                ///å½“å†™æ–‡ä»¶æœ‰æ•°æ®å–èµ°è¾¾åˆ°ä¸€å®šç¨‹åº¦ä¸»åŠ¨æ¿€æ´»ç¼–ç çº¿ç¨‹
+//                ///µ±Ğ´ÎÄ¼şÓĞÊı¾İÈ¡×ß´ïµ½Ò»¶¨³Ì¶ÈÖ÷¶¯¼¤»î±àÂëÏß³Ì
 //                pcm2file_enc_resume(enc);
 //            }
             break;
@@ -364,7 +364,7 @@ void pcm2file_enc_start(void *hdl)
 
     enc_write_file_start(pcm2file->whdl);
 
-    //è®°å½•å½•éŸ³å¯åŠ¨æ—¶çš„tickï¼Œ åé¢å®šæ—¶æ›´æ–°å¤´éƒ¨ä¿¡æ¯ç”¨åˆ°
+    //¼ÇÂ¼Â¼ÒôÆô¶¯Ê±µÄtick£¬ ºóÃæ¶¨Ê±¸üĞÂÍ·²¿ĞÅÏ¢ÓÃµ½
     pcm2file->head_update_tick = timer_get_ms();
 }
 
@@ -395,7 +395,7 @@ void *pcm2file_enc_open(struct audio_fmt *pfmt, char *logo, char *folder, char *
         return NULL;
     }
 
-    ///åˆ›å»ºå½•éŸ³ç¼–ç çº¿ç¨‹
+    ///´´½¨Â¼Òô±àÂëÏß³Ì
     audio_encoder_task_open();
 
 #if (RECORDER_MIX_EN && PCM_ENC2FILE_USE_OVERLAY_EN)

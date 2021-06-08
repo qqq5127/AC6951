@@ -339,7 +339,7 @@ void alink_channel_init(ALINK_PORT port, u8 ch_idx, u8 dir, void (*handle)(u8 ch
         memset(p_alink1_parm->ch_cfg[ch_idx].buf, 0xFF, p_alink1_parm->dma_len);
         u32 *buf_addr;
         //===================================//
-        //           ALNKå·¥ä½œæ¨¡å¼            //
+        //           ALNK¹¤×÷Ä£Ê½            //
         //===================================//
         if (p_alink1_parm->mode > ALINK_MD_IIS_RALIGN) {
             ALINK_CHx_MODE_SEL(1, (p_alink1_parm->mode - ALINK_MD_IIS_RALIGN), ch_idx);
@@ -374,7 +374,7 @@ void alink_channel_init(ALINK_PORT port, u8 ch_idx, u8 dir, void (*handle)(u8 ch
         memset(p_alink0_parm->ch_cfg[ch_idx].buf, 0xFF, p_alink0_parm->dma_len);
         u32 *buf_addr;
         //===================================//
-        //           ALNKå·¥ä½œæ¨¡å¼            //
+        //           ALNK¹¤×÷Ä£Ê½            //
         //===================================//
         if (p_alink0_parm->mode > ALINK_MD_IIS_RALIGN) {
             ALINK_CHx_MODE_SEL(0, (p_alink0_parm->mode - ALINK_MD_IIS_RALIGN), ch_idx);
@@ -456,10 +456,10 @@ int alink_init(ALINK_PARM *parm)
     ALINK_MSRC(module, MCLK_PLL_CLK);	/*MCLK source*/
 
     //===================================//
-    //        è¾“å‡ºæ—¶é’Ÿé…ç½®               //
+    //        Êä³öÊ±ÖÓÅäÖÃ               //
     //===================================//
     if (parm->role == ALINK_ROLE_MASTER) {
-        //ä¸»æœºè¾“å‡ºæ—¶é’Ÿ
+        //Ö÷»úÊä³öÊ±ÖÓ
         if (module) {
             gpio_direction_output(alink1_IOS_port[IIS_IO_MCLK], 1);
             gpio_direction_output(alink1_IOS_port[IIS_IO_LRCK], 1);
@@ -473,7 +473,7 @@ int alink_init(ALINK_PARM *parm)
         ALINK_MOE(module, 1);				/*MCLK output to IO*/
         ALINK_SOE(module, 1);				/*SCLK/LRCK output to IO*/
     } else {
-        //ä»Žæœºè¾“å…¥æ—¶é’Ÿ
+        //´Ó»úÊäÈëÊ±ÖÓ
         if (module) {
             alink_clk_io_in_init(alink1_IOS_port[IIS_IO_MCLK]);
             alink_clk_io_in_init(alink1_IOS_port[IIS_IO_LRCK]);
@@ -487,26 +487,26 @@ int alink_init(ALINK_PARM *parm)
         ALINK_SOE(module, 0);				/*SCLK/LRCK output to IO*/
     }
     //===================================//
-    //        åŸºæœ¬æ¨¡å¼/æ‰©å±•æ¨¡å¼          //
+    //        »ù±¾Ä£Ê½/À©Õ¹Ä£Ê½          //
     //===================================//
     ALINK_DSPE(module, parm->mode >> 2);
 
     //===================================//
-    //         æ•°æ®ä½å®½16/32bit          //
+    //         Êý¾ÝÎ»¿í16/32bit          //
     //===================================//
-    //æ³¨æ„: é…ç½®äº†24bit, ä¸€å®šè¦é€‰ALINK_FRAME_64SCLK, å› ä¸ºsclk32 x 2æ‰ä¼šæœ‰24bit;
+    //×¢Òâ: ÅäÖÃÁË24bit, Ò»¶¨ÒªÑ¡ALINK_FRAME_64SCLK, ÒòÎªsclk32 x 2²Å»áÓÐ24bit;
     if (parm->bitwide == ALINK_LEN_24BIT) {
         ASSERT(parm->sclk_per_frame == ALINK_FRAME_64SCLK);
         ALINK_24BIT_MODE(module);
-        //ä¸€ä¸ªç‚¹éœ€è¦4bytes, LR = 2, åŒbuf = 2
-        ALINK_SEL(module, LEN)  = parm->dma_len / 8; //ç‚¹æ•°
+        //Ò»¸öµãÐèÒª4bytes, LR = 2, Ë«buf = 2
+        ALINK_SEL(module, LEN)  = parm->dma_len / 8; //µãÊý
     } else {
         ALINK_16BIT_MODE(module);
-        //ä¸€ä¸ªç‚¹éœ€è¦2bytes, LR = 2, åŒbuf = 2
-        ALINK_SEL(module, LEN)  = parm->dma_len / 8; //ç‚¹æ•°
+        //Ò»¸öµãÐèÒª2bytes, LR = 2, Ë«buf = 2
+        ALINK_SEL(module, LEN)  = parm->dma_len / 8; //µãÊý
     }
     //===================================//
-    //             æ—¶é’Ÿè¾¹æ²¿é€‰æ‹©          //
+    //             Ê±ÖÓ±ßÑØÑ¡Ôñ          //
     //===================================//
     if (parm->clk_mode == ALINK_CLK_FALL_UPDATE_RAISE_SAMPLE) {
         SCLKINV(module, 0);
@@ -514,7 +514,7 @@ int alink_init(ALINK_PARM *parm)
         SCLKINV(module, 1);
     }
     //===================================//
-    //            æ¯å¸§æ•°æ®sclkä¸ªæ•°       //
+    //            Ã¿Ö¡Êý¾Ýsclk¸öÊý       //
     //===================================//
     if (parm->sclk_per_frame == ALINK_FRAME_64SCLK) {
         F32_EN(module, 0);
@@ -522,7 +522,7 @@ int alink_init(ALINK_PARM *parm)
         F32_EN(module, 1);
     }
     //===================================//
-    //            è®¾ç½®æ•°æ®é‡‡æ ·çŽ‡       	 //
+    //            ÉèÖÃÊý¾Ý²ÉÑùÂÊ       	 //
     //===================================//
     alink_sr(parm->port_select, parm->sample_rate);
 

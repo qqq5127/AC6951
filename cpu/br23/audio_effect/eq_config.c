@@ -15,18 +15,18 @@
 
 const u8 audio_eq_sdk_name[16] 		= "AC695N";
 #if TCFG_EQ_DIVIDE_ENABLE
-const u8 audio_eq_ver[4] 			= {0, 7, 3, 0};//四声道独立eq版本
+const u8 audio_eq_ver[4] 			= {0, 7, 3, 0};//����������eq�汾
 #else
-const u8 audio_eq_ver[4] 			= {0, 7, 2, 0};//四声道eq使用同一效果、立体声、单声道的eq版本
+const u8 audio_eq_ver[4] 			= {0, 7, 2, 0};//������eqʹ��ͬһЧ��������������������eq�汾
 #endif
 
-//eq_cfg_hw.bin中播歌eq曲线，当作用户自定义模式，参与效果切换.
-//通话宽频上下行eq曲线也对应放到phone_eq_tab_normal、ul_eq_tab_normal
-//EQ_FILE_CP_TO_CUSTOM 1使能时，同时板极文件中 TCFG_USE_EQ_FILE 配 0
+//eq_cfg_hw.bin�в���eq���ߣ������û��Զ���ģʽ������Ч���л�.
+//ͨ����Ƶ������eq����Ҳ��Ӧ�ŵ�phone_eq_tab_normal��ul_eq_tab_normal
+//EQ_FILE_CP_TO_CUSTOM 1ʹ��ʱ��ͬʱ�弫�ļ��� TCFG_USE_EQ_FILE �� 0
 #define EQ_FILE_CP_TO_CUSTOM  0
 
 
-/*************************非用户配置区*************************/
+/*************************���û�������*************************/
 #if TCFG_EQ_ONLINE_ENABLE
 #undef EQ_FILE_CP_TO_CUSTOM
 #define EQ_FILE_CP_TO_CUSTOM  0
@@ -49,7 +49,7 @@ const struct eq_seg_info eq_tab_normal[] = {
     {9, EQ_IIR_TYPE_BAND_PASS, 16000, 0 << 20, (int)(0.7f * (1 << 24))},
 
 #if (EQ_SECTION_MAX > 10)
-    //10段之后频率值设置96k,目的是让10段之后的eq走直通
+    //10��֮��Ƶ��ֵ����96k,Ŀ������10��֮���eq��ֱͨ
     {10, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {11, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {12, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
@@ -91,7 +91,7 @@ const struct eq_seg_info eq_tab_rock[] = {
     {9, EQ_IIR_TYPE_BAND_PASS, 16000,  4 << 20, (int)(0.7f * (1 << 24))},
 
 #if (EQ_SECTION_MAX > 10)
-    //10段之后频率值设置96k,目的是让10段之后的eq走直通
+    //10��֮��Ƶ��ֵ����96k,Ŀ������10��֮���eq��ֱͨ
     {10, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {11, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {12, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
@@ -134,7 +134,7 @@ const struct eq_seg_info eq_tab_pop[] = {
     {9, EQ_IIR_TYPE_BAND_PASS, 16000,  2 << 20, (int)(0.7f * (1 << 24))},
 
 #if (EQ_SECTION_MAX > 10)
-    //10段之后频率值设置96k,目的是让10段之后的eq走直通
+    //10��֮��Ƶ��ֵ����96k,Ŀ������10��֮���eq��ֱͨ
     {10, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {11, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {12, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
@@ -177,7 +177,7 @@ const struct eq_seg_info eq_tab_classic[] = {
     {9, EQ_IIR_TYPE_BAND_PASS, 16000,  2 << 20, (int)(0.7f * (1 << 24))},
 
 #if (EQ_SECTION_MAX > 10)
-    //10段之后频率值设置96k,目的是让10段之后的eq走直通
+    //10��֮��Ƶ��ֵ����96k,Ŀ������10��֮���eq��ֱͨ
     {10, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {11, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {12, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
@@ -220,7 +220,7 @@ const struct eq_seg_info eq_tab_country[] = {
     {9, EQ_IIR_TYPE_BAND_PASS, 16000,  4 << 20, (int)(0.7f * (1 << 24))},
 
 #if (EQ_SECTION_MAX > 10)
-    //10段之后频率值设置96k,目的是让10段之后的eq走直通
+    //10��֮��Ƶ��ֵ����96k,Ŀ������10��֮���eq��ֱͨ
     {10, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {11, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {12, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
@@ -262,7 +262,7 @@ const struct eq_seg_info eq_tab_jazz[] = {
     {9, EQ_IIR_TYPE_BAND_PASS, 16000,  4 << 20, (int)(0.7f * (1 << 24))},
 
 #if (EQ_SECTION_MAX > 10)
-    //10段之后频率值设置96k,目的是让10段之后的eq走直通
+    //10��֮��Ƶ��ֵ����96k,Ŀ������10��֮���eq��ֱͨ
     {10, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {11, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {12, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
@@ -305,7 +305,7 @@ struct eq_seg_info eq_tab_custom[] = {
     {9, EQ_IIR_TYPE_BAND_PASS, 16000, 0 << 20, (int)(0.7f * (1 << 24))},
 
 #if (EQ_SECTION_MAX > 10)
-    //10段之后频率值设置96k,目的是让10段之后的eq走直通
+    //10��֮��Ƶ��ֵ����96k,Ŀ������10��֮���eq��ֱͨ
     {10, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {11, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
     {12, EQ_IIR_TYPE_BAND_PASS, 96000, 0 << 20, (int)(0.7f * (1 << 24))},
@@ -339,7 +339,7 @@ struct eq_seg_info eq_tab_custom[] = {
 const EQ_CFG_SEG *eq_type_tab[EQ_MODE_MAX] = {
     eq_tab_normal, eq_tab_rock, eq_tab_pop, eq_tab_classic, eq_tab_jazz, eq_tab_country, eq_tab_custom
 };
-// 默认系数表，每个表对应的总增益,用户可修改
+// Ĭ��ϵ������ÿ������Ӧ��������,�û����޸�
 float type_gain_tab[EQ_MODE_MAX] = {0, 0, 0, 0, 0, 0, 0};
 #endif
 
@@ -380,7 +380,7 @@ static const u8 eq_mode_use_idx[] = {
 };
 #endif
 /*
- *通话下行eq系数表
+ *ͨ������eqϵ����
  * */
 #if TCFG_EQ_ENABLE && TCFG_PHONE_EQ_ENABLE
 #if EQ_FILE_CP_TO_CUSTOM
@@ -402,7 +402,7 @@ const struct eq_seg_info phone_eq_tab_normal[] = {
 #endif
 
 /*
- *通话上行eq系数表
+ *ͨ������eqϵ����
  * */
 #if EQ_FILE_CP_TO_CUSTOM
 struct eq_seg_info ul_eq_tab_normal[] = {
@@ -424,18 +424,18 @@ const struct eq_seg_info ul_eq_tab_normal[] = {
 
 
 #define SONG_SECTION  EQ_SECTION_MAX
-#define CALL_SECTION  3//下行段数,小于等于SONG_SECTION
-#define UL_SECTION    3//上行段数,小于等于SONG_SECTION
+#define CALL_SECTION  3//���ж���,С�ڵ���SONG_SECTION
+#define UL_SECTION    3//���ж���,С�ڵ���SONG_SECTION
 /*
- *下行的宽频和窄频段数需一致，上行的宽频和窄频段数需要一致
- *表的每一项顺序不可修改
+ *���еĿ�Ƶ��խƵ������һ�£����еĿ�Ƶ��խƵ������Ҫһ��
+ *����ÿһ��˳�򲻿��޸�
  * */
 eq_tool_cfg eq_tool_tab[] = {
-    {call_eq_mode,	(u8 *)"通话宽频下行EQ", 0x3000, CALL_SECTION, 1, {EQ_ONLINE_CMD_CALL_EQ_SEG, 0}},
-    {call_narrow_eq_mode,	(u8 *)"通话窄频下行EQ", 0x3001, CALL_SECTION, 1, {EQ_ONLINE_CMD_CALL_EQ_SEG, 0}},
-    {aec_eq_mode,	(u8 *)"通话宽频上行EQ", 0x3002, UL_SECTION,   1, {EQ_ONLINE_CMD_AEC_EQ_SEG,  0}},
-    {aec_narrow_eq_mode,	(u8 *)"通话窄频上行EQ", 0x3003, UL_SECTION,   1, {EQ_ONLINE_CMD_AEC_EQ_SEG,  0}},
-    {song_eq_mode,	(u8 *)"普通音频EQ", 	0x3004, SONG_SECTION, 2, {EQ_ONLINE_CMD_SONG_EQ_SEG, EQ_ONLINE_CMD_SONG_DRC}},
+    {call_eq_mode,	(u8 *)"ͨ����Ƶ����EQ", 0x3000, CALL_SECTION, 1, {EQ_ONLINE_CMD_CALL_EQ_SEG, 0}},
+    {call_narrow_eq_mode,	(u8 *)"ͨ��խƵ����EQ", 0x3001, CALL_SECTION, 1, {EQ_ONLINE_CMD_CALL_EQ_SEG, 0}},
+    {aec_eq_mode,	(u8 *)"ͨ����Ƶ����EQ", 0x3002, UL_SECTION,   1, {EQ_ONLINE_CMD_AEC_EQ_SEG,  0}},
+    {aec_narrow_eq_mode,	(u8 *)"ͨ��խƵ����EQ", 0x3003, UL_SECTION,   1, {EQ_ONLINE_CMD_AEC_EQ_SEG,  0}},
+    {song_eq_mode,	(u8 *)"��ͨ��ƵEQ", 	0x3004, SONG_SECTION, 2, {EQ_ONLINE_CMD_SONG_EQ_SEG, EQ_ONLINE_CMD_SONG_DRC}},
 #ifdef DAC_OUTPUT_FRONT_LR_REAR_LR
 #if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR)
     {fr_eq_mode,	(u8 *)"FR_EQ",      	0x3005, SONG_SECTION, 2, {EQ_ONLINE_CMD_SONG_EQ_SEG, EQ_ONLINE_CMD_SONG_DRC}},
@@ -448,11 +448,11 @@ eq_tool_cfg eq_tool_tab[] = {
 };
 
 /*----------------------------------------------------------------------------*/
-/**@brief    eq 段数更新,需要在eq_init前就准备好
-   @param    mode:call_eq_mode\call_narrow_eq_section等模式
-   @param    section:段数最大为EQ_SECTION_MAX
+/**@brief    eq ��������,��Ҫ��eq_initǰ��׼����
+   @param    mode:call_eq_mode\call_narrow_eq_section��ģʽ
+   @param    section:�������ΪEQ_SECTION_MAX
    @return
-   @note     下行的宽频和窄频段数需一致，上行的宽频和窄频段数需要一致
+   @note     ���еĿ�Ƶ��խƵ������һ�£����еĿ�Ƶ��խƵ������Ҫһ��
 */
 /*----------------------------------------------------------------------------*/
 void set_eq_tool_tab_section(u8 mode, u8 section)
@@ -467,7 +467,7 @@ void drc_default_init(EQ_CFG *eq_cfg, u8 mode)
 #if TCFG_DRC_ENABLE
     int i = mode;
     if (eq_cfg && eq_cfg->drc) {
-        //限幅器的初始值
+        //�޷����ĳ�ʼֵ
         int th = 0;//db -60db~0db
         int threshold = round(pow(10.0, th / 20.0) * 32768); // 0db:32768, -60db:33
         eq_cfg->cfg_parm[i].drc_parm.parm.drc.nband = 1;
@@ -481,15 +481,15 @@ void drc_default_init(EQ_CFG *eq_cfg, u8 mode)
 
 }
 #if EQ_FILE_CP_TO_CUSTOM
-//eq_cfg_hw.bin中播歌eq曲线，当作用户自定义模式，参与效果切换.
-//通话宽频上下行eq曲线也对应放到phone_eq_tab_normal、ul_eq_tab_normal
-//EQ_FILE_CP_TO_CUSTOM 1使能时，同时板极文件中 TCFG_USE_EQ_FILE 配 0
+//eq_cfg_hw.bin�в���eq���ߣ������û��Զ���ģʽ������Ч���л�.
+//ͨ����Ƶ������eq����Ҳ��Ӧ�ŵ�phone_eq_tab_normal��ul_eq_tab_normal
+//EQ_FILE_CP_TO_CUSTOM 1ʹ��ʱ��ͬʱ�弫�ļ��� TCFG_USE_EQ_FILE �� 0
 static void eq_file_cp_to_custon_mode_fun(EQ_CFG *eq_cfg)
 {
     if (eq_cfg->eq_type == EQ_TYPE_FILE) {
         eq_cfg->eq_type = EQ_TYPE_MODE_TAB;
         for (int i = 0; i < eq_cfg->mode_num; i++) {
-            if ((i == song_eq_mode) || (i == call_eq_mode) || (i == aec_eq_mode)) { //播歌eq  通话宽频上下行eq
+            if ((i == song_eq_mode) || (i == call_eq_mode) || (i == aec_eq_mode)) { //����eq  ͨ����Ƶ������eq
                 u32 seg_num    = eq_cfg->cfg_parm[i].song_eq_parm.parm.par.seg_num;
                 if (seg_num > eq_tool_tab[i].section) {
                     seg_num = eq_tool_tab[i].section;
@@ -517,7 +517,7 @@ static void eq_file_cp_to_custon_mode_fun(EQ_CFG *eq_cfg)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief    在线调试，应答接口
+/**@brief    ���ߵ��ԣ�Ӧ��ӿ�
    @param    *packet
    @param
    @return
@@ -585,7 +585,7 @@ int eq_init(void)
 #endif
 
     if (!parm.stero) {
-        parm.mode_num = 5;// 一共有多少个模式
+        parm.mode_num = 5;// һ���ж��ٸ�ģʽ
         /* #ifdef DAC_OUTPUT_FRONT_LR_REAR_LR */
         /* #if (TCFG_AUDIO_DAC_CONNECT_MODE == DAC_OUTPUT_FRONT_LR_REAR_LR) */
         /* parm.mode_num = 6; */

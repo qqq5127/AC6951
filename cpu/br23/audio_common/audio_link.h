@@ -23,7 +23,7 @@ typedef enum {
 
 typedef enum {
     ALINK_LEN_16BIT = 0u,
-    ALINK_LEN_24BIT		, //ALINK_FRAME_MODEéœ€è¦é€‰æ‹©: ALINK_FRAME_64SCLK
+    ALINK_LEN_24BIT		, //ALINK_FRAME_MODEĞèÒªÑ¡Ôñ: ALINK_FRAME_64SCLK
 } ALINK_DATA_WIDTH;
 
 //ch_mode
@@ -38,13 +38,13 @@ typedef enum {
 
 //ch_mode
 typedef enum {
-    ALINK_ROLE_MASTER, //ä¸»æœº
-    ALINK_ROLE_SLAVE,  //ä»æœº
+    ALINK_ROLE_MASTER, //Ö÷»ú
+    ALINK_ROLE_SLAVE,  //´Ó»ú
 } ALINK_ROLE;
 
 typedef enum {
-    ALINK_CLK_FALL_UPDATE_RAISE_SAMPLE, //ä¸‹é™æ²¿æ›´æ–°æ•°æ®, ä¸Šå‡æ²¿é‡‡æ ·æ•°æ®
-    ALINK_CLK_RAISE_UPDATE_FALL_SAMPLE, //ä¸Šé™æ²¿æ›´æ–°æ•°æ®, ä¸‹å‡æ²¿é‡‡æ ·æ•°æ®
+    ALINK_CLK_FALL_UPDATE_RAISE_SAMPLE, //ÏÂ½µÑØ¸üĞÂÊı¾İ, ÉÏÉıÑØ²ÉÑùÊı¾İ
+    ALINK_CLK_RAISE_UPDATE_FALL_SAMPLE, //ÉÏ½µÑØ¸üĞÂÊı¾İ, ÏÂÉıÑØ²ÉÑùÊı¾İ
 } ALINK_CLK_MODE;
 
 typedef enum {
@@ -66,34 +66,34 @@ typedef enum {
 
 struct alnk_ch_cfg {
     u8 enable;
-    ALINK_DIR dir; 				//é€šé“ä¼ è¾“æ•°æ®æ–¹å‘: Tx, Rx
-    void *buf;					//dma bufåœ°å€
+    ALINK_DIR dir; 				//Í¨µÀ´«ÊäÊı¾İ·½Ïò: Tx, Rx
+    void *buf;					//dma bufµØÖ·
     void (*isr_cb)(u8 ch, s16 *buf, u32 len);
 };
 
 //===================================//
-//å¤šä¸ªé€šé“ä½¿ç”¨éœ€è¦æ³¨æ„:
-//1.æ•°æ®ä½å®½éœ€è¦ä¿æŒä¸€è‡´
-//2.bufé•¿åº¦ç›¸åŒ
+//¶à¸öÍ¨µÀÊ¹ÓÃĞèÒª×¢Òâ:
+//1.Êı¾İÎ»¿íĞèÒª±£³ÖÒ»ÖÂ
+//2.buf³¤¶ÈÏàÍ¬
 //===================================//
 typedef struct _ALINK_PARM {
     u8 port_select;
-    struct alnk_ch_cfg ch_cfg[4];		//é€šé“å†…éƒ¨é…ç½®
+    struct alnk_ch_cfg ch_cfg[4];		//Í¨µÀÄÚ²¿ÅäÖÃ
     ALINK_MODE mode; 					//IIS, left, right, dsp0, dsp1
-    ALINK_ROLE role; 			//ä¸»æœº/ä»æœº
-    ALINK_CLK_MODE clk_mode; 			//æ›´æ–°å’Œé‡‡æ ·è¾¹æ²¿
-    ALINK_DATA_WIDTH  bitwide;   //æ•°æ®ä½å®½16/32bit
+    ALINK_ROLE role; 			//Ö÷»ú/´Ó»ú
+    ALINK_CLK_MODE clk_mode; 			//¸üĞÂºÍ²ÉÑù±ßÑØ
+    ALINK_DATA_WIDTH  bitwide;   //Êı¾İÎ»¿í16/32bit
     ALINK_FRAME_MODE sclk_per_frame;  	//32/64 sclk/frame
-    u16 dma_len; 						//bufé•¿åº¦: byte
-    ALINK_SR sample_rate;					//é‡‡æ ·ç‡
+    u16 dma_len; 						//buf³¤¶È: byte
+    ALINK_SR sample_rate;					//²ÉÑùÂÊ
 } ALINK_PARM;
 
-int alink_init(ALINK_PARM *parm);  //iis åˆå§‹åŒ–
-int	alink_start(ALINK_PORT port);             //iis å¼€å¯
-void alink_channel_init(ALINK_PORT port, u8 ch_idx, u8 dir, void (*handle)(u8 ch, s16 *buf, u32 len));   //iis æ‰“å¼€é€šé“
-void alink_channel_close(ALINK_PORT port, u8 ch_idx); //iis å…³é—­é€šé“
-int alink_sr_set(ALINK_PORT port, u16 sr); 			//iis è®¾ç½®é‡‡æ ·ç‡
-void alink_uninit(ALINK_PORT port); 			//iis é€€å‡º
+int alink_init(ALINK_PARM *parm);  //iis ³õÊ¼»¯
+int	alink_start(ALINK_PORT port);             //iis ¿ªÆô
+void alink_channel_init(ALINK_PORT port, u8 ch_idx, u8 dir, void (*handle)(u8 ch, s16 *buf, u32 len));   //iis ´ò¿ªÍ¨µÀ
+void alink_channel_close(ALINK_PORT port, u8 ch_idx); //iis ¹Ø±ÕÍ¨µÀ
+int alink_sr_set(ALINK_PORT port, u16 sr); 			//iis ÉèÖÃ²ÉÑùÂÊ
+void alink_uninit(ALINK_PORT port); 			//iis ÍË³ö
 
 void audio_link_init(ALINK_PORT port);
 void audio_link_uninit(ALINK_PORT port);

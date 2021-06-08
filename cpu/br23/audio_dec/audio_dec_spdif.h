@@ -7,7 +7,7 @@
 #include "system/includes.h"
 #include "media/audio_decoder.h"
 
-// å†™å…¥spdifæ•°æ®
+// Ğ´ÈëspdifÊı¾İ
 // int spdif_dec_write_data(s16 *data, int len);
 int spdif_dec_write_data(void *data, int len);
 void spdif_init(void);

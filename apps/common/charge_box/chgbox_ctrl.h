@@ -6,10 +6,10 @@
 #define STATUS_ONLINE   1
 
 enum {
-    USB_DET,        //usbæ£€æµ‹
-    LID_DET,        //ç›–å­æ£€æµ‹
-    LDO_DET,        //å‡å‹æˆåŠŸæ£€æµ‹
-    WIRELESS_DET,   //æ— çº¿å……æ£€æµ‹
+    USB_DET,        //usb¼ì²â
+    LID_DET,        //¸Ç×Ó¼ì²â
+    LDO_DET,        //ÉıÑ¹³É¹¦¼ì²â
+    WIRELESS_DET,   //ÎŞÏß³ä¼ì²â
     DET_MAX,
 };
 
@@ -22,53 +22,53 @@ enum {
     KEY_POWER_THIRD,
 };
 
-//å……ç”µä»“å½“ç„¶çŠ¶æ€
+//³äµç²Öµ±È»×´Ì¬
 enum {
-    CHG_STATUS_COMM,      //å¼€ç›–é€šä¿¡
-    CHG_STATUS_CHARGE,    //åˆç›–å……ç”µ
-    CHG_STATUS_LOWPOWER,  //å……ç”µä»“ç”µå‹ä½
+    CHG_STATUS_COMM,      //¿ª¸ÇÍ¨ĞÅ
+    CHG_STATUS_CHARGE,    //ºÏ¸Ç³äµç
+    CHG_STATUS_LOWPOWER,  //³äµç²ÖµçÑ¹µÍ
 };
 
 
-//æ£€æµ‹å‡ æ¬¡ä¸åœ¨çº¿åæ‰è®¤ä¸ºè€³æœºæ‹”å‡º
+//¼ì²â¼¸´Î²»ÔÚÏßºó²ÅÈÏÎª¶ú»ú°Î³ö
 #define TCFG_EAR_OFFLINE_MAX     4
-//å‘é€shutdownçš„ä¸ªæ•°
+//·¢ËÍshutdownµÄ¸öÊı
 #define TCFG_SEND_SHUT_DOWN_MAX  5
-//å‘é€closelidçš„ä¸ªæ•° -- éœ€è¦ EAR_OFFLINE_MAX å¤§
+//·¢ËÍcloselidµÄ¸öÊı -- ĞèÒª EAR_OFFLINE_MAX ´ó
 #define TCFG_SEND_CLOSE_LID_MAX  5
 
 
 typedef struct _SYS_INFO {
-    volatile u8 charge: 1;        //æ˜¯å¦å¤„äºå……ç”µçŠ¶æ€
-        volatile u8 ear_l_full: 1;     //å·¦è€³æœºæ˜¯å¦å……æ»¡
-        volatile u8 ear_r_full: 1;     //å³è€³æœºæ˜¯å¦å……æ»¡
-        volatile u8 earfull: 1;     //æ˜¯å¦å……æ»¡
-        volatile u8 localfull: 1;   //æœ¬æœºæ˜¯å¦å……æ»¡
-        volatile u8 led_flag: 1;    //ledæ´»è·ƒçŠ¶æ€
-        volatile u8 lowpower_flag: 1; //ä½ç”µæ ‡è®°
-        volatile u8 power_on: 1;    //ä¸Šç”µ/å”¤é†’
+    volatile u8 charge: 1;        //ÊÇ·ñ´¦ÓÚ³äµç×´Ì¬
+        volatile u8 ear_l_full: 1;     //×ó¶ú»úÊÇ·ñ³äÂú
+        volatile u8 ear_r_full: 1;     //ÓÒ¶ú»úÊÇ·ñ³äÂú
+        volatile u8 earfull: 1;     //ÊÇ·ñ³äÂú
+        volatile u8 localfull: 1;   //±¾»úÊÇ·ñ³äÂú
+        volatile u8 led_flag: 1;    //led»îÔ¾×´Ì¬
+        volatile u8 lowpower_flag: 1; //µÍµç±ê¼Ç
+        volatile u8 power_on: 1;    //ÉÏµç/»½ĞÑ
 
-        volatile u8 pair_succ: 1;   //é…å¯¹æˆåŠŸ
-        volatile u8 init_ok: 1;     //å……ç”µICæ˜¯å¦åˆå§‹åŒ–æˆåŠŸ
-        volatile u8 chg_addr_ok: 1;     //è·å–å¹¿æ’­åœ°å€æˆåŠŸ
-        volatile u8 current_limit: 1; //è¿‡æµ
-        volatile u8 temperature_limit: 1;//è¿‡çƒ­è¿‡å†·
-        volatile u8 wireless_wakeup: 1; //æ ‡è®°æ— çº¿å……å”¤é†’
-        volatile u8 reserev: 2; //ä¿ç•™bit
+        volatile u8 pair_succ: 1;   //Åä¶Ô³É¹¦
+        volatile u8 init_ok: 1;     //³äµçICÊÇ·ñ³õÊ¼»¯³É¹¦
+        volatile u8 chg_addr_ok: 1;     //»ñÈ¡¹ã²¥µØÖ·³É¹¦
+        volatile u8 current_limit: 1; //¹ıÁ÷
+        volatile u8 temperature_limit: 1;//¹ıÈÈ¹ıÀä
+        volatile u8 wireless_wakeup: 1; //±ê¼ÇÎŞÏß³ä»½ĞÑ
+        volatile u8 reserev: 2; //±£Áôbit
 
-        volatile u8 pair_status;    //å¤„äºé…å¯¹çŠ¶æ€
-        volatile u8 shut_cnt;       //å…³æœºå‘½ä»¤è®¡æ•°å™¨
-        volatile u8 lid_cnt;        //å…³ç›–å‘½ä»¤è®¡æ•°å™¨
-        volatile u8 life_cnt;       //è¶…æ—¶ä¼‘çœ 
-        volatile u8 force_charge;       //å¼ºåˆ¶å……ç”µï¼ˆè€³æœºå®Œå…¨æ²¡ç”µæ—¶éœ€è¦å…ˆå……ç”µï¼‰
-        volatile u8 chgbox_status;     //å……ç”µä»“çŠ¶æ€ï¼šå¼€ç›–ã€åˆç›–ã€ä½ç”µç­‰
+        volatile u8 pair_status;    //´¦ÓÚÅä¶Ô×´Ì¬
+        volatile u8 shut_cnt;       //¹Ø»úÃüÁî¼ÆÊıÆ÷
+        volatile u8 lid_cnt;        //¹Ø¸ÇÃüÁî¼ÆÊıÆ÷
+        volatile u8 life_cnt;       //³¬Ê±ĞİÃß
+        volatile u8 force_charge;       //Ç¿ÖÆ³äµç£¨¶ú»úÍêÈ«Ã»µçÊ±ĞèÒªÏÈ³äµç£©
+        volatile u8 chgbox_status;     //³äµç²Ö×´Ì¬£º¿ª¸Ç¡¢ºÏ¸Ç¡¢µÍµçµÈ
         volatile u8 status[DET_MAX];
     } SYS_INFO;
 
     typedef struct _EAR_INFO {
-    volatile u8 online[2];    //åœ¨çº¿ç¦»çº¿è®¡æ•°
-    volatile u8 power[2];     //ç”µé‡
-    volatile u8 full_cnt[2];  //ç”µé‡å……æ»¡è®¡æ•°
+    volatile u8 online[2];    //ÔÚÏßÀëÏß¼ÆÊı
+    volatile u8 power[2];     //µçÁ¿
+    volatile u8 full_cnt[2];  //µçÁ¿³äÂú¼ÆÊı
 } EAR_INFO;
 
 

@@ -7,20 +7,20 @@
 #if 0
 /*
     [[[ README ]]]
-    1. iic从机需要赋值hw_iic_cfg.role = IIC_SLAVE，若role没有赋值或赋值成
-    IIC_MASTER，则默认是主机模式。
-    2. iic从机的demo使用中断-任务的交互方式，避免while(!iic_pnd)的阻塞方式造成的
-    CPU浪费及响应不及时。由于IIC没有DMA，每传输1 byte就会触发1次中断，所以IIC主机
-    必须每传输完成1字节delay一段时间，以至少等待IIC从机响应中断。iic stop产生的
-    end中断被用于计算接收字节数及复位状态机，不要去掉end中断的使能及处理。IIC可能
-    会收到意外的end中断，所以end中断的处理必须用start-end包住。
-    3. demo的接收/发送使用double buffer，避免处理数据过程中被下次接收/发送的数据
-    覆盖。
-    4. IIC从机收到IIC_S_RADDR后需要尽快准备需要发送的数据，因为主机会很短时间内发
-    送下一个IIC字节时钟以请求数据。
-    5. IIC主机的TX的STOP到下个RX的START需要delay一段时间，否则会收多收一个不正确
-    的字节。
-    6. 未尽事项代码中的注释。
+    1. iic�ӻ���Ҫ��ֵhw_iic_cfg.role = IIC_SLAVE����roleû�и�ֵ��ֵ��
+    IIC_MASTER����Ĭ��������ģʽ��
+    2. iic�ӻ���demoʹ���ж�-����Ľ�����ʽ������while(!iic_pnd)��������ʽ��ɵ�
+    CPU�˷Ѽ���Ӧ����ʱ������IICû��DMA��ÿ����1 byte�ͻᴥ��1���жϣ�����IIC����
+    ����ÿ�������1�ֽ�delayһ��ʱ�䣬�����ٵȴ�IIC�ӻ���Ӧ�жϡ�iic stop������
+    end�жϱ����ڼ�������ֽ�������λ״̬������Ҫȥ��end�жϵ�ʹ�ܼ�������IIC����
+    ���յ������end�жϣ�����end�жϵĴ���������start-end��ס��
+    3. demo�Ľ���/����ʹ��double buffer�����⴦�����ݹ����б��´ν���/���͵�����
+    ���ǡ�
+    4. IIC�ӻ��յ�IIC_S_RADDR����Ҫ����׼����Ҫ���͵����ݣ���Ϊ������ܶ�ʱ���ڷ�
+    ����һ��IIC�ֽ�ʱ�����������ݡ�
+    5. IIC������TX��STOP���¸�RX��START��Ҫdelayһ��ʱ�䣬������ն���һ������ȷ
+    ���ֽڡ�
+    6. δ����������е�ע�͡�
 */
 
 #define IIC_S_RADDR                             0x61
@@ -72,7 +72,7 @@ static void iic_slave_isr()
         hw_iic_clr_pnd(IIC_S_DEV);
         putchar('a');
         if (iic_s.dir == IIC_S_RX) {
-            byte = hw_iic_slave_rx_byte(IIC_S_DEV, &is_addr);  //判断是否为地址
+            byte = hw_iic_slave_rx_byte(IIC_S_DEV, &is_addr);  //�ж��Ƿ�Ϊ��ַ
             if (is_addr) {
                 iic_s.rx.cur_cnt = 0;
                 iic_s.rx.rx_cnt = 0;
@@ -80,24 +80,24 @@ static void iic_slave_isr()
                 iic_s.tx.tx_cnt = 0;
                 if (byte == IIC_S_WADDR) {
                     putchar('b');
-                    hw_iic_slave_rx_prepare(IIC_S_DEV, 1);  //触发下1 byte接收，并使能recv ack
+                    hw_iic_slave_rx_prepare(IIC_S_DEV, 1);  //������1 byte���գ���ʹ��recv ack
                     iic_s.bus_occupy = 1;
                 } else if (byte == IIC_S_RADDR) {
                     putchar('c');
                     iic_s.dir = IIC_S_TX;
                     os_taskq_post_msg("iic_slave", 1, IIC_S_MSG_TX);
-                    iic_s.bus_occupy = 1;  //包住start-stop，避免处理意外的stop处理
+                    iic_s.bus_occupy = 1;  //��סstart-stop�����⴦�������stop����
                 }
             } else {
                 putchar('d');
                 if (iic_s.rx.cur_cnt < iic_s.rx.b_size) {
                     iic_s.rx.buf[iic_s.rx.toggle][iic_s.rx.cur_cnt++] = byte;
                 }
-                hw_iic_slave_rx_prepare(IIC_S_DEV, 1);  //触发下1 byte接收，并使能recv ack
+                hw_iic_slave_rx_prepare(IIC_S_DEV, 1);  //������1 byte���գ���ʹ��recv ack
             }
         } else {
             putchar('e');
-            //如果主机接收ACK或者是最后1 byte主机NACK，发送下1 byte，否则重发当前byte
+            //�����������ACK���������1 byte����NACK��������1 byte�������ط���ǰbyte
             if (hw_iic_slave_tx_check_ack(IIC_S_DEV) ||
                 (iic_s.tx.tx_cnt - iic_s.tx.cur_cnt == 1)) {
                 iic_s.tx.cur_cnt++;
@@ -105,7 +105,7 @@ static void iic_slave_isr()
             if (iic_s.tx.cur_cnt < iic_s.tx.tx_cnt) {
                 hw_iic_slave_tx_byte(IIC_S_DEV, iic_s.tx.buf[iic_s.tx.toggle][iic_s.tx.cur_cnt]);
             } else {
-                //如果主机请求字节数比实际IIC发送字节数多，则发送0xff，防止主机while(!iic_pnd)阻塞卡死
+                //������������ֽ�����ʵ��IIC�����ֽ����࣬����0xff����ֹ����while(!iic_pnd)��������
                 hw_iic_slave_tx_byte(IIC_S_DEV, 0xff);
             }
         }
@@ -113,7 +113,7 @@ static void iic_slave_isr()
     if (hw_iic_get_end_pnd(IIC_S_DEV)) {
         hw_iic_clr_end_pnd(IIC_S_DEV);
         putchar('f');
-        //start-stop包住，收到stop时的处理
+        //start-stop��ס���յ�stopʱ�Ĵ���
         if (iic_s.bus_occupy) {
             iic_s.bus_occupy = 0;
             if (iic_s.dir == IIC_S_RX) {
@@ -129,7 +129,7 @@ static void iic_slave_isr()
             iic_s.rx.cur_cnt = 0;
             iic_s.tx.cur_cnt = 0;
             iic_s.tx.tx_cnt = 0;
-            hw_iic_slave_rx_prepare(IIC_S_DEV, 0);  //触发下1 byte接收，并NACK
+            hw_iic_slave_rx_prepare(IIC_S_DEV, 0);  //������1 byte���գ���NACK
         }
     }
 }
@@ -153,17 +153,17 @@ static void iic_slave_task(void *arg)
     iic_s.tx.b_size = IIC_S_TXBUF_SIZE;
 
     hw_iic_init(IIC_S_DEV);
-    //设置IIC从机地址，并且使能地址包自动ACK
+    //����IIC�ӻ���ַ������ʹ�ܵ�ַ���Զ�ACK
     hw_iic_slave_set_addr(IIC_S_DEV, IIC_S_WADDR, 1);
-    //注册中断isr
+    //ע���ж�isr
     request_irq(IRQ_IIC_IDX, 3, iic_slave_isr, 0);
-    //使能byte传输中断
+    //ʹ��byte�����ж�
     hw_iic_set_ie(IIC_S_DEV, 1);
-    //使能stop中断
+    //ʹ��stop�ж�
     hw_iic_set_end_ie(IIC_S_DEV, 1);
-    //请求接收，禁止ACK，避免与地址包自动ACK冲突。bit ACK需要在接收数据前设置，关
-    //闭ACK并打开地址包自动ACK是为了挂多个IIC从机时，本IIC从机不会ACK其他IIC设备
-    //地址，造成多从机失效。地址包自动ACK只有当从机收到设置的地址才会ACK，否则
+    //������գ���ֹACK���������ַ���Զ�ACK��ͻ��bit ACK��Ҫ�ڽ�������ǰ���ã���
+    //��ACK���򿪵�ַ���Զ�ACK��Ϊ�˹Ҷ��IIC�ӻ�ʱ����IIC�ӻ�����ACK����IIC�豸
+    //��ַ����ɶ�ӻ�ʧЧ����ַ���Զ�ACKֻ�е��ӻ��յ����õĵ�ַ�Ż�ACK������
     //NACK
     hw_iic_slave_rx_prepare(IIC_S_DEV, 0);
     __asm__ volatile("%0 = icfg" : "=r"(res));
@@ -248,7 +248,7 @@ void iic_demo_host_main()
     for (i = 0; i < IIC_H_TXBUF_SIZE; i++) {
         iic_h_txbuf[i] = 'A' + i % 26;
     }
-    for (u8 times = 0; times < 3; times++) {  //测试次数
+    for (u8 times = 0; times < 3; times++) {  //���Դ���
         retry = 10;
         do {
             hw_iic_start(IIC_H_DEV);
@@ -268,7 +268,7 @@ void iic_demo_host_main()
             break;
         } while (1);
         hw_iic_stop(IIC_H_DEV);
-        delay(IIC_H_DELAY);  //stop后需要delay一段时间后再start
+        delay(IIC_H_DELAY);  //stop����Ҫdelayһ��ʱ�����start
 
         retry = 10;
         do {
@@ -285,12 +285,12 @@ void iic_demo_host_main()
                 delay(IIC_H_DELAY);
                 i++;
             }
-            iic_h_rxbuf[i] = hw_iic_rx_byte(IIC_H_DEV, 0);  //IIC主机接收最后1 byte NACK
+            iic_h_rxbuf[i] = hw_iic_rx_byte(IIC_H_DEV, 0);  //IIC�����������1 byte NACK
             putchar('g');
             delay(IIC_H_DELAY);
             break;
         } while (1);
-        hw_iic_stop(IIC_H_DEV);  //stop后需要delay一段时间后再start
+        hw_iic_stop(IIC_H_DEV);  //stop����Ҫdelayһ��ʱ�����start
         delay(IIC_H_DELAY);
         putchar('\n');
 

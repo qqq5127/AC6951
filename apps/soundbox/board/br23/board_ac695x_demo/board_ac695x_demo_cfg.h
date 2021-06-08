@@ -30,9 +30,9 @@
 #define TCFG_APP_LINEIN_EN					1
 #define TCFG_APP_FM_EN					    1
 #define TCFG_APP_PC_EN					    1
-#define TCFG_APP_RTC_EN					    1
-#define TCFG_APP_RECORD_EN				    1
-#define TCFG_APP_SPDIF_EN                   0
+#define TCFG_APP_RTC_EN					    0
+#define TCFG_APP_RECORD_EN				    0
+#define TCFG_APP_SPDIF_EN                   1
 //*********************************************************************************//
 //                               PCM_DEBUG调试配置                                 //
 //*********************************************************************************//
@@ -63,7 +63,7 @@
 //*********************************************************************************//
 //                                 硬件SPI 配置                                        //
 //*********************************************************************************//
-#define	TCFG_HW_SPI1_ENABLE		ENABLE_THIS_MOUDLE
+#define	TCFG_HW_SPI1_ENABLE		DISABLE_THIS_MOUDLE
 //A组IO:    DI: PB2     DO: PB1     CLK: PB0
 //B组IO:    DI: PC3     DO: PC5     CLK: PC4
 #define TCFG_HW_SPI1_PORT		'A'
@@ -71,7 +71,7 @@
 #define TCFG_HW_SPI1_MODE		SPI_MODE_BIDIR_1BIT
 #define TCFG_HW_SPI1_ROLE		SPI_ROLE_MASTER
 
-#define	TCFG_HW_SPI2_ENABLE		ENABLE_THIS_MOUDLE
+#define	TCFG_HW_SPI2_ENABLE		DISABLE_THIS_MOUDLE
 //A组IO:    DI: PB8     DO: PB10    CLK: PB9
 //B组IO:    DI: PA13    DO: DM      CLK: DP
 #define TCFG_HW_SPI2_PORT		'A'
@@ -111,7 +111,7 @@
 #define     SD_CMD_DECT 	0
 #define     SD_CLK_DECT  	1
 #define     SD_IO_DECT 		2
-#define TCFG_SD0_ENABLE						ENABLE_THIS_MOUDLE
+#define TCFG_SD0_ENABLE						DISABLE_THIS_MOUDLE
 //A组IO: CMD:PA9    CLK:PA10   DAT0:PA5    DAT1:PA6    DAT2:PA7    DAT3:PA8
 //B组IO: CMD:PB10   CLK:PB9    DAT0:PB8    DAT1:PB6    DAT2:PB5    DAT3:PB4
 #define TCFG_SD0_PORTS						'B'
@@ -121,10 +121,10 @@
 #define TCFG_SD0_DET_IO_LEVEL				0//IO检查，0：低电平检测到卡。 1：高电平(外部电源)检测到卡。 2：高电平(SD卡电源)检测到卡。
 #define TCFG_SD0_CLK						(3000000*4L)
 
-#define TCFG_SD1_ENABLE						DISABLE_THIS_MOUDLE
+#define TCFG_SD1_ENABLE						ENABLE_THIS_MOUDLE
 //A组IO: CMD:PC4    CLK:PC5    DAT0:PC3    DAT1:PC2    DAT2:PC1    DAT3:PC0
 //B组IO: CMD:PB5    CLK:PB6    DAT0:PB4    DAT1:PB8    DAT2:PB9    DAT3:PB10
-#define TCFG_SD1_PORTS						'A'
+#define TCFG_SD1_PORTS						'B'
 #define TCFG_SD1_DAT_MODE					1
 #define TCFG_SD1_DET_MODE					SD_CLK_DECT
 #define TCFG_SD1_DET_IO 					IO_PORT_DM//当SD_DET_MODE为2时有效
@@ -223,8 +223,8 @@
 //*********************************************************************************//
 #define TCFG_ADKEY_ENABLE                   ENABLE_THIS_MOUDLE//是否使能AD按键
 #define TCFG_ADKEY_LED_IO_REUSE				DISABLE_THIS_MOUDLE	//ADKEY 和 LED IO复用，led只能设置蓝灯显示
-#define TCFG_ADKEY_PORT                     IO_PORTA_10         //AD按键端口(需要注意选择的IO口是否支持AD功能)
-#define TCFG_ADKEY_AD_CHANNEL               AD_CH_PA10
+#define TCFG_ADKEY_PORT                     IO_PORTB_01         //AD按键端口(需要注意选择的IO口是否支持AD功能)
+#define TCFG_ADKEY_AD_CHANNEL               AD_CH_PB1
 #define TCFG_ADKEY_EXTERN_UP_ENABLE         ENABLE_THIS_MOUDLE //是否使用外部上拉
 
 #if TCFG_ADKEY_EXTERN_UP_ENABLE
@@ -271,8 +271,8 @@
 //*********************************************************************************//
 //                                 irkey 配置                                      //
 //*********************************************************************************//
-#define TCFG_IRKEY_ENABLE                   DISABLE_THIS_MOUDLE//是否使能ir按键
-#define TCFG_IRKEY_PORT                     IO_PORTA_02        //IR按键端口
+#define TCFG_IRKEY_ENABLE                   ENABLE_THIS_MOUDLE//是否使能ir按键
+#define TCFG_IRKEY_PORT                     IO_PORTA_07        //IR按键端口
 
 //*********************************************************************************//
 //                             tocuh key 配置                                      //
@@ -440,9 +440,9 @@ DAC硬件上的连接方式,可选的配置：
 
 #else
 
-#define TCFG_PWMLED_ENABLE					DISABLE_THIS_MOUDLE			//是否支持PMW LED推灯模块
+#define TCFG_PWMLED_ENABLE					ENABLE_THIS_MOUDLE			//是否支持PMW LED推灯模块
 #define TCFG_PWMLED_IOMODE					LED_ONE_IO_MODE				//LED模式，单IO还是两个IO推灯
-#define TCFG_PWMLED_PIN						IO_PORTB_06					//LED使用的IO口 注意和led7是否有io冲突
+#define TCFG_PWMLED_PIN						IO_PORTA_03					//LED使用的IO口 注意和led7是否有io冲突
 
 #endif
 //*********************************************************************************//
@@ -677,7 +677,7 @@ DAC硬件上的连接方式,可选的配置：
 #define TCFG_LINEIN_ENABLE					TCFG_APP_LINEIN_EN	// linein使能
 // #define TCFG_LINEIN_LADC_IDX				0					// linein使用的ladc通道，对应ladc_list
 #define TCFG_LINEIN_LR_CH					AUDIO_LIN0_LR
-#define TCFG_LINEIN_CHECK_PORT				IO_PORTB_03			// linein检测IO
+#define TCFG_LINEIN_CHECK_PORT				IO_PORTB_08			// linein检测IO
 #define TCFG_LINEIN_PORT_UP_ENABLE        	1					// 检测IO上拉使能
 #define TCFG_LINEIN_PORT_DOWN_ENABLE       	0					// 检测IO下拉使能
 #define TCFG_LINEIN_AD_CHANNEL             	NO_CONFIG_PORT		// 检测IO是否使用AD检测

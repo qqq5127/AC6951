@@ -56,7 +56,7 @@ void *sin_tone_open(const struct sin_param *param, int num, u8 channel, u8 repea
     sin->repeat = repeat;
 #if (defined CONFIG_CPU_BR18 || \
      CONFIG_CPU_BR21)
-    /*è¿™é‡Œå¦‚æœåŠ å¤šfade pointsï¼Œä¼šå¯¼è‡´ç»“æŸçš„æ—¶å€™æœ‰å™ªå£°,ä¸æ˜¯åœ¨æ·¡å‡ºå°¾éƒ¨*/
+    /*ÕâÀïÈç¹û¼Ó¶àfade points£¬»áµ¼ÖÂ½áÊøµÄÊ±ºòÓĞÔëÉù,²»ÊÇÔÚµ­³öÎ²²¿*/
     sin->fade_points = 0;
 #else
     sin->fade_points = 480;
@@ -141,7 +141,7 @@ extern const int sf_sin_tab1[513] ;
 #define  SINE_INT_ZOOM   16384
 #define  SINE_INT_ZBIT   14
 #define __int64	long long
-/*è½¯ä»¶ç´¢å¼•å®ç°sinç”Ÿæˆ*/
+/*Èí¼şË÷ÒıÊµÏÖsinÉú³É*/
 static int get_sine_value(int mx_idx)
 {
     int ret = 0;

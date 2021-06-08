@@ -112,52 +112,52 @@ const struct __effect_mode_attr reverb_tool_attr[EFFECT_REVERB_MODE_MAX] = {
     {
         .num = ARRAY_SIZE(reverb_cmd_cfg),
         .cmd_tab = (u16 *)reverb_cmd_cfg,
-        .name = "Á∫ØÊ∑∑Âìç",
+        .name = "¥øªÏœÏ",
     },
     [EFFECT_REVERB_MODE_ELECTRIC] =
     {
         .num = ARRAY_SIZE(electric_cmd_cfg),
         .cmd_tab = (u16 *)electric_cmd_cfg,
-        .name = "ÁîµÈü≥",
+        .name = "µÁ“Ù",
 
     },
     [EFFECT_REVERB_MODE_BOY_TO_GIRL] =
     {
         .num = ARRAY_SIZE(boy_to_girl_cmd_cfg),
         .cmd_tab = (u16 *)boy_to_girl_cmd_cfg,
-        .name = "Áî∑Â£∞ÂèòÂ•≥Â£∞",
+        .name = "ƒ–…˘±‰≈Æ…˘",
 
     },
     [EFFECT_REVERB_MODE_GIRL_TO_BOY] =
     {
         .num = ARRAY_SIZE(girl_to_boy_cmd_cfg),
         .cmd_tab = (u16 *)girl_to_boy_cmd_cfg,
-        .name = "Â•≥Â£∞ÂèòÁî∑Â£∞",
+        .name = "≈Æ…˘±‰ƒ–…˘",
 
     },
     [EFFECT_REVERB_MODE_KIDS] =
     {
         .num = ARRAY_SIZE(kids_cmd_cfg),
         .cmd_tab = (u16 *)kids_cmd_cfg,
-        .name = "Â®ÉÂ®ÉÈü≥",
+        .name = "ÕﬁÕﬁ“Ù",
     },
     [EFFECT_REVERB_MODE_MAGIC] =
     {
         .num = ARRAY_SIZE(magic_cmd_cfg),
         .cmd_tab = (u16 *)magic_cmd_cfg,
-        .name = "È≠îÈü≥",
+        .name = "ƒß“Ù",
     },
     [EFFECT_REVERB_MODE_BOOM] =
     {
         .num = ARRAY_SIZE(boom_cmd_cfg),
         .cmd_tab = (u16 *)boom_cmd_cfg,
-        .name = "ÁàÜÈü≥",
+        .name = "±¨“Ù",
     },
     [EFFECT_REVERB_MODE_SHOUTING_WHEAT] =
     {
         .num = ARRAY_SIZE(shouting_wheat_cmd_cfg),
         .cmd_tab = (u16 *)shouting_wheat_cmd_cfg,
-        .name = "ÂñäÈ∫¶",
+        .name = "∫∞¬Û",
     },
 };
 

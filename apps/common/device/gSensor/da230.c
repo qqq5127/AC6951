@@ -102,7 +102,7 @@ u32 da230_close_i2c_pullup(void)
     res |= da230_register_write(0x7f,  0x69);
     res |= da230_register_write(0x7f,  0xBD);
 
-    /**********å°†0x8f bit1å†™0ï¼Œå»æ‰da230å†…éƒ¨i2cå¼±ä¸Šæ‹‰*********/
+    /**********½«0x8f bit1Ğ´0£¬È¥µôda230ÄÚ²¿i2cÈõÉÏÀ­*********/
     res |= da230_register_write_bit(0x8f, 1, 1, 0);
 
     return res;
@@ -194,7 +194,7 @@ u32 da230_open_i2c_pullup(void)
     res |= da230_register_write(0x7f,  0x69);
     res |= da230_register_write(0x7f,  0xBD);
 
-    /**********å°†0x8f bit1å†™1ï¼Œå¼€å¯da230å†…éƒ¨i2cå¼±ä¸Šæ‹‰*********/
+    /**********½«0x8f bit1Ğ´1£¬¿ªÆôda230ÄÚ²¿i2cÈõÉÏÀ­*********/
     res |= da230_register_write_bit(0x8f, 1, 1, 1);
 
     return res;

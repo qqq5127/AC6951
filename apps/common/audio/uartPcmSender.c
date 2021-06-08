@@ -5,15 +5,15 @@
 #include "asm/uart_dev.h"
 
 /*
- *ä¸²å£å¯¼å‡ºæ•°æ®é…ç½®
- *æ³¨æ„IOå£è®¾ç½®ä¸è¦å’Œæ™®é€šlogè¾“å‡ºuartå†²çª
+ *´®¿Úµ¼³öÊý¾ÝÅäÖÃ
+ *×¢ÒâIO¿ÚÉèÖÃ²»ÒªºÍÆÕÍ¨logÊä³öuart³åÍ»
  */
-#define PCM_UART1_TX_PORT			IO_PORT_DP	/*æ•°æ®å¯¼å‡ºå‘é€IO*/
+#define PCM_UART1_TX_PORT			IO_PORT_DP	/*Êý¾Ýµ¼³ö·¢ËÍIO*/
 #define PCM_UART1_RX_PORT			-1
-#define PCM_UART1_BAUDRATE			2000000		/*æ•°æ®å¯¼å‡ºæ³¢ç‰¹çŽ‡,ä¸ç”¨ä¿®æ”¹ï¼Œå’ŒæŽ¥æ”¶ç«¯è®¾ç½®ä¸€ç›´*/
+#define PCM_UART1_BAUDRATE			2000000		/*Êý¾Ýµ¼³ö²¨ÌØÂÊ,²»ÓÃÐÞ¸Ä£¬ºÍ½ÓÊÕ¶ËÉèÖÃÒ»Ö±*/
 
 #if ((TCFG_UART0_ENABLE == ENABLE_THIS_MOUDLE) && (PCM_UART1_TX_PORT == TCFG_UART0_TX_PORT))
-//IOå£é…ç½®å†²çªï¼Œè¯·æ£€æŸ¥ä¿®æ”¹
+//IO¿ÚÅäÖÃ³åÍ»£¬Çë¼ì²éÐÞ¸Ä
 #error "PCM_UART1_TX_PORT conflict with TCFG_UART0_TX_PORT"
 #endif/*PCM_UART1_TX_PORT*/
 
@@ -21,7 +21,7 @@
 static u8 uart_cbuf[32] __attribute__((aligned(4)));
 const uart_bus_t *uart_bus = NULL;
 
-//è®¾å¤‡äº‹ä»¶å“åº”demo
+//Éè±¸ÊÂ¼þÏìÓ¦demo
 void uart_event_handler(struct sys_event *e)
 {
     u8 uart_rxbuf[12] = {0};
@@ -70,7 +70,7 @@ static void uart_isr_hook(void *arg, u32 status)
     const uart_bus_t *ubus = arg;
     struct sys_event e;
 
-    //å½“CONFIG_UARTx_ENABLE_TX_DMAï¼ˆx = 0, 1ï¼‰ä¸º1æ—¶ï¼Œä¸è¦åœ¨ä¸­æ–­é‡Œé¢è°ƒç”¨ubus->write()ï¼Œå› ä¸ºä¸­æ–­ä¸èƒ½pendä¿¡å·é‡
+    //µ±CONFIG_UARTx_ENABLE_TX_DMA£¨x = 0, 1£©Îª1Ê±£¬²»ÒªÔÚÖÐ¶ÏÀïÃæµ÷ÓÃubus->write()£¬ÒòÎªÖÐ¶Ï²»ÄÜpendÐÅºÅÁ¿
     if (status == UT_RX) {
         printf("uart_rx_isr\n");
 #if 1//(UART_DEV_USAGE_TEST_SEL == 1)
@@ -97,10 +97,10 @@ static void uart_isr_hook(void *arg, u32 status)
     }
 }
 
-void uartSendData(void *buf, u16 len) 			//å‘é€æ•°æ®çš„æŽ¥å£ã€‚
+void uartSendData(void *buf, u16 len) 			//·¢ËÍÊý¾ÝµÄ½Ó¿Ú¡£
 {
     if (uart_bus) {
-        uart_bus->write(buf, len);		//æŠŠæ•°æ®å†™åˆ°DMA
+        uart_bus->write(buf, len);		//°ÑÊý¾ÝÐ´µ½DMA
     }
 }
 

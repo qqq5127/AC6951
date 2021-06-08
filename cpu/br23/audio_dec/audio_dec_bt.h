@@ -7,24 +7,24 @@
 #include "system/includes.h"
 #include "media/audio_decoder.h"
 
-// a2dp鎴栬�卐sco姝ｅ湪鎾斁
+// a2dp或者esco正在播放
 u8 bt_audio_is_running(void);
-// a2dp姝ｅ湪鎾斁
+// a2dp正在播放
 u8 bt_media_is_running(void);
-// esco姝ｅ湪鎾斁
+// esco正在播放
 u8 bt_phone_dec_is_running();;
 
-// 鎵撳紑a2dp瑙ｇ爜
+// 打开a2dp解码
 int a2dp_dec_open(int media_type);
-// 鍏抽棴a2dp瑙ｇ爜
+// 关闭a2dp解码
 int a2dp_dec_close();
 
-// 鎵撳紑esco瑙ｇ爜
+// 打开esco解码
 int esco_dec_open(void *, u8);
-// 鍏抽棴esco瑙ｇ爜
+// 关闭esco解码
 void esco_dec_close();
 
-// a2dp浼犺緭涓
+// a2dp传输中止
 void __a2dp_drop_frame(void *p);
 
 #endif

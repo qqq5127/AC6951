@@ -7,7 +7,7 @@
 #include "media/audio_stream.h"
 
 struct sbc_emitter_hdl {
-    struct audio_stream_entry entry;	// éŸ³é¢‘æµå…¥å£
+    struct audio_stream_entry entry;	// ÒôÆµÁ÷Èë¿Ú
 };
 extern struct sbc_emitter_hdl sbc_emitter;
 
