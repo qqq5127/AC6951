@@ -1,0 +1,7 @@
+[Project]
+Size=240*240
+CustomTemplateDir=widgets
+Dir=.
+ImageDir=.
+LangugeFile=@ByteArray(ols/\xe5\xa4\x9a\xe5\x9b\xbd\xe8\xaf\xad\xe8\xa8\x80_240x240_twsbox.xls)
+TemplateJson=.

@@ -1,0 +1,4 @@
+play_sec.bmp|D:/Workspace/BR23_download_tools_soundbox_ui_new/UI工程/ui_128_64_JL02/模式界面/project/config/pic_lcd/play_sec.bmpbaskslash equal zero else
+config/pic_lcd/play_sec.bmp
+pause_sec.bmp|D:/Workspace/BR23_download_tools_soundbox_ui_new/UI工程/ui_128_64_JL02/模式界面/project/config/pic_lcd/pause_sec.bmpbaskslash equal zero else
+config/pic_lcd/pause_sec.bmp

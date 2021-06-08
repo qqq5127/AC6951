@@ -1,0 +1,30 @@
+
+#ifndef __SMARTBOX_EVENT_H__
+#define __SMARTBOX_EVENT_H__
+
+#include "typedef.h"
+#include "app_config.h"
+#include "common/user_msg.h"
+
+
+enum {
+    USER_MSG_SMARTBOX_DISCONNECT_EDR = USER_MSG_SYS_SMARTBOX_BEGIN,
+    USER_MSG_SMARTBOX_BT_SCAN_OPEN,
+    USER_MSG_SMARTBOX_BT_SCAN_STOP,
+    USER_MSG_SMARTBOX_BT_CONNECT_SPEC_ADDR,
+    USER_MSG_SMARTBOX_SET_VOL,
+    USER_MSG_SMARTBOX_SET_EQ_PARAM,
+    USER_MSG_SMARTBOX_SET_FMTX_FREQ,
+    USER_MSG_SMARTBOX_SET_BT_EMITTER_SW,
+    USER_MSG_SMARTBOX_SET_BT_EMITTER_CONNECT_STATES,
+    USER_MSG_SMARTBOX_BS_END,
+    USER_MSG_SMARTBOX_MODE_SWITCH,
+    USER_MSG_SMARTBOX_FM_UPDATE_STATE,
+    USER_MSG_SMARTBOX_RTC_UPDATE_STATE,
+};
+
+//void smartbox_common_event_deal(int msg, int argc, int *argv);
+bool smartbox_msg_post(int msg, int argc, ...);
+
+#endif//__SMARTBOX_EVENT_H__
+

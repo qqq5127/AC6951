@@ -1,0 +1,8 @@
+[Project]
+Size=128*160
+CustomTemplateDir=../../../UITools/control/ex
+Dir=.
+ImageDir=config
+LangugeFile=../../../UITools/\x591a\x56fd\x8bed\x8a00_128_64.xls
+TemplateJson=../../../UITools/control/control.json
+LastOpen=@ByteArray(./SmallColorTFT.json)

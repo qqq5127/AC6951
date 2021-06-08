@@ -1,0 +1,248 @@
+{
+    "-class": "NewFrame",
+    "-name": "Time",
+    "-type": "Time",
+    "caption": "时间",
+    "icon": "",
+    "property": [
+        {
+            "-name": "id",
+            "-type": "id",
+            "caption": "唯一ID号",
+            "ename": "",
+            "id": 0
+        },
+        {
+            "-name": "element_css",
+            "-type": "struct",
+            "caption": "CSS元素",
+            "info": "",
+            "struct": [
+                {
+                    "-name": "align",
+                    "-type": "enum",
+                    "caption": "对齐方式",
+                    "default": "ALIGN_CENTER",
+                    "enum": [
+                        {
+                            "ALIGN_LEFT": 0
+                        },
+                        {
+                            "ALIGN_CENTER": 1
+                        },
+                        {
+                            "ALIGN_RIGHT": 2
+                        }
+                    ]
+                },
+                {
+                    "-name": "invisible",
+                    "-type": "enum",
+                    "caption": "默认隐藏",
+                    "default": "false",
+                    "enum": [
+                        {
+                            "true": 1
+                        },
+                        {
+                            "false": 0
+                        }
+                    ]
+                },
+                {
+                    "-name": "flags",
+                    "-type": "enum",
+                    "caption": "标志",
+                    "default": "ELM_FLAG_NORMAL",
+                    "enum": [
+                        {
+                            "ELM_FLAG_NORMAL": 0
+                        },
+                        {
+                            "ELM_FLAG_HEAD": 1
+                        }
+                    ]
+                },
+                {
+                    "-name": "rect",
+                    "-type": "rect",
+                    "caption": "坐标",
+                    "rect": {
+                        "height": 25,
+                        "width": 75,
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                {
+                    "-name": "background_color",
+                    "-type": "background-color",
+                    "background-color": "#368FEE",
+                    "caption": "背景颜色"
+                },
+                {
+                    "-name": "background_image",
+                    "-type": "background-image",
+                    "background-image": "",
+                    "caption": "背景图片"
+                },
+                {
+                    "-name": "border",
+                    "-type": "border",
+                    "border": {
+                        "bottom": 0,
+                        "left": 0,
+                        "right": 0,
+                        "top": 0
+                    },
+                    "caption": "边框",
+                    "gray-color": 0
+                }
+            ]
+        },
+        {
+            "-name": "auto_cnt",
+            "-type": "enum",
+            "caption": "自动记时",
+            "default": "YES",
+            "enum": [
+                {
+                    "YES": 1
+                },
+                {
+                    "NO": 0
+                }
+            ]
+        },
+        {
+            "-name": "format",
+            "-type": "text-str",
+            "caption": "格式",
+            "default": "Y/M/D h:m:s",
+            "maxlength": 16
+        },
+        {
+            "-name": "color",
+            "-type": "background-color",
+            "background-color": "#000000",
+            "caption": "文字颜色"
+        },
+        {
+            "-name": "number",
+            "-type": "arrlist",
+            "caption": "数字图片列表",
+            "default": "",
+            "list": [
+            ],
+            "maxlength": 10
+        },
+        {
+            "-name": "delimiter",
+            "-type": "arrlist",
+            "caption": "分隔符图片列表",
+            "default": "",
+            "list": [
+            ],
+            "maxlength": 10
+        },
+        {
+            "-name": "action",
+            "-type": "action",
+            "action": [
+                {
+                    "-name": "event",
+                    "-type": "enum",
+                    "caption": "事件",
+                    "default": "KEY_OK",
+                    "enum": [
+                        {
+                            "KEY_OK": 13
+                        },
+                        {
+                            "KEY_CANCLE": 14
+                        },
+                        {
+                            "KEY_MENU": 15
+                        },
+                        {
+                            "KEY_MODE": 16
+                        },
+                        {
+                            "KEY_LEFT": 37
+                        },
+                        {
+                            "KEY_UP": 38
+                        },
+                        {
+                            "KEY_RIGHT": 39
+                        },
+                        {
+                            "KEY_DOWN": 40
+                        },
+                        {
+                            "TOUCH_DOWN": 129
+                        },
+                        {
+                            "TOUCH_UP": 130
+                        },
+                        {
+                            "TOUCH_MOVE": 131
+                        },
+                        {
+                            "TOUCH_HOLD": 132
+                        },
+                        {
+                            "TOUCH_CLICK": 133
+                        },
+                        {
+                            "TOUCH_DOUBLE_CLICK": 134
+                        },
+                        {
+                            "ON_CHANGE_INIT": 151
+                        },
+                        {
+                            "ENUM_KEY": 1
+                        }
+                    ]
+                },
+                {
+                    "-name": "action",
+                    "-type": "enum",
+                    "caption": "动作",
+                    "default": "SHOW",
+                    "enum": [
+                        {
+                            "SHOW": 0
+                        },
+                        {
+                            "HIDE": 1
+                        }
+                    ]
+                },
+                {
+                    "-name": "object",
+                    "-type": "text-str",
+                    "caption": "对象",
+                    "default": "",
+                    "object": ""
+                },
+                {
+                    "-name": "args",
+                    "-type": "text-str",
+                    "args": "",
+                    "caption": "参数",
+                    "default": ""
+                },
+                {
+                    "values": [
+                    ]
+                }
+            ],
+            "caption": "事件属性"
+        }
+    ],
+    "tip": "",
+    "version": "1",
+    "widget": [
+    ]
+}
