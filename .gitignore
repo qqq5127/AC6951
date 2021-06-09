@@ -102,3 +102,11 @@ Untitled Project.si4project£¯
 
 # bak file
 *.bak
+
+#JL file
+*.depend
+*.layout
+*.ld
+*.used
+*.map
+*.txt

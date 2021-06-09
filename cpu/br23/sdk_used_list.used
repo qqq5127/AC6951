@@ -82,6 +82,14 @@ dts_decoder
 
 
 g729_decoder
+
+
+
+
+
+
+
+aac_decoder
 wav_decoder
 cvsd_encoder
 

@@ -608,7 +608,7 @@ DAC硬件上的连接方式,可选的配置：
 #define TCFG_USER_TWS_ENABLE                0   //tws功能使能
 #define TCFG_USER_BLE_ENABLE                0   //BLE功能使能
 #define TCFG_USER_BT_CLASSIC_ENABLE         1   //经典蓝牙功能使能
-#define TCFG_BT_SUPPORT_AAC                 0   //AAC格式支持
+#define TCFG_BT_SUPPORT_AAC                 1   //AAC格式支持
 #define TCFG_USER_EMITTER_ENABLE            0   //emitter功能使能
 #define TCFG_BT_SNIFF_ENABLE                0   //bt sniff 功能使能
 
@@ -762,7 +762,7 @@ DAC硬件上的连接方式,可选的配置：
 //                                  SPDIF & ARC 配置                                     //
 //*********************************************************************************//
 #define TCFG_SPDIF_ENABLE                       TCFG_APP_SPDIF_EN
-#define TCFG_SPDIF_OUTPUT_ENABLE                ENABLE
+#define TCFG_SPDIF_OUTPUT_ENABLE                DISABLE
 #define TCFG_HDMI_ARC_ENABLE                    ENABLE
 #define TCFG_HDMI_CEC_PORT                      IO_PORTA_02
 
