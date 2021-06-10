@@ -110,3 +110,5 @@ Untitled Project.si4project£¯
 *.used
 *.map
 *.txt
+*.bin
+*.layout
