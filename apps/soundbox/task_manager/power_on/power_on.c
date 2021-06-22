@@ -55,9 +55,9 @@ static void  lcd_ui_power_on()
 
 static int power_on_init(void)
 {
-    ///有些需要在开机提示完成之后再初始化的东西， 可以在这里初始化
+    ///有些需要在开机提示完成之后再初始化的东西�?可以在这里初始化
 #if (TCFG_SPI_LCD_ENABLE)
-    lcd_ui_power_on();//由ui决定切换的模式
+    lcd_ui_power_on();//由ui决定切换的模�?
     return 0;
 #endif
 
@@ -97,11 +97,11 @@ static int poweron_sys_event_handler(struct sys_event *event)
 {
     switch (event->type) {
     case SYS_KEY_EVENT:
-        break;
+			break;
     case SYS_BT_EVENT:
-        break;
+				return true;
     case SYS_DEVICE_EVENT:
-        break;
+				return true;
     default:
         return false;
     }
@@ -131,11 +131,12 @@ void app_poweron_task()
     int msg[32];
 
     UI_SHOW_MENU(MENU_POWER_UP, 0, 0, NULL);
-
+		set_pa_mode(2);
     int err =  tone_play_with_callback_by_name(tone_table[IDEX_TONE_POWER_ON], 1, tone_play_end_callback, (void *)IDEX_TONE_POWER_ON);
-    /* if (err) { //提示音没有,播放失败，直接init流程 */
+    /* if (err) { //提示音没�?播放失败，直接init流程 */
     /* power_on_init(); */
     /* } */
+		set_pa_mode(0);
 
 
     while (1) {
@@ -149,7 +150,6 @@ void app_poweron_task()
         default:
             break;
         }
-
         if (app_task_exitting()) {
             power_on_unint();
             return;

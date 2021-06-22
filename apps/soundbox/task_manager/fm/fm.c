@@ -27,16 +27,16 @@
 #include "debug.h"
 
 /*************************************************************
-   此文件函数主要是fm模式按键处理和事件处理
+   此文件函数主要是fm模式按键处理和事件处�?
 
 	void app_fm_task()
-   fm模式主函数
+   fm模式主函�?
 
 	static int fm_event_handler(struct sys_event *event)
-   fm系统事件所有处理入口
+   fm系统事件所有处理入�?
 
 	static void fm_app_unint(void)
-	fm模式退出
+	fm模式退�?
 
 **************************************************************/
 
@@ -46,7 +46,7 @@
 static u8 fm_idle_flag = 1;
 //*----------------------------------------------------------------------------*/
 /**@brief    fm按键消息入口
-   @param    无
+   @param    �?
    @return   1、消息已经处理，不需要发送到common  0、消息发送到common处理
    @note
 */
@@ -81,24 +81,24 @@ static int fm_key_event_opr(struct sys_event *event)
         /* app_task_put_key_msg(KEY_TEST_DEMO_0,1234);  //test demo// */
         fm_volume_pp();
         break;
-    case  KEY_FM_SCAN_ALL://全自动搜台
-    case  KEY_FM_SCAN_ALL_DOWN://全自动搜台
-    case  KEY_FM_SCAN_ALL_UP://全自动搜台
+    case  KEY_FM_SCAN_ALL://全自动搜�?
+    case  KEY_FM_SCAN_ALL_DOWN://全自动搜�?
+    case  KEY_FM_SCAN_ALL_UP://全自动搜�?
         fm_scan_all();
         break;
     case  KEY_FM_SCAN_DOWN:
-        fm_scan_down();//半自动搜台
+        fm_scan_down();//半自动搜�?
         break;
     case  KEY_FM_SCAN_UP:
-        fm_scan_up();//半自动搜台
+        fm_scan_up();//半自动搜�?
         break;
-    case  KEY_FM_PREV_STATION://下一台
+    case  KEY_FM_PREV_STATION://下一�?
         fm_prev_station();
         break;
     case  KEY_FM_NEXT_STATION:
         fm_next_station();
         break;
-    case  KEY_FM_PREV_FREQ://下一个频率
+    case  KEY_FM_PREV_FREQ://下一个频�?
         fm_prev_freq();
         break;
     case  KEY_FM_NEXT_FREQ:
@@ -126,8 +126,8 @@ static int fm_key_event_opr(struct sys_event *event)
 
 
 //*----------------------------------------------------------------------------*/
-/**@brief    fm 模式活跃状态 所有消息入口
-   @param    无
+/**@brief    fm 模式活跃状�?所有消息入�?
+   @param    �?
    @return   1、当前消息已经处理，不需要发送comomon 0、当前消息不是fm处理的，发送到common统一处理
    @note
 */
@@ -195,7 +195,7 @@ static void  fm_tone_play_end_callback(void *priv, int flag)
 
     switch (index) {
     case IDEX_TONE_FM:
-        ///提示音播放结束， 启动播放器播放
+        ///提示音播放结束， 启动播放器播�?
         fm_app_start();
         break;
     default:
@@ -204,9 +204,9 @@ static void  fm_tone_play_end_callback(void *priv, int flag)
 }
 
 //*----------------------------------------------------------------------------*/
-/**@brief    fm主任务
-   @param    无
-   @return   无
+/**@brief    fm主任�?
+   @param    �?
+   @return   �?
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -214,6 +214,9 @@ void app_fm_task()
 {
     int msg[32];
     fm_app_init();
+
+		
+		set_pa_mode(1);
 #if TCFG_DEC2TWS_ENABLE
     extern void set_tws_background_connected_flag(u8 flag);
     extern u8 get_tws_background_connected_flag();
@@ -222,6 +225,7 @@ void app_fm_task()
         set_tws_background_connected_flag(0);
     } else
 #endif
+
     {
         tone_play_with_callback_by_name(tone_table[IDEX_TONE_FM], 1, fm_tone_play_end_callback, (void *)IDEX_TONE_FM);
     }

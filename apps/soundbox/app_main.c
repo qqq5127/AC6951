@@ -132,8 +132,9 @@ void app_main()
         /* endless_loop_debug_int(); */
         ui_update_status(STATUS_POWERON);
 
-        app_curr_task = APP_POWERON_TASK;
+        app_curr_task = APP_IDLE_TASK;
     }
+
 
 #if TCFG_CHARGE_BOX_ENABLE
     app_curr_task = APP_IDLE_TASK;

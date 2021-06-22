@@ -86,7 +86,7 @@ void wait_exit_btstack_flag(void *priv)
     sys_timer_del(app_var.wait_exit_timer);
     app_var.wait_exit_timer = 0;
     if (priv == NULL) {
-        app_task_switch_to(APP_POWEROFF_TASK);
+        app_task_switch_to(APP_IDLE_TASK);
     } else if (priv == (void *)1) {
         log_info("cpu_reset!!!\n");
         cpu_reset();

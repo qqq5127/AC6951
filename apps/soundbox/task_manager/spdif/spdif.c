@@ -199,6 +199,7 @@ void app_spdif_task()
     int res;
     int msg[32];
     spdif_app_init();
+		set_pa_mode(2);
     while (1) {
         app_task_get_msg(msg, ARRAY_SIZE(msg), 1);
 

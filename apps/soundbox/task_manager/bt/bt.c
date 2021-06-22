@@ -920,6 +920,7 @@ void app_bt_task()
     extern void tone2tws_bt_task_start(u8 tone_play);
     tone2tws_bt_task_start(!__this->cmd_flag);
 #endif
+		set_pa_mode(2);
 
     extern u8 get_tws_background_connected_flag();
     if (!__this->cmd_flag && (!get_tws_background_connected_flag())) { //蓝牙后台拉回蓝牙模式不播放提示音
@@ -983,6 +984,7 @@ void app_bt_task()
         if (__this->wait_exit) { //开始退出
             if (!__this->exiting) { ///等待蓝牙退出处理完成
                 __this->wait_exit = 0;
+								set_pa_mode(0);
                 return;
             }
         }

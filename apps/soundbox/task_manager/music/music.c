@@ -997,6 +997,7 @@ void app_music_task()
     int res;
     int msg[32];
     music_task_start();
+		set_pa_mode(2);
 
 #if (MUSIC_DEVICE_TONE_EN)
     music_player_play_start();

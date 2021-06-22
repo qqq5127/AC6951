@@ -102,4 +102,8 @@ extern u16 touch_key_event_to_msg(u8 cur_task, struct key_event *key);
 void app_default_event_deal(struct sys_event *event);
 int app_common_key_msg_deal(struct sys_event *event);
 
+#ifdef PA_CONTROL_PIN
+extern void	set_pa_mode(u8 mode);
+#endif
+
 #endif

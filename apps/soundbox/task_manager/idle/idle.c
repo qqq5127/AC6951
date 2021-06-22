@@ -288,7 +288,7 @@ static int idle_key_event_opr(struct sys_event *event)
     int key_event = event->u.key.event;
     int key_value = event->u.key.value;
 
-    log_info("key_event:%d \n", key_event);
+    log_info("idle key_event:%x \n", key_event);
 
     switch (key_event) {
     case KEY_POWER_ON:
@@ -323,7 +323,7 @@ static int idle_sys_event_handler(struct sys_event *event)
             app_chargestore_event_handler(&event->u.chargestore);
         }
 #endif
-        return 0;
+        return true;
     default:
         return true;
     }

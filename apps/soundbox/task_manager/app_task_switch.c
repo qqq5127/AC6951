@@ -300,6 +300,7 @@ u8 app_task_exitting()//
         app_next_task = 0;
         sys_key_event_disable();
         sys_event_clear(&clear_key_event);
+				set_pa_mode(0);
         return 1;
     }
     return 0;

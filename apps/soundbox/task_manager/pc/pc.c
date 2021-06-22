@@ -1,15 +1,15 @@
 
 /*************************************************************
-    此文件函数主要是pc模式按键处理和事件处理
+    此文件函数主要是pc模式按键处理和事件处�?
 
 	void app_pc_task()
-    pc模式主函数
+    pc模式主函�?
 
 	static int pc_sys_event_handler(struct sys_event *event)
-	pc模式系统事件所有处理入口
+	pc模式系统事件所有处理入�?
 
 	static void pc_task_close()
-	pc模式退出
+	pc模式退�?
 
 
 **************************************************************/
@@ -119,7 +119,7 @@ static void pc_hold()
 
 //*----------------------------------------------------------------------------*/
 /**@brief    pc 按键消息入口
-   @param    无
+   @param    �?
    @return   1、消息已经处理，不需要发送到common  0、消息发送到common处理
    @note
 */
@@ -169,7 +169,7 @@ static int pc_key_event_opr(struct sys_event *event)
 
 //*----------------------------------------------------------------------------*/
 /**@brief    pc 入口
-   @param    无
+   @param    �?
    @return
    @note
 */
@@ -190,7 +190,7 @@ static void pc_task_start(void)
 
 //*----------------------------------------------------------------------------*/
 /**@brief    pc 关闭
-   @param    无
+   @param    �?
    @return
    @note
 */
@@ -207,7 +207,7 @@ static void pc_app_uninit(void)
     }
 
     /* tone_play_stop(); */
-    tone_play_stop_by_path(tone_table[IDEX_TONE_PC]);//停止播放提示音
+    tone_play_stop_by_path(tone_table[IDEX_TONE_PC]);//停止播放提示�?
 #if TCFG_USB_DM_MULTIPLEX_WITH_SD_DAT0
     pc_dm_multiplex_exit();
 #endif
@@ -243,8 +243,8 @@ bool pc_backmode_check(struct sys_event *event)
 #endif//TCFG_PC_BACKMODE_ENABLE
 
 //*----------------------------------------------------------------------------*/
-/**@brief    pc模式 退出
-   @param    无
+/**@brief    pc模式 退�?
+   @param    �?
    @return
    @note
 */
@@ -260,8 +260,8 @@ static void pc_task_close()
 }
 
 //*----------------------------------------------------------------------------*/
-/**@brief    pc 模式活跃状态 所有消息入口
-   @param    无
+/**@brief    pc 模式活跃状�?所有消息入�?
+   @param    �?
    @return   1、当前消息已经处理，不需要发送comomon 0、当前消息不是linein处理的，发送到common统一处理
    @note
 */
@@ -288,9 +288,9 @@ static int pc_sys_event_handler(struct sys_event *event)
 }
 
 //*----------------------------------------------------------------------------*/
-/**@brief    pc 在线检测  切换模式判断使用
-   @param    无
-   @return   1 linein设备在线 0 设备不在线
+/**@brief    pc 在线检�? 切换模式判断使用
+   @param    �?
+   @return   1 linein设备在线 0 设备不在�?
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -309,7 +309,7 @@ int pc_app_check(void)
     return false;
 }
 //*----------------------------------------------------------------------------*/
-/**@brief    PC 模式提示音播放结束处理
+/**@brief    PC 模式提示音播放结束处�?
    @param
    @return
    @note
@@ -326,7 +326,7 @@ static void  pc_tone_play_end_callback(void *priv, int flag)
 
     switch (index) {
     case IDEX_TONE_PC:
-        ///提示音播放结束， 启动播放器播放
+        ///提示音播放结束， 启动播放器播�?
         pc_task_start();
         break;
     default:
@@ -345,12 +345,12 @@ void pc_app_init()
     UI_SHOW_WINDOW(ID_WINDOW_PC);
     UI_SHOW_MENU(MENU_PC, 1000, 0, NULL);
     ui_update_status(STATUS_PC_MODE);
-    __this->volume =  app_audio_get_volume(APP_AUDIO_STATE_MUSIC);//记录下当前音量
+    __this->volume =  app_audio_get_volume(APP_AUDIO_STATE_MUSIC);//记录下当前音�?
 }
 //*----------------------------------------------------------------------------*/
-/**@brief    pc 主任务
-   @param    无
-   @return   无
+/**@brief    pc 主任�?
+   @param    �?
+   @return   �?
    @note
 */
 /*----------------------------------------------------------------------------*/
@@ -360,6 +360,7 @@ void app_pc_task()
     int msg[32];
 
     pc_app_init();
+		set_pa_mode(2);
 
     tone_play_with_callback_by_name(tone_table[IDEX_TONE_PC], 1, pc_tone_play_end_callback, (void *)IDEX_TONE_PC);
 

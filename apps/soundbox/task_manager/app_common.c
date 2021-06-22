@@ -399,7 +399,6 @@ static void app_common_device_event_handler(struct sys_event *event)
         }
 #endif
         break;
-
 #if TCFG_APP_LINEIN_EN
     case DEVICE_EVENT_FROM_LINEIN:
         ret = linein_device_event_handler(event);

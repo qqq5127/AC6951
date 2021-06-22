@@ -121,7 +121,7 @@
 #define TCFG_SD0_DET_IO_LEVEL				0//IO检查，0：低电平检测到卡。 1：高电平(外部电源)检测到卡。 2：高电平(SD卡电源)检测到卡。
 #define TCFG_SD0_CLK						(3000000*4L)
 
-#define TCFG_SD1_ENABLE						ENABLE_THIS_MOUDLE
+#define TCFG_SD1_ENABLE						DISABLE_THIS_MOUDLE
 //A组IO: CMD:PC4    CLK:PC5    DAT0:PC3    DAT1:PC2    DAT2:PC1    DAT3:PC0
 //B组IO: CMD:PB5    CLK:PB6    DAT0:PB4    DAT1:PB8    DAT2:PB9    DAT3:PB10
 #define TCFG_SD1_PORTS						'B'
@@ -225,7 +225,7 @@
 #define TCFG_ADKEY_LED_IO_REUSE				DISABLE_THIS_MOUDLE	//ADKEY 和 LED IO复用，led只能设置蓝灯显示
 #define TCFG_ADKEY_PORT                     IO_PORTB_01         //AD按键端口(需要注意选择的IO口是否支持AD功能)
 #define TCFG_ADKEY_AD_CHANNEL               AD_CH_PB1
-#define TCFG_ADKEY_EXTERN_UP_ENABLE         ENABLE_THIS_MOUDLE //是否使用外部上拉
+#define TCFG_ADKEY_EXTERN_UP_ENABLE         DISABLE_THIS_MOUDLE //是否使用外部上拉
 
 #if TCFG_ADKEY_EXTERN_UP_ENABLE
 #define R_UP    220                 //22K，外部上拉阻值在此自行设置
@@ -596,9 +596,9 @@ DAC硬件上的连接方式,可选的配置：
 //                                  系统配置                                         //
 //*********************************************************************************//
 #define TCFG_AUTO_SHUT_DOWN_TIME		    0   //没有蓝牙连接自动关机时间
-#define TCFG_SYS_LVD_EN						1   //电量检测使能
+#define TCFG_SYS_LVD_EN						0   //电量检测使能
 #define TCFG_POWER_ON_NEED_KEY				0	  //是否需要按按键开机配置
-#define TWFG_APP_POWERON_IGNORE_DEV         0//上电忽略挂载设备，0时不忽略，非0则n毫秒忽略
+#define TWFG_APP_POWERON_IGNORE_DEV         2000//上电忽略挂载设备，0时不忽略，非0则n毫秒忽略
 
 #define TCFG_AUDIO_DEC_OUT_TASK				0	// 解码使用单独任务做输出
 
@@ -633,10 +633,10 @@ DAC硬件上的连接方式,可选的配置：
 #define BT_INBAND_RINGTONE                  0   //是否播放手机自带来电铃声
 #define BT_PHONE_NUMBER                     1   //是否播放来电报号
 #define BT_SYNC_PHONE_RING                  0   //是否TWS同步播放来电铃声
-#define BT_SUPPORT_DISPLAY_BAT              1   //是否使能电量检测
+#define BT_SUPPORT_DISPLAY_BAT              0   //是否使能电量检测
 #define BT_SUPPORT_MUSIC_VOL_SYNC           1   //是否使能音量同步
 
-#define TCFG_BLUETOOTH_BACK_MODE			1	//后台模式
+#define TCFG_BLUETOOTH_BACK_MODE			0	//后台模式
 
 #if (TCFG_USER_TWS_ENABLE && TCFG_BLUETOOTH_BACK_MODE) && (TCFG_BT_SNIFF_ENABLE==0) && defined(CONFIG_LOCAL_TWS_ENABLE)
 #define TCFG_DEC2TWS_ENABLE					1	// 本地解码转发
@@ -677,6 +677,7 @@ DAC硬件上的连接方式,可选的配置：
 #define TCFG_LINEIN_ENABLE					TCFG_APP_LINEIN_EN	// linein使能
 // #define TCFG_LINEIN_LADC_IDX				0					// linein使用的ladc通道，对应ladc_list
 #define TCFG_LINEIN_LR_CH					AUDIO_LIN0_LR
+#define TCFG_LINEIN_DETECT_ENABLE			DISABLE
 #define TCFG_LINEIN_CHECK_PORT				IO_PORTB_08			// linein检测IO
 #define TCFG_LINEIN_PORT_UP_ENABLE        	1					// 检测IO上拉使能
 #define TCFG_LINEIN_PORT_DOWN_ENABLE       	0					// 检测IO下拉使能
@@ -763,7 +764,7 @@ DAC硬件上的连接方式,可选的配置：
 //*********************************************************************************//
 #define TCFG_SPDIF_ENABLE                       TCFG_APP_SPDIF_EN
 #define TCFG_SPDIF_OUTPUT_ENABLE                DISABLE
-#define TCFG_HDMI_ARC_ENABLE                    ENABLE
+#define TCFG_HDMI_ARC_ENABLE                    DISABLE
 #define TCFG_HDMI_CEC_PORT                      IO_PORTA_02
 
 //*********************************************************************************//
@@ -871,6 +872,16 @@ DAC硬件上的连接方式,可选的配置：
 #define AUDIO_SPECTRUM_CONFIG     0  //频响能量值获取接口
 #define AUDIO_MIDI_CTRL_CONFIG    0  //midi电子琴接口使能
 
+
+
+
+
+///*********************************************************************************//
+//          自定义 宏 cuixu add 
+//*********************************************************************************//
+#define	SD_POWER_PIN	IO_PORTB_11
+#define	PA_CONTROL_PIN	IO_PORTB_02
+#define	PA_AB_D_CONTROL_PIN	IO_PORTB_03
 //*********************************************************************************//
 //                                 编译警告                                         //
 //*********************************************************************************//

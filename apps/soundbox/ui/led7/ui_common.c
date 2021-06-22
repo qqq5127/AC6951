@@ -9,7 +9,7 @@ static void led7_show_hi(void *hd)
     dis->lock(1);
     dis->clear();
     dis->setXY(0, 0);
-    dis->show_string((u8 *)" HI");
+    dis->show_string((u8 *)"----");
     dis->lock(0);
 }
 

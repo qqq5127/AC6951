@@ -5,9 +5,9 @@
 #if TCFG_UI_LED7_ENABLE
 //LED7真值表选择
 //7脚LED7
-// #define UI_LED7_PIN7_TRUE_TABLE1
+#define UI_LED7_PIN7_TRUE_TABLE1
 //#define UI_LED7_PIN7_TRUE_TABLE2
-#define UI_LED7_PIN7_TRUE_TABLE3
+//#define UI_LED7_PIN7_TRUE_TABLE3
 
 //12脚LED7
 //#define UI_LED7_PIN12_TRUE_TABLE1
@@ -15,7 +15,7 @@
 // #define UI_LED7_PIN13_TRUE_TABLE1
 
 #ifdef  UI_LED7_PIN7_TRUE_TABLE1
-/*********** 数码管(7脚)真值表1 **************/
+/*********** 数码�?7�?真值表1 **************/
 /*
    0    1    2     3     4     5     6
 0  X    1A   1B    1E    USB   X     X
@@ -63,23 +63,24 @@ static const struct seg2pin led7_digit_seg2pin[28] = {
     {4, 6}, //4G
 };
 
-// 数码管字母类转换表
+// 数码管字母类转换�?
 static const struct icon_seg2pin led7_icon_seg2pin[] = {
     //icon       pinH, pinL
-    {LED7_CHARGE, 	{6, 0}},
-    {LED7_USB, 	  	{0, 4}},
-    {LED7_SD, 	  	{5, 1}},
-    {LED7_BT, 	  	{6, 1}}, //BT
-    {LED7_REPEAT, 	{6, 3}}, //REPEAT
+    {LED7_PLAY, 	{0, 5}},
+    {LED7_USB, 	  	{5, 1}},
+    {LED7_SD, 	  	{0, 4}},
+    {LED7_PAUSE, 	  	{2, 5}}, //BT
+    {LED7_FM, 	{6, 2}}, //REPEAT
     {LED7_2POINT, 	{2, 3}}, //:
-    {LED7_DOT, 		{6, 4}} //.
+    {LED7_DOT, 		{6, 4}}, //.
+    {LED7_MP3, 		{2, 6}} //.
 };
 
 #endif /* #ifdef  UI_LED7_PIN7_TRUE_TABLE1 */
 
 
 #ifdef  UI_LED7_PIN7_TRUE_TABLE2
-/*********** 数码管(7脚)真值表 2**************/
+/*********** 数码�?7�?真值表 2**************/
 /* 0    1     2     3     4     5     6  (L)
 0  X    2A    2B    2C    2D    2E    2F
 1  1A   X     2G    :     .     MHz   MP3
@@ -126,7 +127,7 @@ static const struct seg2pin led7_digit_seg2pin[28] = {
     {3, 6}, //4G
 };
 
-// 数码管字母类转换表
+// 数码管字母类转换�?
 static const struct icon_seg2pin led7_icon_seg2pin[] = {
     //icon       	pinH, pinL
     {LED7_PLAY, 	{3, 1}},
@@ -142,7 +143,7 @@ static const struct icon_seg2pin led7_icon_seg2pin[] = {
 #endif /* #ifdef  UI_LED7_PIN7_TRUE_TABLE2 */
 
 #ifdef  UI_LED7_PIN7_TRUE_TABLE3
-/*********** 数码管(7脚)真值表 2**************/
+/*********** 数码�?7�?真值表 2**************/
 /* 0    1     2     3     4     5      6  (L)
 0  X    1A    1B    1E    SD    PAUSE  X
 1  1F   X     2A    2B    2E    2D     X
@@ -189,7 +190,7 @@ static const struct seg2pin led7_digit_seg2pin[28] = {
     {4, 6}, //4G
 };
 
-// 数码管字母类转换表
+// 数码管字母类转换�?
 static const struct icon_seg2pin led7_icon_seg2pin[] = {
     //icon       	pinH, pinL
     {LED7_PLAY, 	{2, 5}},
@@ -207,7 +208,7 @@ static const struct icon_seg2pin led7_icon_seg2pin[] = {
 
 
 #ifdef  UI_LED7_PIN12_TRUE_TABLE1
-/*********** 数码管(12脚)真值表**************/
+/*********** 数码�?12�?真值表**************/
 /* 		0    1     2     3     4     5     6
 COM0  	1A   1B    1C    1D    1E    1F    1G
 COM1  	2A   2B    2C    2D    2E    2F    2G
@@ -252,7 +253,7 @@ static const struct seg2pin led7_digit_seg2pin[28] = {
     {3, 6}, //4G
 };
 
-//数码管字母类转换表
+//数码管字母类转换�?
 static const struct icon_seg2pin led7_icon_seg2pin[] = {
     //icon       comH, segL
     {LED7_AUX, 		{4, 0}},
@@ -266,7 +267,7 @@ static const struct icon_seg2pin led7_icon_seg2pin[] = {
 #endif /* #ifdef  UI_LED7_PIN12_TRUE_TABLE1 */
 
 #ifdef  UI_LED7_PIN13_TRUE_TABLE1
-/*********** 数码管(12脚)真值表**************/
+/*********** 数码�?12�?真值表**************/
 /* 		0    1     2     3     4     5     6
 COM0  	1A   1B    1C    1D    1E    1F    1G
 COM1  	2A   2B    2C    2D    2E    2F    2G
@@ -312,7 +313,7 @@ static const struct seg2pin led7_digit_seg2pin[28] = {
     {3, 6}, //4G
 };
 
-//数码管字母类转换表
+//数码管字母类转换�?
 static const struct icon_seg2pin led7_icon_seg2pin[] = {
     //icon          comL, segH
     {LED7_AUX, 		{4, 2}},

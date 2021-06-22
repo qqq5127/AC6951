@@ -225,6 +225,7 @@ void poweroff_tone_end(void *priv, int flag)
 static void poweroff_app_start()
 {
     int ret = false;
+		static bool first_start = true;
     if (app_var.goto_poweroff_flag) {
         UI_SHOW_WINDOW(ID_WINDOW_POWER_OFF);
         syscfg_write(CFG_MUSIC_VOL, &app_var.music_volume, 1);
@@ -237,12 +238,17 @@ static void poweroff_app_start()
         } else
 #endif/*CONFIG_TWS_POWEROFF_SAME_TIME*/
         {
-            ret = tone_play_with_callback_by_name(tone_table[IDEX_TONE_POWER_OFF], 1,
-                                                  poweroff_tone_end, (void *)IDEX_TONE_POWER_OFF);
-            if (ret) {
-                y_printf("power_off tone play err,enter soft poweroff");
-                poweroff_done();
-            }
+        		if(first_start == false)
+        		{
+        			first_start = false;
+							set_pa_mode(2);
+							ret = tone_play_with_callback_by_name(tone_table[IDEX_TONE_POWER_OFF], 1,
+																										poweroff_tone_end, (void *)IDEX_TONE_POWER_OFF);
+							if (ret) {
+									y_printf("power_off tone play err,enter soft poweroff");
+									poweroff_done();
+							}
+						}
         }
     }
 }
@@ -259,6 +265,7 @@ void app_poweroff_task()
     int res;
     int msg[32];
     poweroff_app_start();
+		set_pa_mode(0);
     while (1) {
         app_task_get_msg(msg, ARRAY_SIZE(msg), 1);
 

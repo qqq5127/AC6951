@@ -69,7 +69,7 @@ static const struct ui_dis_api *ui_dis_main[] = {
     &pc_main,
 #endif
 #if TCFG_APP_SPDIF_EN
-    /* &idle_main, */
+     &idle_main,
 #endif
     &idle_main,
 };

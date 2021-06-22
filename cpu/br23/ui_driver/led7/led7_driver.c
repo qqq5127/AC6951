@@ -37,7 +37,7 @@ static struct ui_led7_env _led7_env = {0};
 
 #define __this 		(&_led7_env)
 
-//数字'0' ~ '9'显示段码表
+//数字'0' ~ '9'显示段码�?
 static const  u8 LED7_NUMBER_2_SEG[10] = {
     (u8)(LED_A | LED_B | LED_C | LED_D | LED_E | LED_F), 		 //'0'
     (u8)(LED_B | LED_C), 										 //'1'
@@ -51,7 +51,7 @@ static const  u8 LED7_NUMBER_2_SEG[10] = {
     (u8)(LED_A | LED_B | LED_C | LED_D | LED_F | LED_G), 		 //'9'
 };
 
-//字母'A' ~ 'Z'显示段码表
+//字母'A' ~ 'Z'显示段码�?
 static const  u8 LED7_LARGE_LETTER_2_SEG[26] = {
     0x77, 0x40, 0x39, 0x3f, 0x79, ///<ABCDE
     0x71, 0x40, 0x76, 0x06, 0x40, ///<FGHIJ
@@ -61,7 +61,7 @@ static const  u8 LED7_LARGE_LETTER_2_SEG[26] = {
     0x40 ///<Z
 };
 
-//字母'a' ~ 'z'显示段码表
+//字母'a' ~ 'z'显示段码�?
 static const  u8 LED7_SMALL_LETTER_2_SEG[26] = {
     0x77, 0x7c, 0x58, 0x5e, 0x79, ///<abcde
     0x71, 0x40, 0x40, 0x40, 0x40, ///<fghij
@@ -72,7 +72,7 @@ static const  u8 LED7_SMALL_LETTER_2_SEG[26] = {
 };
 
 /*----------------------------------------------------------------------------*/
-/**@brief  显示图标类
+/**@brief  显示图标�?
    @param   void
    @return  void
    @author  Change.tsai
@@ -86,7 +86,7 @@ void led7_show_icon(UI_LED7_ICON icon)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief  显示图标类
+/**@brief  显示图标�?
    @param   void
    @return  void
    @author  Change.tsai
@@ -115,7 +115,7 @@ void led7_clear_icon(UI_LED7_ICON icon)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7_drv 清楚所有图标显示
+/**@brief   led7_drv 清楚所有图标显�?
    @param   void
    @return  void
    @author  Change.tsai
@@ -144,7 +144,7 @@ void led7_setX(u8 X)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7_drv 清除显示数字和字母
+/**@brief   led7_drv 清除显示数字和字�?
    @param 	void
    @return  void
    @author  Change.tsai
@@ -176,7 +176,7 @@ void led7_show_null(void)
 
 /*----------------------------------------------------------------------------*/
 /**@brief   led7_drv 单个字符显示函数
-   @param   chardata：显示字符
+   @param   chardata：显示字�?
    @return  void
    @author  Change.tsai
    @note    void led7_show_char(u8 chardata)
@@ -214,7 +214,7 @@ void led7_show_char(u8 chardata)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7_drv 某一位字符闪烁
+/**@brief   led7_drv 某一位字符闪�?
    @param   index
    @return  void
    @author  Change.tsai
@@ -229,7 +229,7 @@ void led7_flash_char_start(u8 index)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7_drv 某一位取消字符闪烁
+/**@brief   led7_drv 某一位取消字符闪�?
    @param   index
    @return  void
    @author  Change.tsai
@@ -245,8 +245,8 @@ void led7_flash_char_stop(u8 index)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7_drv 字符串显示函数, 默认左对齐, 从x = 0开始显示
-   @param   *str：字符串的指针   offset：显示偏移量
+/**@brief   led7_drv 字符串显示函�? 默认左对�? 从x = 0开始显�?
+   @param   *str：字符串的指�?  offset：显示偏移量
    @return  void
    @author  Change.tsai
    @note    void led7_show_string_left(u8 *str)
@@ -261,8 +261,8 @@ void led7_show_string_reset_x(u8 *str)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7_drv 字符串显示函数, 默认左对齐, 追加形式
-   @param   *str：字符串的指针   offset：显示偏移量
+/**@brief   led7_drv 字符串显示函�? 默认左对�? 追加形式
+   @param   *str：字符串的指�?  offset：显示偏移量
    @return  void
    @author  Change.tsai
    @note    void led7_show_string_left(u8 *str)
@@ -276,8 +276,8 @@ void led7_show_string(u8 *str)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7_drv 字符串显示函数, 左对齐, 清屏
-   @param   *str：字符串的指针
+/**@brief   led7_drv 字符串显示函�? 左对�? 清屏
+   @param   *str：字符串的指�?
    @return  void
    @author  Change.tsai
    @note    void led7_show_string_left(u8 *str)
@@ -290,8 +290,8 @@ void led7_show_string_align_left(u8 *str)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7_drv 字符串显示函数, 右对齐, 清屏
-   @param   *str：字符串的指针
+/**@brief   led7_drv 字符串显示函�? 右对�? 清屏
+   @param   *str：字符串的指�?
    @return  void
    @author  Change.tsai
    @note    void led7_show_string_left(u8 *str)
@@ -335,7 +335,7 @@ void led7_show_number(u16 val)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   数字显示函数, 高位不显示0
+/**@brief   数字显示函数, 高位不显�?
    @param   val, 显示数字
    @return  void
    @author  Change.tsai
@@ -461,7 +461,7 @@ static void __ui_led7_update_bShowbuf1(void)
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   把所有IO设置为高阻
+/**@brief   把所有IO设置为高�?
    @param   x：显示横坐标
    @return  void
    @author  Change.tsai
@@ -476,7 +476,7 @@ static void __ui_led7_port_set_hz(u8 port)
 }
 
 /*----------------------------------------------------------------------------*/
-/**@brief   LED清屏函数, 把所有IO设置为高阻
+/**@brief   LED清屏函数, 把所有IO设置为高�?
    @param   x：显示横坐标
    @return  void
    @author  Change.tsai
@@ -541,6 +541,16 @@ void led7_scan(void *param)
     if (!cnt && !__this->lock) {
         __ui_led7_update_bShowbuf1();
     }
+
+		#if 0	// cuixu test
+    __this->led7_var.bShowBuff1[0] = 0; //if pin0 output 1, other output 0/1
+    __this->led7_var.bShowBuff1[1] = 0;
+    __this->led7_var.bShowBuff1[2] = 0;
+    __this->led7_var.bShowBuff1[3] = 0;//BIT(6);
+    __this->led7_var.bShowBuff1[4] = 0;
+    __this->led7_var.bShowBuff1[5] = 0;
+    __this->led7_var.bShowBuff1[6] = BIT(4);
+		#endif
 
     seg = __this->led7_var.bShowBuff1[cnt];
 
@@ -647,7 +657,7 @@ static LCD_API LED7_HW = {
 
 
 /*----------------------------------------------------------------------------*/
-/**@brief   led7段数码管初始化
+/**@brief   led7段数码管初始�?
    @param   void
    @return  void
    @author  Change.tsai
@@ -790,7 +800,7 @@ void led7_test()
     if (!(cnt % 5)) {
         ui_led7_show_number(123); //高位显示0
     } else {
-        ui_led7_show_number2(123); //高位不显示0
+        ui_led7_show_number2(123); //高位不显�?
     }
     if (cnt == 0) {
         ui_led7_setX(0);
@@ -811,7 +821,7 @@ void led7_test()
     /* buf[0] = cnt; */
     /* buf[1] = cnt + 1; */
     /* buf[2] = '\0'; */
-    /* ui_led7_show_string(buf); //显示字符串 */
+    /* ui_led7_show_string(buf); //显示字符�?*/
     /* cnt++; */
     /* } else { */
     /* cnt = '0'; */
