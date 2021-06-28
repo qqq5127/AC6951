@@ -1166,6 +1166,18 @@ static void set_sd_vdd_power(void)
 #endif
 
 #ifdef PA_CONTROL_PIN
+
+#ifdef PA_AB_D_CONTROL_PIN
+
+static int PA_AB_D_timer = 0;
+
+void pa_ab_d_timer_callback(void *priv)
+{
+
+}
+
+
+#endif
 static void init_pa_mode(void)
 {
 	gpio_set_direction(PA_CONTROL_PIN, 0);
@@ -1174,11 +1186,17 @@ static void init_pa_mode(void)
 	gpio_set_die(PA_CONTROL_PIN, 0);
 	gpio_direction_output(PA_CONTROL_PIN, 0);
 #ifdef PA_AB_D_CONTROL_PIN
+
+#if 0
 	gpio_set_direction(PA_AB_D_CONTROL_PIN, 0);
 	gpio_set_pull_down(PA_AB_D_CONTROL_PIN,0);
 	gpio_set_pull_up(PA_AB_D_CONTROL_PIN,0);
 	gpio_set_die(PA_AB_D_CONTROL_PIN, 0);
 	gpio_direction_output(PA_AB_D_CONTROL_PIN, 0);
+#else
+
+
+#endif
 #endif	
 }
 
@@ -1210,7 +1228,7 @@ void set_pa_mode(u8 mode)
 
 #ifdef PA_AB_D_CONTROL_PIN
 		case 2:
-			gpio_direction_output(PA_CONTROL_PIN, 0);
+			gpio_direction_output(PA_CONTROL_PIN, 1);
 		  gpio_direction_output(PA_AB_D_CONTROL_PIN, 1);
 		break;
 #endif

@@ -1626,6 +1626,7 @@ obj/Release/apps/soundbox/board/br23/board_ac695x_demo/board_ac695x_demo.o
 -r=obj/Release/apps/soundbox/board/br23/board_ac695x_demo/board_ac695x_demo.o,gpio_set_hd0,l
 -r=obj/Release/apps/soundbox/board/br23/board_ac695x_demo/board_ac695x_demo.o,gpio_set_hd,l
 -r=obj/Release/apps/soundbox/board/br23/board_ac695x_demo/board_ac695x_demo.o,gpio_direction_output,l
+-r=obj/Release/apps/soundbox/board/br23/board_ac695x_demo/board_ac695x_demo.o,pa_ab_d_timer_callback,pl
 -r=obj/Release/apps/soundbox/board/br23/board_ac695x_demo/board_ac695x_demo.o,set_pa_mode,pl
 -r=obj/Release/apps/soundbox/board/br23/board_ac695x_demo/board_ac695x_demo.o,ui_pwm_led_init,l
 -r=obj/Release/apps/soundbox/board/br23/board_ac695x_demo/board_ac695x_demo.o,key_driver_init,l

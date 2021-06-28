@@ -6220,9 +6220,10 @@
 	"fm_emitter/fm_emitter_manage.h"
 	"debug.h"
 
-1624154528 source:d:\jl\ac6951c\ac6951c\apps\soundbox\ui\led7\ui_idle.c
+1624287543 source:d:\jl\ac6951c\ac6951c\apps\soundbox\ui\led7\ui_idle.c
 	"includes.h"
 	"ui/ui_api.h"
+	"app_task.h"
 
 1623122513 source:d:\jl\ac6951c\ac6951c\apps\soundbox\ui\led7\ui_linein.c
 	"system/includes.h"

@@ -12,7 +12,7 @@ copy ..\..\effects_cfg.bin .
 copy ..\..\ota_all.bin .
 copy ..\..\ota_nor.bin .
 
-..\..\isd_download.exe -tonorflash -dev br23 -boot 0x12000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -format all %1 -key 077-AC690X-A2E8.key
+..\..\isd_download.exe -tonorflash -dev br23 -boot 0x12000 -div8 -wait 300 -uboot uboot.boot -app app.bin cfg_tool.bin -format all %1
 :: -format all
 ::-reboot 2500
 
